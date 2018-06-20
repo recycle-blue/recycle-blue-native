@@ -17,6 +17,7 @@ const Product = db.define('product', {
   points: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true
     }
