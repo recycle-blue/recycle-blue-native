@@ -3,6 +3,37 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://www.jamiesale-cartoonist.com/wp-content/uploads/cartoon-duck-free.png'
+  },
+  totalPoints: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  name: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return (
+        this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
+      )
+    }
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
