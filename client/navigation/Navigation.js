@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
 import { Home, AddProduct } from '../components'
-// import { DrawerStack } from '.'
 
 const Drawer = createDrawerNavigator({
   home: { screen: Home },
@@ -17,7 +16,6 @@ const Drawer = createDrawerNavigator({
 const PrimaryNav = createStackNavigator({
   home: { screen: Home },
   drawerStack: { screen: Drawer }
-  // AddProduct: { screen: AddProduct }
 }, {
     title: 'main',
     initialRouteName: 'drawerStack',
