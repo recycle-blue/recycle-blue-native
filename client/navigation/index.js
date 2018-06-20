@@ -1,2 +1,2 @@
-export { default as AppNavigation } from './AppNavigation'
-export { default as Drawer } from './Drawer'
+export { default as Navigation } from './Navigation'
+export { default as DrawerStack } from './Drawer'

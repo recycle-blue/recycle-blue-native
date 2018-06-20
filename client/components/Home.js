@@ -1,11 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 
-export default class AddProduct extends React.Component {
+export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Add Product Page</Text>
+        <Text>Home</Text>
+        this.props.navigation.openDrawer()
+      }} />
       </View>
     )
   }
