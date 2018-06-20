@@ -8,7 +8,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <Text>I made a change...</Text>
+          <Text>Does this work?</Text>
         </View>
       </Provider>
     )
