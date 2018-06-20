@@ -1,13 +1,13 @@
 import { StackNavigator } from 'react-navigation'
-import LoginScreen from '../components'
+import AddProduct from '../components'
 
 // Manifest of possible screens
 const PrimaryNav = StackNavigator({
-  LoginScreen: { screen: LoginScreen }
+  AddProduct: { screen: AddProduct }
 }, {
     // Default config for all screens
     headerMode: 'none',
-    initialRouteName: 'LoginScreen'
+    initialRouteName: 'AddProduct'
   })
 
 export default PrimaryNav

@@ -1,10 +1,10 @@
 // import axios from 'axios'
 // import history from '../history'
-import AppNaviagation from '../navigation/AppNavigation'
+import AppNavigation from '../navigation'
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
+const GET_NAV = 'GET_NAV'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -15,7 +15,7 @@ const initialNav = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({ type: GET_USER, user })
+const getNav = nav => ({ type: GET_NAV, nav })
 const removeUser = () => ({ type: REMOVE_USER })
 
 /**
@@ -60,12 +60,12 @@ export const logout = () => async dispatch => {
  * REDUCER
  */
 export default function (state = initialNav, action) {
-  switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return initialNav
-    default:
-      return state
-  }
+  const newState = AppNavigation.router.getStateForAction(action, state)
+  return newState
+  // switch (action.type) {
+  //   case GET_NAV:
+  //     return action.nav
+  //   default:
+  //     return state
+  // }
 }
