@@ -1,25 +1,16 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Provider } from 'react-redux'
-import store from './store'
+import { createDrawerNavigator } from 'react-navigation'
+import { AddProduct } from '../components'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <Text>Does this work?</Text>
-        </View>
-      </Provider>
-    )
+const DrawerStack = createDrawerNavigator({
+  addProduct: { screen: AddProduct }
+}, {
+    headerMode: 'float',
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: { background: 'blue' },
+      title: 'RecycleBlue',
+      headerTintColor: 'white'
+    })
   }
-}
+)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+export default DrawerStack
