@@ -7,12 +7,10 @@ import { Home, AddProduct } from '../components'
 const Drawer = createDrawerNavigator({
   home: { screen: Home },
   addProduct: { screen: AddProduct }
-})
-
-const DrawerNavigation = createStackNavigator({
-  drawer: { screen: Drawer }
 }, {
-
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle'
   }
 )
 
@@ -28,7 +26,7 @@ const PrimaryNav = createStackNavigator({
       headerStyle: { backgroundColor: 'blue' },
       title: 'RecycleBlue',
       headerTintColor: 'white',
-      headerLeft: <Button title='pressme' onPress={() => navigation.navigate('DrawerOpen')} />
+      headerLeft: <Button title='pressme' onPress={() => navigation.toggleDrawer()} />
     })
   }
 )
