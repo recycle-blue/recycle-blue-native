@@ -3,21 +3,37 @@ import { MapView } from 'expo'
 import { connect } from 'react-redux'
 import { getRecycleLocationsThunk } from '../store/location'
 
+const geoLocation = navigator.geolocation
+
 class MapComp extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      userLocation: {
+        latitude: 41.8956689,
+        longitude: -87.6394469,
+      },
+    }
+  }
   componentDidMount() {
     // fetch locations
     this.props.fetchRecycleLocations()
+    geoLocation.getCurrentPosition(location => {
+      const { latitude, longitude } = location.coords
+      this.setState({ userLocation: { latitude, longitude } })
+    })
   }
   render() {
-    console.log(this.props)
     const { recycleLocations } = this.props
+    const { latitude, longitude } = this.state.userLocation
+    console.log('LOCAL STATE:', this.state)
     return (
       <MapView
         provider="google"
         style={{ flex: 1 }}
-        initialRegion={{
-          latitude: 41.895766,
-          longitude: -87.638865,
+        region={{
+          latitude: latitude,
+          longitude: longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
