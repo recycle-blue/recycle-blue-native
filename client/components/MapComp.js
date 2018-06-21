@@ -1,24 +1,16 @@
 import React from 'react'
 import { MapView } from 'expo'
-import axios from 'axios'
-import { googleAPIKey } from '../secrets'
+import { connect } from 'react-redux'
+import { getRecycleLocationsThunk } from '../store/location'
 
 class MapComp extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      markers: [],
-    }
-  }
-  async componentDidMount() {
-    const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.895766,-87.638865&keyword=recycle&radius=3000&key=${googleAPIKey}`
-    )
-    console.log('RESULTS:', data.results[0].geometry.location)
-    this.setState({ markers: data.results })
+  componentDidMount() {
+    // fetch locations
+    this.props.fetchRecycleLocations()
   }
   render() {
-    const { markers } = this.state
+    console.log(this.props)
+    const { recycleLocations } = this.props
     return (
       <MapView
         provider="google"
@@ -30,7 +22,7 @@ class MapComp extends React.Component {
           longitudeDelta: 0.0421,
         }}
       >
-        {markers.map(marker => {
+        {recycleLocations.map(marker => {
           const location = {
             latitude: marker.geometry.location.lat,
             longitude: marker.geometry.location.lng,
@@ -42,4 +34,18 @@ class MapComp extends React.Component {
   }
 }
 
-export default MapComp
+const mapState = state => {
+  return {
+    recycleLocations: state.location,
+  }
+}
+const mapDispatch = dispatch => {
+  return {
+    fetchRecycleLocations: () => dispatch(getRecycleLocationsThunk()),
+  }
+}
+
+export default connect(
+  mapState,
+  mapDispatch
+)(MapComp)
