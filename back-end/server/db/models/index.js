@@ -24,6 +24,9 @@ Product.hasMany(Tag)
 Product.belongsTo(Category)
 Category.hasMany(Product)
 
+User.belongsTo(Milestone)
+Milestone.hasMany(User)
+
 User.belongsToMany(User, {
   as: 'Friends',
   foreignKey: 'myId',

@@ -6,8 +6,6 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Home</Text>
-        this.props.navigation.openDrawer()
-      }} />
       </View>
     )
   }
