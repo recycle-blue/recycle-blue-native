@@ -9,7 +9,7 @@ const mapStateToProps = (store) => {
   return {
     type: store.activity.type || "typetest",
     category: store.activity.category || "cattest",
-    photoUri: store.activity.photo.uri
+    photo: `data:image/jpg;base64,${store.activity.photo.base64}`
   }
 }
 
@@ -38,12 +38,10 @@ class AddActivity extends React.Component {
         <Content>
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text>This is where the image goes</Text>
-            <View style={styles.image}>
-              <Image
-                style={{ flex: .5 }}
-                source={{ uri: this.props.photoUri }}
-              />
-            </View>
+            <Image
+              style={styles.image}
+              source={{ uri: this.props.photo }}
+            />
           </View>
           <Form>
             <Item rounded>
@@ -63,8 +61,8 @@ class AddActivity extends React.Component {
 const styles = StyleSheet.create({
   image: {
     flex: 1,
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     borderWidth: 1,
     borderColor: 'blue',
     alignItems: 'center',
