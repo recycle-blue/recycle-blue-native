@@ -9,7 +9,7 @@ const mapStateToProps = (store) => {
   return {
     type: store.activity.type || "typetest",
     category: store.activity.category || "cattest",
-    photo: `data:image/jpg;base64,${store.activity.photo.base64}`
+    photo: store.activity.photo
   }
 }
 

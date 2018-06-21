@@ -10,9 +10,7 @@ const SAVE_PHOTO = 'SAVE_PHOTO'
 /**
  * INITIAL STATE
  */
-const defaultActivity = {
-  photo: {}
-}
+const defaultActivity = {}
 
 /**
  * ACTION CREATORS
@@ -46,7 +44,7 @@ export const setActivityThunk = (activity) => async dispatch => {
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    // const res = await axios.post('/api/activity/watson', photo)
+    const res = await axios.post('/api/activity/photo', photo)
     // dispatch(setActivity(res.data || defaultActivity))
     console.log('store photo', photo)
     await dispatch(savePhoto(photo))

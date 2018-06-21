@@ -15,7 +15,6 @@ class TestCamera extends React.Component {
     this.state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
-      photoSaved: false,
     }
   }
 
@@ -51,12 +50,9 @@ class TestCamera extends React.Component {
 
   savePicture = async (photo) => {
     console.log('in save photo')
-    await this.props.storePicture(photo)
-    // await FileSystem.moveAsync({
-    //   from: photo.uri,
-    //   to: `${FileSystem.documentDirectory}photos/latest.jpg`
-    // })
-    this.props.navigation.navigate('addActivity')
+    const photoData = `data:image/jpg;base64,${photo.base64}`
+    await this.props.storePicture(photoData)
+    this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
   }
 
   render() {
