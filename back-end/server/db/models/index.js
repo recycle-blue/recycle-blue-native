@@ -6,14 +6,17 @@ const Tag = require('./tag')
 const Milestone = require('./milestone')
 const Activity = require('./activity')
 
-Comments.belongsTo(User)
-User.hasMany(Comments)
+User.belongsTo(Milestone);
+Milestone.hasMany(User);
 
 User.belongsToMany(Product, {through: Activity})
 Product.belongsToMany(User, {through: Activity})
 
-Comments.belongsTo(Activity)
-Activity.hasMany(Comments)
+User.belongsToMany(Activity,
+{
+    as: 'Comments',
+    through: Comments
+});
 
 Tag.belongsTo(Product)
 Product.hasMany(Tag)
@@ -34,5 +37,6 @@ module.exports = {
   Product,
   Comments,
   Tag,
-  Milestone
+  Milestone,
+  Activity
 }
