@@ -1,13 +1,12 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
-import { Home, AddProduct } from '../components'
-import MapComp from '../components/MapComp'
+import { Home, AddActivity, Camera, MapComp } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
     home: { screen: Home },
-    addProduct: { screen: AddProduct },
+    addActivity: { screen: AddActivity },
     map: { screen: MapComp },
   },
   {
@@ -21,6 +20,8 @@ const PrimaryNav = createStackNavigator(
   {
     home: { screen: Home },
     drawerStack: { screen: Drawer },
+    camera: { screen: Camera },
+    addActivity: { screen: AddActivity },
   },
   {
     title: 'main',
@@ -31,7 +32,20 @@ const PrimaryNav = createStackNavigator(
       title: 'RecycleBlue',
       headerTintColor: 'white',
       headerLeft: (
-        <Button title="pressme" onPress={() => navigation.toggleDrawer()} />
+        <Button
+          title="Menu"
+          onPress={() => {
+            navigation.toggleDrawer()
+          }}
+        />
+      ),
+      headerRight: (
+        <Button
+          title="Cam"
+          onPress={() => {
+            navigation.navigate('camera')
+          }}
+        />
       ),
     }),
   }
