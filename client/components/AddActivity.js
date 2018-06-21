@@ -9,7 +9,9 @@ const mapStateToProps = (store) => {
   return {
     type: store.activity.type || "typetest",
     category: store.activity.category || "cattest",
-    photo: store.activity.photo,
+    qty: store.activity.qty || '1',
+    unit: store.activity.unit || 'qty',
+    photo: store.activity.photo || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
     rawData: store.activity.rawData
   }
 }
@@ -46,11 +48,41 @@ class AddActivity extends React.Component {
           </View>
           <Form>
             <Item rounded>
-              <Input name="type" placeholder="Type" onChange={this.handleChange} value={this.state.type} />
+              <Input
+                name="type"
+                placeholder="Type"
+                onChange={this.handleChange}
+                value={this.state.type}
+              />
             </Item>
             <Item rounded>
-              <Input name="category" placeholder="Category" onChange={this.handleChange} value={this.state.category} />
+              <Input
+                name="category"
+                placeholder="Category"
+                onChange={this.handleChange}
+                value={this.state.category}
+              />
             </Item>
+            <View style={styles.qtyInputs}>
+              <Item rounded>
+                <Input
+                  style={styles.halfInput}
+                  name="amount"
+                  onChange={this.handleChange}
+                  value={this.state.qty}
+                  keyboardType='numeric'
+                />
+              </Item>
+              <Item rounded>
+                <Input
+                  style={styles.halfInput}
+                  name="unit"
+                  placeholder="qty"
+                  onChange={this.handleChange}
+                  value={this.state.unit}
+                />
+              </Item>
+            </View>
           </Form>
           <Button title='submit' onPress={this.handleSubmit} />
         </Content>
@@ -69,6 +101,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  qtyInputs: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  halfInput: {
+    // flex: 1,
+    width: 125,
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddActivity)

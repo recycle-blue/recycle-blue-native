@@ -25,7 +25,7 @@ const PrimaryNav = createStackNavigator(
   },
   {
     title: 'main',
-    initialRouteName: 'home',
+    initialRouteName: 'drawerStack',
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: 'blue' },
