@@ -34,5 +34,6 @@ module.exports = {
   Product,
   Comments,
   Tag,
-  Milestone
+  Milestone,
+  Activity
 }
