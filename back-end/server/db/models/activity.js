@@ -13,8 +13,8 @@ const Activity = db.define('activity', {
   },
   likes: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
   }
 })
-
 module.exports = Activity
