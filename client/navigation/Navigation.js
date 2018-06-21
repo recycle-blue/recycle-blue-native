@@ -16,7 +16,8 @@ const Drawer = createDrawerNavigator({
 const PrimaryNav = createStackNavigator({
   home: { screen: Home },
   drawerStack: { screen: Drawer },
-  camera: { screen: Camera }
+  camera: { screen: Camera },
+  addActivity: { screen: AddActivity }
 }, {
     title: 'main',
     initialRouteName: 'drawerStack',
@@ -25,12 +26,10 @@ const PrimaryNav = createStackNavigator({
       headerStyle: { backgroundColor: 'blue' },
       title: 'RecycleBlue',
       headerTintColor: 'white',
-      headerLeft: <Button title='pressme' onPress={() => {
-        // navigation.navigate('drawerStack')
+      headerLeft: <Button title='Menu' onPress={() => {
         navigation.toggleDrawer()
       }} />,
       headerRight: <Button title='Cam' onPress={() => {
-        console.log('go to camera?')
         navigation.navigate('camera')
       }} />
     })

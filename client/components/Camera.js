@@ -1,25 +1,62 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-// import { RNCamera } from 'react-native-camera'
-import { Camera, Permissions } from 'expo'
+import { Camera, Permissions, FileSystem } from 'expo'
+import { Icon, Button } from 'native-base'
+import { connect } from 'react-redux'
+import { savePhotoThunk } from '../store'
 
-export default class TestCamera extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-  };
+const mapDispatchToProps = (dispatch) => ({
+  storePicture: (data) => dispatch(savePhotoThunk(data))
+})
+
+class TestCamera extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasCameraPermission: null,
+      type: Camera.Constants.Type.back,
+      photoSaved: false,
+    }
+  }
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({ hasCameraPermission: status === 'granted' })
   }
 
+  componentDidMount() {
+    // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photo').catch(e => {
+    // console.log(e, 'Directory Exists')
+    // })
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: null,
+      headerLeft: (
+        <Button transparent onPress={() => navigation.goBack()}>
+          <Icon style={{ color: 'white' }} name='arrow-back' />
+        </Button>
+      )
+    }
+  }
   takePicture = async () => {
     if (this.camera) {
       const options = { quality: 0.5, base64: true }
       const data = await this.camera.takePictureAsync(options)
-      console.log(data.uri)
+      console.log(data)
+      this.savePicture(data)
     }
+  }
+
+  savePicture = async (photo) => {
+    console.log('in save photo')
+    await this.props.storePicture(photo)
+    // await FileSystem.moveAsync({
+    //   from: photo.uri,
+    //   to: `${FileSystem.documentDirectory}photos/latest.jpg`
+    // })
+    this.props.navigation.navigate('addActivity')
   }
 
   render() {
@@ -108,3 +145,5 @@ const styles = StyleSheet.create({
     margin: 20
   }
 })
+
+export default connect(null, mapDispatchToProps)(TestCamera)
