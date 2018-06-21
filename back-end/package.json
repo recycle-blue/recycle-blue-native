@@ -22,7 +22,7 @@
     "start-server":
       "nodemon server -e html,js,scss --ignore public --ignore client",
     "test":
-      "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+      "NODE_ENV='test' mocha ./test-setup.js \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "lint-staged": {
     "*.{js,jsx}": ["prettier --write", "npm run lint-fix", "git add"],
