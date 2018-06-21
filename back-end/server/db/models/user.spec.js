@@ -39,6 +39,17 @@ describe('User model', () => {
   })
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
+      let cody
+
+      beforeEach(async () => {
+        cody = await User.create({
+          firstName: 'Cody',
+          lastName: 'Puppy',
+          email: 'cody@puppybook.com',
+          password: 'bones'
+        })
+      })
+
       it('returns true if the password is correct', () => {
         expect(cody.correctPassword('bones')).to.be.equal(true)
       })

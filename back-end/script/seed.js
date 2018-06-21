@@ -1,8 +1,11 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {Product, Category, Milestone, Comments, User, Activity} = require('../server/db/models')
+const { productsData, usersData, categoriesData, commentsData, milestonesData } = require('./seed-data');
 
+const shuffle = () => 0.5 - Math.random()
+const randomIndexGenerator = (num) => Math.floor(Math.random()*num)
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -20,16 +23,75 @@ async function seed() {
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-}
 
+  const userP = User.bulkCreate(usersData, { individualHooks: true}) // must hit salting hooks
+  const categoryP = Category.bulkCreate(categoriesData)
+  const productP = Product.bulkCreate(productsData)
+  //const commentP = Comments.bulkCreate(commentsData)
+  const milestoneP = Milestone.bulkCreate(milestonesData);
+
+  await Promise.all([userP, categoryP]);
+  // Products and Milestones require users and categories to be created
+  await Promise.all([productP, milestoneP]);
+  //await Promise.all([commentP]);
+
+  // Associations cannot be set immediately after creation (https://github.com/sequelize/sequelize/issues/864)
+  await db.sync()
+  const products = await Product.findAll();
+  const categories = await Category.findAll();
+  const users = await User.findAll();
+  const milestones = await Milestone.findAll();
+  //const comments = await Comments.findAll();
+
+  await Promise.all(products.map( product => {
+    const randomId = randomIndexGenerator(categories.length);
+    const randomCategory = categories.find(category => category.id === randomId)
+    return product.setCategory(randomCategory);
+  }))
+
+  await Promise.all(users.map( user => {
+    const randomProducts = products.sort(shuffle).slice(0,5);
+    const quantity = randomIndexGenerator(5) + 1;
+    return Promise.all(randomProducts.map( product => {
+      return user.addProduct(product, {
+        through: {
+          quantity
+        }
+      })
+    }))
+  }))
+
+  function getRandomUsers(user) {
+    return users.filter(checkUser => checkUser.id !== user.id)
+  }
+
+  await Promise.all(users.map( user => {
+    const milestoneId = randomIndexGenerator(milestones.length);
+    return user.setMilestone(milestones[milestoneId])
+  }))
+
+  await Promise.all(users.map( user => {
+    const randomUsers = getRandomUsers(user);
+    return user.addFriends(randomUsers);
+  }))
+
+  const activities = await Activity.findAll();
+
+  await Promise.all(users.map( user => {
+    let testComments = commentsData;
+    const randomComment = testComments.sort(shuffle).slice(0,2)[0];
+    const randomId = randomIndexGenerator(activities.length);
+    const randomActivity = activities.find(activity => activity.id === randomId)
+    return user.addComment(randomActivity, {
+      through: {
+        text : randomComment.text
+      }
+    })
+  }))
+
+  console.log(`seeded successfully`)
+
+}
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
 // The `seed` function is concerned only with modifying the database.
@@ -47,7 +109,7 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
+// Execute the `seed` function,xw IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
 if (module === require.main) {
