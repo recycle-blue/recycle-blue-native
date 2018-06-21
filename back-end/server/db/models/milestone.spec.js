@@ -1,7 +1,5 @@
 const {expect} = require('chai')
 const {User, Milestone} = require('./index')
-const db = require('../index')
-const UserMilestone = db.model('user_milestone')
 
 describe('Milestone model', () => {
   const bob = {
@@ -22,11 +20,14 @@ describe('Milestone model', () => {
     ])
     ;[someUser, someMilestone] = promises
   })
-  it('populates the join table correctly', async () => {
-    await someMilestone.setUsers([someUser])
-    const milestoneUserRows = await UserMilestone.findAll()
-    expect(milestoneUserRows.length).to.equal(1)
-    expect(milestoneUserRows[0].userId).to.equal(someUser.id)
-    expect(milestoneUserRows[0].milestoneId).to.equal(someMilestone.id)
+  it('properly creates a milestone', () => {
+    expect(someMilestone).to.be.an('object')
+    expect(someMilestone.pointsNeeded).to.equal(50)
+    expect(someMilestone.description).to.equal('The best milestone ever!')
+    expect(someMilestone.badgeIcon).to.equal('Something cool')
+  })
+  it('is set as a foreign key for a user', async () => {
+    await someUser.setMilestone(someMilestone)
+    expect(someUser.milestoneId).to.equal(someMilestone.id)
   })
 })

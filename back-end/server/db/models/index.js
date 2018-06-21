@@ -21,8 +21,8 @@ Product.hasMany(Tag)
 Product.belongsTo(Category)
 Category.hasMany(Product)
 
-User.belongsToMany(Milestone, {through: 'user_milestone'})
-Milestone.belongsToMany(User, {through: 'user_milestone'})
+User.belongsTo(Milestone)
+Milestone.hasMany(User)
 
 User.belongsToMany(User, {
   as: 'Friends',
