@@ -20,7 +20,7 @@ const PrimaryNav = createStackNavigator({
   addActivity: { screen: AddActivity }
 }, {
     title: 'main',
-    initialRouteName: 'drawerStack',
+    initialRouteName: 'home',
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: 'blue' },

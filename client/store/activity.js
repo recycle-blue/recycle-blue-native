@@ -48,9 +48,8 @@ export const setActivityThunk = (activity) => async dispatch => {
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    console.log('store photo', photo)
     const res = axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    // dispatch(setActivity(res.data || defaultActivity))
+    await dispatch(setActivity(res.data || defaultActivity))
     await dispatch(savePhoto(photo))
   } catch (err) {
     console.error(err)
