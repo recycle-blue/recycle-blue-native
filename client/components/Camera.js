@@ -40,10 +40,8 @@ class TestCamera extends React.Component {
     }
   }
   takePicture = async () => {
-    console.log('in take picture', this.camera)
     if (this.camera) {
       const options = { quality: 0.5, base64: true }
-      console.log('pre take picture async')
       const data = await this.camera.takePictureAsync(options)
       console.log(data)
       this.savePicture(data)
@@ -51,7 +49,6 @@ class TestCamera extends React.Component {
   }
 
   savePicture = async (photo) => {
-    console.log('in save photo')
     const photoData = `data:image/jpg;base64,${photo.base64}`
     await this.props.storePicture(photoData)
     this.props.navigation.navigate('addActivity') //Change to nav to loading screen!

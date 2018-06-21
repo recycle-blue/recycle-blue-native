@@ -1,7 +1,7 @@
 import axios from 'axios'
-// import { ENV_PATH } from '../secrets'
+import { ENV_PATH } from '../secrets'
 // import history from '../history'
-const ENV_PATH = 'localhost://8080'
+// const ENV_PATH = 'localhost://8080'
 
 /**
  * ACTION TYPES
@@ -49,7 +49,7 @@ export const setActivityThunk = (activity) => async dispatch => {
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
     console.log('store photo', photo)
-    // const res = axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
+    const res = axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     // dispatch(setActivity(res.data || defaultActivity))
     await dispatch(savePhoto(photo))
   } catch (err) {
