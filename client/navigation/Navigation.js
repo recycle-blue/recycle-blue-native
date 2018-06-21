@@ -1,11 +1,13 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
-import { Home, AddProduct } from '../components'
+import { Home, AddProduct, ProgressChart, ActivityChart } from '../components'
 
 const Drawer = createDrawerNavigator({
   home: { screen: Home },
-  addProduct: { screen: AddProduct }
+  addProduct: { screen: AddProduct },
+  progressChart: { screen: ProgressChart },
+  activityChart: { screen: ActivityChart },
 }, {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
