@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ProgressCircle } from 'react-native-svg-charts'
+import { Text, View } from 'react-native'
 import SVG from 'expo'
 const {
   Path,
-  Text
+
 } = SVG
 
 const mapStateToProps = (state) => {
@@ -15,22 +16,24 @@ const mapStateToProps = (state) => {
 
 class ProgressChart extends React.Component {
   render() {
-    console.log("what are the props here?", this.props)
-
+    const totalPoints = this.props.totalPoints / 1000
+    const nextMileStone = 1000 - this.props.totalPoints
     return (
-      <ProgressCircle
-        style={{ height: 200 }}
-        progress={0.7}
-        progressColor={'rgb(134, 65, 244)'}
-        startAngle={- Math.PI * 0.8}
-        endAngle={Math.PI * 0.8}
-
-      >
-      </ProgressCircle >
+      <View>
+        <ProgressCircle
+          style={{ height: 200 }}
+          progress={totalPoints}
+          progressColor={'rgb(134, 65, 244)'}
+          startAngle={- Math.PI * 0.8}
+          endAngle={Math.PI * 0.8}
+        >
+        </ProgressCircle >
+        <Text>You have {nextMileStone} point until your next milestone</Text>
+      </View>
     )
   }
 
 }
 
 
-export default connect(mapStateToProps)(ProgressChart)
+export default connect(mapStateToProps)(ProgressChart);
