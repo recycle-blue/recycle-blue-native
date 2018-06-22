@@ -6,17 +6,20 @@ const Tag = require('./tag')
 const Milestone = require('./milestone')
 const Activity = require('./activity')
 
-User.belongsTo(Milestone);
-Milestone.hasMany(User);
+User.belongsTo(Milestone)
+Milestone.hasMany(User)
 
-User.belongsToMany(Product, {through: Activity})
-Product.belongsToMany(User, {through: Activity})
+Activity.belongsTo(User)
+User.hasMany(Activity)
 
-User.belongsToMany(Activity,
-{
-    as: 'Comments',
-    through: Comments
-});
+Activity.belongsTo(Product)
+Product.hasMany(Activity)
+
+Comments.belongsTo(Activity);
+Activity.hasMany(Comments);
+
+Comments.belongsTo(User);
+User.hasMany(Comments);
 
 Tag.belongsTo(Product)
 Product.hasMany(Tag)

@@ -11,6 +11,10 @@ const Category = db.define('category', {
   },
   description: {
     type: Sequelize.TEXT
+  },
+  multiplier: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 })
 

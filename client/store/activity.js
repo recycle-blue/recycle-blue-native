@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { ENV_PATH } from '../secrets'
-// import history from '../history'
-// const ENV_PATH = 'localhost://8080'
 
 /**
  * ACTION TYPES
@@ -38,7 +36,7 @@ export const getActivityThunk = (activityId) => async dispatch => {
   }
 }
 
-export const setActivityThunk = (activity) => async dispatch => {
+export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
     dispatch(setActivity(res.data || defaultActivity))
@@ -48,10 +46,9 @@ export const setActivityThunk = (activity) => async dispatch => {
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    console.log('store photo', photo)
     const res = axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    // dispatch(setActivity(res.data || defaultActivity))
     await dispatch(savePhoto(photo))
+    await dispatch(setActivity(res.data || defaultActivity))
   } catch (err) {
     console.error(err)
   }
