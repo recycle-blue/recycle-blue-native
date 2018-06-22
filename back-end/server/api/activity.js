@@ -2,7 +2,6 @@ const router = require('express').Router()
 const { Activity, Product, Category, User } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { CLOUDINARY } = require('../../secrets')
-const fs = require('fs')
 module.exports = router
 
 console.log('in api/activity')
@@ -26,15 +25,6 @@ cloudinary.config({
 // })
 
 const parseImgTags = (imgTagResults) => {
-  console.log('amazon', imgTagResults.aws_rek_tagging.data)
-  console.log('google', imgTagResults.google_tagging.data)
-  console.log('imagga', imgTagResults.imagga_tagging.data)
-  fs.writeFile('/tmp/cloudDataTest', JSON.stringify(cloudData), (err) => {
-    if (err) {
-      return console.log(err)
-    }
-    console.log('file saved')
-  })
   return {
     name: 'bottle',
     category: 'Plastic',
@@ -49,7 +39,6 @@ const sendPhotoToCloud = async (photo) => {
       auto_tagging: 0.6
     }
   )
-  console.log('cloud data', cloudData.info.categorization)
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = parseImgTags(imgRecognitionResults)
@@ -79,13 +68,9 @@ router.post('/', async (req, res, next) => {
     const category = categoryData.dataValues
     const product = productData.dataValues
     const user = userData.dataValues
-    console.log('user return from db', user)
-    console.log('product return from db', product)
-    console.log('category return from db', category)
     const activityPoints = category.multiplier * product.points
     const newTotalPoints = activityPoints + user.totalPoints
     // user.update({ points: newTotalPoints })
-    console.log('new total points', newTotalPoints)
     const newActivityData = await Activity.create({
       userId: req.body.userId,
       productId: product.id,
