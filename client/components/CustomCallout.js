@@ -7,11 +7,16 @@ import { getDistanceThunk } from '../store/location'
 
 class CustomCallout extends React.Component {
   componentDidMount() {
-    this.props.getDistance()
+    const { userLocation, marker } = this.props
+    const destination = `${marker.geometry.location.lat},${
+      marker.geometry.location.lng
+    }`
+    const origin = `${userLocation.latitude},${userLocation.longitude}`
+    this.props.getDistance(marker.id, origin, destination)
   }
 
   render() {
-    const { marker, distance } = this.props
+    const { marker } = this.props
     return (
       <Callout>
         <Card>
@@ -27,7 +32,9 @@ class CustomCallout extends React.Component {
           </CardItem>
           <CardItem>
             <Body>
-              <Text style={{ fontWeight: 'bold' }}>Distance: {distance}</Text>
+              <Text style={{ fontWeight: 'bold' }}>
+                Distance: {marker.distance}
+              </Text>
             </Body>
           </CardItem>
         </Card>
@@ -39,12 +46,13 @@ class CustomCallout extends React.Component {
 const mapState = state => {
   return {
     distance: state.location.distance,
+    userLocation: state.location.userLocation,
   }
 }
 const mapDispatch = dispatch => {
   return {
-    getDistance: (origin, destination) =>
-      dispatch(getDistanceThunk(origin, destination)),
+    getDistance: (markerId, origin, destination) =>
+      dispatch(getDistanceThunk(markerId, origin, destination)),
   }
 }
 

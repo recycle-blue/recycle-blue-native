@@ -14,9 +14,7 @@ class MapComp extends React.Component {
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
-      const locationStr = Object.keys(userLocation)
-        .map(key => userLocation[key])
-        .join(',')
+      const locationStr = `${userLocation.latitude},${userLocation.longitude}`
       this.props.fetchRecycleLocations(locationStr)
       this.props.setUserLocation(userLocation)
     })
