@@ -14,28 +14,6 @@ const Drawer = createDrawerNavigator(
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     initialRouteName: 'dashboard',
-    headerMode: 'float',
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: 'blue' },
-      title: 'RecycleBlue',
-      headerTintColor: 'white',
-      headerLeft: (
-        <Button
-          title="Menu"
-          onPress={() => {
-            navigation.toggleDrawer()
-          }}
-        />
-      ),
-      headerRight: (
-        <Button
-          title="Cam"
-          onPress={() => {
-            navigation.navigate('camera')
-          }}
-        />
-      ),
-    }),
   }
 )
 
