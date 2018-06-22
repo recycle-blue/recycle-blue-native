@@ -1,8 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
-import { Container } from 'native-base'
+import { Container, Card, CardItem, Body, Button, Text } from 'native-base'
 import {
   getRecycleLocationsThunk,
   getUserLocationAction,
@@ -16,7 +15,9 @@ class MapComp extends React.Component {
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
-      const locationStr = `${userLocation.latitude},${userLocation.longitude}`
+      const locationStr = Object.keys(userLocation)
+        .map(key => userLocation[key])
+        .join(',')
       this.props.fetchRecycleLocations(locationStr)
       this.props.setUserLocation(userLocation)
     })
@@ -48,9 +49,32 @@ class MapComp extends React.Component {
             )
           })}
         </MapView>
-        <View>
-          <Text>Below the Map</Text>
-        </View>
+        <Card>
+          <CardItem>
+            <Body>
+              <Text>Test</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>Does this work</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text style={{ fontWeight: 'bold' }}>
+                5 miles from current location
+              </Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Button success onPress={() => console.log('pressed!')}>
+                <Text> Navigate to Location </Text>
+              </Button>
+            </Body>
+          </CardItem>
+        </Card>
       </Container>
     )
   }
