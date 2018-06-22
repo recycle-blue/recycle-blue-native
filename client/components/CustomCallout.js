@@ -1,8 +1,8 @@
 import React from 'react'
 import { Callout } from 'react-native-maps'
 import { connect } from 'react-redux'
-// import { Image } from 'react-native'
-import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
+// import { Button } from 'react-native'
+import { Card, CardItem, Body, Text, Right, Button } from 'native-base'
 import { getDistanceThunk } from '../store/location'
 
 class CustomCallout extends React.Component {

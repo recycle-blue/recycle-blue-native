@@ -1,6 +1,8 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
+import { View, Text } from 'react-native'
+import { Container } from 'native-base'
 import {
   getRecycleLocationsThunk,
   getUserLocationAction,
@@ -23,28 +25,33 @@ class MapComp extends React.Component {
     const { recycleLocations } = this.props
     const { latitude, longitude } = this.props.userLocation
     return (
-      <MapView
-        provider="google"
-        style={{ flex: 1 }}
-        region={{
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        {recycleLocations.map(marker => {
-          const location = {
-            latitude: marker.geometry.location.lat,
-            longitude: marker.geometry.location.lng,
-          }
-          return (
-            <MapView.Marker key={marker.id} coordinate={location}>
-              <CustomCallout marker={marker} />
-            </MapView.Marker>
-          )
-        })}
-      </MapView>
+      <Container>
+        <MapView
+          provider="google"
+          style={{ flex: 1 }}
+          region={{
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          {recycleLocations.map(marker => {
+            const location = {
+              latitude: marker.geometry.location.lat,
+              longitude: marker.geometry.location.lng,
+            }
+            return (
+              <MapView.Marker key={marker.id} coordinate={location}>
+                <CustomCallout marker={marker} />
+              </MapView.Marker>
+            )
+          })}
+        </MapView>
+        <View>
+          <Text>Below the Map</Text>
+        </View>
+      </Container>
     )
   }
 }
