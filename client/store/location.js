@@ -10,10 +10,10 @@ const getRecycleLocationsAction = locations => {
   }
 }
 
-export const getRecycleLocationsThunk = () => {
+export const getRecycleLocationsThunk = locationStr => {
   return async dispatch => {
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.895766,-87.638865&keyword=recycle&radius=3000&key=${googleAPIKey}`
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=recycle&radius=3000&key=${googleAPIKey}`
     )
     dispatch(getRecycleLocationsAction(data.results))
   }

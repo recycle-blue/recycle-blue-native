@@ -17,16 +17,20 @@ class MapComp extends React.Component {
   }
   componentDidMount() {
     // fetch locations
-    this.props.fetchRecycleLocations()
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
-      this.setState({ userLocation: { latitude, longitude } })
+      const userLocation = { latitude, longitude }
+      const locationStr = Object.keys(userLocation)
+        .map(key => userLocation[key])
+        .join(',')
+      console.log('locationStr:', locationStr)
+      this.props.fetchRecycleLocations(locationStr)
+      this.setState({ userLocation })
     })
   }
   render() {
     const { recycleLocations } = this.props
     const { latitude, longitude } = this.state.userLocation
-    console.log('LOCAL STATE:', this.state)
     return (
       <MapView
         provider="google"
@@ -57,7 +61,8 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    fetchRecycleLocations: () => dispatch(getRecycleLocationsThunk()),
+    fetchRecycleLocations: locationStr =>
+      dispatch(getRecycleLocationsThunk(locationStr)),
   }
 }
 
