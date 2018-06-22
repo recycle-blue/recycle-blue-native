@@ -54,14 +54,11 @@ async function seed() {
     const quantity = randomIndexGenerator(5) + 1;
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
     return Promise.all(randomProducts.map(product => {
-      return user.addProduct(product, {
-        through: {
-          quantity,
-          imageUrl
-        }
-      })
+      return Activity.create({
+        productId: product.id, userId: user.id, quantity, imageUrl
+        })
+      }))
     }))
-  }))
 
   function getRandomUsers(user) {
     return users.filter(checkUser => checkUser.id !== user.id)
@@ -84,10 +81,8 @@ async function seed() {
     const randomComment = testComments.sort(shuffle).slice(0, 2)[0];
     const randomId = randomIndexGenerator(activities.length);
     const randomActivity = activities.find(activity => activity.id === randomId)
-    return user.addComment(randomActivity, {
-      through: {
-        text: randomComment.text
-      }
+    return Comments.create({
+      activityId: randomActivity.id, userId: user.id, text: randomComment.text
     })
   }))
 
