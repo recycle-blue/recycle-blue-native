@@ -13,8 +13,6 @@ const mapStateToProps = (state) => {
   })
 }
 
-
-
 class ProgressChart extends React.Component {
   constructor(props) {
     super()

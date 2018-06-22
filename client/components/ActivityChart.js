@@ -20,7 +20,17 @@ class ActivityChart extends React.Component {
     // In order for us to align the axes correctly we must know the height of the x-axis or the width of the x-axis
     // and then displace the other axis with just as many pixels. Simple but manual.
     console.log("where is the xData", this)
-
+    const styles = StyleSheet.create({
+      image: {
+        flex: 1,
+        width: 250,
+        height: 250,
+        borderWidth: 1,
+        borderColor: 'blue',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    })
     return (
       <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
         <YAxis
