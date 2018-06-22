@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, Image } from 'react-native'
 import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../store'
+import { addActivityThunk, me } from '../store'
 
 const mapStateToProps = (store) => {
   return {
@@ -17,7 +17,8 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity))
+  addActivity: (activity) => dispatch(addActivityThunk(activity)),
+  refreshUser: (userId) => dispatch(me(userId)),
 })
 
 class AddActivity extends React.Component {
