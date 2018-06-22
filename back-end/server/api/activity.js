@@ -25,6 +25,9 @@ cloudinary.config({
 // })
 
 const parseImgTags = (imgTagResults) => {
+  console.log('google_tagging', imgTagResults.google_tagging)
+  console.log('imagga_tagging', imgTagResults.imagga_tagging)
+  console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
   return {
     name: 'bottle',
     category: 'Plastic',
