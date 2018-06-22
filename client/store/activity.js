@@ -39,7 +39,7 @@ export const getActivityThunk = (activityId) => async dispatch => {
 export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
-    console.log(res.data)
+    console.log(res)
     dispatch(setActivity(res.data || defaultActivity))
   } catch (err) {
     console.error(err)

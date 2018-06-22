@@ -86,12 +86,13 @@ router.post('/', async (req, res, next) => {
     const newTotalPoints = activityPoints + user.totalPoints
     // user.update({ points: newTotalPoints })
     console.log('new total points', newTotalPoints)
-    const newActivity = await Activity.create({
+    const newActivityData = await Activity.create({
       userId: req.body.userId,
       productId: product.id,
       quantity: req.body.quantity,
       imageUrl: req.body.imageUrl,
     })
+    const newActivity = newActivityData.dataValues
     newActivity.points = activityPoints
     res.json(newActivity)
   } catch (err) {

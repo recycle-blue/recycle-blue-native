@@ -32,8 +32,9 @@ class AddActivity extends React.Component {
       imageUrl: this.props.imageUrl
     }
   }
-  handleSubmit = () => {
-    this.props.addActivity(this.state)
+  handleSubmit = async () => {
+    await this.props.addActivity(this.state)
+    this.props.navigation.navigate('product')
   }
   render() {
     return (
