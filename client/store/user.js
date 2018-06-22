@@ -1,4 +1,5 @@
-// import axios from 'axios'
+import axios from 'axios'
+import {ENV_PATH} from '../secrets'
 // import history from '../history'
 
 /**
@@ -33,14 +34,13 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, { email, password })
+    res = await axios.post(`${ENV_PATH}/auth/${method}`, { email, password })
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
   }
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
