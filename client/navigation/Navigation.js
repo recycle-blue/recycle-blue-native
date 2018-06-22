@@ -1,31 +1,19 @@
 import React from 'react'
 import { Button } from 'react-native'
-import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
-import { Home, AddActivity, Camera, MapComp, Dashboard } from '../components'
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
+import { Login, AddActivity, Camera, MapComp, Dashboard } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
     dashboard: { screen: Dashboard },
     addActivity: { screen: AddActivity },
     map: { screen: MapComp },
-    camera: { screen: Camera },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-  }
-)
-
-const PrimaryNav = createStackNavigator(
-  {
-    home: { screen: Home },
-    drawerStack: { screen: Drawer },
-    addActivity: { screen: AddActivity },
-  },
-  {
-    title: 'main',
-    initialRouteName: 'home',
+    initialRouteName: 'dashboard',
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: 'blue' },
@@ -51,4 +39,42 @@ const PrimaryNav = createStackNavigator(
   }
 )
 
-export default PrimaryNav
+const PrimaryNav = createStackNavigator(
+  {
+    drawerStack: { screen: Drawer },
+    camera: { screen: Camera },
+  },
+  {
+    title: 'main',
+    initialRouteName: 'drawerStack',
+    headerMode: 'float',
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: { backgroundColor: 'blue' },
+      title: 'RecycleBlue',
+      headerTintColor: 'white',
+      headerLeft: (
+        <Button
+          title="Menu"
+          onPress={() => {
+            navigation.toggleDrawer()
+          }}
+        />
+      ),
+      headerRight: (
+        <Button
+          title="Cam"
+          onPress={() => {
+            navigation.navigate('camera')
+          }}
+        />
+      ),
+    }),
+  }
+)
+
+const InitialNav = createSwitchNavigator({
+  login: { screen: Login },
+  primaryNav: { screen: PrimaryNav }
+})
+
+export default InitialNav
