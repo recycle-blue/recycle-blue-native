@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Card, CardItem, Body, Button, Text } from 'native-base'
+import { Container } from 'native-base'
 import {
   getRecycleLocationsThunk,
   getUserLocationAction,
