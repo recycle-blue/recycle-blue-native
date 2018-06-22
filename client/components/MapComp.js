@@ -1,6 +1,8 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
+import { Header, Left, Right, Body, Title, Text } from 'native-base'
+import { Callout } from 'react-native-maps'
 import { getRecycleLocationsThunk } from '../store/location'
 
 const geoLocation = navigator.geolocation
@@ -16,14 +18,12 @@ class MapComp extends React.Component {
     }
   }
   componentDidMount() {
-    // fetch locations
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
-      console.log('locationStr:', locationStr)
       this.props.fetchRecycleLocations(locationStr)
       this.setState({ userLocation })
     })
@@ -47,7 +47,20 @@ class MapComp extends React.Component {
             latitude: marker.geometry.location.lat,
             longitude: marker.geometry.location.lng,
           }
-          return <MapView.Marker key={marker.id} coordinate={location} />
+          return (
+            <MapView.Marker key={marker.id} coordinate={location}>
+              <Callout>
+                <Header>
+                  <Left />
+                  <Body>
+                    <Title>Custom Callout</Title>
+                  </Body>
+                  <Right />
+                </Header>
+                <Text>This is a custom callout</Text>
+              </Callout>
+            </MapView.Marker>
+          )
         })}
       </MapView>
     )
