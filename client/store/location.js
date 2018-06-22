@@ -35,7 +35,7 @@ export const getRecycleLocationsThunk = locationStr => {
 export const getDistanceThunk = (origin, destination) => {
   return async dispatch => {
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=41.8956689,-87.6394469&destinations=place_id:ChIJe_o2hCR-j4ARxSNVkQ7Fw2k&units=imperial&key=AIzaSyDHKOV1PI9C3bXaAbtxZL-x2t5-UiV0Ass`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=41.8956689,-87.6394469&destinations=place_id:ChIJe_o2hCR-j4ARxSNVkQ7Fw2k&units=imperial&key=${googleAPIKey}`
     )
     dispatch(getDistanceAction(data.rows[0].elements[0].distance.text))
   }
