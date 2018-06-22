@@ -13,6 +13,17 @@ class MarkerDetail extends React.Component {
     const origin = `${userLocation.latitude},${userLocation.longitude}`
     this.props.getDistance(marker.id, origin, destination)
   }
+  componentDidUpdate(prevProps) {
+    console.log('componentDidUpdate called!')
+    if (prevProps.marker.id !== this.props.marker.id) {
+      const { userLocation, marker } = this.props
+      const destination = `${marker.geometry.location.lat},${
+        marker.geometry.location.lng
+      }`
+      const origin = `${userLocation.latitude},${userLocation.longitude}`
+      this.props.getDistance(marker.id, origin, destination)
+    }
+  }
 
   render() {
     const { marker } = this.props

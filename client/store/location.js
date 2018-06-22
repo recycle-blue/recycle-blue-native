@@ -69,14 +69,10 @@ export default function(state = initialState, action) {
     case GET_USER_LOCATION:
       return { ...state, userLocation: action.location }
     case GET_DISTANCE:
-      const updatedRecycleLocations = state.recycleLocations.map(location => {
-        if (location.id === action.markerId) {
-          return { ...location, distance: action.distance }
-        } else {
-          return location
-        }
-      })
-      return { ...state, recycleLocations: updatedRecycleLocations }
+      return {
+        ...state,
+        selectedMarker: { ...state.selectedMarker, distance: action.distance },
+      }
     case SELECT_MARKER:
       return { ...state, selectedMarker: action.marker }
     default:
