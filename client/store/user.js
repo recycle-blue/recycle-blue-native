@@ -12,11 +12,8 @@ const REMOVE_USER = 'REMOVE_USER'
  * INITIAL STATE
  */
 const defaultUser = {
-  firstName: 'Samir',
-  lastName: 'Thakral',
-  email: 'samir@email.com',
-  password: '1234',
-  totalPoints: 560,
+  email: '',
+  totalPoints: 0,
 }
 
 /**
