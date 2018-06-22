@@ -12,6 +12,8 @@ const REMOVE_USER = 'REMOVE_USER'
  * INITIAL STATE
  */
 const defaultUser = {
+  firstName: '',
+  lastName: '',
   email: '',
   totalPoints: 0,
 }
