@@ -5,9 +5,10 @@ import { Home, AddActivity, Camera, MapComp, Dashboard } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: {screen: Dashboard},
+    dashboard: { screen: Dashboard },
     addActivity: { screen: AddActivity },
     map: { screen: MapComp },
+    camera: { screen: Camera },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
@@ -20,7 +21,6 @@ const PrimaryNav = createStackNavigator(
   {
     home: { screen: Home },
     drawerStack: { screen: Drawer },
-    camera: { screen: Camera },
     addActivity: { screen: AddActivity },
   },
   {

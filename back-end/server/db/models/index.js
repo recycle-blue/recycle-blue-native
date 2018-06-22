@@ -9,14 +9,16 @@ const Activity = require('./activity')
 User.belongsTo(Milestone);
 Milestone.hasMany(User);
 
-User.belongsToMany(Product, {through: Activity})
-Product.belongsToMany(User, {through: Activity})
+Activity.belongsTo(User)
+User.hasMany(Activity)
+Activity.belongsTo(Product)
+Product.hasMany(Activity)
 
 User.belongsToMany(Activity,
-{
+  {
     as: 'Comments',
     through: Comments
-});
+  });
 
 Tag.belongsTo(Product)
 Product.hasMany(Tag)
