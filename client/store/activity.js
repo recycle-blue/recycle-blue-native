@@ -15,7 +15,8 @@ const defaultActivity = {
   name: '',
   category: '',
   quantity: 0,
-  imageUrl: ''
+  imageUrl: '',
+  productId: 1
 }
 
 /**
