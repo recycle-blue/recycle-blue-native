@@ -1,23 +1,36 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { getRecycleLocationsThunk } from '../store/location'
+import {
+  getRecycleLocationsThunk,
+  getUserLocationAction,
+} from '../store/location'
+import CustomCallout from './CustomCallout'
+
+const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
   componentDidMount() {
-    // fetch locations
-    this.props.fetchRecycleLocations()
+    geoLocation.getCurrentPosition(location => {
+      const { latitude, longitude } = location.coords
+      const userLocation = { latitude, longitude }
+      const locationStr = Object.keys(userLocation)
+        .map(key => userLocation[key])
+        .join(',')
+      this.props.fetchRecycleLocations(locationStr)
+      this.props.setUserLocation(userLocation)
+    })
   }
   render() {
-    console.log(this.props)
     const { recycleLocations } = this.props
+    const { latitude, longitude } = this.props.userLocation
     return (
       <MapView
         provider="google"
         style={{ flex: 1 }}
-        initialRegion={{
-          latitude: 41.895766,
-          longitude: -87.638865,
+        region={{
+          latitude: latitude,
+          longitude: longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -27,7 +40,11 @@ class MapComp extends React.Component {
             latitude: marker.geometry.location.lat,
             longitude: marker.geometry.location.lng,
           }
-          return <MapView.Marker key={marker.id} coordinate={location} />
+          return (
+            <MapView.Marker key={marker.id} coordinate={location}>
+              <CustomCallout marker={marker} />
+            </MapView.Marker>
+          )
         })}
       </MapView>
     )
@@ -36,12 +53,15 @@ class MapComp extends React.Component {
 
 const mapState = state => {
   return {
-    recycleLocations: state.location,
+    recycleLocations: state.location.recycleLocations,
+    userLocation: state.location.userLocation,
   }
 }
 const mapDispatch = dispatch => {
   return {
-    fetchRecycleLocations: () => dispatch(getRecycleLocationsThunk()),
+    fetchRecycleLocations: locationStr =>
+      dispatch(getRecycleLocationsThunk(locationStr)),
+    setUserLocation: location => dispatch(getUserLocationAction(location)),
   }
 }
 
