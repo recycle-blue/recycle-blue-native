@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { addActivityThunk } from '../store'
 
 const mapStateToProps = (store) => {
-  //  console.log(store)
   return {
     userId: store.user.id || 1,
     name: store.activity.name || "bottle",

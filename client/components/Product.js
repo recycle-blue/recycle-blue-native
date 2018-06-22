@@ -4,20 +4,11 @@ import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk } from '../store/product'
 
-
 class Product extends React.Component {
-  constructor() {
-    super()
-
-  }
-
   componentWillMount() {
-    console.log("getting here?", this.props.productId)
     this.props.getProduct(this.props.productId)
   }
-
   render() {
-    console.log("this is working in products", this)
     return (
       <Container>
         <Content>
