@@ -12,6 +12,10 @@ const SAVE_PHOTO = 'SAVE_PHOTO'
  */
 const defaultActivity = {
   photo: '',
+  name: '',
+  category: '',
+  quantity: 0,
+  imageUrl: '',
   productId: 1
 }
 
