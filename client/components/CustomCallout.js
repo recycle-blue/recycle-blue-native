@@ -1,8 +1,8 @@
 import React from 'react'
 import { Callout } from 'react-native-maps'
 import { connect } from 'react-redux'
-import { Image } from 'react-native'
-import { Left, Right, Card, CardItem, Body, Text, Thumbnail } from 'native-base'
+// import { Image } from 'react-native'
+import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
 import { getDistanceThunk } from '../store/location'
 
 class CustomCallout extends React.Component {
@@ -33,8 +33,15 @@ class CustomCallout extends React.Component {
           <CardItem>
             <Body>
               <Text style={{ fontWeight: 'bold' }}>
-                Distance: {marker.distance}
+                {marker.distance} from current location
               </Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Button success>
+                <Text> Navigate to Location </Text>
+              </Button>
             </Body>
           </CardItem>
         </Card>
