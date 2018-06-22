@@ -1,11 +1,13 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
+import { Container, Card, CardItem, Body, Button, Text } from 'native-base'
 import {
   getRecycleLocationsThunk,
   getUserLocationAction,
+  selectMarkerAction,
 } from '../store/location'
-import CustomCallout from './CustomCallout'
+import MarkerDetail from './MarkerDetail'
 
 const geoLocation = navigator.geolocation
 
@@ -21,32 +23,40 @@ class MapComp extends React.Component {
       this.props.setUserLocation(userLocation)
     })
   }
+  handleMarkerPress = marker => {
+    this.props.selectMarker(marker)
+  }
   render() {
-    const { recycleLocations } = this.props
+    const { recycleLocations, selectedMarker } = this.props
     const { latitude, longitude } = this.props.userLocation
     return (
-      <MapView
-        provider="google"
-        style={{ flex: 1 }}
-        region={{
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        {recycleLocations.map(marker => {
-          const location = {
-            latitude: marker.geometry.location.lat,
-            longitude: marker.geometry.location.lng,
-          }
-          return (
-            <MapView.Marker key={marker.id} coordinate={location}>
-              <CustomCallout marker={marker} />
-            </MapView.Marker>
-          )
-        })}
-      </MapView>
+      <Container>
+        <MapView
+          provider="google"
+          style={{ flex: 1 }}
+          region={{
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          {recycleLocations.map(marker => {
+            const location = {
+              latitude: marker.geometry.location.lat,
+              longitude: marker.geometry.location.lng,
+            }
+            return (
+              <MapView.Marker
+                key={marker.id}
+                coordinate={location}
+                onPress={() => this.handleMarkerPress(marker)}
+              />
+            )
+          })}
+        </MapView>
+        {selectedMarker.id && <MarkerDetail marker={selectedMarker} />}
+      </Container>
     )
   }
 }
@@ -55,6 +65,7 @@ const mapState = state => {
   return {
     recycleLocations: state.location.recycleLocations,
     userLocation: state.location.userLocation,
+    selectedMarker: state.location.selectedMarker,
   }
 }
 const mapDispatch = dispatch => {
@@ -62,6 +73,7 @@ const mapDispatch = dispatch => {
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
+    selectMarker: marker => dispatch(selectMarkerAction(marker)),
   }
 }
 
