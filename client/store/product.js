@@ -20,7 +20,7 @@ const defaultProduct = {
  * ACTION CREATORS
  */
 const getProductById = product => ({
-  type: GET_ACTIVITY,
+  type: GET_PRODUCT_BY_ID,
   product
 })
 
@@ -29,6 +29,7 @@ const getProductById = product => ({
  * THUNK CREATORS
  */
 export const getProductThunk = (productId) => async dispatch => {
+
   try {
     const res = await axios.get(`${ENV_PATH}/api/product/${productId}`)
     dispatch(getProductById(res.data || defaultProduct))

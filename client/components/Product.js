@@ -1,4 +1,6 @@
 import React from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk } from '../store/product'
 
@@ -10,10 +12,12 @@ class Product extends React.Component {
   }
 
   componentWillMount() {
+    console.log("getting here?", this.props.productId)
     this.props.getProduct(this.props.productId)
   }
 
   render() {
+    console.log("this is working in products", this)
     return (
       <Container>
         <Content>
@@ -51,7 +55,7 @@ const mapStateToProps = state => {
     points: state.product.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,
-    photo: state.activity.photo,
+    photo: state.activity.imageUrl || state.activity.photo,
     productId: state.activity.productId
   })
 }
