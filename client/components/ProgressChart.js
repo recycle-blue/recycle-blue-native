@@ -21,9 +21,6 @@ class ProgressChart extends React.Component {
   }
   render() {
     console.log("what are the props here?", this.props)
-    this.props.getUserProgress()
-
-
 
     return (
       <ProgressCircle

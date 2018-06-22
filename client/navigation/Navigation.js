@@ -1,27 +1,29 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
-import { Home, AddProduct, ProgressChart, ActivityChart, AddActivity, Camera } from '../components'
+import { Home, ProgressChart, ActivityChart, AddActivity, Camera, MapComp } from '../components'
 
 const Drawer = createDrawerNavigator({
   home: { screen: Home },
-  addProduct: { screen: AddProduct },
   progressChart: { screen: ProgressChart },
   activityChart: { screen: ActivityChart },
-  addActivity: { screen: AddActivity }
+  addActivity: { screen: AddActivity },
+  map: { screen: MapComp },
 }, {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
-    drawerToggleRoute: 'DrawerToggle'
+    drawerToggleRoute: 'DrawerToggle',
   }
 )
 
-const PrimaryNav = createStackNavigator({
-  home: { screen: Home },
-  drawerStack: { screen: Drawer },
-  camera: { screen: Camera },
-  addActivity: { screen: AddActivity }
-}, {
+const PrimaryNav = createStackNavigator(
+  {
+    home: { screen: Home },
+    drawerStack: { screen: Drawer },
+    camera: { screen: Camera },
+    addActivity: { screen: AddActivity },
+  },
+  {
     title: 'main',
     initialRouteName: 'drawerStack',
     headerMode: 'float',
@@ -29,13 +31,23 @@ const PrimaryNav = createStackNavigator({
       headerStyle: { backgroundColor: 'blue' },
       title: 'RecycleBlue',
       headerTintColor: 'white',
-      headerLeft: <Button title='Menu' onPress={() => {
-        navigation.toggleDrawer()
-      }} />,
-      headerRight: <Button title='Cam' onPress={() => {
-        navigation.navigate('camera')
-      }} />
-    })
+      headerLeft: (
+        <Button
+          title="Menu"
+          onPress={() => {
+            navigation.toggleDrawer()
+          }}
+        />
+      ),
+      headerRight: (
+        <Button
+          title="Cam"
+          onPress={() => {
+            navigation.navigate('camera')
+          }}
+        />
+      ),
+    }),
   }
 )
 

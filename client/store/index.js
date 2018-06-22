@@ -4,9 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import activity from './activity'
-import progresswheel from './progresswheel'
+import location from './location'
 
-const reducer = combineReducers({ user, activity, progresswheel })
+const reducer = combineReducers({ user, activity, location })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
@@ -15,4 +15,3 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './user'
 export * from './activity'
-export * from './progresswheel'

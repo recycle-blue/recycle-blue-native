@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { ENV_PATH } from '../secrets'
-// import history from '../history'
-// const ENV_PATH = 'localhost://8080'
 
 /**
  * ACTION TYPES
