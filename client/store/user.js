@@ -1,17 +1,22 @@
 import axios from 'axios'
-import {ENV_PATH} from '../secrets'
+import { ENV_PATH } from '../secrets'
 // import history from '../history'
 
-/**
- * ACTION TYPES
- */
+// /**
+//  * ACTION TYPES
+//  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  totalPoints: 0,
+}
 
 /**
  * ACTION CREATORS
@@ -59,7 +64,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
