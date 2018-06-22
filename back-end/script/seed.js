@@ -1,11 +1,11 @@
 'use strict'
 
 const db = require('../server/db')
-const {Product, Category, Milestone, Comments, User, Activity} = require('../server/db/models')
+const { Product, Category, Milestone, Comments, User, Activity } = require('../server/db/models')
 const { productsData, usersData, categoriesData, commentsData, milestonesData } = require('./seed-data');
 
 const shuffle = () => 0.5 - Math.random()
-const randomIndexGenerator = (num) => Math.floor(Math.random()*num)
+const randomIndexGenerator = (num) => Math.floor(Math.random() * num)
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -19,12 +19,12 @@ const randomIndexGenerator = (num) => Math.floor(Math.random()*num)
  */
 
 async function seed() {
-  await db.sync({force: true})
+  await db.sync({ force: true })
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
 
-  const userP = User.bulkCreate(usersData, { individualHooks: true}) // must hit salting hooks
+  const userP = User.bulkCreate(usersData, { individualHooks: true }) // must hit salting hooks
   const categoryP = Category.bulkCreate(categoriesData)
   const productP = Product.bulkCreate(productsData)
   //const commentP = Comments.bulkCreate(commentsData)
@@ -43,49 +43,46 @@ async function seed() {
   const milestones = await Milestone.findAll();
   //const comments = await Comments.findAll();
 
-  await Promise.all(products.map( product => {
+  await Promise.all(products.map(product => {
     const randomId = randomIndexGenerator(categories.length);
     const randomCategory = categories.find(category => category.id === randomId)
     return product.setCategory(randomCategory);
   }))
 
-  await Promise.all(users.map( user => {
-    const randomProducts = products.sort(shuffle).slice(0,5);
+  await Promise.all(users.map(user => {
+    const randomProducts = products.sort(shuffle).slice(0, 5);
     const quantity = randomIndexGenerator(5) + 1;
-    return Promise.all(randomProducts.map( product => {
-      return user.addProduct(product, {
-        through: {
-          quantity
-        }
-      })
+    const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
+    return Promise.all(randomProducts.map(product => {
+      return Activity.create({
+        productId: product.id, userId: user.id, quantity, imageUrl
+        })
+      }))
     }))
-  }))
 
   function getRandomUsers(user) {
     return users.filter(checkUser => checkUser.id !== user.id)
   }
 
-  await Promise.all(users.map( user => {
+  await Promise.all(users.map(user => {
     const milestoneId = randomIndexGenerator(milestones.length);
     return user.setMilestone(milestones[milestoneId])
   }))
 
-  await Promise.all(users.map( user => {
+  await Promise.all(users.map(user => {
     const randomUsers = getRandomUsers(user);
     return user.addFriends(randomUsers);
   }))
 
   const activities = await Activity.findAll();
 
-  await Promise.all(users.map( user => {
+  await Promise.all(users.map(user => {
     let testComments = commentsData;
-    const randomComment = testComments.sort(shuffle).slice(0,2)[0];
+    const randomComment = testComments.sort(shuffle).slice(0, 2)[0];
     const randomId = randomIndexGenerator(activities.length);
     const randomActivity = activities.find(activity => activity.id === randomId)
-    return user.addComment(randomActivity, {
-      through: {
-        text : randomComment.text
-      }
+    return Comments.create({
+      activityId: randomActivity.id, userId: user.id, text: randomComment.text
     })
   }))
 

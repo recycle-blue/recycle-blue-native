@@ -41,7 +41,11 @@ class TestCamera extends React.Component {
   }
   takePicture = async () => {
     if (this.camera) {
-      const options = { quality: 0.5, base64: true }
+      const options = {
+        quality: 0.5,
+        base64: true
+      }
+      console.log('pre-take pic')
       const data = await this.camera.takePictureAsync(options)
       console.log(data)
       this.savePicture(data)
