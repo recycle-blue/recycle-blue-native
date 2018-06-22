@@ -4,6 +4,7 @@ import { googleAPIKey } from '../secrets'
 const GET_RECYCLE_LOCATIONS = 'GET_RECYCLE_LOCATIONS'
 const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
+const SELECT_MARKER = 'SELECT_MARKER'
 
 const getRecycleLocationsAction = locations => {
   return {
@@ -22,6 +23,12 @@ const getDistanceAction = (distance, markerId) => {
     type: GET_DISTANCE,
     distance,
     markerId,
+  }
+}
+export const selectMarkerAction = marker => {
+  return {
+    type: SELECT_MARKER,
+    marker,
   }
 }
 
@@ -52,6 +59,7 @@ const defaultLocation = {
 const initialState = {
   recycleLocations: [],
   userLocation: defaultLocation,
+  selectedMarker: {},
 }
 
 export default function(state = initialState, action) {
@@ -69,6 +77,8 @@ export default function(state = initialState, action) {
         }
       })
       return { ...state, recycleLocations: updatedRecycleLocations }
+    case SELECT_MARKER:
+      return { ...state, selectedMarker: action.marker }
     default:
       return state
   }
