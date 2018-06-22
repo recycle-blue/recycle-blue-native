@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { ProgressCircle } from 'react-native-svg-charts'
 import SVG from 'expo'
 const {
@@ -6,15 +7,21 @@ const {
   Text
 } = SVG
 
+const mapStateToProps = (state) => {
+  return ({
+    totalPoints: state.user.totalPoints
+  })
+}
 
-export default class ProgressChart extends React.Component {
+
+
+class ProgressChart extends React.Component {
   constructor(props) {
     super()
-
   }
   render() {
     console.log("what are the props here?", this.props)
-
+    this.props.getUserProgress()
 
 
 
@@ -33,3 +40,5 @@ export default class ProgressChart extends React.Component {
 
 }
 
+
+export default connect(mapStateToProps)(ProgressChart)
