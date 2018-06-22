@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator } from 'react-navigation'
-import { Home, AddActivity, Camera, MapComp } from '../components'
+import { Home, AddActivity, Camera, MapComp, Dashboard } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
-    home: { screen: Home },
+    dashboard: {screen: Dashboard},
     addActivity: { screen: AddActivity },
     map: { screen: MapComp },
   },
@@ -25,7 +25,7 @@ const PrimaryNav = createStackNavigator(
   },
   {
     title: 'main',
-    initialRouteName: 'drawerStack',
+    initialRouteName: 'home',
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: 'blue' },

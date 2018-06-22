@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addActivityThunk } from '../store'
 
 const mapStateToProps = (store) => {
-  console.log(store)
+//  console.log(store)
   return {
     type: store.activity.type || "typetest",
     category: store.activity.category || "cattest",
