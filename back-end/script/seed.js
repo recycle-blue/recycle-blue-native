@@ -5,7 +5,7 @@ const { Product, Category, Milestone, Comments, User, Activity } = require('../s
 const { productsData, usersData, categoriesData, commentsData, milestonesData } = require('./seed-data');
 
 const shuffle = () => 0.5 - Math.random()
-const randomIndexGenerator = (num) => Math.floor(Math.random() * num)
+const randomIndexGenerator = (num) => Math.floor(Math.random() * num + 1)
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -51,14 +51,14 @@ async function seed() {
 
   await Promise.all(users.map(user => {
     const randomProducts = products.sort(shuffle).slice(0, 5);
-    const quantity = randomIndexGenerator(5) + 1;
+    const quantity = randomIndexGenerator(5);
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
     return Promise.all(randomProducts.map(product => {
       return Activity.create({
         productId: product.id, userId: user.id, quantity, imageUrl
-        })
-      }))
+      })
     }))
+  }))
 
   function getRandomUsers(user) {
     return users.filter(checkUser => checkUser.id !== user.id)
