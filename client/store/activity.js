@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ENV_PATH } from '../secrets'
+import { setProduct, setCategory } from '.'
 
 /**
  * ACTION TYPES
@@ -45,15 +46,26 @@ export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
     dispatch(setActivity(res.data || defaultActivity))
+    // if (res.data.updateRequired) {
+    // dispatch(setProduct(res.data.product))
+    // dispatch(setCategory(res.data.category))
+    // }
   } catch (err) {
     console.error(err)
   }
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    const res = axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    await dispatch(savePhoto(photo))
-    await dispatch(setActivity(res.data || defaultActivity))
+    const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
+    dispatch(savePhoto(photo))
+    dispatch(setActivity({
+      name: res.data.product.name,
+      category: res.data.category.name,
+      imageUrl: res.data.imageUrl,
+      productId: res.data.product.id
+    }))
+    dispatch(setProduct(res.data.product))
+    dispatch(setCategory(res.data.category))
   } catch (err) {
     console.error(err)
   }

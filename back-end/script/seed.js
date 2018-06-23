@@ -1,11 +1,11 @@
 'use strict'
 
 const db = require('../server/db')
-const { Product, Category, Milestone, Comments, User, Activity } = require('../server/db/models')
-const { productsData, usersData, categoriesData, commentsData, milestonesData } = require('./seed-data');
+const { Product, Category, Milestone, Comments, User, Activity, Tag } = require('../server/db/models')
+const { productsData, usersData, categoriesData, commentsData, milestonesData, tagsData } = require('./seed-data');
 
 const shuffle = () => 0.5 - Math.random()
-const randomIndexGenerator = (num) => Math.floor(Math.random() * num)
+const randomIndexGenerator = (num) => Math.floor(Math.random() * num + 1)
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -51,14 +51,14 @@ async function seed() {
 
   await Promise.all(users.map(user => {
     const randomProducts = products.sort(shuffle).slice(0, 5);
-    const quantity = randomIndexGenerator(5) + 1;
+    const quantity = randomIndexGenerator(5);
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
     return Promise.all(randomProducts.map(product => {
       return Activity.create({
         productId: product.id, userId: user.id, quantity, imageUrl
-        })
-      }))
+      })
     }))
+  }))
 
   function getRandomUsers(user) {
     return users.filter(checkUser => checkUser.id !== user.id)
@@ -83,6 +83,22 @@ async function seed() {
     const randomActivity = activities.find(activity => activity.id === randomId)
     return Comments.create({
       activityId: randomActivity.id, userId: user.id, text: randomComment.text
+    })
+  }))
+
+  await Promise.all(tagsData.map(async tag => {
+    let product = { dataValues: 0 }
+    let category = { dataValues: 0 }
+    if (tag.productName) {
+      product = await Product.find({ where: { name: tag.productName } })
+    }
+    if (tag.categoryName) {
+      category = await Category.find({ where: { name: tag.categoryName } })
+    }
+    return Tag.create({
+      name: tag.name,
+      productId: product.dataValues.id || null,
+      categoryId: category.dataValues.id || null
     })
   }))
 
