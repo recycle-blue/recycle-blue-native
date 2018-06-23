@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { Activity, Product, Category, User } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { CLOUDINARY } = require('../../secrets')
+const { parseImgTags } = require('./parseAI')
 module.exports = router
 
 console.log('in api/activity')
@@ -23,45 +24,33 @@ cloudinary.config({
 //     next(err)
 //   }
 // })
-
-const parseImgTags = (imgTagResults) => {
-  console.log('google_tagging', imgTagResults.google_tagging)
-  console.log('imagga_tagging', imgTagResults.imagga_tagging)
-  console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
-  return {
-    name: 'bottle',
-    category: 'Plastic',
-  }
-}
-
 const sendPhotoToCloud = async (photo) => {
   const cloudData = await cloudinary.v2.uploader.upload(
     photo,
     {
       categorization: 'google_tagging,imagga_tagging,aws_rek_tagging',
-      auto_tagging: 0.6
+      auto_tagging: 0.5
     }
   )
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
-  const parsedTags = parseImgTags(imgRecognitionResults)
+  const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
-    name: parsedTags.name,
-    category: parsedTags.category,
+    product: parsedTags.product,
+    categoryList: parsedTags.categories,
+    tags: parsedTags.tags,
     imageUrl
   }
 }
 
 router.post('/photo', async (req, res, next) => {
   try {
-    const cloudData = await sendPhotoToCloud(req.body.photo)
-    res.json(cloudData)
+    const parsedCloudData = await sendPhotoToCloud(req.body.photo)
+    res.json(parsedCloudData)
   } catch (err) {
     next(err)
   }
 })
-
-
 
 router.post('/', async (req, res, next) => {
   try {
