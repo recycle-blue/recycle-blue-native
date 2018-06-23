@@ -54,7 +54,7 @@ class TestCamera extends React.Component {
 
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
-    this.props.storePicture(photoData)
+    await this.props.storePicture(photoData)
     this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
   }
 

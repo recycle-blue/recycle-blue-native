@@ -33,14 +33,12 @@ class AddActivity extends React.Component {
       dataAsyncToggle: false,
     }
   }
-  async componentWillMount() {
-
-  }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
     this.props.navigation.navigate('product')
   }
   render() {
+    console.log(this.props)
     return (
       <Container>
         <Content>
