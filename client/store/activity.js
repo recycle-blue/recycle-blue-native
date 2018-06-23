@@ -7,6 +7,7 @@ import { setProduct, setCategory } from '.'
  */
 const SET_ACTIVITY = 'SET_ACTIVITY'
 const SAVE_PHOTO = 'SAVE_PHOTO'
+const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
 
 /**
  * INITIAL STATE
@@ -29,7 +30,7 @@ const setActivity = activity => ({
 const savePhoto = photo => ({
   type: SAVE_PHOTO, photo
 })
-
+export const clearActivityAction = () => ({ type: CLEAR_ACTIVITY })
 /**
  * THUNK CREATORS
  */
@@ -60,12 +61,12 @@ export const savePhotoThunk = (photo) => async dispatch => {
     dispatch(savePhoto(photo))
     dispatch(setActivity({
       name: res.data.product.name,
-      category: res.data.category.name,
+      category: res.data.category[0],
       imageUrl: res.data.imageUrl,
       productId: res.data.product.id
     }))
     dispatch(setProduct(res.data.product))
-    dispatch(setCategory(res.data.category))
+    dispatch(setCategory(res.data.category[0]))
   } catch (err) {
     console.error(err)
   }
@@ -80,6 +81,8 @@ export default function (state = defaultActivity, action) {
       return { ...state, activity: action.activity }
     case SAVE_PHOTO:
       return { ...state, photo: action.photo }
+    case CLEAR_ACTIVITY:
+      return { defaultActivity }
     default:
       return state
   }

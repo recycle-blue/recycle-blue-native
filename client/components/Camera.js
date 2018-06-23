@@ -1,13 +1,32 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Camera, Permissions, FileSystem } from 'expo'
+import { Camera, Permissions } from 'expo'
 import { Icon, Button } from 'native-base'
 import { connect } from 'react-redux'
-import { savePhotoThunk } from '../store'
+import { savePhotoThunk, clearActivityAction } from '../store'
+import {
+  Ionicons,
+  MaterialIcons,
+} from '@expo/vector-icons'
 
 const mapDispatchToProps = (dispatch) => ({
-  storePicture: (data) => dispatch(savePhotoThunk(data))
+  storePicture: (data) => dispatch(savePhotoThunk(data)),
+  clearActivity: () => dispatch(clearActivityAction())
 })
+
+const flashModeOrder = {
+  off: 'on',
+  on: 'auto',
+  auto: 'torch',
+  torch: 'off',
+}
+
+const flashIcons = {
+  off: 'flash-off',
+  on: 'flash-on',
+  auto: 'flash-auto',
+  torch: 'highlight'
+}
 
 class TestCamera extends React.Component {
   constructor(props) {
@@ -15,7 +34,13 @@ class TestCamera extends React.Component {
     this.state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
+      flash: 'off',
+      barcodeScanning: 'off'
     }
+  }
+
+  toggleFlash = () => {
+    this.setState({ flash: flashModeOrder[this.state.flash] })
   }
 
   async componentWillMount() {
@@ -48,13 +73,14 @@ class TestCamera extends React.Component {
       console.log('pre-take pic')
       const data = await this.camera.takePictureAsync(options)
       console.log(data)
+      this.props.clearActivity()
       this.savePicture(data)
     }
   }
 
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
-    await this.props.storePicture(photoData)
+    this.props.storePicture(photoData)
     this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
   }
 
@@ -71,48 +97,19 @@ class TestCamera extends React.Component {
             ref={(cam) => { this.camera = cam }}
             style={styles.preview}
             type={this.state.type}
-            flashMode={Camera.Constants.FlashMode.on}
+            flashMode={this.state.flash}
+            barcodeScanning={this.state.barcodeScanning}
             permissionDialogTitle="Permission to use camera"
             permissionDialogMessage="We need your permission to use your camera"
           >
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                alignItems: 'flex-end',
-              }}>
-              <TouchableOpacity
-                style={{
-                  // flex: 0.1,
-                  // alignSelf: 'flex-end',
-                  // alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  })
-                }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
-                </Text>
+            <View style={styles.topBar}>
+              <TouchableOpacity onPress={this.toggleFlash} >
+                <MaterialIcons name={flashIcons[this.state.flash]} size={36} color="white" />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  // flex: 0.1,
-                  // alignSelf: 'flex-end',
-                  // alignItems: 'center',
-                }}
-                onPress={this.takePicture}
-              >
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}CAPTURE{' '}
-                </Text>
+            </View>
+            <View style={styles.bottomBar}>
+              <TouchableOpacity onPress={this.takePicture} >
+                <Ionicons name="ios-radio-button-on" size={100} color="white" />
               </TouchableOpacity>
             </View>
           </Camera>
@@ -125,23 +122,35 @@ class TestCamera extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
   preview: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   capture: {
     flex: 0,
-    // backgroundColor: '#fff',
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,
     alignSelf: 'center',
     margin: 20
+  },
+  bottomBar: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    justifyContent: 'flex-end',
+    padding: 25,
+  },
+  topBar: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'flex-end',
+    alignContent: 'flex-end',
+    width: '100%',
+    padding: 10,
   }
 })
 
