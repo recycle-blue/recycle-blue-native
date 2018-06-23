@@ -4,6 +4,7 @@ import { googleAPIKey } from '../secrets'
 const GET_RECYCLE_LOCATIONS = 'GET_RECYCLE_LOCATIONS'
 const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
+const SELECT_MARKER = 'SELECT_MARKER'
 
 const getRecycleLocationsAction = locations => {
   return {
@@ -17,10 +18,17 @@ export const getUserLocationAction = location => {
     location,
   }
 }
-const getDistanceAction = distance => {
+const getDistanceAction = (distance, markerId) => {
   return {
     type: GET_DISTANCE,
     distance,
+    markerId,
+  }
+}
+export const selectMarkerAction = marker => {
+  return {
+    type: SELECT_MARKER,
+    marker,
   }
 }
 
@@ -32,12 +40,14 @@ export const getRecycleLocationsThunk = locationStr => {
     dispatch(getRecycleLocationsAction(data.results))
   }
 }
-export const getDistanceThunk = (origin, destination) => {
+export const getDistanceThunk = (markerId, origin, destination) => {
   return async dispatch => {
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=41.8956689,-87.6394469&destinations=place_id:ChIJe_o2hCR-j4ARxSNVkQ7Fw2k&units=imperial&key=${googleAPIKey}`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&units=imperial&key=${googleAPIKey}`
     )
-    dispatch(getDistanceAction(data.rows[0].elements[0].distance.text))
+    dispatch(
+      getDistanceAction(data.rows[0].elements[0].distance.text, markerId)
+    )
   }
 }
 
@@ -49,7 +59,7 @@ const defaultLocation = {
 const initialState = {
   recycleLocations: [],
   userLocation: defaultLocation,
-  distance: 0,
+  selectedMarker: {},
 }
 
 export default function(state = initialState, action) {
@@ -59,7 +69,12 @@ export default function(state = initialState, action) {
     case GET_USER_LOCATION:
       return { ...state, userLocation: action.location }
     case GET_DISTANCE:
-      return { ...state, distance: action.distance }
+      return {
+        ...state,
+        selectedMarker: { ...state.selectedMarker, distance: action.distance },
+      }
+    case SELECT_MARKER:
+      return { ...state, selectedMarker: action.marker }
     default:
       return state
   }
