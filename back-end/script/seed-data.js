@@ -202,11 +202,40 @@ const AItagsData = [
   }
 ]
 
+const activityData = [
+  {
+    "quantity": 3,
+    "likes": 5,
+    "imageUrl": "https://i.imgur.com/q9xzQk8.jpg"
+  },
+  {
+    "quantity": 4,
+    "likes": 6,
+    "imageUrl": "https://i.imgur.com/q9xzQk8.jpg"
+  },
+  {
+    "quantity": 5,
+    "likes": 7,
+    "imageUrl": "https://i.imgur.com/q9xzQk8.jpg"
+  },
+  {
+    "quantity": 6,
+    "likes": 8,
+    "imageUrl": "https://i.imgur.com/q9xzQk8.jpg"
+  },
+  {
+    "quantity": 7,
+    "likes": 9,
+    "imageUrl": "https://i.imgur.com/q9xzQk8.jpg"
+  }
+]
+
 module.exports = {
   productsData,
   usersData,
   categoriesData,
   commentsData,
   milestonesData,
-  AItagsData
+  AItagsData,
+  activityData
 }

@@ -2,7 +2,7 @@
 
 const db = require('../server/db')
 const { Product, Category, Milestone, Comments, User, Activity } = require('../server/db/models')
-const { productsData, usersData, categoriesData, commentsData, milestonesData } = require('./seed-data');
+const { productsData, usersData, categoriesData, commentsData, milestonesData, activityData } = require('./seed-data');
 
 const shuffle = () => 0.5 - Math.random()
 const randomIndexGenerator = (num) => Math.floor(Math.random() * num + 1)
@@ -29,10 +29,11 @@ async function seed() {
   const productP = Product.bulkCreate(productsData)
   //const commentP = Comments.bulkCreate(commentsData)
   const milestoneP = Milestone.bulkCreate(milestonesData);
+  const activityP = Activity.bulkCreate(activityData)
 
   await Promise.all([userP, categoryP]);
   // Products and Milestones require users and categories to be created
-  await Promise.all([productP, milestoneP]);
+  await Promise.all([productP, milestoneP, activityP]);
   //await Promise.all([commentP]);
 
   // Associations cannot be set immediately after creation (https://github.com/sequelize/sequelize/issues/864)
@@ -41,6 +42,7 @@ async function seed() {
   const categories = await Category.findAll();
   const users = await User.findAll();
   const milestones = await Milestone.findAll();
+
   //const comments = await Comments.findAll();
 
   await Promise.all(products.map(product => {

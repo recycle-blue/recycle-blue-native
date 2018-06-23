@@ -27,10 +27,6 @@ class Dashboard extends React.Component {
             </Left>
             <Right>
               <Thumbnail name="userMilestoneThumbnail" large square source={{ uri: user.milestone.badgeIcon }} />
-              <Body>
-                <Text>{user.name}</Text>
-                <Text>{user.totalPoints}</Text>
-              </Body>
             </Right>
           </CardItem>
         </Card>
