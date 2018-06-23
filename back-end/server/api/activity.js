@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { Activity, Product, Category, User } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { CLOUDINARY } = require('../../secrets')
+const { parseImgTags } = require('./parseAI')
 module.exports = router
 
 console.log('in api/activity')
@@ -23,16 +24,6 @@ cloudinary.config({
 //     next(err)
 //   }
 // })
-
-const parseImgTags = (imgTagResults) => {
-  console.log('google_tagging', imgTagResults.google_tagging)
-  console.log('imagga_tagging', imgTagResults.imagga_tagging)
-  console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
-  return {
-    name: 'bottle',
-    category: 'Plastic',
-  }
-}
 
 const sendPhotoToCloud = async (photo) => {
   const cloudData = await cloudinary.v2.uploader.upload(
