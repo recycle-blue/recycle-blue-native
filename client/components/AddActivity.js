@@ -6,13 +6,13 @@ import { addActivityThunk, me } from '../store'
 
 const mapStateToProps = (store) => {
   return {
-    userId: store.user.id || 1,
-    name: store.activity.name || "bottle",
-    category: store.activity.category || "Plastic",
-    quantity: store.activity.quantity || 1,
-    unit: store.activity.unit || 'qty',
-    photo: store.activity.photo || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
-    imageUrl: store.activity.imageUrl || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+    userId: store.user.id,// || 1,
+    name: store.activity.name,// || "bottle",
+    category: store.activity.category,// || "Plastic",
+    quantity: store.activity.quantity,// || 1,
+    unit: store.activity.unit,// || 'qty',
+    photo: store.activity.photo,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+    imageUrl: store.activity.imageUrl,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
   }
 }
 
@@ -29,8 +29,12 @@ class AddActivity extends React.Component {
       name: this.props.name,
       category: this.props.category,
       quantity: this.props.quantity,
-      imageUrl: this.props.imageUrl
+      imageUrl: this.props.imageUrl,
+      dataAsyncToggle: false,
     }
+  }
+  async componentWillMount() {
+
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)

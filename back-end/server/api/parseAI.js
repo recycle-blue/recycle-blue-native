@@ -1,7 +1,7 @@
 const fs = require('fs')
-const { Tag } = require('../db/models')
+const { Tag, Product, Category } = require('../db/models')
 
-const parseImgTags = (imgTagResults) => {
+const parseImgTags = async (imgTagResults) => {
   console.log('google_tagging', imgTagResults.google_tagging)
   console.log('imagga_tagging', imgTagResults.imagga_tagging)
   console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
@@ -22,9 +22,9 @@ const parseImgTags = (imgTagResults) => {
   const trimmedTags = {}
   allTags.forEach(tag => {
     if (tag.confidence > confidenceLimit) {
-      trimmedTags[tag.tag] ?
-        trimmedTags[tag.tag] += tag.confidence
-        : trimmedTags[tag.tag] = tag.confidence
+      trimmedTags[tag.tag.toLowerCase()] ?
+        trimmedTags[tag.tag.toLowerCase()] += tag.confidence
+        : trimmedTags[tag.tag.toLowerCase()] = tag.confidence
     }
   })
   const sortedTags = []
@@ -33,35 +33,27 @@ const parseImgTags = (imgTagResults) => {
   }
   sortedTags.sort((a, b) => b[1] - a[1])
 
-  const matchCategory = false
-  const matchProduct = false
-  let index = 0
-  while (index < sortedTags.length || (matchCategory && matchProduct)) {
-
-    index++
-  }
-
-  return {
-    name: 'bottle',
-    category: 'Plastic',
-  }
-}
-
-const sendPhotoToCloud = async (photo) => {
-  const cloudData = await cloudinary.v2.uploader.upload(
-    photo,
-    {
-      categorization: 'google_tagging,imagga_tagging,aws_rek_tagging',
-      auto_tagging: 0.5
-    }
+  const matchCategory = []
+  let matchProduct = {}
+  const tagsList = await Promise.all(
+    sortedTags.map(async tag => {
+      const matchedTagData = await Tag.find({ where: { name: tag[0] } })
+      const matchedTag = matchedTagData.dataValues
+      if (matchedTag.categoryId) {
+        const category = await Category.findById(matchedTag.categoryId)
+        matchCategory.push(category.dataValues)
+      }
+      if (!matchProduct.id && matchedTag.productId) {
+        const product = await Product.findById(matchedTag.productId)
+        matchProduct = product.dataValues
+      }
+      return matchedTag
+    })
   )
-  const imageUrl = cloudData.secure_url
-  const imgRecognitionResults = cloudData.info.categorization
-  const parsedTags = parseImgTags(imgRecognitionResults)
   return {
-    name: parsedTags.name,
-    category: parsedTags.category,
-    imageUrl
+    tags: tagsList,
+    categories: matchCategory,
+    product: matchProduct
   }
 }
 

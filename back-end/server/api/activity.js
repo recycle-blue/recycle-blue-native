@@ -24,29 +24,29 @@ cloudinary.config({
 //     next(err)
 //   }
 // })
-
 const sendPhotoToCloud = async (photo) => {
   const cloudData = await cloudinary.v2.uploader.upload(
     photo,
     {
       categorization: 'google_tagging,imagga_tagging,aws_rek_tagging',
-      auto_tagging: 0.6
+      auto_tagging: 0.5
     }
   )
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
-  const parsedTags = parseImgTags(imgRecognitionResults)
+  const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
-    name: parsedTags.name,
-    category: parsedTags.category,
+    product: parsedTags.product,
+    categoryList: parsedTags.categories,
+    tags: parsedTags.tags,
     imageUrl
   }
 }
 
 router.post('/photo', async (req, res, next) => {
   try {
-    const cloudData = await sendPhotoToCloud(req.body.photo)
-    res.json(cloudData)
+    const parsedCloudData = await sendPhotoToCloud(req.body.photo)
+    res.json(parsedCloudData)
   } catch (err) {
     next(err)
   }

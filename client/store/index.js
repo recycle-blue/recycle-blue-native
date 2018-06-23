@@ -17,3 +17,4 @@ export default store
 export * from './user'
 export * from './activity'
 export * from './product'
+export * from './category'
