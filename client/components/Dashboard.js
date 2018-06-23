@@ -2,9 +2,14 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import {connect} from 'react-redux'
 import { Container, Tabs,Tab, ScrollableTab } from 'native-base';
+import {getUserActivitiesThunk} from '../store'
+import { UserActivities } from './'
 
 class Dashboard extends React.Component {
 
+  componentDidMount(){
+    this.props.getUserActivitiesThunk(this.props.user.id);
+  }
 
   render() {
     const {user} = this.props
@@ -21,6 +26,7 @@ class Dashboard extends React.Component {
             <Tab heading='Progess'>
             </Tab>
             <Tab heading='Activity'>
+             <UserActivities />
             </Tab>
           </Tabs>
         </View>
@@ -55,7 +61,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    getUserActivitiesThunk: (userId) => dispatch(getUserActivitiesThunk(userId))
   }
 }
 
