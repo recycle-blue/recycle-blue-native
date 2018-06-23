@@ -38,7 +38,7 @@ const parseImgTags = async (imgTagResults) => {
   const tagsList = await Promise.all(
     sortedTags.map(async tag => {
       const matchedTagData = await Tag.find({ where: { name: tag[0] } })
-      const matchedTag = matchedTagData.dataValues
+      const matchedTag = !!matchedTagData && matchedTagData.dataValues
       if (matchedTag.categoryId) {
         const category = await Category.findById(matchedTag.categoryId)
         matchCategory.push(category.dataValues)
