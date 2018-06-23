@@ -4,7 +4,7 @@ import { ENV_PATH } from '../secrets'
 /**
  * ACTION TYPES
  */
-const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID'
+const SET_PRODUCT = 'SET_PRODUCT'
 
 /**
  * INITIAL STATE
@@ -19,8 +19,8 @@ const defaultProduct = {
 /**
  * ACTION CREATORS
  */
-const getProductById = product => ({
-  type: GET_PRODUCT_BY_ID,
+export const setProduct = product => ({
+  type: SET_PRODUCT,
   product
 })
 
@@ -32,7 +32,7 @@ export const getProductThunk = (productId) => async dispatch => {
 
   try {
     const res = await axios.get(`${ENV_PATH}/api/product/${productId}`)
-    dispatch(getProductById(res.data || defaultProduct))
+    dispatch(setProduct(res.data || defaultProduct))
   } catch (err) {
     console.error(err)
   }
@@ -43,7 +43,7 @@ export const getProductThunk = (productId) => async dispatch => {
  */
 export default function (state = defaultProduct, action) {
   switch (action.type) {
-    case GET_PRODUCT_BY_ID:
+    case SET_PRODUCT:
       return action.product
     default:
       return state

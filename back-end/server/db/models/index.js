@@ -24,6 +24,9 @@ User.hasMany(Comments);
 Tag.belongsTo(Product)
 Product.hasMany(Tag)
 
+Tag.belongsTo(Category)
+Category.hasMany(Tag)
+
 Product.belongsTo(Category)
 Category.hasMany(Product)
 

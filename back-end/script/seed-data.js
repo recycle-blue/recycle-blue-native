@@ -49,7 +49,7 @@ const productsData = [
     "recycleUse": "dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus"
   },
   {
-    "name": "wrapper",
+    "name": "trash",
     "points": 0,
     "description": "non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu.",
     "recycleUse": "congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend"
@@ -79,13 +79,13 @@ const productsData = [
     "recycleUse": "feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,"
   },
   {
-    "name": "Melinda",
-    "points": 5,
+    "name": "cloth",
+    "points": 1,
     "description": "quis accumsan convallis, ante lectus convallis est, vitae sodales nisi",
     "recycleUse": "arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend"
   },
   {
-    "name": "Yoshi",
+    "name": "mug",
     "points": 1,
     "description": "vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue",
     "recycleUse": "facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis"
@@ -193,13 +193,44 @@ const milestonesData = [
   }
 ]
 
-const AItagsData = [
-  {
-    name: 'Water Bottle',
-  },
-  {
-    name: 'Pizza Box'
-  }
+const tagsData = [
+  { name: 'plastic', categoryName: 'Plastic' },
+  { name: 'glass', categoryName: 'Glass' },
+  { name: 'metal', categoryName: 'Metal' },
+  { name: 'paper', categoryName: 'Paper' },
+  { name: 'wood', categoryName: 'Wood' },
+  { name: 'compost', categoryName: 'Compost' },
+  { name: 'landfill', categoryName: 'Landfill' },
+  { name: 'bottle', productName: 'bottle' },
+  { name: 'water', productName: 'bottle', categoryName: 'Plastic' },
+  { name: 'jug', productName: 'jug', categoryName: 'Plastic' },
+  { name: 'can', productName: 'can', categoryName: 'Metal' },
+  { name: 'tin can', productName: 'can', categoryName: 'Metal' },
+  { name: 'tin', productName: 'can', categoryName: 'Metal' },
+  { name: 'mug', productName: 'mug' },
+  { name: 'box', productName: 'box', categoryName: 'Paper' },
+  { name: 'pizza box', productName: 'box', categoryName: 'Paper' },
+  { name: 'paper', productName: 'sheet', categoryName: 'Paper' },
+  { name: 'notebook', productName: 'notebook', categoryName: 'Paper' },
+  { name: 'bag', productName: 'bag', categoryName: 'Plastic' },
+  { name: 'wrapper', productName: 'trash', categoryName: 'Landfill' },
+  { name: 'trash', productName: 'trash', categoryName: 'Landfill' },
+  { name: 'cup', productName: 'cup' },
+  { name: 'coffee', productName: 'cup' },
+  { name: 'coffee cup', productName: 'cup', categoryName: 'Paper' },
+  { name: 'jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'pickle', productName: 'jar', categoryName: 'Glass' },
+  { name: 'mason jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'pickle jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'food', productName: 'food', categoryName: 'Compost' },
+  { name: 'fruit', productName: 'food', categoryName: 'Compost' },
+  { name: 'vegetable', productName: 'food', categoryName: 'Compost' },
+  { name: 'dessert', productName: 'food', categoryName: 'Compost' },
+  { name: 'dinner', productName: 'food', categoryName: 'Compost' },
+  { name: 'breakfast', productName: 'food', categoryName: 'Compost' },
+  { name: 'lunch', productName: 'food', categoryName: 'Compost' },
+  { name: 'meal', productName: 'food', categoryName: 'Compost' },
+  { name: 'cloth', productName: 'cloth' },
 ]
 
 const activityData = [
@@ -237,5 +268,5 @@ module.exports = {
   commentsData,
   milestonesData,
   AItagsData,
-  activityData
+  tagsData
 }

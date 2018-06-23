@@ -1,8 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const { Product, Category, Milestone, Comments, User, Activity } = require('../server/db/models')
-const { productsData, usersData, categoriesData, commentsData, milestonesData, activityData } = require('./seed-data');
+const { Product, Category, Milestone, Comments, User, Activity, Tag } = require('../server/db/models')
+const { productsData, usersData, categoriesData, commentsData, milestonesData, tagsData } = require('./seed-data');
 
 const shuffle = () => 0.5 - Math.random()
 const randomIndexGenerator = (num) => Math.floor(Math.random() * num + 1)
@@ -85,6 +85,22 @@ async function seed() {
     const randomActivity = activities.find(activity => activity.id === randomId)
     return Comments.create({
       activityId: randomActivity.id, userId: user.id, text: randomComment.text
+    })
+  }))
+
+  await Promise.all(tagsData.map(async tag => {
+    let product = { dataValues: 0 }
+    let category = { dataValues: 0 }
+    if (tag.productName) {
+      product = await Product.find({ where: { name: tag.productName } })
+    }
+    if (tag.categoryName) {
+      category = await Category.find({ where: { name: tag.categoryName } })
+    }
+    return Tag.create({
+      name: tag.name,
+      productId: product.dataValues.id || null,
+      categoryId: category.dataValues.id || null
     })
   }))
 
