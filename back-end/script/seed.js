@@ -57,7 +57,11 @@ async function seed() {
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
     return Promise.all(randomProducts.map(product => {
       return Activity.create({
-        productId: product.id, userId: user.id, quantity, imageUrl
+        productId: product.id,
+        userId: user.id,
+        quantity,
+        imageUrl,
+        points: quantity * product.points
       })
     }))
   }))

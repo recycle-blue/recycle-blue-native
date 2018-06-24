@@ -15,6 +15,10 @@ const Activity = db.define('activity', {
   imageUrl: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  points: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

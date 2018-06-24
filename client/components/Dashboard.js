@@ -1,14 +1,18 @@
 import React from 'react'
-import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Container, Tabs, Tab, ScrollableTab,
   Card, CardItem, Text, Body, Left, Right, Thumbnail
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
+import { StyleSheet, Text, View, Image } from 'react-native'
+import {getUserActivitiesThunk} from '../store'
+import { UserActivities } from './'
 
 class Dashboard extends React.Component {
-
+  componentDidMount(){
+    this.props.getUserActivitiesThunk(this.props.user.id);
+  }
 
   render() {
     const { user } = this.props
@@ -38,8 +42,12 @@ class Dashboard extends React.Component {
               </ScrollView>
             </Tab>
             <Tab heading='Activity'>
+<<<<<<< HEAD
               <ScrollView>
               </ScrollView>
+=======
+             <UserActivities />
+>>>>>>> 5f3c7233324c32e250de2249bdb786e979336d0e
             </Tab>
           </Tabs>
         </View>
@@ -79,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    getUserActivitiesThunk: (userId) => dispatch(getUserActivitiesThunk(userId))
   }
 }
 
