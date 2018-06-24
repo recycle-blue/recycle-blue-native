@@ -8,6 +8,7 @@ import {
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons'
+import { LoadingScreen } from '.'
 
 const mapDispatchToProps = (dispatch) => ({
   storePicture: (data) => dispatch(savePhotoThunk(data)),
@@ -35,7 +36,8 @@ class TestCamera extends React.Component {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
       flash: 'off',
-      barcodeScanning: 'off'
+      barcodeScanning: 'off',
+      loadingToggle: false,
     }
   }
 
@@ -75,12 +77,13 @@ class TestCamera extends React.Component {
       console.log(data)
       this.props.clearActivity()
       this.savePicture(data)
+      this.setState({ loadingToggle: true })
     }
   }
 
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
-    this.props.storePicture(photoData)
+    await this.props.storePicture(photoData)
     this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
   }
 
@@ -90,6 +93,8 @@ class TestCamera extends React.Component {
       return <View />
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>
+    } else if (loadingToggle) {
+      return <LoadingScreen />
     } else {
       return (
         <View style={{ flex: 1 }}>

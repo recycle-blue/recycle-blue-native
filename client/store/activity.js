@@ -57,8 +57,8 @@ export const addActivityThunk = (activity) => async dispatch => {
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     dispatch(savePhoto(photo))
+    const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     console.log('savePhotoRes', res)
     console.log('savePhotoRes .data', res.data)
     const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'

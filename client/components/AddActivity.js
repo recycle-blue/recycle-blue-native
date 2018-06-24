@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, Image } from 'react-native'
 import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk, me } from '../store'
+import { addActivityThunk, refreshActivityThunk, me } from '../store'
 import { LoadingScreen } from '.'
 
 const mapStateToProps = (store) => {
@@ -20,6 +20,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => ({
   addActivity: (activity) => dispatch(addActivityThunk(activity)),
   refreshUser: (userId) => dispatch(me(userId)),
+  refreshActivity: () => dispatch(refreshActivityThunk()),
 })
 
 class AddActivity extends React.Component {
@@ -37,9 +38,11 @@ class AddActivity extends React.Component {
     await this.props.addActivity(this.state)
     this.props.navigation.navigate('product')
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps if statement')
-    if (this.state.name) {
+  async componentDidMount() {
+    if (!this.state.name) {
+      while (!this.props.name) {
+        await setTimeout(() => { return true }, 100)
+      }
       this.setState()
     }
   }
