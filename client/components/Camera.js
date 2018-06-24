@@ -50,12 +50,6 @@ class TestCamera extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' })
   }
 
-  componentDidMount() {
-    // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photo').catch(e => {
-    // console.log(e, 'Directory Exists')
-    // })
-  }
-
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: null,
@@ -75,9 +69,9 @@ class TestCamera extends React.Component {
       console.log('is expo broken?')
       const data = await this.camera.takePictureAsync(options)
       console.log('nope! still working for now!')
-      this.props.clearActivity()
+      await this.props.clearActivity()
       this.savePicture(data)
-      this.setState({ loadingToggle: true })
+      this.setState({ ...this.state, loadingToggle: true })
     }
   }
 
@@ -93,7 +87,7 @@ class TestCamera extends React.Component {
       return <View />
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>
-    } else if (loadingToggle) {
+    } else if (this.state.loadingToggle) {
       return <LoadingScreen />
     } else {
       return (
