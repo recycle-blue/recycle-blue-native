@@ -29,11 +29,11 @@ async function seed() {
   const productP = Product.bulkCreate(productsData)
   //const commentP = Comments.bulkCreate(commentsData)
   const milestoneP = Milestone.bulkCreate(milestonesData);
-  const activityP = Activity.bulkCreate(activityData)
+
 
   await Promise.all([userP, categoryP]);
   // Products and Milestones require users and categories to be created
-  await Promise.all([productP, milestoneP, activityP]);
+  await Promise.all([productP, milestoneP]);
   //await Promise.all([commentP]);
 
   // Associations cannot be set immediately after creation (https://github.com/sequelize/sequelize/issues/864)

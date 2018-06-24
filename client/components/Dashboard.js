@@ -3,8 +3,7 @@ import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Container, Tabs, Tab, ScrollableTab,
-  Header, Title, Content, Button, Icon, Card, CardItem,
-  Text, Body, Left, Right, IconNB, Thumbnail
+  Card, CardItem, Text, Body, Left, Right, Thumbnail
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
 

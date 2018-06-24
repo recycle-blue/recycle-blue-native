@@ -267,6 +267,5 @@ module.exports = {
   categoriesData,
   commentsData,
   milestonesData,
-  AItagsData,
   tagsData
 }
