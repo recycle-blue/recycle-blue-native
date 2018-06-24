@@ -6,17 +6,16 @@ import {
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import {getUserActivitiesThunk} from '../store'
+import { getUserActivitiesThunk } from '../store'
 import { UserActivities } from './'
 
 class Dashboard extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getUserActivitiesThunk(this.props.user.id);
   }
 
   render() {
     const { user } = this.props
-    console.log("what do i have on user ", user)
     return (
       <Container >
         <Card style={styles.card}>
@@ -42,12 +41,7 @@ class Dashboard extends React.Component {
               </ScrollView>
             </Tab>
             <Tab heading='Activity'>
-<<<<<<< HEAD
-              <ScrollView>
-              </ScrollView>
-=======
-             <UserActivities />
->>>>>>> 5f3c7233324c32e250de2249bdb786e979336d0e
+              <UserActivities />
             </Tab>
           </Tabs>
         </View>
