@@ -5,17 +5,18 @@ import {
   Card, CardItem, Text, Body, Left, Right, Thumbnail
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { getUserActivitiesThunk } from '../store'
 import { UserActivities } from './'
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.getUserActivitiesThunk(this.props.user.id);
+    this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
   render() {
     const { user } = this.props
+    console.log("getting into render", this.props)
     return (
       <Container >
         <Card style={styles.card}>
@@ -80,9 +81,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
+  return ({
     getUserActivitiesThunk: (userId) => dispatch(getUserActivitiesThunk(userId))
-  }
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

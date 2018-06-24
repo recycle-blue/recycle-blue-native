@@ -89,6 +89,12 @@ const productsData = [
     "points": 1,
     "description": "vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue",
     "recycleUse": "facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis"
+  },
+  {
+    "name": "package",
+    "points": 1,
+    "description": "vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue",
+    "recycleUse": "facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis"
   }
 ]
 
