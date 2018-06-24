@@ -5,7 +5,7 @@ import {
   Card, CardItem, Text, Body, Left, Right, Thumbnail
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { getUserActivitiesThunk } from '../store'
 import { UserActivities } from './'
 
