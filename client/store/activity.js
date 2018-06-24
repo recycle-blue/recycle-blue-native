@@ -8,6 +8,7 @@ import { setProduct, setCategory } from '.'
 const SET_ACTIVITY = 'SET_ACTIVITY'
 const SAVE_PHOTO = 'SAVE_PHOTO'
 const SET_ACTIVITY_WEEK = 'SET_ACTIVITY_WEEK'
+const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
 
 /**
  * INITIAL STATE
@@ -36,7 +37,7 @@ const setActivityWeek = activities => ({
 const savePhoto = photo => ({
   type: SAVE_PHOTO, photo
 })
-
+export const clearActivityAction = () => ({ type: CLEAR_ACTIVITY })
 /**
  * THUNK CREATORS
  */
@@ -75,14 +76,17 @@ export const savePhotoThunk = (photo) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     dispatch(savePhoto(photo))
+    console.log('savePhotoRes', res)
+    console.log('savePhotoRes .data', res.data)
+    const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
     dispatch(setActivity({
       name: res.data.product.name,
-      category: res.data.category.name,
+      category,
       imageUrl: res.data.imageUrl,
       productId: res.data.product.id
     }))
     dispatch(setProduct(res.data.product))
-    dispatch(setCategory(res.data.category))
+    dispatch(setCategory(category))
   } catch (err) {
     console.error(err)
   }
@@ -99,6 +103,8 @@ export default function (state = defaultActivity, action) {
       return { ...state, photo: action.photo }
     case SET_ACTIVITY_WEEK:
       return action.activities
+    case CLEAR_ACTIVITY:
+      return { ...defaultActivity }
     default:
       return state
   }

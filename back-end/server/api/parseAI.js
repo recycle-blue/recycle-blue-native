@@ -32,6 +32,7 @@ const parseImgTags = async (imgTagResults) => {
     sortedTags.push([tag, trimmedTags[tag]])
   }
   sortedTags.sort((a, b) => b[1] - a[1])
+  console.log('sortedTags', sortedTags)
 
   const matchCategory = []
   let matchProduct = {}
@@ -42,10 +43,12 @@ const parseImgTags = async (imgTagResults) => {
       if (matchedTag.categoryId) {
         const category = await Category.findById(matchedTag.categoryId)
         matchCategory.push(category.dataValues)
+        console.log('category found', matchCategory)
       }
       if (!matchProduct.id && matchedTag.productId) {
         const product = await Product.findById(matchedTag.productId)
         matchProduct = product.dataValues
+        console.log('product found', matchProduct)
       }
       return matchedTag
     })

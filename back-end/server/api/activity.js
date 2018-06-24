@@ -35,6 +35,7 @@ const sendPhotoToCloud = async (photo) => {
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
+  console.log('parsed tags', parsedTags)
   return {
     product: parsedTags.product,
     categoryList: parsedTags.categories,

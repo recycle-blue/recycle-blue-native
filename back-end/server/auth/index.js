@@ -3,7 +3,6 @@ const { Milestone, User } = require('../db/models')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
-<<<<<<< HEAD
   console.log(req.body);
   const user = await User.findOne({
     where: { email: req.body.email },
@@ -11,9 +10,6 @@ router.post('/login', async (req, res, next) => {
       model: Milestone
     }]
   })
-=======
-  const user = await User.findOne({where: {email: req.body.email}})
->>>>>>> 5f3c7233324c32e250de2249bdb786e979336d0e
   if (!user) {
     console.log('No such user found:', req.body.email)
     res.status(401).send('Wrong username and/or password')
