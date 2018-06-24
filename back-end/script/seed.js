@@ -30,6 +30,7 @@ async function seed() {
   //const commentP = Comments.bulkCreate(commentsData)
   const milestoneP = Milestone.bulkCreate(milestonesData);
 
+
   await Promise.all([userP, categoryP]);
   // Products and Milestones require users and categories to be created
   await Promise.all([productP, milestoneP]);
@@ -41,6 +42,7 @@ async function seed() {
   const categories = await Category.findAll();
   const users = await User.findAll();
   const milestones = await Milestone.findAll();
+
   //const comments = await Comments.findAll();
 
   await Promise.all(products.map(product => {

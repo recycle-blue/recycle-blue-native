@@ -44,6 +44,19 @@ const sendPhotoToCloud = async (photo) => {
   }
 }
 
+// GET Routes
+router.get("/weekly/:userId", async (req, res, next) => {
+  try {
+    const response = await Activity.activityCountWeek(req.params.userId)
+    res.json(response)
+  } catch (err) {
+    next(err)
+  }
+
+})
+
+
+// POST Routes
 router.post('/photo', async (req, res, next) => {
   try {
     const parsedCloudData = await sendPhotoToCloud(req.body.photo)
