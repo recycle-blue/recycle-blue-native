@@ -70,9 +70,9 @@ class TestCamera extends React.Component {
         quality: 0.5,
         base64: true
       }
-
+      console.log('is expo broken?')
       const data = await this.camera.takePictureAsync(options)
-      console.log(data)
+      console.log('nope! still working for now!')
       this.props.clearActivity()
       this.savePicture(data)
     }
