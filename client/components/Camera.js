@@ -93,7 +93,7 @@ class TestCamera extends React.Component {
       return <View />
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>
-    } else if (loadingToggle) {
+    } else if (this.state.loadingToggle) {
       return <LoadingScreen />
     } else {
       return (

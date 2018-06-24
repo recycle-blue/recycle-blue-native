@@ -5,13 +5,13 @@ import {
   Card, CardItem, Text, Body, Left, Right, Thumbnail
 } from 'native-base'
 import { ProgressChart, ActivityChart } from '.'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { getUserActivitiesThunk } from '../store'
 import { UserActivities } from './'
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.getUserActivitiesThunk(this.props.user.id);
+    this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
   render() {
