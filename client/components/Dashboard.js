@@ -1,32 +1,47 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {
+  Container, Tabs, Tab, ScrollableTab,
+  Card, CardItem, Text, Body, Left, Right, Thumbnail
+} from 'native-base'
+import { ProgressChart, ActivityChart } from '.'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import {connect} from 'react-redux'
-import { Container, Tabs,Tab, ScrollableTab } from 'native-base';
-import {getUserActivitiesThunk} from '../store'
+import { getUserActivitiesThunk } from '../store'
 import { UserActivities } from './'
 
 class Dashboard extends React.Component {
-
-  componentDidMount(){
+  componentDidMount() {
     this.props.getUserActivitiesThunk(this.props.user.id);
   }
 
   render() {
-    const {user} = this.props
+    const { user } = this.props
     return (
-      <Container>
+      <Container >
+        <Card style={styles.card}>
+          <CardItem>
+            <Left>
+              <Thumbnail name="userThunmbnail" large square source={{ uri: user.imageUrl }} />
+              <Body>
+                <Text>{user.name}</Text>
+                <Text>{user.totalPoints}</Text>
+              </Body>
+            </Left>
+            <Right>
+              <Thumbnail name="userMilestoneThumbnail" large square source={{ uri: user.milestone.badgeIcon }} />
+            </Right>
+          </CardItem>
+        </Card>
         <View style={styles.container}>
-          <Image
-            source={{uri: user.imageUrl}}
-            style={styles.image}
-          />
-          <Text>{user.name}</Text>
-          <Text>{user.totalPoints}</Text>
           <Tabs renderTabBar={() => <ScrollableTab />}>
             <Tab heading='Progess'>
+              <ScrollView>
+                <ProgressChart />
+                <ActivityChart />
+              </ScrollView>
             </Tab>
             <Tab heading='Activity'>
-             <UserActivities />
+              <UserActivities />
             </Tab>
           </Tabs>
         </View>
@@ -50,7 +65,12 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'flex-start',
-  }
+  },
+  card: {
+    minHeight: 70,
+    flex: 0.1,
+  },
+
 })
 
 const mapStateToProps = state => {
