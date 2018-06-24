@@ -59,14 +59,17 @@ export const savePhotoThunk = (photo) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     dispatch(savePhoto(photo))
+    console.log('savePhotoRes', res)
+    console.log('savePhotoRes .data', res.data)
+    const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
     dispatch(setActivity({
       name: res.data.product.name,
-      category: res.data.category[0],
+      category,
       imageUrl: res.data.imageUrl,
       productId: res.data.product.id
     }))
     dispatch(setProduct(res.data.product))
-    dispatch(setCategory(res.data.category[0]))
+    dispatch(setCategory(category))
   } catch (err) {
     console.error(err)
   }
@@ -82,7 +85,7 @@ export default function (state = defaultActivity, action) {
     case SAVE_PHOTO:
       return { ...state, photo: action.photo }
     case CLEAR_ACTIVITY:
-      return { defaultActivity }
+      return { ...defaultActivity }
     default:
       return state
   }

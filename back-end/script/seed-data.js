@@ -209,6 +209,7 @@ const tagsData = [
   { name: 'tin', productName: 'can', categoryName: 'Metal' },
   { name: 'mug', productName: 'mug' },
   { name: 'box', productName: 'box', categoryName: 'Paper' },
+  { name: 'package', productName: 'package', categoryName: 'Paper' },
   { name: 'pizza box', productName: 'box', categoryName: 'Paper' },
   { name: 'paper', productName: 'sheet', categoryName: 'Paper' },
   { name: 'notebook', productName: 'notebook', categoryName: 'Paper' },

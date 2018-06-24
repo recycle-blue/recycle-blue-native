@@ -37,13 +37,14 @@ class AddActivity extends React.Component {
     await this.props.addActivity(this.state)
     this.props.navigation.navigate('product')
   }
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps if statement')
     if (this.state.name) {
       this.setState()
     }
   }
   render() {
-    console.log(this.props)
+    console.log('activity render props', this.props)
     if (!this.state.name) {
       return <LoadingScreen />
     } else {
