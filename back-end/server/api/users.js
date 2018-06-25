@@ -74,3 +74,14 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
     next(err)
   }
 })
+
+// post route to follow another user
+
+router.post('/:userId/followees/:followeeId', async (req, res, next) => {
+  const [currentUser, followee] = await Promise.all([
+    User.findById(req.params.userId),
+    User.findById(req.params.followeeId)
+  ])
+  await currentUser.addFollowee(followee)
+  res.json(followee)
+})
