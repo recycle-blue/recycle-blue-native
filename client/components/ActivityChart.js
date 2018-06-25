@@ -1,68 +1,91 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, LineChart, XAxis, YAxis, StackedAreaChart } from 'react-native-svg-charts'
+import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
 import { View, StyleSheet } from 'react-native'
 import { setActivityWeekThunk } from '../store/activity'
-import * as shape from 'd3-shape'
 
 class ActivityChart extends React.Component {
   componentWillMount() {
     this.props.setActivityWeekThunk(this.props.user.id)
   }
   render() {
+    const data = [{
+      points: 1,
+      day: 'mon'
+    }, {
+      points: 2,
+      day: 'tues'
+    }, {
+      points: 3,
+      day: 'wed'
+    }, {
+      points: 4,
+      day: 'thurs'
+    }, {
+      points: 5,
+      day: 'fri'
+    }, {
+      points: 6,
+      day: 'sat'
+    }, {
+      points: 7,
+      day: 'sun'
+    }]
+    // const xdata = ['mon', 'tues', 'wed', 'thurs', 'fri']
 
-    let day;
-    const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
+    // const axesSvg = { fontSize: 10, fill: 'grey' };
+    // const verticalContentInset = { top: 10, bottom: 10 }
+    // const xAxisHeight = 30
 
-    console.log("this.props.activities", this.props)
 
-    this.props.activities ?
-      day = new Date(this.props.activities[0].createdAt) :
-      day = false
-
-    console.log("is my ternary working?", day)
-
-    const axesSvg = { fontSize: 10, fill: 'grey' };
-    const verticalContentInset = { top: 10, bottom: 10 }
-    const xAxisHeight = 30
-
-    const styles = StyleSheet.create({
-      image: {
-        flex: 1,
-        width: 250,
-        height: 250,
-        borderWidth: 1,
-        borderColor: 'blue',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    })
     return (
-      <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
-        <YAxis
+      <View style={{ height: 200, padding: 20 }}>
+
+        <LineChart
+          style={{ height: 200 }}
+          yAccessor={item => item.item.points}
           data={data}
-          style={{ marginBottom: xAxisHeight }}
-          contentInset={verticalContentInset}
-          svg={axesSvg}
+          svg={{ stroke: 'rgb(134, 65, 244)' }}
+          contentInset={{ top: 20, bottom: 20 }}
+        >
+          <Grid />
+        </LineChart>
+        <XAxis
+          style={{ marginHorizontal: -10 }}
+          xAccessor={axis => axis.item.day}
+          data={console.log(data)}
+          formatLabel={(value, index) => index}
+          contentInset={{ left: 10, right: 10 }}
+          svg={{ fontSize: 10, fill: 'black' }}
         />
-        <View style={{ flex: 1, marginLeft: 10 }}>
-          <LineChart
-            style={{ flex: 1 }}
-            data={data}
-            contentInset={verticalContentInset}
-            svg={{ stroke: 'rgb(134, 65, 244)' }}
-          >
-            <Grid />
-          </LineChart>
-          <XAxis
-            style={{ marginHorizontal: -10, height: xAxisHeight }}
-            data={data}
-            formatLabel={(value, index) => index}
-            contentInset={{ left: 10, right: 10 }}
-            svg={axesSvg}
-          />
-        </View>
+
       </View>
+
+      // <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
+      //   <YAxis
+      //     data={data}
+      //     style={{ marginBottom: xAxisHeight }}
+      //     contentInset={verticalContentInset}
+      //     svg={axesSvg}
+      //   />
+      //   <View style={{ flex: 1, marginLeft: 10 }}>
+      //     <LineChart
+      //       style={{ flex: 1 }}
+      //       data={data}
+      //       contentInset={verticalContentInset}
+      //       svg={{ stroke: 'rgb(134, 65, 244)' }}
+      //     >
+      //       <Grid />
+      //     </LineChart>
+      //     <XAxis
+      //       style={{ marginHorizontal: -10, height: xAxisHeight }}
+      //       data={data}
+      //       formatLabel={(value, index) => index}
+      //       contentInset={{ left: 10, right: 10 }}
+      //       svg={axesSvg}
+      //     />
+      //   </View>
+      // </View>
     )
   }
 
