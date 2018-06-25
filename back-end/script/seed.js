@@ -71,8 +71,7 @@ async function seed() {
   }
 
   await Promise.all(users.map(user => {
-    const milestoneId = randomIndexGenerator(milestones.length);
-    return user.setMilestone(milestones[milestoneId])
+    return user.setMilestone(milestones[0])
   }))
 
   await Promise.all(users.map(user => {

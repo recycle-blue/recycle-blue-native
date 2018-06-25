@@ -34,7 +34,7 @@ User.belongsToMany(User, {
   as: 'Friends',
   foreignKey: 'myId',
   through: 'friends',
-  otherKey: 'friendId'
+  otherKey: 'friendid'
 })
 
 module.exports = {
