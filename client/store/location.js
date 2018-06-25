@@ -5,6 +5,7 @@ const GET_RECYCLE_LOCATIONS = 'GET_RECYCLE_LOCATIONS'
 const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
 const SELECT_MARKER = 'SELECT_MARKER'
+const SET_FETCH = 'SET_FETCH'
 
 const getRecycleLocationsAction = locations => {
   return {
@@ -29,6 +30,12 @@ export const selectMarkerAction = marker => {
   return {
     type: SELECT_MARKER,
     marker,
+  }
+}
+export const setFetch = status => {
+  return {
+    type: SET_FETCH,
+    status,
   }
 }
 
@@ -60,6 +67,7 @@ const initialState = {
   recycleLocations: [],
   userLocation: defaultLocation,
   selectedMarker: {},
+  isFetching: true,
 }
 
 export default function(state = initialState, action) {
@@ -75,6 +83,8 @@ export default function(state = initialState, action) {
       }
     case SELECT_MARKER:
       return { ...state, selectedMarker: action.marker }
+    case SET_FETCH:
+      return { ...state, isFetching: action.status }
     default:
       return state
   }

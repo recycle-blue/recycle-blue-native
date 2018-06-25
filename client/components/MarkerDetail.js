@@ -1,10 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // import { Button } from 'react-native'
+import { Popup } from 'react-native-map-link'
 import { Card, CardItem, Body, Text, Right, Button } from 'native-base'
 import { getDistanceThunk } from '../store/location'
 
 class MarkerDetail extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isVisible: false,
+    }
+  }
   componentDidMount() {
     const { userLocation, marker } = this.props
     const destination = `${marker.geometry.location.lat},${
@@ -14,7 +21,6 @@ class MarkerDetail extends React.Component {
     this.props.getDistance(marker.id, origin, destination)
   }
   componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate called!')
     if (prevProps.marker.id !== this.props.marker.id) {
       const { userLocation, marker } = this.props
       const destination = `${marker.geometry.location.lat},${
@@ -23,6 +29,12 @@ class MarkerDetail extends React.Component {
       const origin = `${userLocation.latitude},${userLocation.longitude}`
       this.props.getDistance(marker.id, origin, destination)
     }
+  }
+  handlePress = () => {
+    this.setState({ isVisible: true })
+  }
+  makeInvisible = () => {
+    this.setState({ isVisible: false })
   }
 
   render() {
@@ -48,11 +60,25 @@ class MarkerDetail extends React.Component {
         </CardItem>
         <CardItem>
           <Body>
-            <Button success>
+            <Button success onPress={this.handlePress}>
               <Text> Navigate to Location </Text>
             </Button>
           </Body>
         </CardItem>
+        <Popup
+          isVisible={this.state.isVisible}
+          onCancelPressed={this.makeInvisible}
+          onAppPressed={this.makeInvisible}
+          onBackButtonPressed={this.makeInvisible}
+          modalProps={{
+            animationIn: 'slideInUp',
+          }}
+          appsWhiteList={['google-maps', 'apple-maps']}
+          options={{
+            latitude: marker.geometry.location.lat,
+            longitude: marker.geometry.location.lng,
+          }}
+        />
       </Card>
     )
   }

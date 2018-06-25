@@ -1,11 +1,13 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Card, CardItem, Body, Button, Text } from 'native-base'
+import { Container } from 'native-base'
+import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
   getUserLocationAction,
   selectMarkerAction,
+  setFetch,
 } from '../store/location'
 import MarkerDetail from './MarkerDetail'
 
@@ -21,24 +23,33 @@ class MapComp extends React.Component {
         .join(',')
       this.props.fetchRecycleLocations(locationStr)
       this.props.setUserLocation(userLocation)
+      this.props.setFetch(false)
     })
   }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
   }
   render() {
-    const { recycleLocations, selectedMarker } = this.props
+    const { recycleLocations, selectedMarker, isFetching } = this.props
     const { latitude, longitude } = this.props.userLocation
+    if (isFetching) {
+      return (
+        <View>
+          <Text>LOADING MAP...</Text>
+        </View>
+      )
+    }
     return (
       <Container>
         <MapView
           provider="google"
           style={{ flex: 1 }}
-          region={{
+          initialRegion={{
             latitude: latitude,
             longitude: longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
+            showUserLocation: true,
           }}
         >
           {recycleLocations.map(marker => {
@@ -66,6 +77,7 @@ const mapState = state => {
     recycleLocations: state.location.recycleLocations,
     userLocation: state.location.userLocation,
     selectedMarker: state.location.selectedMarker,
+    isFetching: state.location.isFetching,
   }
 }
 const mapDispatch = dispatch => {
@@ -74,6 +86,7 @@ const mapDispatch = dispatch => {
       dispatch(getRecycleLocationsThunk(locationStr)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
+    setFetch: status => dispatch(setFetch(status)),
   }
 }
 
