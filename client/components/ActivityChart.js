@@ -1,15 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
+import { Grid, LineChart, XAxis, YAxis, StackedAreaChart } from 'react-native-svg-charts'
 import { View, StyleSheet } from 'react-native'
 import { setActivityWeekThunk } from '../store/activity'
+import * as shape from 'd3-shape'
 
 class ActivityChart extends React.Component {
   componentWillMount() {
     this.props.setActivityWeekThunk(this.props.user.id)
   }
   render() {
+
+    let day;
     const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
+
+    console.log("this.props.activities", this.props)
+
+    this.props.activities ?
+      day = new Date(this.props.activities[0].createdAt) :
+      day = false
+
+    console.log("is my ternary working?", day)
 
     const axesSvg = { fontSize: 10, fill: 'grey' };
     const verticalContentInset = { top: 10, bottom: 10 }
