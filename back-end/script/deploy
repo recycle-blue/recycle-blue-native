@@ -44,6 +44,6 @@ git commit --allow-empty -m 'Deploying'
 
 # push your local "deploy" branch to the "master" branch on heroku
 cd ..
-git subtree push --prefix back-end heroku master
+git push heroku `git subtree split --prefix back-end deploy`:master --force
+#  heroku deploy:master
 cd back-end
-# git push --force heroku deploy:master
