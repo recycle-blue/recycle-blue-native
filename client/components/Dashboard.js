@@ -16,7 +16,6 @@ class Dashboard extends React.Component {
 
   render() {
     const { user } = this.props
-    console.log("getting into render", this.props)
     return (
       <Container >
         <Card style={styles.card}>
