@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
+import { Card, CardItem, Left, Right, Row } from 'native-base';
 
 const UserActivities = (props) => {
     const {activities} = props
@@ -8,14 +9,20 @@ const UserActivities = (props) => {
         <ScrollView>
           {activities.length ?
             activities.map(activity =>
-              <View key={activity.id}>
-                <Image
-                  source={{uri: activity.imageUrl}}
-                  style={styles.image}
-                />
-                <Text>{activity.product.name}</Text>
-                <Text>{activity.points}</Text>
-              </View>
+              <Card style={styles.card} key={activity.id}>
+                <CardItem>
+                  <Left>
+                    <Image
+                      source={{uri: activity.imageUrl}}
+                      style={styles.image}
+                    />
+                  </Left>
+                  <Right style={styles.right}>
+                    <Text>{activity.product.name}</Text>
+                    <Text>{activity.points}</Text>
+                  </Right>
+                </CardItem>
+              </Card>
             )
             : <Text> No Activity </Text>}
         </ScrollView>
@@ -37,6 +44,15 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  card: {
+    minHeight: 70,
+    flex: 0.1,
+  },
+  right: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between'
   }
 })
 
@@ -45,11 +61,5 @@ const mapStateToProps = state => {
     activities: state.userActivities
   }
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-
-//   }
-// }
 
 export default connect(mapStateToProps)(UserActivities)
