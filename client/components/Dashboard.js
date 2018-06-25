@@ -11,7 +11,7 @@ import { UserActivities } from './'
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.getUserActivitiesThunk(this.props.user.id);
+    this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
   render() {

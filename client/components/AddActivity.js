@@ -2,8 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, Image } from 'react-native'
 import { Container, Content, Form, Item, Input } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk, me } from '../store'
-import { LoadingScreen } from '.'
+import { addActivityThunk, refreshActivityThunk, me } from '../store'
 
 const mapStateToProps = (store) => {
   return {
@@ -20,6 +19,7 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => ({
   addActivity: (activity) => dispatch(addActivityThunk(activity)),
   refreshUser: (userId) => dispatch(me(userId)),
+  refreshActivity: () => dispatch(refreshActivityThunk()),
 })
 
 class AddActivity extends React.Component {
@@ -37,69 +37,59 @@ class AddActivity extends React.Component {
     await this.props.addActivity(this.state)
     this.props.navigation.navigate('product')
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps if statement')
-    if (this.state.name) {
-      this.setState()
-    }
-  }
   render() {
     console.log('activity render props', this.props)
-    if (!this.state.name) {
-      return <LoadingScreen />
-    } else {
-      return (
-        <Container>
-          <Content>
-            <View style={{ flex: 1, alignItems: 'center' }}>
-              <Text>This is where the image goes</Text>
-              <Image
-                style={styles.image}
-                source={{ uri: this.props.photo }}
+    return (
+      <Container>
+        <Content>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Text>This is where the image goes</Text>
+            <Image
+              style={styles.image}
+              source={{ uri: this.props.photo }}
+            />
+          </View>
+          <Form>
+            <Item rounded>
+              <Input
+                name="name"
+                placeholder="Recycleable Name"
+                onChangeText={(text) => this.setState({ name: text })}
+                value={this.state.name}
               />
+            </Item>
+            <Item rounded>
+              <Input
+                name="category"
+                placeholder="Category"
+                onChangeText={(text) => this.setState({ category: text })}
+                value={this.state.category}
+              />
+            </Item>
+            <View style={styles.qtyInputs}>
+              <Item rounded style={styles.halfInput}>
+                <Input
+                  name="amount"
+                  placeholder='1'
+                  onChangeText={(text) => this.setState({ quantity: text })}
+                  value={this.state.qty}
+                  keyboardType='numeric'
+                />
+              </Item>
+              <Item rounded style={styles.halfInput}>
+                <Input
+                  name="unit"
+                  placeholder="qty"
+                  onChangeText={(text) => this.setState({ unit: text })}
+                  value={this.state.unit}
+                />
+              </Item>
             </View>
-            <Form>
-              <Item rounded>
-                <Input
-                  name="name"
-                  placeholder="Recycleable Name"
-                  onChangeText={(text) => this.setState({ name: text })}
-                  value={this.state.name}
-                />
-              </Item>
-              <Item rounded>
-                <Input
-                  name="category"
-                  placeholder="Category"
-                  onChangeText={(text) => this.setState({ category: text })}
-                  value={this.state.category}
-                />
-              </Item>
-              <View style={styles.qtyInputs}>
-                <Item rounded style={styles.halfInput}>
-                  <Input
-                    name="amount"
-                    placeholder='1'
-                    onChangeText={(text) => this.setState({ quantity: text })}
-                    value={this.state.qty}
-                    keyboardType='numeric'
-                  />
-                </Item>
-                <Item rounded style={styles.halfInput}>
-                  <Input
-                    name="unit"
-                    placeholder="qty"
-                    onChangeText={(text) => this.setState({ unit: text })}
-                    value={this.state.unit}
-                  />
-                </Item>
-              </View>
-            </Form>
-            <Button title='submit' onPress={this.handleSubmit} />
-          </Content>
-        </Container>
-      )
-    }
+          </Form>
+          <Button title='submit' onPress={this.handleSubmit} />
+        </Content>
+      </Container>
+    )
   }
 }
 

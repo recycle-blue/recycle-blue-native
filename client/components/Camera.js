@@ -8,6 +8,7 @@ import {
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons'
+import { LoadingScreen } from '.'
 
 const mapDispatchToProps = (dispatch) => ({
   storePicture: (data) => dispatch(savePhotoThunk(data)),
@@ -35,7 +36,8 @@ class TestCamera extends React.Component {
       hasCameraPermission: null,
       type: Camera.Constants.Type.back,
       flash: 'off',
-      barcodeScanning: 'off'
+      barcodeScanning: 'off',
+      loadingToggle: false,
     }
   }
 
@@ -46,12 +48,6 @@ class TestCamera extends React.Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({ hasCameraPermission: status === 'granted' })
-  }
-
-  componentDidMount() {
-    // FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photo').catch(e => {
-    // console.log(e, 'Directory Exists')
-    // })
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -73,14 +69,15 @@ class TestCamera extends React.Component {
       console.log('is expo broken?')
       const data = await this.camera.takePictureAsync(options)
       console.log('nope! still working for now!')
-      this.props.clearActivity()
+      await this.props.clearActivity()
       this.savePicture(data)
+      this.setState({ ...this.state, loadingToggle: true })
     }
   }
 
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
-    this.props.storePicture(photoData)
+    await this.props.storePicture(photoData)
     this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
   }
 
@@ -90,6 +87,8 @@ class TestCamera extends React.Component {
       return <View />
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>
+    } else if (this.state.loadingToggle) {
+      return <LoadingScreen />
     } else {
       return (
         <View style={{ flex: 1 }}>

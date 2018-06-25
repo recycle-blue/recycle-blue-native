@@ -4,7 +4,7 @@ import { Container, Form, Item, Input, Content } from 'native-base'
 import { connect } from 'react-redux'
 
 const mapStateToProps = (store) => ({
-  loading: store.activity.photo
+  loading: '/recycleloading.gif'
 })
 
 const LoadingScreen = (props) => {
@@ -13,7 +13,7 @@ const LoadingScreen = (props) => {
       <Content>
         <Image
           style={styles.image}
-          source={{ uri: props.loading }}
+          source={require('../recycleloading.gif')}
         />
         <Text>Loading</Text>
       </Content>

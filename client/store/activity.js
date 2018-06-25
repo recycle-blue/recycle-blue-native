@@ -15,8 +15,8 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  */
 const defaultActivity = {
   photo: '',
-  name: '',
-  category: '',
+  name: 'default',
+  category: 'default',
   quantity: 0,
   imageUrl: '',
   productId: 1
@@ -64,29 +64,29 @@ export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
     dispatch(setActivity(res.data || defaultActivity))
-    // if (res.data.updateRequired) {
-    // dispatch(setProduct(res.data.product))
-    // dispatch(setCategory(res.data.category))
-    // }
+    if (res.data.updateRequired) {
+      dispatch(setProduct(res.data.product))
+      dispatch(setCategory(res.data.categoryList[0]))
+    }
   } catch (err) {
     console.error(err)
   }
 }
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
-    const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     dispatch(savePhoto(photo))
+    const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
     console.log('savePhotoRes', res)
     console.log('savePhotoRes .data', res.data)
     const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
-    dispatch(setActivity({
+    await dispatch(setActivity({
       name: res.data.product.name,
       category,
       imageUrl: res.data.imageUrl,
       productId: res.data.product.id
     }))
-    dispatch(setProduct(res.data.product))
-    dispatch(setCategory(category))
+    await dispatch(setProduct(res.data.product))
+    await dispatch(setCategory(category))
   } catch (err) {
     console.error(err)
   }
@@ -98,7 +98,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
 export default function (state = defaultActivity, action) {
   switch (action.type) {
     case SET_ACTIVITY:
-      return { ...state, activity: action.activity }
+      return { ...state, ...action.activity }
     case SAVE_PHOTO:
       return { ...state, photo: action.photo }
     case SET_ACTIVITY_WEEK:
