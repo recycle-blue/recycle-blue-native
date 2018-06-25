@@ -1,16 +1,15 @@
 const router = require('express').Router()
 const { Activity, Product, Category, User } = require('../db/models')
 const cloudinary = require('cloudinary')
-const { CLOUDINARY } = require('../../secrets')
 const { parseImgTags } = require('./parseAI')
 module.exports = router
 
 console.log('in api/activity')
 
 cloudinary.config({
-  cloud_name: CLOUDINARY.NAME,
-  api_key: CLOUDINARY.KEY,
-  api_secret: CLOUDINARY.SECRET,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
   secure: true,
 })
 

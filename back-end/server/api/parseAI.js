@@ -2,17 +2,9 @@ const fs = require('fs')
 const { Tag, Product, Category } = require('../db/models')
 
 const parseImgTags = async (imgTagResults) => {
-  console.log('google_tagging', imgTagResults.google_tagging)
-  console.log('imagga_tagging', imgTagResults.imagga_tagging)
-  console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
-  fs.writeFile(`/tmp/tagResults.txt`, imgTagResults,
-    function (err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    }
-  )
+  // console.log('google_tagging', imgTagResults.google_tagging)
+  // console.log('imagga_tagging', imgTagResults.imagga_tagging)
+  // console.log('aws_rek_tagging', imgTagResults.aws_rek_tagging)
 
   const confidenceLimit = 0.5
   const googleTags = imgTagResults.google_tagging.data
@@ -32,7 +24,7 @@ const parseImgTags = async (imgTagResults) => {
     sortedTags.push([tag, trimmedTags[tag]])
   }
   sortedTags.sort((a, b) => b[1] - a[1])
-  console.log('sortedTags', sortedTags)
+  // console.log('sortedTags', sortedTags)
 
   const matchCategory = []
   let matchProduct = {}
@@ -43,12 +35,12 @@ const parseImgTags = async (imgTagResults) => {
       if (matchedTag.categoryId) {
         const category = await Category.findById(matchedTag.categoryId)
         matchCategory.push(category.dataValues)
-        console.log('category found', matchCategory)
+        // console.log('category found', matchCategory)
       }
       if (!matchProduct.id && matchedTag.productId) {
         const product = await Product.findById(matchedTag.productId)
         matchProduct = product.dataValues
-        console.log('product found', matchProduct)
+        // console.log('product found', matchProduct)
       }
       return matchedTag
     })
