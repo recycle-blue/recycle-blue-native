@@ -4,7 +4,7 @@ import { ENV_PATH } from '../secrets'
 /**
  * ACTION TYPES
  */
-const GET_USER_ACTIVITIES = 'GET_USER_ACTIVITIES'
+const GET_LEADERS = 'GET_LEADERS'
 
 /**
  * INITIAL STATE
@@ -14,15 +14,15 @@ const initialState = []
 /**
  * ACTION CREATORS
  */
-const getUserActivities = activities => ({ type: GET_USER_ACTIVITIES, activities })
+const getLeaders = leaders => ({ type: GET_LEADERS, leaders })
 /**
  * THUNK CREATORS
  */
 
-export const getUserActivitiesThunk = (userId) => async dispatch => {
+export const getLeadersThunk = (userId) => async dispatch => {
   try {
-    const res = await axios.get(`${ENV_PATH}/api/users/${userId}/activities`)
-    dispatch(getUserActivities(res.data))
+    const res = await axios.get(`${ENV_PATH}/api/users/${userId}/leaderboard`)
+    dispatch(getLeaders(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -33,8 +33,8 @@ export const getUserActivitiesThunk = (userId) => async dispatch => {
  */
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_USER_ACTIVITIES:
-      return action.activities
+    case GET_LEADERS:
+      return action.leaders
     default:
       return state
   }
