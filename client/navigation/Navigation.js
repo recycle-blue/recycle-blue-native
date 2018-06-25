@@ -5,20 +5,21 @@ import { Login, AddActivity, Camera, MapComp, Dashboard, Product, LoadingScreen,
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: { screen: Dashboard },
+    Dashboard: { screen: Dashboard },
     addActivity: { screen: AddActivity },
     map: { screen: MapComp },
     camera: { screen: Camera },
     product: { screen: Product },
     loadingScreen: { screen: LoadingScreen },
     Leaderboard: { screen: Leaderboard},
-    Friends: { screen: Friends}
+    Friends: { screen: Friends},
+    SingleFriend: {screen: Dashboard }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'dashboard',
+    initialRouteName: 'Dashboard',
   }
 )
 

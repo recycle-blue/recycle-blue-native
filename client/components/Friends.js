@@ -2,12 +2,19 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
 import { Container, Tabs,Tab, ScrollableTab } from 'native-base';
-import { getFriendsThunk } from '../store'
+import { getFriendsThunk, selectedFriendThunk, selectedFriendActivitiesThunk } from '../store'
+
 
 class Friends extends React.Component {
 
     componentDidMount() {
       this.props.getFriends(this.props.user.id)
+    }
+
+    singleFriend = async (friendId) => {
+      await this.props.selectFriend(this.props.user.id, friendId)
+      await this.props.selectFriendActivities(this.props.user.id, friendId)
+      this.props.navigation.navigate('SingleFriend')
     }
 
     render(){
@@ -21,7 +28,7 @@ class Friends extends React.Component {
                   source={{uri: friend.imageUrl}}
                   style={styles.image}
                 />
-                <Text>{friend.name}</Text>
+                <Text onPress={() => this.singleFriend(friend.id)}>{friend.name}</Text>
                 <Text>{friend.totalPoints}</Text>
               </View>
             )
@@ -56,7 +63,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFriends: (userId) => dispatch(getFriendsThunk(userId))
+    getFriends: (userId) => dispatch(getFriendsThunk(userId)),
+    selectFriend: (userId, friendId) => dispatch(selectedFriendThunk(userId,friendId)),
+    selectFriendActivities: (userId, friendId) => dispatch(selectedFriendActivitiesThunk(userId,friendId))
   }
 }
 
