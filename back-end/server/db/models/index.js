@@ -31,9 +31,9 @@ Product.belongsTo(Category)
 Category.hasMany(Product)
 
 User.belongsToMany(User, {
-  as: 'Followers',
+  as: 'Followees',
   foreignKey: 'followerId',
-  through: 'followers',
+  through: 'followees',
   otherKey: 'followeeId'
 })
 

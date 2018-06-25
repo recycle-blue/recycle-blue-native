@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const db = require('../db')
-const { User, Activity, Product } = require('../db/models')
-const Friends = db.model('friends')
+const {User, Activity, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -26,7 +25,7 @@ router.get('/:userId/activities', async (req, res, next) => {
   try {
     const activities = await Activity.findAll({
       where: {
-        userId : req.params.userId
+        userId: req.params.userId
       },
       include: [Product]
     })
@@ -36,25 +35,25 @@ router.get('/:userId/activities', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/friends', async (req, res, next) => {
+router.get('/:userId/followees', async (req, res, next) => {
   try {
-    const {Friends} = await User.findOne({
+    const {Followees} = await User.findOne({
       where: {
         id: req.params.userId
       },
-      include: ['Friends']
+      include: ['Followees']
     })
-    const friends = await User.friendsInAlphabeticalOrder(Friends);
-    res.json(friends)
+    const followees = await User.followeesInAlphabeticalOrder(Followees)
+    res.json(followees)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/:userId/friends/:friendId', async (req,res,next) => {
-  try{
-    const friend = await User.findById(req.params.friendId)
-    res.json(friend)
+router.get('/:userId/followees/:followeeId', async (req, res, next) => {
+  try {
+    const followee = await User.findById(req.params.followeeId)
+    res.json(followee)
   } catch (err) {
     next(err)
   }
@@ -69,8 +68,8 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
       include: ['Friends']
     })
     const currentUser = await User.findById(req.params.userId)
-    const users = await User.leaderboard(currentUser,Friends);
-    res.json(users);
+    const users = await User.leaderboard(currentUser, Friends)
+    res.json(users)
   } catch (err) {
     next(err)
   }
