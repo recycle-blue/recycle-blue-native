@@ -19,20 +19,18 @@ describe('User routes', () => {
       cody = await User.create({
         firstName: 'Cody',
         lastName: 'Jones',
-        email: codysEmail
+        email: codysEmail,
+        password: '1234'
       })
       dustin = await User.create({
         firstName: 'Dustin',
         lastName: 'McDowell',
-        email: 'dustin@email.com'
+        email: 'dustin@email.com',
+        password: 'password'
       })
     })
     it('lets user follow other user', async () => {
-      await cody.addFollowee(dustin)
-      const allFollowees = await Followees.findAll()
-      expect(allFollowees.length).to.equal(1)
-      expect(allFollowees[0].followerId).to.equal(cody.id)
-      expect(allFollowees[0].followeeId).to.equal(dustin.id)
+      // login a user and hit post route to add as a follower
     })
 
     xit('GET /api/users', async () => {

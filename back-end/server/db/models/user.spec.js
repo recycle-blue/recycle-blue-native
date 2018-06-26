@@ -3,7 +3,7 @@
 const {expect} = require('chai')
 const db = require('../index')
 const {User} = require('./index')
-// const Friends = db.model('friends')
+const Followees = db.model('followees')
 
 describe('User model', () => {
   let cody, mario
@@ -27,17 +27,14 @@ describe('User model', () => {
     expect(cody.lastName).to.equal('Jones')
     expect(cody.email).to.equal('cody@puppybook.com')
   })
-  xit('creates friends', async () => {
-    await cody.setFriends([mario])
-    await mario.setFriends([cody])
-    const friends = await Friends.findAll()
-    expect(friends.length).to.equal(2)
-    expect(friends[0].myId).to.equal(cody.id)
-    expect(friends[0].friendId).to.equal(mario.id)
-    expect(friends[1].myId).to.equal(mario.id)
-    expect(friends[1].friendId).to.equal(cody.id)
+  it('allows user to followe another user', async () => {
+    await cody.addFollowee(mario)
+    const allFollowees = await Followees.findAll()
+    expect(allFollowees.length).to.equal(1)
+    expect(allFollowees[0].followerId).to.equal(cody.id)
+    expect(allFollowees[0].followeeId).to.equal(mario.id)
   })
-  describe('instanceMethods', () => {
+  xdescribe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
 

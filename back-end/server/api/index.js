@@ -1,7 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 
-router.use('/users', require('./users'))
+router.use('/users', isCorrectUser, require('./users'))
 router.use('/activity', require('./activity'))
 router.use('/product', require('./product'))
 
@@ -10,3 +10,11 @@ router.use((req, res, next) => {
   error.status = 404
   next(error)
 })
+
+function isCorrectUser(req, res, next) {
+  if (req.user && req.user.id === req.params.userId) {
+    next()
+  } else {
+    res.status(401).send('Unauthorized')
+  }
+}
