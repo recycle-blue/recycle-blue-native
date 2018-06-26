@@ -53,7 +53,7 @@ class ActivityChart extends React.Component {
         <XAxis
           style={{ marginHorizontal: -10 }}
           xAccessor={axis => axis.item.day}
-          data={console.log(data)}
+          data={data}
           formatLabel={(value, index) => index}
           contentInset={{ left: 10, right: 10 }}
           svg={{ fontSize: 10, fill: 'black' }}
