@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
-import { Login, AddActivity, Camera, MapComp, Dashboard, Product, LoadingScreen, Leaderboard, Friends } from '../components'
+import { Login, AddActivity, Camera, MapComp, Dashboard, Activity, LoadingScreen, Leaderboard, Friends } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
@@ -9,10 +9,11 @@ const Drawer = createDrawerNavigator(
     addActivity: { screen: AddActivity },
     map: { screen: MapComp },
     camera: { screen: Camera },
-    product: { screen: Product },
+    activity: { screen: Activity },
     loadingScreen: { screen: LoadingScreen },
-    Leaderboard: { screen: Leaderboard},
-    Friends: { screen: Friends}
+    leaderboard: { screen: Leaderboard },
+    friends: { screen: Friends },
+    singleFriend: { screen: Dashboard }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
