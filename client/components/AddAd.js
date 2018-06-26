@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, Image, KeyboardAvoidingView } from 'react-native'
-import { Container, Content, Form, Item, Input, Picker } from 'native-base'
+import { StyleSheet, View, Button, Image, KeyboardAvoidingView } from 'react-native'
+import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivity } from '../store'
+import { addAd } from '../store'
 
 class AddAd extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class AddAd extends React.Component {
     }
   }
   handleSubmit = async () => {
-    await this.props.addActivity(this.state)
+    await this.props.addAd(this.state)
     this.props.navigation.navigate('product')
   }
   render() {
@@ -108,21 +108,22 @@ class AddAd extends React.Component {
 
 const mapStateToProps = (store) => {
   return {
-    userId: store.user.id,// || 1,
-    name: store.activity.name,// || "bottle",
-    category: store.activity.category,// || "Plastic",
-    quantity: store.activity.quantity,// || 1,
-    unit: store.activity.unit,// || 'qty',
+    userId: store.user.id,
+    name: store.activity.name,
+    category: store.activity.category,
+    quantity: store.activity.quantity,
+    unit: store.activity.unit,
     type: store.activity.type,
-    photo: store.activity.photo,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
-    imageUrl: store.activity.imageUrl,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+    photo: store.activity.photo,
+    imageUrl: store.activity.imageUrl,
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity)),
+  addAd: (ad) => dispatch(addAdThunk(ad)),
   refreshUser: (userId) => dispatch(me(userId)),
-  refreshActivity: () => dispatch(refreshActivityThunk()),
+  refreshAd: () => dispatch(refreshAdThunk()),
 })
 
 const styles = StyleSheet.create({
