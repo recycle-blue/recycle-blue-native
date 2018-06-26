@@ -55,12 +55,17 @@ async function seed() {
     const randomProducts = products.sort(shuffle).slice(0, 5);
     const quantity = randomIndexGenerator(5);
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
+    const type = quantity > 3 ? 'Post' : 'Ad'
     return Promise.all(randomProducts.map(product => {
+      const categoryId = randomIndexGenerator(categories.length)
       return Activity.create({
         productId: product.id,
+        categoryId,
         userId: user.id,
         quantity,
         imageUrl,
+        type,
+        unit: 'QTY',
         points: quantity * product.points
       })
     }))

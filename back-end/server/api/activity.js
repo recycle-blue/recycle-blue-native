@@ -1,10 +1,8 @@
 const router = require('express').Router()
-const { Activity, Product, Category, User } = require('../db/models')
+const { Activity, Product, Category, User, Ad } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { parseImgTags } = require('./parseAI')
 module.exports = router
-
-console.log('in api/activity')
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -34,7 +32,6 @@ const sendPhotoToCloud = async (photo) => {
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
-  console.log('parsed tags', parsedTags)
   return {
     product: parsedTags.product,
     categoryList: parsedTags.categories,
@@ -75,16 +72,38 @@ router.post('/', async (req, res, next) => {
     const user = userData.dataValues
     const activityPoints = category.multiplier * product.points
     const newTotalPoints = activityPoints + user.totalPoints
-    User.update({ points: newTotalPoints }, { where: { id: user.id } })
+    User.update({ totalPoints: newTotalPoints }, { where: { id: user.id } })
     const newActivityData = await Activity.create({
       userId: req.body.userId,
       productId: product.id,
+      categoryId: category.id,
       quantity: req.body.quantity,
       imageUrl: req.body.imageUrl,
+      type: req.body.type,
+      unit: req.body.unit
     })
     const newActivity = newActivityData.dataValues
     newActivity.points = activityPoints
     res.json(newActivity)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/ad', async (req, res, next) => {
+  try {
+    const newAdRes = await Ad.create({
+      activityId: req.body.activityId,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zipCode: req.body.zipCode,
+      email: req.body.email,
+      phone: req.body.phone,
+      description: req.body.description,
+    })
+    const newAd = newAdRes.dataValues
+    res.json(newAd)
   } catch (err) {
     next(err)
   }
