@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Card, CardItem, Body, Text, Left } from 'native-base'
 import { Image } from 'react-native'
 
@@ -23,4 +24,13 @@ const UserCard = props => {
   )
 }
 
-export default UserCard
+const mapDispatch = dispatch => {
+  return {
+    selectUser: userId => dispatch(selectUserThunk(userId)),
+  }
+}
+
+export default connect(
+  null,
+  mapDispatch
+)(UserCard)
