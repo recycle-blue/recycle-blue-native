@@ -5,7 +5,7 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { Container, Tabs, Tab, ScrollableTab,
   Card, CardItem, Body, Left, Right, Thumbnail } from 'native-base'
 import { getUserActivitiesThunk, setSelectedFriend} from '../store'
-import { UserActivities } from '.'
+import { UserActivities, ProgressChart, ActivityChart } from '.'
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -40,8 +40,8 @@ class Dashboard extends React.Component {
             <Tabs renderTabBar={() => <ScrollableTab />}>
               <Tab heading='Progess'>
                 <ScrollView>
-                  {/* <ProgressChart user={user}/>
-                  <ActivityChart /> */}
+                  <ProgressChart />
+                  <ActivityChart />
                 </ScrollView>
               </Tab>
               <Tab heading='Activity'>
