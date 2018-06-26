@@ -114,6 +114,7 @@ const mapStateToProps = (store) => {
     category: store.activity.category,// || "Plastic",
     quantity: store.activity.quantity,// || 1,
     unit: store.activity.unit,// || 'qty',
+    type: store.activity.type,
     photo: store.activity.photo,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
     imageUrl: store.activity.imageUrl,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
   }

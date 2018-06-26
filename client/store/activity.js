@@ -19,6 +19,8 @@ const defaultActivity = {
   category: 'default',
   quantity: 0,
   imageUrl: '',
+  unit: 'QTY',
+  type: 'Post',
   productId: 1
 }
 
