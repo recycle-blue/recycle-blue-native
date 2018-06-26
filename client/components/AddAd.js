@@ -22,7 +22,6 @@
 //     this.props.navigation.navigate('product')
 //   }
 //   render() {
-//     console.log('activity render props', this.props)
 //     return (
 //       <KeyboardAvoidingView
 //         style={styles.container}

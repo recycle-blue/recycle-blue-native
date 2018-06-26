@@ -22,7 +22,6 @@ class Dashboard extends React.Component {
   render() {
     const user = this.props.selectedFriend.id ? this.props.selectedFriend : this.props.user
     const { activities } = this.props
-    console.log(this.props)
     return (
       <Container >
         <Card style={styles.card}>

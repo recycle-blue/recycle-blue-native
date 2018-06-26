@@ -4,8 +4,6 @@ const cloudinary = require('cloudinary')
 const { parseImgTags } = require('./parseAI')
 module.exports = router
 
-console.log('in api/activity')
-
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
@@ -34,7 +32,6 @@ const sendPhotoToCloud = async (photo) => {
   const imageUrl = cloudData.secure_url
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
-  console.log('parsed tags', parsedTags)
   return {
     product: parsedTags.product,
     categoryList: parsedTags.categories,

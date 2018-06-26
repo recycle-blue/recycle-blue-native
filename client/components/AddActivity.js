@@ -22,7 +22,6 @@ class AddActivity extends React.Component {
     this.props.navigation.navigate('activity')
   }
   render() {
-    console.log('activity render props', this.props)
     return (
       <KeyboardAvoidingView
         style={styles.container}
