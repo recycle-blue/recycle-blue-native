@@ -15,8 +15,6 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  */
 const defaultActivity = {
   photo: '',
-  name: 'default',
-  category: 'default',
   quantity: 0,
   imageUrl: '',
   unit: 'QTY',
@@ -53,15 +51,6 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
   }
 }
 
-// export const getActivityThunk = (activityId) => async dispatch => {
-//   try {
-//     const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}`)
-//     dispatch(setActivity(res.data || defaultActivity))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-
 export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
@@ -74,6 +63,7 @@ export const addActivityThunk = (activity) => async dispatch => {
     console.error(err)
   }
 }
+
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
     dispatch(savePhoto(photo))

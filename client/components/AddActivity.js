@@ -19,7 +19,7 @@ class AddActivity extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
-    this.props.navigation.navigate('product')
+    this.props.navigation.navigate('activity')
   }
   render() {
     console.log('activity render props', this.props)
@@ -55,7 +55,7 @@ class AddActivity extends React.Component {
               selectedValue={this.state.category}
               onValueChange={(category) => this.setState({ category })}
             >
-              <Picker.Item label="Category" value="default" />
+              <Picker.Item label="Category" value="Other" />
               <Picker.Item label="Plastic" value="Plastic" />
               <Picker.Item label="Glass" value="Glass" />
               <Picker.Item label="Metal" value="Metal" />
@@ -63,6 +63,7 @@ class AddActivity extends React.Component {
               <Picker.Item label="Wood" value="Wood" />
               <Picker.Item label="Compost" value="Compost" />
               <Picker.Item label="Landfill" value="Landfill" />
+              <Picker.Item label="Category" value="Other" />
             </Picker>
           </Item>
           <View style={styles.qtyInputs}>
@@ -94,7 +95,6 @@ class AddActivity extends React.Component {
                 selectedValue={this.state.type}
                 onValueChange={(type) => this.setState({ type })}
               >
-                {/* <Picker.Item label="Type" value="default" /> */}
                 <Picker.Item label="Activity" value="activity" />
                 <Picker.Item label="Ad" value="ad" />
               </Picker>
@@ -110,8 +110,8 @@ class AddActivity extends React.Component {
 const mapStateToProps = (store) => {
   return {
     userId: store.user.id,// || 1,
-    name: store.activity.name,// || "bottle",
-    category: store.activity.category,// || "Plastic",
+    name: store.product.name,// || "bottle",
+    category: store.category.name,// || "Plastic",
     quantity: store.activity.quantity,// || 1,
     unit: store.activity.unit,// || 'qty',
     type: store.activity.type,

@@ -11,7 +11,7 @@ class ActivityCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
       await this.props.selectActivity(this.props.activity)
-      console.log('props', this.props)
+      // console.log('props', this.props)
       this.props.navigation.navigate('activity')
     }
   }
@@ -23,7 +23,7 @@ class ActivityCard extends React.Component {
           <Thumbnail medium square
             source={{ uri: activity.imageUrl }}
           />
-          <Text style={styles.name} >{activity.product.name}</Text>
+          <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
         </CardItem>
       </Card>

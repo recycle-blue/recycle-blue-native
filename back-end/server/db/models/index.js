@@ -16,6 +16,12 @@ User.hasMany(Activity)
 Activity.belongsTo(Product)
 Product.hasMany(Activity)
 
+Activity.belongsTo(Category)
+Category.hasMany(Activity)
+
+Activity.hasOne(Ad)
+Ad.belongsTo(Activity)
+
 Comments.belongsTo(Activity);
 Activity.hasMany(Comments);
 
@@ -37,9 +43,6 @@ User.belongsToMany(User, {
   through: 'friends',
   otherKey: 'friendid'
 })
-
-Activity.hasOne(Ad)
-Ad.belongsTo(Activity)
 
 module.exports = {
   User,

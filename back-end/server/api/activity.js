@@ -79,6 +79,7 @@ router.post('/', async (req, res, next) => {
     const newActivityData = await Activity.create({
       userId: req.body.userId,
       productId: product.id,
+      categoryId: category.id,
       quantity: req.body.quantity,
       imageUrl: req.body.imageUrl,
       type: req.body.type,

@@ -57,8 +57,10 @@ async function seed() {
     const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
     const type = quantity > 3 ? 'Post' : 'Ad'
     return Promise.all(randomProducts.map(product => {
+      const categoryId = randomIndexGenerator(categories.length)
       return Activity.create({
         productId: product.id,
+        categoryId,
         userId: user.id,
         quantity,
         imageUrl,
