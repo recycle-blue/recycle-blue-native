@@ -19,7 +19,7 @@ const Drawer = createDrawerNavigator(
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'dashboard',
   }
 )
 
