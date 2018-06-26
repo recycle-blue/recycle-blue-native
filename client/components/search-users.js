@@ -28,12 +28,16 @@ class SearchUsers extends React.Component {
   handleChange = text => {
     this.setState({ text })
   }
-  filterResults() {
+  filterResults(users, text) {
     // filter based on state the users array
+    return users.filter(user => {
+      return user.name.search(text) > -1
+    })
   }
   render() {
     const { users } = this.props
     const { text } = this.state
+    const filteredUsers = this.filterResults(users, text)
     return (
       <Container>
         <Content>
@@ -45,7 +49,7 @@ class SearchUsers extends React.Component {
             <Icon active name="search" />
           </Item>
           <ScrollView>
-            {users.map(user => {
+            {filteredUsers.map(user => {
               return (
                 <Card key={user.id}>
                   <CardItem>
