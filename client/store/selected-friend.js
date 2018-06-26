@@ -15,7 +15,7 @@ const initialState = {}
 /**
  * ACTION CREATORS
  */
-const selectFriend = friend => ({type: SELECTED_FRIEND, friend})
+export const setSelectedFriend = friend => ({type: SELECTED_FRIEND, friend})
 /**
  * THUNK CREATORS
  */
@@ -23,7 +23,7 @@ const selectFriend = friend => ({type: SELECTED_FRIEND, friend})
 export const selectedFriendThunk = (userId, friendId) => async dispatch => {
   try {
     const res = await axios.get(`${ENV_PATH}/api/users/${userId}/friends/${friendId}`)
-    dispatch(selectFriend(res.data))
+    dispatch(setSelectedFriend(res.data))
   } catch (err) {
     console.error(err)
   }

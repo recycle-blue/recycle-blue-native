@@ -11,14 +11,15 @@ const Drawer = createDrawerNavigator(
     camera: { screen: Camera },
     product: { screen: Product },
     loadingScreen: { screen: LoadingScreen },
-    Leaderboard: { screen: Leaderboard},
-    Friends: { screen: Friends}
+    leaderboard: { screen: Leaderboard},
+    friends: { screen: Friends},
+    singleFriend: {screen: Dashboard }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'dashboard',
+    initialRouteName: 'Dashboard',
   }
 )
 
