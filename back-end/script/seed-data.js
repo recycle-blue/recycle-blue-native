@@ -119,7 +119,10 @@ const categoriesData = [
   },
   {
     "name": "Landfill", "description": "molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim.", "multiplier": 0
-  }
+  },
+  {
+    "name": "Other", "description": "fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo.", "multiplier": 1
+  },
 ]
 
 const commentsData = [

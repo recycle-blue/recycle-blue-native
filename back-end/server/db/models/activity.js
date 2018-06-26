@@ -7,6 +7,10 @@ const Activity = db.define('activity', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  unit: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   likes: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -19,7 +23,11 @@ const Activity = db.define('activity', {
   points: {
     type: Sequelize.INTEGER,
     defaultValue: 0
-  }
+  },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
 })
 
 Activity.activityCountWeek = function (userId) {
