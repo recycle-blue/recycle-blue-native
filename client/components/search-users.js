@@ -16,22 +16,33 @@ import {
 } from 'native-base'
 
 class SearchUsers extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      text: '',
+    }
+  }
   componentDidMount() {
-    // load all users
     this.props.fetchUsers()
+  }
+  handleChange = text => {
+    this.setState({ text })
+  }
+  filterResults() {
+    // filter based on state the users array
   }
   render() {
     const { users } = this.props
+    const { text } = this.state
     return (
       <Container>
         <Content>
           <Item>
-            <Input placeholder="Search For Other Users" />
-            <Icon
-              active
-              name="search"
-              onPress={() => console.log('PRESSED!')}
+            <Input
+              placeholder="Search For Other Users"
+              onChangeText={this.handleChange}
             />
+            <Icon active name="search" />
           </Item>
           <ScrollView>
             {users.map(user => {
