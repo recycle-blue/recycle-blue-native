@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const db = require('../db')
-const {User, Activity, Product} = require('../db/models')
+const { User, Activity, Product, Milestone } = require('../db/models')
+// const Friends = db.model('friends')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -50,10 +51,33 @@ router.get('/:userId/followees', async (req, res, next) => {
   }
 })
 
+<<<<<<< HEAD
 router.get('/:userId/followees/:followeeId', async (req, res, next) => {
   try {
     const followee = await User.findById(req.params.followeeId)
     res.json(followee)
+=======
+router.get('/:userId/friends/:friendId', async (req,res,next) => {
+  try{
+    const friend = await User.findById(req.params.friendId, {
+      include: [Milestone]
+    })
+    res.json(friend)
+>>>>>>> 872c1b5aead759a43670eae2463a883814d4594c
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/friends/:friendId/activities', async (req,res,next) => {
+  try{
+    const activities = await Activity.findAll({
+      where: {
+        userId: req.params.friendId
+      },
+      include: [Product]
+    })
+    res.json(activities);
   } catch (err) {
     next(err)
   }

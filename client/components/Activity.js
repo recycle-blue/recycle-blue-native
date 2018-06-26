@@ -4,7 +4,7 @@ import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk } from '../store/product'
 
-class Product extends React.Component {
+class Activity extends React.Component {
   componentWillMount() {
     this.props.getProduct(this.props.productId)
   }
@@ -69,4 +69,4 @@ const mapDispatchToProps = dispacth => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Product)
+)(Activity)
