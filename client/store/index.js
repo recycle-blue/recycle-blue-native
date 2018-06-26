@@ -13,7 +13,7 @@ import selectedFriend from './selected-friend'
 
 const reducer = combineReducers({ user, activity, location, product, userActivities, leaders, friends, selectedFriend })
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+  applyMiddleware(thunkMiddleware, /*createLogger({ collapsed: true })*/)
 )
 const store = createStore(reducer, middleware)
 
