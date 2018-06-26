@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const db = require('../db')
-const { User, Activity, Product, Milestone } = require('../db/models')
+const {User, Activity, Product, Milestone} = require('../db/models')
 const Friends = db.model('friends')
 module.exports = router
 
@@ -26,7 +26,7 @@ router.get('/:userId/activities', async (req, res, next) => {
   try {
     const activities = await Activity.findAll({
       where: {
-        userId : req.params.userId
+        userId: req.params.userId
       },
       include: [Product]
     })
@@ -44,15 +44,15 @@ router.get('/:userId/friends', async (req, res, next) => {
       },
       include: ['Friends']
     })
-    const friends = await User.friendsInAlphabeticalOrder(Friends);
+    const friends = await User.friendsInAlphabeticalOrder(Friends)
     res.json(friends)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/:userId/friends/:friendId', async (req,res,next) => {
-  try{
+router.get('/:userId/friends/:friendId', async (req, res, next) => {
+  try {
     const friend = await User.findById(req.params.friendId, {
       include: [Milestone]
     })
@@ -62,15 +62,15 @@ router.get('/:userId/friends/:friendId', async (req,res,next) => {
   }
 })
 
-router.get('/:userId/friends/:friendId/activities', async (req,res,next) => {
-  try{
+router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
+  try {
     const activities = await Activity.findAll({
       where: {
         userId: req.params.friendId
       },
       include: [Product]
     })
-    res.json(activities);
+    res.json(activities)
   } catch (err) {
     next(err)
   }
@@ -85,8 +85,8 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
       include: ['Friends']
     })
     const currentUser = await User.findById(req.params.userId)
-    const users = await User.leaderboard(currentUser,Friends);
-    res.json(users);
+    const users = await User.leaderboard(currentUser, Friends)
+    res.json(users)
   } catch (err) {
     next(err)
   }
