@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getUsersThunk } from '../store'
 import { Image, ScrollView } from 'react-native'
+import UserCard from './user-card'
 import {
   Container,
   Content,
@@ -31,13 +32,23 @@ class SearchUsers extends React.Component {
   filterResults(users, text) {
     // filter based on state the users array
     return users.filter(user => {
-      return user.name.search(text) > -1
+      return user.name.toLowerCase().search(text.toLowerCase().trim()) > -1
     })
+  }
+  resultsFound(filteredUsers) {
+    if (filteredUsers.length) {
+      return filteredUsers.map(user => {
+        return <UserCard key={user.id} user={user} />
+      })
+    } else {
+      return <Text>No results found</Text>
+    }
   }
   render() {
     const { users } = this.props
     const { text } = this.state
     const filteredUsers = this.filterResults(users, text)
+    const results = this.resultsFound(filteredUsers)
     return (
       <Container>
         <Content>
@@ -48,27 +59,7 @@ class SearchUsers extends React.Component {
             />
             <Icon active name="search" />
           </Item>
-          <ScrollView>
-            {filteredUsers.map(user => {
-              return (
-                <Card key={user.id}>
-                  <CardItem>
-                    <Left>
-                      <Body>
-                        <Text>{user.name}</Text>
-                      </Body>
-                    </Left>
-                  </CardItem>
-                  <CardItem cardBody>
-                    <Image
-                      source={{ uri: user.imageUrl }}
-                      style={{ height: 200, width: 200, flex: 1 }}
-                    />
-                  </CardItem>
-                </Card>
-              )
-            })}
-          </ScrollView>
+          <ScrollView>{results}</ScrollView>
         </Content>
       </Container>
     )
