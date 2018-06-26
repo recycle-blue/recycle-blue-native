@@ -1,22 +1,39 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, CardItem, Left, Right, Row } from 'native-base'
+import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
+import { setActivity } from '../store'
 
-export default ActivityCard = (props) => {
-  const { activity } = props
-  return (
-    <Card style={styles.card} key={activity.id}>
-      <CardItem style={styles.cardItem} >
-        <Thumbnail
-          source={{ uri: activity.imageUrl }}
-        />
-        <Text>{activity.product.name}</Text>
-        <Text>{activity.points}</Text>
-      </CardItem>
-    </Card>
-  )
+class ActivityCard extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  handlePress = async () => {
+    if (!this.props.disabled) {
+      await this.props.selectActivity(this.props.activity)
+      console.log('props', this.props)
+      this.props.navigation.navigate('activity')
+    }
+  }
+  render() {
+    const { activity } = this.props
+    return (
+      <Card style={styles.card}>
+        <CardItem button style={styles.cardItem} onPress={this.handlePress} >
+          <Thumbnail medium square
+            source={{ uri: activity.imageUrl }}
+          />
+          <Text style={styles.name} >{activity.product.name}</Text>
+          <Text style={styles.points} >{activity.points}</Text>
+        </CardItem>
+      </Card>
+    )
+  }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  selectActivity: (activity) => dispatch(setActivity(activity))
+})
 
 const styles = StyleSheet.create({
   card: {
@@ -28,7 +45,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: '100%',
   },
   image: {
     flex: 0.5,
@@ -39,8 +57,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  item: {
+  name: {
+    flex: 4,
+    width: '100%',
+    textAlign: 'center',
+  },
+  points: {
     flex: 1,
     width: '100%',
-  }
+    textAlign: 'center',
+  },
 })
+
+export default connect(null, mapDispatchToProps)(ActivityCard)

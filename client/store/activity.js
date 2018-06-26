@@ -27,7 +27,7 @@ const defaultActivity = {
 /**
  * ACTION CREATORS
  */
-const setActivity = activity => ({
+export const setActivity = activity => ({
   type: SET_ACTIVITY,
   activity
 })
@@ -53,14 +53,14 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
   }
 }
 
-export const getActivityThunk = (activityId) => async dispatch => {
-  try {
-    const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}`)
-    dispatch(setActivity(res.data || defaultActivity))
-  } catch (err) {
-    console.error(err)
-  }
-}
+// export const getActivityThunk = (activityId) => async dispatch => {
+//   try {
+//     const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}`)
+//     dispatch(setActivity(res.data || defaultActivity))
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
 
 export const addActivityThunk = (activity) => async dispatch => {
   try {

@@ -15,7 +15,7 @@ class Activity extends React.Component {
       <Container>
         <Content>
           <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text>This is where the image goes</Text>
+            <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
             <Image
               style={styles.image}
               source={{ uri: this.props.photo }}
