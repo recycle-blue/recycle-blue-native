@@ -15,17 +15,17 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  */
 const defaultActivity = {
   photo: '',
-  name: 'default',
-  category: 'default',
   quantity: 0,
   imageUrl: '',
+  unit: 'QTY',
+  type: 'Post',
   productId: 1
 }
 
 /**
  * ACTION CREATORS
  */
-const setActivity = activity => ({
+export const setActivity = activity => ({
   type: SET_ACTIVITY,
   activity
 })
@@ -51,15 +51,6 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
   }
 }
 
-export const getActivityThunk = (activityId) => async dispatch => {
-  try {
-    const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}`)
-    dispatch(setActivity(res.data || defaultActivity))
-  } catch (err) {
-    console.error(err)
-  }
-}
-
 export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
@@ -72,12 +63,11 @@ export const addActivityThunk = (activity) => async dispatch => {
     console.error(err)
   }
 }
+
 export const savePhotoThunk = (photo) => async dispatch => {
   try {
     dispatch(savePhoto(photo))
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    console.log('savePhotoRes', res)
-    console.log('savePhotoRes .data', res.data)
     const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
     await dispatch(setActivity({
       name: res.data.product.name,
