@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardItem, Body, Text, Left } from 'native-base'
+import { Card, CardItem, Body, Text, Left, Thumbnail } from 'native-base'
 import { Image } from 'react-native'
 
 const UserCard = props => {
@@ -9,6 +9,7 @@ const UserCard = props => {
     <Card key={user.id}>
       <CardItem>
         <Left>
+          <Thumbnail source={{ uri: user.milestone.badgeIcon }} />
           <Body>
             <Text>{user.name}</Text>
           </Body>
@@ -17,7 +18,7 @@ const UserCard = props => {
       <CardItem cardBody>
         <Image
           source={{ uri: user.imageUrl }}
-          style={{ height: 200, width: 200, flex: 1 }}
+          style={{ height: 100, width: 200, flex: 1 }}
         />
       </CardItem>
     </Card>

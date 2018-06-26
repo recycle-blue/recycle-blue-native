@@ -6,7 +6,9 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({
+      include: [Milestone]
+    })
     res.json(users)
   } catch (err) {
     next(err)

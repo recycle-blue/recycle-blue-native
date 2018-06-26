@@ -32,6 +32,7 @@ class Dashboard extends React.Component {
       ? this.props.selectedFriend
       : this.props.user
     if (this.props.selectedUser.id) user = this.props.selectedUser
+    console.log('USER:', user)
     return (
       <Container>
         <Card style={styles.card}>

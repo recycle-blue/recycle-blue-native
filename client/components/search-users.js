@@ -1,20 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getUsersThunk } from '../store'
-import { Image, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import UserCard from './user-card'
-import {
-  Container,
-  Content,
-  Item,
-  Icon,
-  Input,
-  Card,
-  CardItem,
-  Body,
-  Left,
-  Text,
-} from 'native-base'
+import { Container, Content, Item, Icon, Input, Text } from 'native-base'
 
 class SearchUsers extends React.Component {
   constructor() {
