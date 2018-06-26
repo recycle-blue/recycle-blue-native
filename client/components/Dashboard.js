@@ -2,14 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ProgressChart, ActivityChart } from '.'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
-import { Container, Tabs, Tab, ScrollableTab,
-  Card, CardItem, Body, Left, Right, Thumbnail } from 'native-base'
-import { getUserActivitiesThunk, setSelectedFriend} from '../store'
-import { UserActivities, ProgressChart, ActivityChart } from '.'
+import {
+  Container, Tabs, Tab, ScrollableTab,
+  Card, CardItem, Body, Left, Right, Thumbnail
+} from 'native-base'
+import { getUserActivitiesThunk, setSelectedFriend } from '../store'
+import { ActivityCard, ProgressChart, ActivityChart } from '.'
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    if(!this.props.selectedFriend.id){
+    if (!this.props.selectedFriend.id) {
       this.props.getUserActivitiesThunk(this.props.user.id)
     }
   }
@@ -20,35 +22,42 @@ class Dashboard extends React.Component {
 
   render() {
     const user = this.props.selectedFriend.id ? this.props.selectedFriend : this.props.user
+    const { activities } = this.props
     return (
       <Container >
-          <Card style={styles.card}>
-            <CardItem>
-              <Left>
-                <Thumbnail name="userThunmbnail" large square source={{ uri: user.imageUrl }} />
-                <Body>
-                  <Text>{user.name}</Text>
-                  <Text>{user.totalPoints}</Text>
-                </Body>
-              </Left>
-              <Right>
-                <Thumbnail name="userMilestoneThumbnail" large square source={{ uri: user.milestone.badgeIcon }} />
-              </Right>
-            </CardItem>
-          </Card>
-          <View style={styles.container}>
-            <Tabs renderTabBar={() => <ScrollableTab />}>
-              <Tab heading='Progess'>
-                <ScrollView>
-                  <ProgressChart />
-                  <ActivityChart />
-                </ScrollView>
-              </Tab>
-              <Tab heading='Activity'>
-                <UserActivities />
-              </Tab>
-            </Tabs>
-          </View>
+        <Card style={styles.card}>
+          <CardItem>
+            <Left>
+              <Thumbnail name="userThunmbnail" large square source={{ uri: user.imageUrl }} />
+              <Body>
+                <Text>{user.name}</Text>
+                <Text>{user.totalPoints}</Text>
+              </Body>
+            </Left>
+            <Right>
+              <Thumbnail name="userMilestoneThumbnail" large square source={{ uri: user.milestone.badgeIcon }} />
+            </Right>
+          </CardItem>
+        </Card>
+        <View style={styles.container}>
+          <Tabs renderTabBar={() => <ScrollableTab />}>
+            <Tab heading='Progess'>
+              <ScrollView>
+                <ProgressChart />
+                <ActivityChart />
+              </ScrollView>
+            </Tab>
+            <Tab heading='Activity'>
+              <ScrollView>
+                {activities.length ?
+                  activities.map(activity =>
+                    <ActivityCard key={activity.id} activity={activity} />
+                  )
+                  : <Text> No Activity Yet! </Text>}
+              </ScrollView>
+            </Tab>
+          </Tabs>
+        </View>
       </Container>
     )
   }
@@ -80,7 +89,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     user: state.user,
-    selectedFriend: state.selectedFriend
+    selectedFriend: state.selectedFriend,
+    activities: state.userActivities
   }
 }
 

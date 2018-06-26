@@ -5,6 +5,7 @@ const Comments = require('./comments')
 const Tag = require('./tag')
 const Milestone = require('./milestone')
 const Activity = require('./activity')
+const Ad = require('./ad')
 
 User.belongsTo(Milestone)
 Milestone.hasMany(User)
@@ -37,6 +38,9 @@ User.belongsToMany(User, {
   otherKey: 'friendid'
 })
 
+Activity.hasOne(Ad)
+Ad.belongsTo(Activity)
+
 module.exports = {
   User,
   Category,
@@ -44,5 +48,6 @@ module.exports = {
   Comments,
   Tag,
   Milestone,
-  Activity
+  Activity,
+  Ad
 }
