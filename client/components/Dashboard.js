@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ProgressChart, ActivityChart } from '.'
+//import { ProgressChart, ActivityChart } from '.'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { Container, Tabs, Tab, ScrollableTab,
   Card, CardItem, Body, Left, Right, Thumbnail } from 'native-base'
