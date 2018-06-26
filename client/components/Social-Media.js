@@ -3,7 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Share from 'react-native-share'
 import {connect} from 'react-redux'
 import { Icon } from 'native-base'
-// import { shareOnFacebook, shareOnTwitter} from 'react-native-social-share'
 
 class SocialMedia extends React.Component {
 
