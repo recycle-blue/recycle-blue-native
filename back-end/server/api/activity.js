@@ -35,13 +35,12 @@ router.get("/weekly/:userId", async (req, res, next) => {
 
 router.get('/:activityId/ad', async (req, res, next) => {
   try {
-    const adData = await Ad.find({
+    const ad = await Ad.find({
       where: {
         activityId: +req.params.activityId,
       },
     })
-    console.log(adData)
-    const ad = adData.dataValues
+    // const ad = adData.dataValues
     res.json(ad)
   } catch (err) {
     next(err)
