@@ -18,8 +18,8 @@ const defaultActivity = {
   photo: '',
   quantity: '1',
   imageUrl: 'default',
-  unit: 'QTY',
-  type: 'Post',
+  unit: 'qty',
+  type: 'activity',
   productId: 1,
   activities: [],
 }
@@ -69,7 +69,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
   try {
     dispatch(savePhoto(photo))
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
+    const category = res.data.categoryList[0].name
     await dispatch(setActivity({
       name: res.data.product.name,
       category,
@@ -77,7 +77,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
       productId: res.data.product.id
     }))
     await dispatch(setProduct(res.data.product))
-    await dispatch(setCategory(category))
+    await dispatch(setCategory(res.data.categoryList[0]))
   } catch (err) {
     console.error(err)
   }

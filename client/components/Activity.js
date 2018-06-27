@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return ({
     name: `${state.category.name} ${state.product.name}`,
-    points: state.product.points,
+    points: state.activity.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,
     photo: state.activity.imageUrl || state.activity.photo,

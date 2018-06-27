@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Button, Image, KeyboardAvoidingView } from 'react-native'
-import { Form, Item, Input, Picker, Textarea } from 'native-base'
+import { StyleSheet, View, Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { Form, Item, Input, Textarea } from 'native-base'
 import { connect } from 'react-redux'
 import { addAdThunk } from '../store'
 import { ActivityCard } from '.'
@@ -34,7 +34,7 @@ class AddAd extends React.Component {
       <KeyboardAvoidingView
         style={styles.container}
         behavior="position"
-        keyboardVerticalOffset={-85}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? -110 : -85}
         contentContainerStyle={styles.container}
         enabled={true}
       >
