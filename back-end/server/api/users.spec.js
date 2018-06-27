@@ -5,6 +5,7 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
+const Followees = db.model('followees')
 
 describe('User routes', () => {
   beforeEach(() => {
@@ -13,11 +14,23 @@ describe('User routes', () => {
 
   describe('/api/users/', () => {
     const codysEmail = 'cody@puppybook.com'
-
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail
+    let cody, dustin
+    beforeEach(async () => {
+      cody = await User.create({
+        firstName: 'Cody',
+        lastName: 'Jones',
+        email: codysEmail,
+        password: '1234'
       })
+      dustin = await User.create({
+        firstName: 'Dustin',
+        lastName: 'McDowell',
+        email: 'dustin@email.com',
+        password: 'password'
+      })
+    })
+    it('lets user follow other user', async () => {
+      // login a user and hit post route to add as a follower
     })
 
     xit('GET /api/users', async () => {

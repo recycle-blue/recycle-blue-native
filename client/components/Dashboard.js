@@ -12,24 +12,55 @@ import {
   Left,
   Right,
   Thumbnail,
+  Button,
 } from 'native-base'
 import {
   getUserActivitiesThunk,
   setSelectedFriend,
   selectUserAction,
+  addFriendThunk,
+  getFriendsThunk,
 } from '../store'
 import { ProgressChart, ActivityChart, ActivityCard } from '.'
 
 class Dashboard extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isFriendOrSelf: true,
+    }
+  }
   componentDidMount() {
     if (!this.props.selectedFriend.id && !this.props.selectedUser.id) {
       this.props.getUserActivitiesThunk(this.props.user.id)
     }
+    this.checkIfFriendOrSelf()
   }
 
   componentWillUnmount() {
     this.props.removeSelectedFriend()
     this.props.removeSelectedUser()
+  }
+
+  addFriend = async (currentUserId, selectedUserId) => {
+    await this.props.addFriend(currentUserId, selectedUserId)
+    this.props.navigation.navigate('friends')
+  }
+
+  async checkIfFriendOrSelf() {
+    const { selectedFriend, selectedUser, user } = this.props
+    // if selectedFriend.id is defined, then we immediately know this is a friend
+    if (selectedFriend.id || selectedUser.id === user.id || !selectedUser.id) {
+      this.setState({ isFriendOrSelf: true })
+    } else {
+      if (!this.props.friends.length) {
+        await this.props.getFriends(user.id)
+      }
+      const isFriendOrSelf =
+        this.props.friends.filter(friend => friend.id === selectedUser.id)
+          .length > 0
+      this.setState({ isFriendOrSelf })
+    }
   }
 
   render() {
@@ -38,6 +69,7 @@ class Dashboard extends React.Component {
       : this.props.user
     if (this.props.selectedUser.id) user = this.props.selectedUser
     const { activities } = this.props
+    // this.checkIfFriendOrSelf(this.props.user, user)
     return (
       <Container>
         <Card style={styles.card}>
@@ -52,6 +84,19 @@ class Dashboard extends React.Component {
               <Body>
                 <Text>{user.name}</Text>
                 <Text>{user.totalPoints}</Text>
+                {!this.state.isFriendOrSelf && (
+                  <Button
+                    primary
+                    onPress={() =>
+                      this.addFriend(
+                        this.props.user.id,
+                        this.props.selectedUser.id
+                      )
+                    }
+                  >
+                    <Text style={{ color: 'white' }}> Add Friend </Text>
+                  </Button>
+                )}
               </Body>
             </Left>
             <Right>
@@ -129,6 +174,7 @@ const mapStateToProps = state => {
     selectedFriend: state.selectedFriend,
     selectedUser: state.userSearch.selectedUser,
     activities: state.userActivities,
+    friends: state.friends,
   }
 }
 
@@ -137,6 +183,9 @@ const mapDispatchToProps = dispatch => {
     getUserActivitiesThunk: userId => dispatch(getUserActivitiesThunk(userId)),
     removeSelectedFriend: () => dispatch(setSelectedFriend({})),
     removeSelectedUser: () => dispatch(selectUserAction(0)),
+    addFriend: (currentUserId, selectedUserId) =>
+      dispatch(addFriendThunk(currentUserId, selectedUserId)),
+    getFriends: userId => dispatch(getFriendsThunk(userId)),
   }
 }
 
