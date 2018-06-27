@@ -31,7 +31,21 @@ router.get("/weekly/:userId", async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
 
+router.get('/:activityId/ad', async (req, res, next) => {
+  try {
+    const adData = await Ad.find({
+      where: {
+        activityId: +req.params.activityId,
+      },
+    })
+    console.log(adData)
+    const ad = adData.dataValues
+    res.json(ad)
+  } catch (err) {
+    next(err)
+  }
 })
 
 // POST Routes
@@ -106,6 +120,7 @@ router.post('/', async (req, res, next) => {
 
 router.post('/ad', async (req, res, next) => {
   try {
+    console.log('post ad body', req.body)
     const newAdRes = await Ad.create({
       activityId: req.body.activityId,
       address: req.body.address,
@@ -123,19 +138,6 @@ router.post('/ad', async (req, res, next) => {
   }
 })
 
-router.get('/:activityId/ad', async (req, res, next) => {
-  try {
-    const adData = await Ad.find({
-      where: {
-        activityId: req.params.activityId,
-      },
-    })
-    const ad = adData.dataValues
-    res.json(ad)
-  } catch (err) {
-    next(err)
-  }
-})
 router.post('/:activityId/comment', async (req, res, next) => {
   try {
     const newCommentRes = await Comments.create({

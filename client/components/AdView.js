@@ -2,34 +2,25 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import { getProductThunk } from '../store/product'
+import { getAdThunk } from '../store'
 
 class AdView extends React.Component {
   componentWillMount() {
-    this.props.getProduct(this.props.productId)
+    this.props.getAd(this.props.activityId)
   }
 
   render() {
     return (
-      <Container>
+      <Container style={styles.container}>
         <Content>
-          <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
-            <Image
-              style={styles.image}
-              source={{ uri: this.props.photo }}
-            />
-            <Text>{this.props.points}</Text>
-            <Text>{this.props.description}</Text>
-            <Text>{this.props.recycleUse}</Text>
-            <Button
-              onPress={() => {
-                this.props.navigation.navigate('map')
-              }}
-              title='Find Recycling Near You'
-              color='#58A4B0'
-            />
+          <Text>Address: {this.props.address}</Text>
+          <View style={styles.sideBySide}>
+            <Text style={styles.city}>City: {this.props.city}</Text>
+            <Text style={styles.state}>State: {this.props.state}</Text>
+            <Text style={styles.zipCode}>Zip Code: {this.props.zipCode}</Text>
           </View>
+          <Text>Email: {this.props.email}</Text>
+          <Text>Description: {this.props.description}</Text>
         </Content>
       </Container>
     )
@@ -37,31 +28,39 @@ class AdView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    width: 250,
-    height: 250,
-    borderWidth: 1,
-    borderColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {
+    paddingTop: 10,
+    height: '100%',
   },
+  sideBySide: {
+    flexDirection: 'row',
+  },
+  city: {
+    flex: 5,
+  },
+  state: {
+    flex: 3,
+  },
+  zipCode: {
+    flex: 4,
+  }
 })
 
 const mapStateToProps = state => {
   return ({
-    name: `${state.activity.category.name} ${state.product.name}`,
-    points: state.product.points,
-    description: state.product.description,
-    recycleUse: state.product.recycleUse,
-    photo: state.activity.imageUrl || state.activity.photo,
-    productId: state.activity.productId
+    address: state.ad.address,
+    city: state.ad.city,
+    state: state.ad.state,
+    zipCode: state.ad.zipCode,
+    email: state.ad.email,
+    description: state.ad.description,
+    activityId: state.activity.id
   })
 }
 
 const mapDispatchToProps = dispacth => {
   return ({
-    getProduct: (productId) => dispacth(getProductThunk(productId))
+    getAd: (activityId) => dispacth(getAdThunk(activityId))
   })
 }
 

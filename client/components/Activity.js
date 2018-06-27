@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk } from '../store/product'
-import { AddComment } from './'
+import { AddComment, AdView } from './'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -31,6 +31,7 @@ class Activity extends React.Component {
               color='#58A4B0'
             />
           </View>
+          {this.props.type === 'ad' && <AdView />}
           <AddComment navigation={this.props.navigation} />
         </Content>
 
@@ -59,8 +60,8 @@ const mapStateToProps = state => {
     recycleUse: state.product.recycleUse,
     photo: state.activity.imageUrl || state.activity.photo,
     productId: state.activity.productId,
-    activityId: state.activity.id
-
+    activityId: state.activity.id,
+    type: state.activity.type,
   })
 }
 
