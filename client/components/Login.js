@@ -54,7 +54,7 @@ class Login extends React.Component {
         </Content >
         <TouchableHighlight
           style={styles.devButton}
-          onPress={this.handleSubmit}
+          onPress={this.devLogin}
           underlayColor='#fff'
         >
           <Text style={styles.buttonFont}>Dev Login</Text>
@@ -66,7 +66,7 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#f4fcff',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
