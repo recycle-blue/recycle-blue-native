@@ -5,6 +5,7 @@ const Comments = require('./comments')
 const Tag = require('./tag')
 const Milestone = require('./milestone')
 const Activity = require('./activity')
+const Ad = require('./ad')
 
 User.belongsTo(Milestone)
 Milestone.hasMany(User)
@@ -14,6 +15,12 @@ User.hasMany(Activity)
 
 Activity.belongsTo(Product)
 Product.hasMany(Activity)
+
+Activity.belongsTo(Category)
+Category.hasMany(Activity)
+
+Activity.hasOne(Ad)
+Ad.belongsTo(Activity)
 
 Comments.belongsTo(Activity)
 Activity.hasMany(Comments)
@@ -44,5 +51,6 @@ module.exports = {
   Comments,
   Tag,
   Milestone,
-  Activity
+  Activity,
+  Ad
 }

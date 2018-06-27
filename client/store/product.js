@@ -10,7 +10,7 @@ const SET_PRODUCT = 'SET_PRODUCT'
  * INITIAL STATE
  */
 const defaultProduct = {
-  name: '',
+  name: 'default product',
   points: 0,
   description: '',
   recycleUse: '',
