@@ -10,7 +10,7 @@ const SET_CATEGORY = 'SET_CATEGORY'
  * INITIAL STATE
  */
 const defaultCategory = {
-  name: 'default category',
+  name: 'Other',
   multiplier: 1,
   description: '',
 }

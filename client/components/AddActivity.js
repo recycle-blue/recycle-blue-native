@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, Image, KeyboardAvoidingView } from 'react-native'
-import { Container, Content, Form, Item, Input, Picker } from 'native-base'
+import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
+import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk, refreshActivityThunk, me } from '../store'
+import { addActivityThunk } from '../store'
 
 class AddActivity extends React.Component {
   constructor(props) {
@@ -13,13 +13,17 @@ class AddActivity extends React.Component {
       category: this.props.category,
       quantity: this.props.quantity,
       unit: this.props.unit,
-      type: this.props.type,
-      imageUrl: this.props.imageUrl,
+      type: this.props.type || 'activity',
+      imageUrl: this.props.imageUrl
     }
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
-    this.props.navigation.navigate('activity')
+    if (this.state.type === 'ad') {
+      this.props.navigation.navigate('addAd')
+    } else {
+      this.props.navigation.navigate('activity')
+    }
   }
   render() {
     return (
@@ -30,7 +34,7 @@ class AddActivity extends React.Component {
         enabled={true}
       >
         <View style={styles.topView}>
-          {!this.state.imageUrl ?
+          {this.state.imageUrl === 'default' ?
             <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
             : <Image
               style={styles.image}
@@ -50,6 +54,7 @@ class AddActivity extends React.Component {
           <Item rounded>
             <Picker
               name="category"
+              style={Platform.OS === 'ios' ? styles.ios : styles.android}
               mode="dropdown"
               selectedValue={this.state.category}
               onValueChange={(category) => this.setState({ category })}
@@ -78,6 +83,7 @@ class AddActivity extends React.Component {
             <Item rounded style={styles.splitInput}>
               <Picker
                 name="unit"
+                style={Platform.OS === 'ios' ? styles.ios : styles.android}
                 mode="dropdown"
                 selectedValue={this.state.unit}
                 onValueChange={(unit) => this.setState({ unit })}
@@ -90,6 +96,7 @@ class AddActivity extends React.Component {
             <Item rounded style={styles.splitInput}>
               <Picker
                 name="type"
+                style={Platform.OS === 'ios' ? styles.ios : styles.android}
                 mode="dropdown"
                 selectedValue={this.state.type}
                 onValueChange={(type) => this.setState({ type })}
@@ -120,20 +127,16 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity)),
-  refreshUser: (userId) => dispatch(me(userId)),
-  refreshActivity: () => dispatch(refreshActivityThunk()),
+  addActivity: (activity) => dispatch(addActivityThunk(activity))
 })
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'flex-start',
   },
   image: {
-    // flex: 1,
     width: 250,
     height: 250,
     // borderWidth: 1,
@@ -145,23 +148,23 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   qtyInputs: {
-    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
-    alignItems: 'stretch',
   },
   splitInput: {
     flex: 1,
-    // width: '50%',
   },
+  ios: {
+    height: 50,
+    width: 1000,
+  },
+  android: {},
   topView: {
-    // flex: 1,
     width: 250,
     height: 250,
     borderWidth: 1,
     borderColor: 'blue',
-    alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,
