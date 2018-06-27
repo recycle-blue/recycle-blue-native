@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container } from 'native-base'
+import { Container, Form, Picker, Icon } from 'native-base'
 import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
@@ -14,6 +14,12 @@ import MarkerDetail from './MarkerDetail'
 const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      selected: 1,
+    }
+  }
   componentDidMount() {
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
@@ -29,6 +35,9 @@ class MapComp extends React.Component {
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
   }
+  handleChange = value => {
+    this.setState({ selected: value })
+  }
   render() {
     const { recycleLocations, selectedMarker, isFetching } = this.props
     const { latitude, longitude } = this.props.userLocation
@@ -41,6 +50,20 @@ class MapComp extends React.Component {
     }
     return (
       <Container>
+        <Form>
+          <Picker
+            mode="dropdown"
+            iosHeader="What do you want to see?"
+            iosIcon={<Icon name="ios-arrow-down-outline" />}
+            style={{ width: undefined }}
+            onValueChange={this.handleChange}
+            placeholder="What do you want to see?"
+            selectedValue={this.state.selected}
+          >
+            <Picker.Item label="Recycling Locations" value={1} />
+            <Picker.Item label="Ads" value={2} />
+          </Picker>
+        </Form>
         <MapView
           provider="google"
           style={{ flex: 1 }}
