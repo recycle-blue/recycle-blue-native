@@ -1,17 +1,17 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Share from 'react-native-share'
+import { StyleSheet, Text, Share, TouchableOpacity, View } from 'react-native';
+// import Share from 'react-native-share'
 import {connect} from 'react-redux'
 import { Icon } from 'native-base'
+window.btoa = require('Base64').btoa;
 
 class SocialMedia extends React.Component {
 
   render() {
-
+    const activity = this.props.activity;
     let shareImageBase64 = {
       title: "React Native",
-      message: ``,
-     // url: REACT_ICON, // This will have the activity imageUrl once its passed as props
+      message: `I just recycled ${activity.quantity} units of ${activity.category.name} ${activity.product.name}. ${activity.product.description} #RecycleBlue`,
       subject: "Share Link", //  for email
       failOnCancel: false
     };
@@ -19,7 +19,7 @@ class SocialMedia extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={()=>{
-          Share.open(shareImageBase64)
+          Share.share(shareImageBase64)
           .then((res) => console.log(res))
           .catch((err) => {
             if(err) {

@@ -1,8 +1,6 @@
 import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
-import { Login, AddActivity, Camera, MapComp, Dashboard, Activity, LoadingScreen, Leaderboard, Friends, ActivityCard, SocialMedia } from '../components'
-import { createStackNavigator, createDrawerNavigator, createSwitchNavigator} from 'react-navigation'
 import {
   Login,
   AddActivity,
@@ -16,7 +14,8 @@ import {
   Friends,
   ActivityCard,
   SearchUsers,
-  AddComment
+  AddComment,
+  SocialMedia
 } from '../components'
 
 const Drawer = createDrawerNavigator(
