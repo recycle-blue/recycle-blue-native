@@ -1,10 +1,11 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Form, Picker, Icon } from 'native-base'
+import { Container, Form, Picker, Icon, Spinner, Content } from 'native-base'
 import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
+  getAdLocationsThunk,
   getUserLocationAction,
   selectMarkerAction,
   setFetch,
@@ -17,7 +18,7 @@ class MapComp extends React.Component {
   constructor() {
     super()
     this.state = {
-      selected: 1,
+      selected: 'recycling',
     }
   }
   componentDidMount() {
@@ -43,9 +44,9 @@ class MapComp extends React.Component {
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
       return (
-        <View>
-          <Text>LOADING MAP...</Text>
-        </View>
+        <Container>
+          <Spinner color="blue" />
+        </Container>
       )
     }
     return (
@@ -60,8 +61,8 @@ class MapComp extends React.Component {
             placeholder="What do you want to see?"
             selectedValue={this.state.selected}
           >
-            <Picker.Item label="Recycling Locations" value={1} />
-            <Picker.Item label="Ads" value={2} />
+            <Picker.Item label="Recycling Locations" value="recycling" />
+            <Picker.Item label="Ads" value="ads" />
           </Picker>
         </Form>
         <MapView

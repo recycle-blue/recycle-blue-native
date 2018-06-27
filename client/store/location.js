@@ -2,6 +2,7 @@ import axios from 'axios'
 import { googleAPIKey } from '../secrets'
 
 const GET_RECYCLE_LOCATIONS = 'GET_RECYCLE_LOCATIONS'
+const GET_AD_LOCATIONS = 'GET_AD_LOCATIONS'
 const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
 const SELECT_MARKER = 'SELECT_MARKER'
@@ -10,6 +11,12 @@ const SET_FETCH = 'SET_FETCH'
 const getRecycleLocationsAction = locations => {
   return {
     type: GET_RECYCLE_LOCATIONS,
+    locations,
+  }
+}
+const getAdLocationsAction = locations => {
+  return {
+    type: GET_AD_LOCATIONS,
     locations,
   }
 }
@@ -47,6 +54,14 @@ export const getRecycleLocationsThunk = locationStr => {
     dispatch(getRecycleLocationsAction(data.results))
   }
 }
+export const getAdLocationsThunk = (locationStr, address) => {
+  return async dispatch => {
+    const { data } = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=${address}&radius=3000&key=${googleAPIKey}`
+    )
+    dispatch(getAdLocationsAction(data.results))
+  }
+}
 export const getDistanceThunk = (markerId, origin, destination) => {
   return async dispatch => {
     const { data } = await axios.get(
@@ -65,6 +80,7 @@ const defaultLocation = {
 
 const initialState = {
   recycleLocations: [],
+  adLocations: [],
   userLocation: defaultLocation,
   selectedMarker: {},
   isFetching: true,
@@ -74,6 +90,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_RECYCLE_LOCATIONS:
       return { ...state, recycleLocations: action.locations }
+    case GET_AD_LOCATIONS:
+      return { ...state, adLocations: action.locations }
     case GET_USER_LOCATION:
       return { ...state, userLocation: action.location }
     case GET_DISTANCE:
