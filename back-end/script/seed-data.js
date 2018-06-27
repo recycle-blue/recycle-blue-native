@@ -7,6 +7,12 @@ const usersData = [
 
 const productsData = [
   {
+    "name": "miscellaneous",
+    "points": 1,
+    "description": "tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris.",
+    "recycleUse": "Fusce mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit."
+  },
+  {
     "name": "bottle",
     "points": 3,
     "description": "In condimentum. Donec at arcu. Vestibulum ante ipsum primis in",
@@ -67,12 +73,6 @@ const productsData = [
     "recycleUse": "iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget"
   },
   {
-    "name": "miscellaneous",
-    "points": 1,
-    "description": "tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris.",
-    "recycleUse": "Fusce mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit."
-  },
-  {
     "name": "food",
     "points": 1,
     "description": "ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem",
@@ -100,6 +100,9 @@ const productsData = [
 
 const categoriesData = [
   {
+    "name": "Other", "description": "fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo.", "multiplier": 1
+  },
+  {
     "name": "Plastic", "description": "fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo.", "multiplier": 3
   },
   {
@@ -119,9 +122,6 @@ const categoriesData = [
   },
   {
     "name": "Landfill", "description": "molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim.", "multiplier": 0
-  },
-  {
-    "name": "Other", "description": "fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo.", "multiplier": 1
   },
 ]
 

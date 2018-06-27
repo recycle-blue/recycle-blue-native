@@ -38,6 +38,14 @@ const parseImgTags = async (imgTagResults) => {
       return matchedTag
     })
   )
+  if (!matchCategory.length) {
+    const defaultCategory = await Category.findById(1)
+    matchCategory.push(defaultCategory.dataValues)
+  }
+  if (!matchProduct.id) {
+    const defaultProduct = await Product.findById(1)
+    matchProduct.push(defaultProduct.dataValues)
+  }
   return {
     tags: tagsList,
     categories: matchCategory,
