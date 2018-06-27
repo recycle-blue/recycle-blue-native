@@ -70,7 +70,6 @@ class Dashboard extends React.Component {
     if (this.props.selectedUser.id) user = this.props.selectedUser
     const { activities } = this.props
     // this.checkIfFriendOrSelf(this.props.user, user)
-    console.log('IS FRIEND OR USER?', this.state.isFriendOrSelf)
     return (
       <Container>
         <Card style={styles.card}>
