@@ -16,13 +16,12 @@ const Ad = db.define('ad', {
     allowNull: false
   },
   zipCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 0
   },
   phone: {
     type: Sequelize.STRING,

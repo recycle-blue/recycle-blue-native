@@ -8,6 +8,7 @@ import {
 import {
   Login,
   AddActivity,
+  AddAd,
   Camera,
   MapComp,
   Dashboard,
@@ -24,6 +25,7 @@ const Drawer = createDrawerNavigator(
   {
     dashboard: { screen: Dashboard },
     addActivity: { screen: AddActivity },
+    addAd: { screen: AddAd },
     map: { screen: MapComp },
     camera: { screen: Camera },
     activity: { screen: Activity },

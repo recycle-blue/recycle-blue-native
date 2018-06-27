@@ -17,7 +17,7 @@ const defaultAd = {
   address: '',
   city: '',
   state: '',
-  zipCode: 0,
+  zipCode: '',
   email: '',
   phone: '',
   description: '',
