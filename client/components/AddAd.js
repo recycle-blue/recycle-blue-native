@@ -15,6 +15,12 @@ class AddAd extends React.Component {
       unit: this.props.unit,
       type: this.props.type,
       imageUrl: this.props.imageUrl,
+      address: this.props.address,
+      city: this.props.city,
+      state: this.props.state,
+      zipCode: this.props.zipCode, 
+      email: this.props.email,
+      phone: this.props.phone,
     }
   }
   handleSubmit = async () => {
@@ -41,29 +47,20 @@ class AddAd extends React.Component {
         <Form style={styles.form} >
           <Item rounded>
             <Input
-              name="name"
-              placeholder="Recycleable Name"
-              onChangeText={(text) => this.setState({ name: text })}
-              value={this.state.name}
+              name="address"
+              placeholder="Address"
+              onChangeText={(address) => this.setState({ address })}
+              value={this.state.address}
             />
           </Item>
           <Item rounded>
-            <Picker
-              name="category"
-              mode="dropdown"
-              selectedValue={this.state.category}
-              onValueChange={(category) => this.setState({ category })}
-            >
-              <Picker.Item label="Category" value="default" />
-              <Picker.Item label="Plastic" value="Plastic" />
-              <Picker.Item label="Glass" value="Glass" />
-              <Picker.Item label="Metal" value="Metal" />
-              <Picker.Item label="Paper" value="Paper" />
-              <Picker.Item label="Wood" value="Wood" />
-              <Picker.Item label="Compost" value="Compost" />
-              <Picker.Item label="Landfill" value="Landfill" />
-            </Picker>
-          </Item>
+            <Input
+                name="address"
+                placeholder="Address"
+                onChangeText={(address) => this.setState({ address })}
+                value={this.state.address}
+              />
+            </Item>
           <View style={styles.qtyInputs}>
             <Item rounded style={styles.splitInput}>
               <Input
@@ -116,7 +113,12 @@ const mapStateToProps = (store) => {
     type: store.activity.type,
     photo: store.activity.photo,
     imageUrl: store.activity.imageUrl,
-
+    address: store.ad.address,
+    city: store.ad.city,
+    state: store.ad.state,
+    zipCode: store.ad.zipCode, 
+    email: store.ad.email,
+    phone: store.ad.phone,
   }
 }
 
