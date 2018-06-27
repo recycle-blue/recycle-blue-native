@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Activity, Product, Category, User, Ad } = require('../db/models')
+const { Activity, Product, Category, User, Ad, Comments } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { parseImgTags } = require('./parseAI')
 module.exports = router
@@ -104,6 +104,21 @@ router.post('/ad', async (req, res, next) => {
     })
     const newAd = newAdRes.dataValues
     res.json(newAd)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:activityId/comment', async (req, res, next) => {
+  try {
+    const newCommentRes = await Comments.create({
+      userId: req.body.userId,
+      activityId: req.body.activityId,
+      text: req.body.text
+    })
+    const newComment = newCommentRes.dataValues
+    res.json(newComment)
+
   } catch (err) {
     next(err)
   }

@@ -13,6 +13,7 @@ import friends from './friends'
 import selectedFriend from './selected-friend'
 import ad from './ad'
 import category from './category'
+import comments from './comments'
 
 const reducer = combineReducers({
   user,
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   userSearch,
   ad,
   category,
+  comments
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -43,3 +45,4 @@ export * from './leaders'
 export * from './friends'
 export * from './selected-friend'
 export * from './ad'
+export * from './comments'
