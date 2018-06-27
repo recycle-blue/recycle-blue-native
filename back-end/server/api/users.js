@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const db = require('../db')
 const {User, Activity, Product, Milestone, Category} = require('../db/models')
+const Friends = db.model('friends')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -96,10 +97,14 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
 // post route to follow another user
 
 router.post('/:userId/friends/:friendId', async (req, res, next) => {
-  const [currentUser, friend] = await Promise.all([
-    User.findById(req.params.userId),
-    User.findById(req.params.friendId)
-  ])
-  await currentUser.addFriend(friend)
+  // const [currentUser, friend] = await Promise.all([
+  //   User.findById(req.params.userId),
+  //   User.findById(req.params.friendId)
+  // ])
+  await Friends.create({
+    myId: req.params.userId,
+    friendId: req.params.friendId
+  })
+  const friend = await User.findById(req.params.friendId)
   res.json(friend)
 })

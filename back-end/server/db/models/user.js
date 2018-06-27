@@ -97,8 +97,8 @@ const setSaltAndPassword = user => {
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 
-User.followeesInAlphabeticalOrder = followees => {
-  const all = [...followees]
+User.friendsInAlphabeticalOrder = friends => {
+  const all = [...friends]
   return Promise.all(
     all.sort(function(a, b) {
       var nameA = a.name.toUpperCase() // ignore upper and lowercase
@@ -114,8 +114,8 @@ User.followeesInAlphabeticalOrder = followees => {
   )
 }
 
-User.leaderboard = (user, followees) => {
-  const all = [user, ...followees]
+User.leaderboard = (user, friends) => {
+  const all = [user, ...friends]
   return Promise.all(
     all.sort(function(a, b) {
       var pointsA = a.totalPoints

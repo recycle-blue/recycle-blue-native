@@ -18,6 +18,7 @@ import {
   getUserActivitiesThunk,
   setSelectedFriend,
   selectUserAction,
+  addFriendThunk,
 } from '../store'
 import { UserActivities, ProgressChart, ActivityChart, ActivityCard } from '.'
 
@@ -33,7 +34,8 @@ class Dashboard extends React.Component {
     this.props.removeSelectedUser()
   }
 
-  addFriend = () => {
+  addFriend = (currentUserId, selectedUserId) => {
+    this.props.addFriend(currentUserId, selectedUserId)
     console.log('Friend added! Ok... not really')
   }
 
@@ -58,7 +60,15 @@ class Dashboard extends React.Component {
                 <Text>{user.name}</Text>
                 <Text>{user.totalPoints}</Text>
                 {this.props.selectedUser.id && (
-                  <Button primary onPress={this.addFriend}>
+                  <Button
+                    primary
+                    onPress={() =>
+                      this.addFriend(
+                        this.props.user.id,
+                        this.props.selectedUser.id
+                      )
+                    }
+                  >
                     <Text style={{ color: 'white' }}> Add Friend </Text>
                   </Button>
                 )}
@@ -147,6 +157,8 @@ const mapDispatchToProps = dispatch => {
     getUserActivitiesThunk: userId => dispatch(getUserActivitiesThunk(userId)),
     removeSelectedFriend: () => dispatch(setSelectedFriend({})),
     removeSelectedUser: () => dispatch(selectUserAction(0)),
+    addFriend: (currentUserId, selectedUserId) =>
+      dispatch(addFriendThunk(currentUserId, selectedUserId)),
   }
 }
 
