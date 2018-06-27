@@ -47,14 +47,16 @@ class SearchUsers extends React.Component {
     return (
       <Container>
         <Content>
-          <Item>
-            <Input
-              placeholder="Search For Other Users"
-              onChangeText={this.handleChange}
-            />
-            <Icon active name="search" />
-          </Item>
-          <ScrollView>{results}</ScrollView>
+          <ScrollView stickyHeaderIndices={[1]}>
+            <Item>
+              <Input
+                placeholder="Search For Other Users"
+                onChangeText={this.handleChange}
+              />
+              <Icon active name="search" />
+            </Item>
+            {results}
+          </ScrollView>
         </Content>
       </Container>
     )
