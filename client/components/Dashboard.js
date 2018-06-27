@@ -12,6 +12,7 @@ import {
   Left,
   Right,
   Thumbnail,
+  Button,
 } from 'native-base'
 import {
   getUserActivitiesThunk,
@@ -30,6 +31,10 @@ class Dashboard extends React.Component {
   componentWillUnmount() {
     this.props.removeSelectedFriend()
     this.props.removeSelectedUser()
+  }
+
+  addFriend = () => {
+    console.log('Friend added! Ok... not really')
   }
 
   render() {
@@ -52,6 +57,11 @@ class Dashboard extends React.Component {
               <Body>
                 <Text>{user.name}</Text>
                 <Text>{user.totalPoints}</Text>
+                {this.props.selectedUser.id && (
+                  <Button primary onPress={this.addFriend}>
+                    <Text style={{ color: 'white' }}> Add Friend </Text>
+                  </Button>
+                )}
               </Body>
             </Left>
             <Right>
