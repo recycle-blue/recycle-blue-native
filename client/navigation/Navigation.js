@@ -1,7 +1,23 @@
 import React from 'react'
 import { Button } from 'react-native'
-import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
-import { Login, AddActivity, Camera, MapComp, Dashboard, Activity, LoadingScreen, Leaderboard, Friends, ActivityCard } from '../components'
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+  createSwitchNavigator,
+} from 'react-navigation'
+import {
+  Login,
+  AddActivity,
+  Camera,
+  MapComp,
+  Dashboard,
+  Activity,
+  LoadingScreen,
+  Leaderboard,
+  Friends,
+  ActivityCard,
+  SearchUsers,
+} from '../components'
 
 const Drawer = createDrawerNavigator(
   {
@@ -14,6 +30,7 @@ const Drawer = createDrawerNavigator(
     leaderboard: { screen: Leaderboard },
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
+    searchUsers: { screen: SearchUsers },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
@@ -58,7 +75,7 @@ const PrimaryNav = createStackNavigator(
 
 const InitialNav = createSwitchNavigator({
   login: { screen: Login },
-  primaryNav: { screen: PrimaryNav }
+  primaryNav: { screen: PrimaryNav },
 })
 
 export default InitialNav
