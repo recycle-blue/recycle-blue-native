@@ -19,7 +19,11 @@ class AddActivity extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
-    this.props.navigation.navigate('activity')
+    if (this.state.type === 'ad') {
+      this.props.navigation.navigate('addAd')
+    } else {
+      this.props.navigation.navigate('activity')
+    }
   }
   render() {
     return (
@@ -30,7 +34,7 @@ class AddActivity extends React.Component {
         enabled={true}
       >
         <View style={styles.topView}>
-          {!this.state.imageUrl ?
+          {this.state.imageUrl === 'default' ?
             <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
             : <Image
               style={styles.image}

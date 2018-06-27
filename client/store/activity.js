@@ -16,8 +16,8 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
 const defaultActivity = {
   id: 1,
   photo: '',
-  quantity: 0,
-  imageUrl: '',
+  quantity: '1',
+  imageUrl: 'default',
   unit: 'QTY',
   type: 'Post',
   productId: 1,
@@ -56,11 +56,10 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
 export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
-    dispatch(setActivity(res.data || defaultActivity))
-    if (res.data.updateRequired) {
-      dispatch(setProduct(res.data.product))
-      dispatch(setCategory(res.data.categoryList[0]))
-    }
+    await dispatch(setActivity(res.data.activity || defaultActivity))
+    console.log('data', res.data)
+    await dispatch(setProduct(res.data.product))
+    await dispatch(setCategory(res.data.category))
   } catch (err) {
     console.error(err)
   }

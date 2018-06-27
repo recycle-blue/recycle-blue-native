@@ -68,7 +68,19 @@ router.post('/', async (req, res, next) => {
     const productData = await Product.find({ where: { name: req.body.name } })
     const userData = await User.findById(req.body.userId)
     const category = categoryData.dataValues
-    const product = productData.dataValues
+    let product
+    if (productData) {
+      product = productData.dataValues
+    } else {
+      product = {
+        id: 1,
+        name: 'Unknown',
+        imageUrl: 'https://5.imimg.com/data5/SD/JK/MY-10914613/plastic-water-bottle-500x500.jpg',
+        points: 0,
+        description: 'Product not found.',
+        recycleUse: 'Product not found.',
+      }
+    }
     const user = userData.dataValues
     const activityPoints = category.multiplier * product.points
     const newTotalPoints = activityPoints + user.totalPoints
@@ -77,14 +89,15 @@ router.post('/', async (req, res, next) => {
       userId: req.body.userId,
       productId: product.id,
       categoryId: category.id,
-      quantity: req.body.quantity,
+      quantity: Number(req.body.quantity),
       imageUrl: req.body.imageUrl,
       type: req.body.type,
       unit: req.body.unit
     })
-    const newActivity = newActivityData.dataValues
-    newActivity.points = activityPoints
-    res.json(newActivity)
+    const activity = newActivityData.dataValues
+    activity.points = activityPoints
+    const resData = { activity, category, product }
+    res.json(resData)
   } catch (err) {
     next(err)
   }

@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, View, Button, Image, KeyboardAvoidingView } from 'react-native'
-import { Form, Item, Input, Picker } from 'native-base'
+import { Form, Item, Input, Picker, Textarea } from 'native-base'
 import { connect } from 'react-redux'
-import { addAd } from '../store'
+import { addAdThunk } from '../store'
+import { ActivityCard } from '.'
 
 class AddAd extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activityId: this.props.activity.id,
+      activityId: this.props.activityId,
       address: this.props.address,
       city: this.props.city,
       state: this.props.state,
@@ -19,25 +20,25 @@ class AddAd extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addAd(this.state)
-    this.props.navigation.navigate('product')
+    this.props.navigation.navigate('activity')
   }
   render() {
+    const activity = {
+      ...this.props.activity,
+      category: this.props.category,
+      product: this.props.product
+    }
+    console.log('activity', activity)
+    console.log(this.state)
     return (
       <KeyboardAvoidingView
         style={styles.container}
         behavior="position"
+        keyboardVerticalOffset={-85}
         contentContainerStyle={styles.container}
         enabled={true}
       >
-        <View style={styles.topView}>
-          {!this.state.imageUrl ?
-            <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
-            : <Image
-              style={styles.image}
-              source={{ uri: this.state.imgUrl }}
-            />
-          }
-        </View>
+        <ActivityCard activity={activity} disabled={true} />
         <Form style={styles.form} >
           <Item rounded>
             <Input
@@ -47,49 +48,60 @@ class AddAd extends React.Component {
               value={this.state.address}
             />
           </Item>
-          <Item rounded>
-            <Input
-              name="address"
-              placeholder="Address"
-              onChangeText={(address) => this.setState({ address })}
-              value={this.state.address}
-            />
-          </Item>
-          <View style={styles.qtyInputs}>
-            <Item rounded style={styles.splitInput}>
+          <View style={styles.splitRow}>
+            <Item rounded style={styles.city}>
               <Input
-                name="amount"
-                placeholder='1'
-                onChangeText={(text) => this.setState({ quantity: text })}
-                value={this.state.qty}
+                name="city"
+                placeholder="City"
+                onChangeText={(city) => this.setState({ city })}
+                value={this.state.city}
+              />
+            </Item>
+            <Item rounded style={styles.state}>
+              <Input
+                name="state"
+                placeholder="State"
+                onChangeText={(state) => this.setState({ state })}
+                value={this.state.state}
+              />
+            </Item>
+            <Item rounded style={styles.zipCode}>
+              <Input
+                name="zipCode"
+                placeholder="Zip Code"
+                onChangeText={(zipCode) => this.setState({ zipCode })}
+                value={this.state.zipCode}
                 keyboardType='numeric'
               />
             </Item>
-            <Item rounded style={styles.splitInput}>
-              <Picker
-                name="unit"
-                mode="dropdown"
-                selectedValue={this.state.unit}
-                onValueChange={(unit) => this.setState({ unit })}
-              >
-                <Picker.Item label="#" value="qty" />
-                <Picker.Item label="lbs" value="lbs" />
-                <Picker.Item label="kg" value="kg" />
-              </Picker>
-            </Item>
-            <Item rounded style={styles.splitInput}>
-              <Picker
-                name="type"
-                mode="dropdown"
-                selectedValue={this.state.type}
-                onValueChange={(type) => this.setState({ type })}
-              >
-                {/* <Picker.Item label="Type" value="default" /> */}
-                <Picker.Item label="Activity" value="activity" />
-                <Picker.Item label="Ad" value="ad" />
-              </Picker>
-            </Item>
           </View>
+          <Item rounded>
+            <Input
+              name="email"
+              placeholder="Email"
+              onChangeText={(email) => this.setState({ email })}
+              value={this.state.email}
+            />
+          </Item>
+          {/* <Item rounded>
+            <Input
+              name="phone"
+              placeholder="Phone Number"
+              onChangeText={(phone) => this.setState({ phone })}
+              value={this.state.phone}
+              keyboardType='numeric'
+            />
+          </Item> */}
+          <Item rounded>
+            <Textarea
+              style={{ width: '100%', paddingTop: 8, paddingBottom: 8 }}
+              name="description"
+              placeholder="Description"
+              rowSpan={4}
+              onChangeText={(description) => this.setState({ description })}
+              value={this.state.description}
+            />
+          </Item>
         </Form>
         <Button title='submit' onPress={this.handleSubmit} />
       </KeyboardAvoidingView>
@@ -100,6 +112,8 @@ class AddAd extends React.Component {
 const mapStateToProps = (store) => {
   return {
     activity: store.activity,
+    product: store.product,
+    category: store.category,
     address: store.ad.address,
     city: store.ad.city,
     state: store.ad.state,
@@ -118,6 +132,7 @@ const mapDispatchToProps = (dispatch) => ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'flex-start',
@@ -133,17 +148,23 @@ const styles = StyleSheet.create({
   },
   form: {
     paddingBottom: 10,
+    width: '100%',
   },
-  qtyInputs: {
+  splitRow: {
     // flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     width: '100%',
     alignItems: 'stretch',
   },
-  splitInput: {
+  city: {
+    flex: 3,
+  },
+  state: {
     flex: 1,
-    // width: '50%',
+  },
+  zipCode: {
+    flex: 2,
   },
   topView: {
     // flex: 1,

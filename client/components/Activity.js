@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return ({
-    name: `${state.activity.category.name} ${state.product.name}`,
+    name: `${state.category.name} ${state.product.name}`,
     points: state.product.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,
