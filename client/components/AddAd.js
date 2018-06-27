@@ -8,17 +8,11 @@ class AddAd extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: this.props.userId,
-      name: this.props.name,
-      category: this.props.category,
-      quantity: this.props.quantity,
-      unit: this.props.unit,
-      type: this.props.type,
-      imageUrl: this.props.imageUrl,
+      activityId: this.props.activity.id,
       address: this.props.address,
       city: this.props.city,
       state: this.props.state,
-      zipCode: this.props.zipCode, 
+      zipCode: this.props.zipCode,
       email: this.props.email,
       phone: this.props.phone,
     }
@@ -55,12 +49,12 @@ class AddAd extends React.Component {
           </Item>
           <Item rounded>
             <Input
-                name="address"
-                placeholder="Address"
-                onChangeText={(address) => this.setState({ address })}
-                value={this.state.address}
-              />
-            </Item>
+              name="address"
+              placeholder="Address"
+              onChangeText={(address) => this.setState({ address })}
+              value={this.state.address}
+            />
+          </Item>
           <View style={styles.qtyInputs}>
             <Item rounded style={styles.splitInput}>
               <Input
@@ -105,18 +99,11 @@ class AddAd extends React.Component {
 
 const mapStateToProps = (store) => {
   return {
-    userId: store.user.id,
-    name: store.activity.name,
-    category: store.activity.category,
-    quantity: store.activity.quantity,
-    unit: store.activity.unit,
-    type: store.activity.type,
-    photo: store.activity.photo,
-    imageUrl: store.activity.imageUrl,
+    activity: store.activity,
     address: store.ad.address,
     city: store.ad.city,
     state: store.ad.state,
-    zipCode: store.ad.zipCode, 
+    zipCode: store.ad.zipCode,
     email: store.ad.email,
     phone: store.ad.phone,
   }

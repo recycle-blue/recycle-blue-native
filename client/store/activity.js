@@ -14,12 +14,14 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  * INITIAL STATE
  */
 const defaultActivity = {
+  id: 1,
   photo: '',
   quantity: 0,
   imageUrl: '',
   unit: 'QTY',
   type: 'Post',
-  productId: 1
+  productId: 1,
+  activities: [],
 }
 
 /**
