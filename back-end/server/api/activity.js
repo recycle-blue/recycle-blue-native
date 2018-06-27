@@ -40,7 +40,6 @@ router.get('/:activityId/ad', async (req, res, next) => {
         activityId: +req.params.activityId,
       },
     })
-    console.log(adData)
     const ad = adData.dataValues
     res.json(ad)
   } catch (err) {
@@ -120,7 +119,6 @@ router.post('/', async (req, res, next) => {
 
 router.post('/ad', async (req, res, next) => {
   try {
-    console.log('post ad body', req.body)
     const newAdRes = await Ad.create({
       activityId: req.body.activityId,
       address: req.body.address,
