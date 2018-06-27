@@ -18,7 +18,7 @@ import {
   setSelectedFriend,
   selectUserAction,
 } from '../store'
-import { UserActivities, ProgressChart, ActivityChart, ActivityCard } from '.'
+import { ProgressChart, ActivityChart, ActivityCard } from '.'
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -90,8 +90,8 @@ class Dashboard extends React.Component {
                     />
                   ))
                 ) : (
-                  <Text> No Activity Yet! </Text>
-                )}
+                    <Text> No Activity Yet! </Text>
+                  )}
               </ScrollView>
             </Tab>
           </Tabs>
