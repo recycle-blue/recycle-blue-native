@@ -2,11 +2,28 @@ import React from 'react'
 import { Button } from 'react-native'
 import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
 import { Login, AddActivity, Camera, MapComp, Dashboard, Activity, LoadingScreen, Leaderboard, Friends, ActivityCard, SocialMedia } from '../components'
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator} from 'react-navigation'
+import {
+  Login,
+  AddActivity,
+  AddAd,
+  Camera,
+  MapComp,
+  Dashboard,
+  Activity,
+  LoadingScreen,
+  Leaderboard,
+  Friends,
+  ActivityCard,
+  SearchUsers,
+  AddComment
+} from '../components'
 
 const Drawer = createDrawerNavigator(
   {
     dashboard: { screen: Dashboard },
     addActivity: { screen: AddActivity },
+    addAd: { screen: AddAd },
     map: { screen: MapComp },
     camera: { screen: Camera },
     activity: { screen: Activity },
@@ -14,7 +31,9 @@ const Drawer = createDrawerNavigator(
     leaderboard: { screen: Leaderboard },
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
-    socialMedia: {screen: SocialMedia}
+    socialMedia: {screen: SocialMedia},
+    searchUsers: { screen: SearchUsers },
+    addComment: { screen: AddComment }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
@@ -59,7 +78,7 @@ const PrimaryNav = createStackNavigator(
 
 const InitialNav = createSwitchNavigator({
   login: { screen: Login },
-  primaryNav: { screen: PrimaryNav }
+  primaryNav: { screen: PrimaryNav },
 })
 
 export default InitialNav

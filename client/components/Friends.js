@@ -1,41 +1,46 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
-import {connect} from 'react-redux'
-import { Container, Tabs,Tab, ScrollableTab } from 'native-base';
-import { getFriendsThunk, selectedFriendThunk, selectedFriendActivitiesThunk } from '../store'
-
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+import { Container, Tabs, Tab, ScrollableTab } from 'native-base'
+import {
+  getFriendsThunk,
+  selectedFriendThunk,
+  selectedFriendActivitiesThunk,
+} from '../store'
 
 class Friends extends React.Component {
-
-    componentDidMount() {
+  componentDidMount() {
+    if (!this.props.friends.length) {
       this.props.getFriends(this.props.user.id)
     }
+  }
 
-    singleFriend = async (friendId) => {
-      await this.props.selectFriend(this.props.user.id, friendId)
-      await this.props.selectFriendActivities(this.props.user.id, friendId)
-      this.props.navigation.navigate('SingleFriend')
-    }
+  singleFriend = async friendId => {
+    await this.props.selectFriend(this.props.user.id, friendId)
+    await this.props.selectFriendActivities(this.props.user.id, friendId)
+    this.props.navigation.navigate('dashboard')
+  }
 
-    render(){
-      const {friends} = this.props
-      return (
-        <ScrollView>
-          {friends.length ?
-            friends.map(friend =>
-              <View key={friend.id}>
-                <Image
-                  source={{uri: friend.imageUrl}}
-                  style={styles.image}
-                />
-                <Text onPress={() => this.singleFriend(friend.id)}>{friend.name}</Text>
-                <Text>{friend.totalPoints}</Text>
-              </View>
-            )
-            : <Text> No response </Text>}
-        </ScrollView>
-      )
-    }
+  render() {
+    const { friends } = this.props
+    return (
+      <ScrollView>
+        {friends.length ? (
+          friends.map(friend => (
+            <View key={friend.id}>
+              <Image source={{ uri: friend.imageUrl }} style={styles.image} />
+              <Text onPress={() => this.singleFriend(friend.id)}>
+                {friend.name}
+              </Text>
+              <Text>{friend.totalPoints}</Text>
+            </View>
+          ))
+        ) : (
+          <Text> No response </Text>
+        )}
+      </ScrollView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -50,23 +55,28 @@ const styles = StyleSheet.create({
     height: 100,
     borderWidth: 1,
     borderColor: 'blue',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 })
 
 const mapStateToProps = state => {
   return {
     user: state.user,
-    friends: state.friends
+    friends: state.friends,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFriends: (userId) => dispatch(getFriendsThunk(userId)),
-    selectFriend: (userId, friendId) => dispatch(selectedFriendThunk(userId,friendId)),
-    selectFriendActivities: (userId, friendId) => dispatch(selectedFriendActivitiesThunk(userId,friendId))
+    getFriends: userId => dispatch(getFriendsThunk(userId)),
+    selectFriend: (userId, friendId) =>
+      dispatch(selectedFriendThunk(userId, friendId)),
+    selectFriendActivities: (userId, friendId) =>
+      dispatch(selectedFriendActivitiesThunk(userId, friendId)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Friends)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Friends)

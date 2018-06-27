@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Activity, Product, Category, User, Ad } = require('../db/models')
+const { Activity, Product, Category, User, Ad, Comments } = require('../db/models')
 const cloudinary = require('cloudinary')
 const { parseImgTags } = require('./parseAI')
 module.exports = router
@@ -21,6 +21,20 @@ cloudinary.config({
 //     next(err)
 //   }
 // })
+
+
+// GET Routes
+router.get("/weekly/:userId", async (req, res, next) => {
+  try {
+    const response = await Activity.activityCountWeek(req.params.userId)
+    res.json(response)
+  } catch (err) {
+    next(err)
+  }
+
+})
+
+// POST Routes
 const sendPhotoToCloud = async (photo) => {
   const cloudData = await cloudinary.v2.uploader.upload(
     photo,
@@ -40,19 +54,6 @@ const sendPhotoToCloud = async (photo) => {
   }
 }
 
-// GET Routes
-router.get("/weekly/:userId", async (req, res, next) => {
-  try {
-    const response = await Activity.activityCountWeek(req.params.userId)
-    res.json(response)
-  } catch (err) {
-    next(err)
-  }
-
-})
-
-
-// POST Routes
 router.post('/photo', async (req, res, next) => {
   try {
     const parsedCloudData = await sendPhotoToCloud(req.body.photo)
@@ -68,7 +69,19 @@ router.post('/', async (req, res, next) => {
     const productData = await Product.find({ where: { name: req.body.name } })
     const userData = await User.findById(req.body.userId)
     const category = categoryData.dataValues
-    const product = productData.dataValues
+    let product
+    if (productData) {
+      product = productData.dataValues
+    } else {
+      product = {
+        id: 1,
+        name: 'Unknown',
+        imageUrl: 'https://5.imimg.com/data5/SD/JK/MY-10914613/plastic-water-bottle-500x500.jpg',
+        points: 0,
+        description: 'Product not found.',
+        recycleUse: 'Product not found.',
+      }
+    }
     const user = userData.dataValues
     const activityPoints = category.multiplier * product.points
     const newTotalPoints = activityPoints + user.totalPoints
@@ -77,14 +90,15 @@ router.post('/', async (req, res, next) => {
       userId: req.body.userId,
       productId: product.id,
       categoryId: category.id,
-      quantity: req.body.quantity,
+      quantity: Number(req.body.quantity),
       imageUrl: req.body.imageUrl,
       type: req.body.type,
       unit: req.body.unit
     })
-    const newActivity = newActivityData.dataValues
-    newActivity.points = activityPoints
-    res.json(newActivity)
+    const activity = newActivityData.dataValues
+    activity.points = activityPoints
+    const resData = { activity, category, product }
+    res.json(resData)
   } catch (err) {
     next(err)
   }
@@ -104,6 +118,21 @@ router.post('/ad', async (req, res, next) => {
     })
     const newAd = newAdRes.dataValues
     res.json(newAd)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:activityId/comment', async (req, res, next) => {
+  try {
+    const newCommentRes = await Comments.create({
+      userId: req.body.userId,
+      activityId: req.body.activityId,
+      text: req.body.text
+    })
+    const newComment = newCommentRes.dataValues
+    res.json(newComment)
+
   } catch (err) {
     next(err)
   }

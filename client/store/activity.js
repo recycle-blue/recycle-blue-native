@@ -14,12 +14,14 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  * INITIAL STATE
  */
 const defaultActivity = {
+  id: 1,
   photo: '',
-  quantity: 0,
-  imageUrl: '',
-  unit: 'QTY',
-  type: 'Post',
-  productId: 1
+  quantity: '1',
+  imageUrl: 'default',
+  unit: 'qty',
+  type: 'activity',
+  productId: 1,
+  activities: [],
 }
 
 /**
@@ -54,11 +56,9 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
 export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
-    dispatch(setActivity(res.data || defaultActivity))
-    if (res.data.updateRequired) {
-      dispatch(setProduct(res.data.product))
-      dispatch(setCategory(res.data.categoryList[0]))
-    }
+    await dispatch(setActivity(res.data.activity || defaultActivity))
+    await dispatch(setProduct(res.data.product))
+    await dispatch(setCategory(res.data.category))
   } catch (err) {
     console.error(err)
   }
@@ -68,7 +68,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
   try {
     dispatch(savePhoto(photo))
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    const category = res.data.categoryList.length ? res.data.categoryList[0].name : 'Plastic'
+    const category = res.data.categoryList[0].name
     await dispatch(setActivity({
       name: res.data.product.name,
       category,
@@ -76,7 +76,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
       productId: res.data.product.id
     }))
     await dispatch(setProduct(res.data.product))
-    await dispatch(setCategory(category))
+    await dispatch(setCategory(res.data.categoryList[0]))
   } catch (err) {
     console.error(err)
   }
@@ -92,7 +92,7 @@ export default function (state = defaultActivity, action) {
     case SAVE_PHOTO:
       return { ...state, photo: action.photo }
     case SET_ACTIVITY_WEEK:
-      return action.activities
+      return { ...state, activities: action.activities }
     case CLEAR_ACTIVITY:
       return { ...defaultActivity }
     default:

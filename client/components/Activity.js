@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk } from '../store/product'
+import { AddComment } from './'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -30,7 +31,9 @@ class Activity extends React.Component {
               color='#58A4B0'
             />
           </View>
+          <AddComment navigation={this.props.navigation} />
         </Content>
+
       </Container>
     )
   }
@@ -50,12 +53,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return ({
-    name: `${state.activity.category.name} ${state.product.name}`,
-    points: state.product.points,
+    name: `${state.category.name} ${state.product.name}`,
+    points: state.activity.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,
     photo: state.activity.imageUrl || state.activity.photo,
-    productId: state.activity.productId
+    productId: state.activity.productId,
+    activityId: state.activity.id
+
   })
 }
 

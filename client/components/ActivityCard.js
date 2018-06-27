@@ -36,7 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = StyleSheet.create({
   card: {
-    // maxHeight: 70,
+    maxHeight: 80,
     // flex: 0.1,
   },
   cardItem: {
