@@ -4,74 +4,91 @@ import { connect } from 'react-redux'
 // import * as scale from 'd3-scale'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { setActivityWeekThunk } from '../store/activity'
-import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryBrushContainer, VictoryAxis } from "victory-native";
 
 
 class ActivityChart extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      zoomDomain: { x: [new Date(1990, 1, 1), new Date(2009, 1, 1)] }
+    };
+  }
   componentWillMount() {
     this.props.setActivityWeekThunk(this.props.user.id)
   }
-  render() {
-    const data = [
-      { quarter: 1, earnings: 13000 },
-      { quarter: 2, earnings: 16500 },
-      { quarter: 3, earnings: 14250 },
-      { quarter: 4, earnings: 19000 }
-    ];
-    const { width } = Dimensions.get('window')
 
-    // const data = [
-    //   {
-    //     value: 50,
-    //     label: 'One',
-    //   },
-    //   {
-    //     value: 10,
-    //     label: 'Two',
-    //   },
-    //   {
-    //     value: 40,
-    //     label: 'Three',
-    //   },
-    //   {
-    //     value: 95,
-    //     label: 'Four',
-    //   },
-    //   {
-    //     value: 85,
-    //     label: 'Five',
-    //   },
-    // ]
-    // const data = [{
-    //   points: 1,
-    //   day: 'mon'
-    // }, {
-    //   points: 2,
-    //   day: 'tues'
-    // }, {
-    //   points: 3,
-    //   day: 'wed'
-    // }, {
-    //   points: 4,
-    //   day: 'thurs'
-    // }, {
-    //   points: 5,
-    //   day: 'fri'
-    // }, {
-    //   points: 6,
-    //   day: 'sat'
-    // }, {
-    //   points: 7,
-    //   day: 'sun'
-    // }]
+  handleZoom(domain) {
+    this.setState({ zoomDomain: domain });
+  }
+
+  render() {
+    const { width, height } = Dimensions.get('screen')
+
     return (
-      <View >
-        <VictoryChart width={width} theme={VictoryTheme.material}>
-          <VictoryBar data={data} x="quarter" y="earnings" />
+      <View>
+        <VictoryChart width={width} height={height} scale={{ x: "time" }}
+          containerComponent={
+            <VictoryZoomContainer
+              zoomDimension="x"
+              zoomDomain={this.state.zoomDomain}
+              onZoomDomainChange={this.handleZoom.bind(this)}
+            />
+          }
+        >
+          <VictoryLine
+            style={{
+              data: { stroke: "tomato" }
+            }}
+            data={[
+              { a: new Date(1982, 1, 1), b: 125 },
+              { a: new Date(1987, 1, 1), b: 257 },
+              { a: new Date(1993, 1, 1), b: 345 },
+              { a: new Date(1997, 1, 1), b: 515 },
+              { a: new Date(2001, 1, 1), b: 132 },
+              { a: new Date(2005, 1, 1), b: 305 },
+              { a: new Date(2011, 1, 1), b: 270 },
+              { a: new Date(2015, 1, 1), b: 470 }
+            ]}
+            x="a"
+            y="b"
+          />
+
+        </VictoryChart>
+        <VictoryChart
+          padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
+          width={width} height={height} scale={{ x: "time" }}
+          containerComponent={
+            <VictoryBrushContainer
+              brushDimension="x"
+              brushDomain={this.state.zoomDomain}
+              onBrushDomainChange={this.handleZoom.bind(this)}
+            />
+          }
+        >
+          <VictoryAxis
+            tickFormat={(x) => new Date(x).getFullYear()}
+          />
+          <VictoryLine
+            style={{
+              data: { stroke: "tomato" }
+            }}
+            data={[
+              { key: new Date(1982, 1, 1), b: 125 },
+              { key: new Date(1987, 1, 1), b: 257 },
+              { key: new Date(1993, 1, 1), b: 345 },
+              { key: new Date(1997, 1, 1), b: 515 },
+              { key: new Date(2001, 1, 1), b: 132 },
+              { key: new Date(2005, 1, 1), b: 305 },
+              { key: new Date(2011, 1, 1), b: 270 },
+              { key: new Date(2015, 1, 1), b: 470 }
+            ]}
+            x="key"
+            y="b"
+          />
         </VictoryChart>
       </View>
-
-    )
+    );
   }
 
 }
