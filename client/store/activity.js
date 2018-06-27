@@ -57,7 +57,6 @@ export const addActivityThunk = (activity) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity`, activity)
     await dispatch(setActivity(res.data.activity || defaultActivity))
-    console.log('data', res.data)
     await dispatch(setProduct(res.data.product))
     await dispatch(setCategory(res.data.category))
   } catch (err) {

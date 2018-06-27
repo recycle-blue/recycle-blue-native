@@ -28,8 +28,6 @@ class AddAd extends React.Component {
       category: this.props.category,
       product: this.props.product
     }
-    console.log('activity', activity)
-    console.log(this.state)
     return (
       <KeyboardAvoidingView
         style={styles.container}
