@@ -1,9 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, Share, TouchableOpacity, View } from 'react-native';
-// import Share from 'react-native-share'
 import {connect} from 'react-redux'
 import { Icon } from 'native-base'
-window.btoa = require('Base64').btoa;
 
 class SocialMedia extends React.Component {
 
