@@ -2,11 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ProgressCircle } from 'react-native-svg-charts'
 import { Text, View } from 'react-native'
-import SVG from 'expo'
-const {
-  Path,
-
-} = SVG
 
 const mapStateToProps = (state) => {
   return ({

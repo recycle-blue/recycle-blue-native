@@ -1,15 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { Grid, XAxis, YAxis, AreaChart, BarChart } from 'react-native-svg-charts'
+// import { BarChart, Grid, YAxis } from 'react-native-svg-charts'
+// import * as scale from 'd3-scale'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { setActivityWeekThunk } from '../store/activity'
-// import {
-//   LineChart,
-//   BarChart,
-//   PieChart,
-//   ProgressChart,
-//   ContributionGraph
-// } from 'react-native-chart-kit'
+import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
 
 
 class ActivityChart extends React.Component {
@@ -17,71 +12,79 @@ class ActivityChart extends React.Component {
     this.props.setActivityWeekThunk(this.props.user.id)
   }
   render() {
-    const data = [{
-      points: 1,
-      day: 'mon'
-    }, {
-      points: 2,
-      day: 'tues'
-    }, {
-      points: 3,
-      day: 'wed'
-    }, {
-      points: 4,
-      day: 'thurs'
-    }, {
-      points: 5,
-      day: 'fri'
-    }, {
-      points: 6,
-      day: 'sat'
-    }, {
-      points: 7,
-      day: 'sun'
-    }]
+    const data = [
+      { quarter: 1, earnings: 13000 },
+      { quarter: 2, earnings: 16500 },
+      { quarter: 3, earnings: 14250 },
+      { quarter: 4, earnings: 19000 }
+    ];
+    const { width } = Dimensions.get('window')
+
+    // const data = [
+    //   {
+    //     value: 50,
+    //     label: 'One',
+    //   },
+    //   {
+    //     value: 10,
+    //     label: 'Two',
+    //   },
+    //   {
+    //     value: 40,
+    //     label: 'Three',
+    //   },
+    //   {
+    //     value: 95,
+    //     label: 'Four',
+    //   },
+    //   {
+    //     value: 85,
+    //     label: 'Five',
+    //   },
+    // ]
+    // const data = [{
+    //   points: 1,
+    //   day: 'mon'
+    // }, {
+    //   points: 2,
+    //   day: 'tues'
+    // }, {
+    //   points: 3,
+    //   day: 'wed'
+    // }, {
+    //   points: 4,
+    //   day: 'thurs'
+    // }, {
+    //   points: 5,
+    //   day: 'fri'
+    // }, {
+    //   points: 6,
+    //   day: 'sat'
+    // }, {
+    //   points: 7,
+    //   day: 'sun'
+    // }]
     return (
-  //     <View>
-  //       <Text>
-  //         Bezier Line Chart
-  // </Text>
-  //       <LineChart
-  //         data={{
-  //           labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-  //           datasets: [{
-  //             data: [
-  //               Math.random() * 100,
-  //               Math.random() * 100,
-  //               Math.random() * 100,
-  //               Math.random() * 100,
-  //               Math.random() * 100,
-  //               Math.random() * 100
-  //             ]
-  //           }]
-  //         }}
-  //         width={Dimensions.get('window').width} // from react-native
-  //         height={220}
-  //         chartConfig={{
-  //           backgroundColor: '#e26a00',
-  //           backgroundGradientFrom: '#fb8c00',
-  //           backgroundGradientTo: '#ffa726',
-  //           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-  //           style: {
-  //             borderRadius: 16
-  //           }
-  //         }}
-  //         bezier
-  //         style={{
-  //           marginVertical: 8,
-  //           borderRadius: 16
-  //         }}
-  //       />
-  //     </View>
+      <View >
+        <VictoryChart width={width} theme={VictoryTheme.material}>
+          <VictoryBar data={data} x="quarter" y="earnings" />
+        </VictoryChart>
+      </View>
 
     )
   }
 
 }
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5fcff"
+  }
+});
 const mapStateToProps = (state) => {
   return ({
     user: state.user,
