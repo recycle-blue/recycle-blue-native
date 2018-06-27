@@ -97,32 +97,36 @@ const setSaltAndPassword = user => {
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 
-User.friendsInAlphabeticalOrder = (friends) => {
-  const all = [...friends];
-  return Promise.all(all.sort(function(a, b) {
-    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-    if ( nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  }))
+User.friendsInAlphabeticalOrder = friends => {
+  const all = [...friends]
+  return Promise.all(
+    all.sort(function(a, b) {
+      var nameA = a.name.toUpperCase() // ignore upper and lowercase
+      var nameB = b.name.toUpperCase() // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+      return 0
+    })
+  )
 }
 
-User.leaderboard = (user,friends) => {
-  const all = [user,...friends];
-  return Promise.all(all.sort(function(a,b) {
-    var pointsA = a.totalPoints;
-    var pointsB = b.totalPoints;
-    if ( pointsA < pointsB) {
-      return 1;
-    }
-    if ( pointsA > pointsB) {
-      return -1;
-    }
-    return 0;
-  }))
+User.leaderboard = (user, friends) => {
+  const all = [user, ...friends]
+  return Promise.all(
+    all.sort(function(a, b) {
+      var pointsA = a.totalPoints
+      var pointsB = b.totalPoints
+      if (pointsA < pointsB) {
+        return 1
+      }
+      if (pointsA > pointsB) {
+        return -1
+      }
+      return 0
+    })
+  )
 }

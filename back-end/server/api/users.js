@@ -93,3 +93,14 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
     next(err)
   }
 })
+
+// post route to follow another user
+
+router.post('/:userId/friends/:friendId', async (req, res, next) => {
+  await Friends.create({
+    myId: req.params.userId,
+    friendId: req.params.friendId
+  })
+  const friend = await User.findById(req.params.friendId)
+  res.json(friend)
+})

@@ -22,11 +22,11 @@ Category.hasMany(Activity)
 Activity.hasOne(Ad)
 Ad.belongsTo(Activity)
 
-Comments.belongsTo(Activity);
-Activity.hasMany(Comments);
+Comments.belongsTo(Activity)
+Activity.hasMany(Comments)
 
-Comments.belongsTo(User);
-User.hasMany(Comments);
+Comments.belongsTo(User)
+User.hasMany(Comments)
 
 Tag.belongsTo(Product)
 Product.hasMany(Tag)
@@ -41,7 +41,7 @@ User.belongsToMany(User, {
   as: 'Friends',
   foreignKey: 'myId',
   through: 'friends',
-  otherKey: 'friendid'
+  otherKey: 'friendId'
 })
 
 module.exports = {

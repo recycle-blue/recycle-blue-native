@@ -10,3 +10,11 @@ router.use((req, res, next) => {
   error.status = 404
   next(error)
 })
+
+// function isCorrectUser(req, res, next) {
+//   if (req.user && req.user.id === req.params.userId) {
+//     next()
+//   } else {
+//     res.status(401).send('Unauthorized')
+//   }
+// }
