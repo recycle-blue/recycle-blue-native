@@ -50,7 +50,7 @@ class Login extends React.Component {
           >
             <Text style={styles.buttonFont}>{method}</Text>
           </TouchableHighlight>
-          {error && error.response && <Text> {error.response.data} </Text>}
+          {error && error.response && <Text style={{textAlign: 'center'}}> {error.response.data} </Text>}
         </Content >
         <TouchableHighlight
           style={styles.devButton}
@@ -127,7 +127,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     auth: (email, password, method) =>
       dispatch(auth(email, password, method))
-        .then(() => ownProps.navigation.navigate('primaryNav'))
+      .then((res) => {
+          if(!res)
+            ownProps.navigation.navigate('primaryNav')
+      })
   }
 }
 
