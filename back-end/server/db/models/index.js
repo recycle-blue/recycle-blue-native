@@ -38,10 +38,10 @@ Product.belongsTo(Category)
 Category.hasMany(Product)
 
 User.belongsToMany(User, {
-  as: 'Followees',
-  foreignKey: 'followerId',
-  through: 'followees',
-  otherKey: 'followeeId'
+  as: 'Friends',
+  foreignKey: 'myId',
+  through: 'friends',
+  otherKey: 'friendId'
 })
 
 module.exports = {

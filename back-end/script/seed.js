@@ -106,7 +106,7 @@ async function seed() {
   await Promise.all(
     users.map(user => {
       const randomUsers = getRandomUsers(user)
-      return user.addFollowees(randomUsers)
+      return user.addFriends(randomUsers)
     })
   )
 
