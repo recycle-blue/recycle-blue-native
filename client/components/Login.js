@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Image, View, Dimensions } from 'react-native'
-import { Container, Form, Item, Text, Input, Content, Button } from 'native-base'
+import { StyleSheet, Image, View, Text, Button, TouchableHighlight } from 'react-native'
+import { Container, Form, Item, Input, Content, } from 'native-base'
 import { auth } from '../store'
 import { connect } from 'react-redux'
 import { devEmail } from '../secrets'
@@ -11,7 +11,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      method: 'login'
+      method: 'Login'
     }
   }
 
@@ -34,6 +34,7 @@ class Login extends React.Component {
             style={styles.image}
             source={{ uri: 'https://i.pinimg.com/originals/23/05/a6/2305a658b57008997afd9dffa3c91300.png' }}
           />
+          <Text style={styles.title}>Recycle Blue</Text>
           <Form>
             <Item rounded style={styles.padVert}>
               <Input name="email" placeholder="Email" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
@@ -42,15 +43,23 @@ class Login extends React.Component {
               <Input name="password" placeholder="Password" onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
             </Item>
           </Form>
-          <Button rounded title={method} onPress={this.handleSubmit} style={styles.padVert} >
-            <Text>{method}</Text>
-          </Button>
-          <Button rounded title="Dev Login" onPress={this.devLogin} style={styles.padVert}>
-            <Text>Dev Login</Text>
-          </Button>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmit}
+            underlayColor='#fff'
+          >
+            <Text style={styles.buttonFont}>{method}</Text>
+          </TouchableHighlight>
           {error && error.response && <Text> {error.response.data} </Text>}
-        </Content>
-      </Container>
+        </Content >
+        <TouchableHighlight
+          style={styles.devButton}
+          onPress={this.handleSubmit}
+          underlayColor='#fff'
+        >
+          <Text style={styles.buttonFont}>Dev Login</Text>
+        </TouchableHighlight>
+      </Container >
     )
   }
 }
@@ -66,12 +75,43 @@ const styles = StyleSheet.create({
   padVert: {
     marginTop: 5,
   },
+  title: {
+    color: '#006D8A',
+    textAlign: 'center',
+    fontSize: 36,
+    fontWeight: 'bold',
+  },
   image: {
     flex: 1,
-    width: 250,
-    height: 250,
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
+  },
+  button: {
+    marginTop: 5,
+    padding: 10,
+    backgroundColor: '#68a0cf',
+    width: '60%',
+    borderRadius: 100,
+    borderColor: '#fff',
     borderWidth: 1,
-    borderColor: 'blue',
+    alignSelf: 'center',
+  },
+  buttonFont: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  devButton: {
+    position: 'absolute',
+    bottom: 10,
+    padding: 10,
+    backgroundColor: '#878787',
+    width: '60%',
+    borderRadius: 100,
+    borderColor: '#fff',
+    borderWidth: 1,
     alignSelf: 'center',
   },
 })
