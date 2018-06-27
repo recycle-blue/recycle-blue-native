@@ -65,7 +65,7 @@ async function seed() {
         quantity,
         imageUrl,
         type,
-        unit: 'QTY',
+        unit: 'qty',
         points: quantity * product.points
       })
     }))

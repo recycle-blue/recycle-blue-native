@@ -122,3 +122,17 @@ router.post('/ad', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:activityId/ad', async (req, res, next) => {
+  try {
+    const adData = await Ad.find({
+      where: {
+        activityId: req.params.activityId,
+      },
+    })
+    const ad = adData.dataValues
+    res.json(ad)
+  } catch (err) {
+    next(err)
+  }
+})
