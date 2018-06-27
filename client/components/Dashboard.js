@@ -13,18 +13,23 @@ import {
   Right,
   Thumbnail,
 } from 'native-base'
-import { getUserActivitiesThunk, setSelectedFriend } from '../store'
+import {
+  getUserActivitiesThunk,
+  setSelectedFriend,
+  selectUserAction,
+} from '../store'
 import { UserActivities, ProgressChart, ActivityChart } from '.'
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    if (!this.props.selectedFriend.id) {
+    if (!this.props.selectedFriend.id && !this.props.selectedUser.id) {
       this.props.getUserActivitiesThunk(this.props.user.id)
     }
   }
 
   componentWillUnmount() {
     this.props.removeSelectedFriend()
+    this.props.removeSelectedUser()
   }
 
   render() {
@@ -32,7 +37,6 @@ class Dashboard extends React.Component {
       ? this.props.selectedFriend
       : this.props.user
     if (this.props.selectedUser.id) user = this.props.selectedUser
-    console.log('USER:', user)
     return (
       <Container>
         <Card style={styles.card}>
@@ -111,6 +115,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getUserActivitiesThunk: userId => dispatch(getUserActivitiesThunk(userId)),
     removeSelectedFriend: () => dispatch(setSelectedFriend({})),
+    removeSelectedUser: () => dispatch(selectUserAction(0)),
   }
 }
 

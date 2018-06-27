@@ -2,11 +2,18 @@ import axios from 'axios'
 import { ENV_PATH } from '../secrets'
 
 const GET_ALL_USERS = 'GET_ALL_USERS'
+const SELECT_USER = 'SELECT_USER'
 
 const getUsersAction = users => {
   return {
     type: GET_ALL_USERS,
     users,
+  }
+}
+export const selectUserAction = userId => {
+  return {
+    type: SELECT_USER,
+    userId,
   }
 }
 
@@ -30,6 +37,10 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return { ...state, users: action.users }
+    case SELECT_USER:
+      let selectedUser = state.users.find(user => user.id === action.userId)
+      if (!selectedUser) selectedUser = {}
+      return { ...state, selectedUser }
     default:
       return state
   }

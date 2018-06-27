@@ -27,7 +27,13 @@ class SearchUsers extends React.Component {
   resultsFound(filteredUsers) {
     if (filteredUsers.length) {
       return filteredUsers.map(user => {
-        return <UserCard key={user.id} user={user} />
+        return (
+          <UserCard
+            key={user.id}
+            user={user}
+            navigate={this.props.navigation.navigate}
+          />
+        )
       })
     } else {
       return <Text>No results found</Text>

@@ -1,25 +1,50 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardItem, Body, Text, Left, Thumbnail } from 'native-base'
+import { selectUserAction } from '../store'
+import {
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Left,
+  Thumbnail,
+  Button,
+  Right,
+} from 'native-base'
 import { Image } from 'react-native'
 
 const UserCard = props => {
-  const { user } = props
+  const { user, navigate } = props
   return (
     <Card key={user.id}>
-      <CardItem>
+      <CardItem onPress={() => console.log('pressed!')}>
         <Left>
-          <Thumbnail source={{ uri: user.milestone.badgeIcon }} />
+          <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
           <Body>
             <Text>{user.name}</Text>
+            <Text note>{user.totalPoints}</Text>
           </Body>
         </Left>
       </CardItem>
       <CardItem cardBody>
-        <Image
-          source={{ uri: user.imageUrl }}
-          style={{ height: 100, width: 200, flex: 1 }}
-        />
+        <Left />
+        <Thumbnail source={{ uri: user.imageUrl }} large />
+        <Right />
+      </CardItem>
+      <CardItem>
+        <Left>
+          <Body>
+            <Button
+              primary
+              onPress={() => {
+                props.selectUser(user.id)
+                props.navigate('dashboard')
+              }}
+            >
+              <Text> View Dashboard </Text>
+            </Button>
+          </Body>
+        </Left>
       </CardItem>
     </Card>
   )
@@ -27,7 +52,7 @@ const UserCard = props => {
 
 const mapDispatch = dispatch => {
   return {
-    selectUser: userId => dispatch(selectUserThunk(userId)),
+    selectUser: userId => dispatch(selectUserAction(userId)),
   }
 }
 
