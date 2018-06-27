@@ -10,12 +10,11 @@ class Activity extends React.Component {
   }
 
   render() {
-    console.log("what are my props", this.props)
     return (
       <Container>
         <Content>
           <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text>This is where the image goes</Text>
+            <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
             <Image
               style={styles.image}
               source={{ uri: this.props.photo }}
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return ({
-    name: state.product.name,
+    name: `${state.activity.category.name} ${state.product.name}`,
     points: state.product.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,

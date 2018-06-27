@@ -15,6 +15,7 @@ import {
   LoadingScreen,
   Leaderboard,
   Friends,
+  ActivityCard,
   SearchUsers,
 } from '../components'
 

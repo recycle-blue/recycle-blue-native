@@ -18,7 +18,7 @@ import {
   setSelectedFriend,
   selectUserAction,
 } from '../store'
-import { UserActivities, ProgressChart, ActivityChart } from '.'
+import { UserActivities, ProgressChart, ActivityChart, ActivityCard } from '.'
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -37,6 +37,7 @@ class Dashboard extends React.Component {
       ? this.props.selectedFriend
       : this.props.user
     if (this.props.selectedUser.id) user = this.props.selectedUser
+    const { activities } = this.props
     return (
       <Container>
         <Card style={styles.card}>
@@ -72,7 +73,26 @@ class Dashboard extends React.Component {
               </ScrollView>
             </Tab>
             <Tab heading="Activity">
-              <UserActivities />
+              <Card style={{ maxHeight: 40 }}>
+                <CardItem style={{ justifyContent: 'space-between' }}>
+                  <Text style={{ paddingLeft: 10 }}>Img</Text>
+                  <Text style={{ paddingLeft: 10 }}>Product Name</Text>
+                  <Text>Points</Text>
+                </CardItem>
+              </Card>
+              <ScrollView>
+                {activities.length ? (
+                  activities.map(activity => (
+                    <ActivityCard
+                      key={activity.id}
+                      activity={activity}
+                      navigation={this.props.navigation}
+                    />
+                  ))
+                ) : (
+                  <Text> No Activity Yet! </Text>
+                )}
+              </ScrollView>
             </Tab>
           </Tabs>
         </View>
@@ -108,6 +128,7 @@ const mapStateToProps = state => {
     user: state.user,
     selectedFriend: state.selectedFriend,
     selectedUser: state.userSearch.selectedUser,
+    activities: state.userActivities,
   }
 }
 

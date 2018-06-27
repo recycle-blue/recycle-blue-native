@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const db = require('../db')
-const {User, Activity, Product, Milestone} = require('../db/models')
+const {User, Activity, Product, Milestone, Category} = require('../db/models')
 const Friends = db.model('friends')
 module.exports = router
 
@@ -30,7 +30,7 @@ router.get('/:userId/activities', async (req, res, next) => {
       where: {
         userId: req.params.userId
       },
-      include: [Product]
+      include: [Product, Category]
     })
     res.json(activities)
   } catch (err) {
@@ -70,7 +70,7 @@ router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
       where: {
         userId: req.params.friendId
       },
-      include: [Product]
+      include: [Product, Category]
     })
     res.json(activities)
   } catch (err) {
