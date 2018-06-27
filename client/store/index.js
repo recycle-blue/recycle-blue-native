@@ -7,12 +7,24 @@ import activity from './activity'
 import location from './location'
 import product from './product'
 import userActivities from './user-activities'
+import userSearch from './user-search'
 import leaders from './leaders'
 import friends from './friends'
 import selectedFriend from './selected-friend'
 import ad from './ad'
 
-const reducer = combineReducers({ user, activity, location, product, userActivities, leaders, friends, selectedFriend, ad })
+const reducer = combineReducers({
+  user,
+  activity,
+  location,
+  product,
+  userActivities,
+  leaders,
+  friends,
+  selectedFriend,
+  userSearch,
+  ad,
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
@@ -23,6 +35,7 @@ export * from './user'
 export * from './activity'
 export * from './product'
 export * from './user-activities'
+export * from './user-search'
 export * from './category'
 export * from './leaders'
 export * from './friends'
