@@ -9,7 +9,7 @@ const mapStateToProps = (store) => ({
 
 const LoadingScreen = (props) => {
   return (
-    <Container>
+    <Container style={styles.container}>
       <Content>
         <Image
           style={styles.image}
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 50,
   }, image: {
     flex: 1,
     width: 250,
