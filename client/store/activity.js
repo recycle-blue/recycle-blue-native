@@ -92,7 +92,7 @@ export default function (state = defaultActivity, action) {
     case SAVE_PHOTO:
       return { ...state, photo: action.photo }
     case SET_ACTIVITY_WEEK:
-      return action.activities
+      return { ...state, activities: action.activities }
     case CLEAR_ACTIVITY:
       return { ...defaultActivity }
     default:

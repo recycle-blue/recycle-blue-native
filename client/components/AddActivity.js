@@ -107,6 +107,7 @@ class AddActivity extends React.Component {
 }
 
 const mapStateToProps = (store) => {
+  console.log('store', store)
   return {
     userId: store.user.id,// || 1,
     name: store.product.name,// || "bottle",
