@@ -15,6 +15,7 @@ import {
   ActivityCard,
   SearchUsers,
   AddComment,
+  CommentCard,
   SocialMedia,
   Logout,
   Feed
@@ -30,13 +31,14 @@ const Drawer = createDrawerNavigator(
     activity: { screen: Activity },
     loadingScreen: { screen: LoadingScreen },
     leaderboard: { screen: Leaderboard },
-    feed: { screen: Feed},
+    feed: { screen: Feed },
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
-    socialMedia: {screen: SocialMedia},
+    socialMedia: { screen: SocialMedia },
     searchUsers: { screen: SearchUsers },
     addComment: { screen: AddComment },
-    logout: {screen: Logout}
+    commentCard: { screen: CommentCard },
+    logout: { screen: Logout }
   },
   {
     drawerOpenRoute: 'DrawerOpen',

@@ -46,6 +46,17 @@ router.get('/:activityId/ad', async (req, res, next) => {
   }
 })
 
+router.get('/:activityId/comments', async (req, res, next) => {
+  try {
+    const comments = await Activity.findById(req.params.activityId, {
+      include: [{ model: Comments, include: [User] }]
+    })
+    res.json(comments)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // POST Routes
 const sendPhotoToCloud = async (photo) => {
   const cloudData = await cloudinary.v2.uploader.upload(
