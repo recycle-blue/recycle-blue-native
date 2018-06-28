@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
       isFriendOrSelf: true,
     }
   }
+  // static navigationOptions = { drawerLabel: () => null }
   componentDidMount() {
     if (!this.props.selectedFriend.id && !this.props.selectedUser.id) {
       this.props.getUserActivitiesThunk(this.props.user.id)
