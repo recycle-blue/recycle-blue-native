@@ -19,7 +19,6 @@ class AddAd extends React.Component {
     }
   }
   handleSubmit = async () => {
-    console.log('handleSubmit', this.state.activityId)
     await this.props.addAd(this.state)
     this.props.navigation.navigate('activity')
   }

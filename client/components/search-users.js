@@ -40,7 +40,6 @@ class SearchUsers extends React.Component {
     }
   }
   render() {
-    console.log("this.props.users in search Users", this.props.users)
     const { users } = this.props
     const { text } = this.state
     const filteredUsers = this.filterResults(users, text)

@@ -44,9 +44,7 @@ export const postCommentThunk = (comment) => async dispatch => {
 
 export const getCommentsThunk = (activityId) => async dispatch => {
   try {
-    console.log("getting her? in the get comments thunk activity id", activityId)
     const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}/comments`)
-    console.log("what is my res.data in get comments thunk", res.data.comments)
     dispatch(getComments(res.data.comments || defaultComment))
   } catch (err) {
     console.error(err)

@@ -48,7 +48,6 @@ router.get('/:activityId/ad', async (req, res, next) => {
 
 router.get('/:activityId/comments', async (req, res, next) => {
   try {
-    console.log("gshjfdshfdshdsdsffdshjfdsfdsfdshfdsfdsdskjgfhgfhjgdskufhlisudhfisdnhifhbishd fihsoudflusg")
     const comments = await Activity.findById(req.params.activityId, {
       include: [{ model: Comments, include: [User] }]
     })

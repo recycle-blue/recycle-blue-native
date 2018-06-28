@@ -4,11 +4,8 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 import moment from 'moment'
 export default class CommentCard extends Component {
   render() {
-    console.log("getting to comment card", this.props)
     const imageurl = 'https://i.imgur.com/lsoomRq.jpg'
-    console.log("Moment is working", moment(this.props.comment.createdAt).format('"dddd, MMMM Do YYYY, h:mm:ss a"'))
     return (
-
       <View>
         <Content>
           <Card>
@@ -36,11 +33,3 @@ export default class CommentCard extends Component {
   }
 }
 
-// const mapStateToProps = (store) => {
-//   return {
-//     comments: store.comments,
-//     user: store.comments.user
-//   }
-// }
-
-// export default connect(mapStateToProps)(CommentCard)
