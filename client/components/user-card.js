@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectUserAction } from '../store'
+import { getUserThunk } from '../store'
 import {
   Card,
   CardItem,
@@ -19,7 +19,9 @@ const UserCard = props => {
     <Card key={user.id}>
       <CardItem onPress={() => console.log('pressed!')}>
         <Left>
-          {user.milestone && <Thumbnail source={{ uri: user.milestone.badgeIcon }} small /> }
+          {user.milestone && (
+            <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
+          )}
           <Body>
             <Text>{user.name}</Text>
             <Text note>{user.totalPoints}</Text>
@@ -38,7 +40,7 @@ const UserCard = props => {
               primary
               onPress={() => {
                 props.selectUser(user.id)
-                props.navigate('dashboard')
+                navigate('friendDashboard')
               }}
             >
               <Text> View Dashboard </Text>
@@ -50,9 +52,14 @@ const UserCard = props => {
   )
 }
 
+// const mapState = state => {
+//   return {
+//     selectedUser: state.userSearch.selectedUser,
+//   }
+// }
 const mapDispatch = dispatch => {
   return {
-    selectUser: userId => dispatch(selectUserAction(userId)),
+    selectUser: userId => dispatch(getUserThunk(userId)),
   }
 }
 
