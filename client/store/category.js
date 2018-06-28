@@ -27,15 +27,16 @@ export const setCategory = category => ({
 /**
  * THUNK CREATORS
  */
-// export const getCategoryThunk = (categoryId) => async dispatch => {
 
-//   try {
-//     const res = await axios.get(`${ENV_PATH}/api/category/${categoryId}`)
-//     dispatch(setCategory(res.data || defaultCategory))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
+export const getCategoryThunk = (categoryId) => async dispatch => {
+
+  try {
+    const res = await axios.get(`${ENV_PATH}/api/category/${categoryId}`)
+    dispatch(setCategory(res.data || defaultCategory))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 /**
  * REDUCER

@@ -2,13 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import { getProductThunk, getCommentsThunk } from '../store'
+import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
 import { AddComment, AdView, CommentCard } from './'
 
 class Activity extends React.Component {
   componentWillMount() {
     this.props.getProduct(this.props.productId)
+    this.props.getCategory(this.props.categoryId)
     this.props.getComments(this.props.activityId)
+  }
+  static navigationOptions = {
+    drawerLabel: () => null
   }
 
   render() {
@@ -64,6 +68,7 @@ const mapStateToProps = state => {
     photo: state.activity.imageUrl || state.activity.photo,
     productId: state.activity.productId,
     activityId: state.activity.id,
+    categoryId: state.activity.categoryId,
     comments: state.comments,
     type: state.activity.type,
   })
@@ -72,6 +77,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispacth => {
   return ({
     getProduct: (productId) => dispacth(getProductThunk(productId)),
+    getCategory: (categoryId) => dispacth(getCategoryThunk(categoryId)),
     getComments: (activityId) => dispacth(getCommentsThunk(activityId))
   })
 }

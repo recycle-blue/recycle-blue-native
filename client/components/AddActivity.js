@@ -25,6 +25,9 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('activity')
     }
   }
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     return (
       <KeyboardAvoidingView
