@@ -11,7 +11,9 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      method: 'Login'
+      method: 'login',
+      firstName: '',
+      lastName: ''
     }
   }
 
@@ -21,9 +23,16 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { email, password, method } = this.state
-    this.props.auth(email, password, method)
+    if(this.state.method === 'login'){
+      const { email, password, method } = this.state
+      this.props.auth(email, password, method)
+    }
+    else {
+      const { email, password, method, firstName, lastName } = this.state
+      this.props.auth(email, password, method, firstName, lastName)
+    }
   }
+
   render() {
     const { method } = this.state
     const { error } = this.props
@@ -36,6 +45,16 @@ class Login extends React.Component {
           />
           <Text style={styles.title}>Recycle Blue</Text>
           <Form>
+            {method === 'signup' &&
+            <View>
+              <Item rounded style={styles.padVert}>
+                <Input name="firstName" placeholder="First Name" onChangeText={(text) => this.setState({ firstName: text })} value={this.state.firstName} />
+              </Item>
+              <Item rounded style={styles.padVert}>
+                <Input name="lastName" placeholder="Last Name" onChangeText={(text) => this.setState({ lastName: text })} value={this.state.lastName} />
+              </Item>
+            </View>
+            }
             <Item rounded style={styles.padVert}>
               <Input name="email" placeholder="Email" onChangeText={(text) => this.setState({ email: text })} value={this.state.email} />
             </Item>
@@ -43,14 +62,44 @@ class Login extends React.Component {
               <Input name="password" placeholder="Password" onChangeText={(text) => this.setState({ password: text })} value={this.state.password} />
             </Item>
           </Form>
-          <TouchableHighlight
-            style={styles.button}
-            onPress={this.handleSubmit}
-            underlayColor='#fff'
-          >
-            <Text style={styles.buttonFont}>{method}</Text>
-          </TouchableHighlight>
-          {error && error.response && <Text> {error.response.data} </Text>}
+          {method === 'login' ?
+            <View>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={this.handleSubmit}
+                underlayColor='#fff'
+              >
+                <Text style={styles.buttonFont}>Login</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={() => this.setState({method : 'signup'})}
+                underlayColor='#fff'
+              >
+                <Text style={styles.buttonFont}>Sign Up</Text>
+              </TouchableHighlight>
+            </View>
+            :
+            <View>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={this.handleSubmit}
+                underlayColor='#fff'
+              >
+                <Text style={styles.buttonFont}>Sign Up</Text>
+              </TouchableHighlight>
+              <View>
+                <Text> Already have an account ?
+                  <Text
+                    onPress={() => this.setState({method: 'login'})}
+                    style={{textAlign: 'center', color: '#003366'}} >
+                  Login
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          }
+          {error && error.response && <Text style={{textAlign: 'center'}}> {error.response.data} </Text>}
         </Content >
         <TouchableHighlight
           style={styles.devButton}
@@ -125,9 +174,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    auth: (email, password, method) =>
-      dispatch(auth(email, password, method))
-        .then(() => ownProps.navigation.navigate('primaryNav'))
+    auth: (email, password, method, firstName, lastName) =>
+      dispatch(auth(email, password, method, firstName, lastName))
+      .then((res) => {
+          if(!res)
+            ownProps.navigation.navigate('primaryNav')
+      })
   }
 }
 

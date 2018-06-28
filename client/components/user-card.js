@@ -19,7 +19,7 @@ const UserCard = props => {
     <Card key={user.id}>
       <CardItem onPress={() => console.log('pressed!')}>
         <Left>
-          <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
+          {user.milestone && <Thumbnail source={{ uri: user.milestone.badgeIcon }} small /> }
           <Body>
             <Text>{user.name}</Text>
             <Text note>{user.totalPoints}</Text>
