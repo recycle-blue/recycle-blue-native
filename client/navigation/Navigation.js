@@ -18,7 +18,8 @@ import {
   Friends,
   ActivityCard,
   SearchUsers,
-  AddComment
+  AddComment,
+  CommentCard
 } from '../components'
 
 const Drawer = createDrawerNavigator(
@@ -34,7 +35,8 @@ const Drawer = createDrawerNavigator(
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
     searchUsers: { screen: SearchUsers },
-    addComment: { screen: AddComment }
+    addComment: { screen: AddComment },
+    commentCard: { screen: CommentCard }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
