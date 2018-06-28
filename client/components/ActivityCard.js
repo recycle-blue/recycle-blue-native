@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
 import { setActivity } from '../store'
+import { SocialMedia } from './'
 
 class ActivityCard extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class ActivityCard extends React.Component {
           />
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
+          <SocialMedia activity={activity}/>
         </CardItem>
       </Card>
     )

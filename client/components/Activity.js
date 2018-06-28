@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk, getCommentsThunk } from '../store'
-import { AddComment, CommentCard } from './'
-
+import { AddComment, AdView, CommentCard } from './'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -33,6 +32,7 @@ class Activity extends React.Component {
               color='#58A4B0'
             />
           </View>
+          {this.props.type === 'ad' && <AdView />}
           {this.props.comments.length ?
             this.props.comments.map((singlecomment) => <CommentCard key={singlecomment.id} comment={singlecomment} />) :
             <Text>There are no comments</Text>}
@@ -65,7 +65,7 @@ const mapStateToProps = state => {
     productId: state.activity.productId,
     activityId: state.activity.id,
     comments: state.comments,
-    what: state
+    type: state.activity.type,
   })
 }
 

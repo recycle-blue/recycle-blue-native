@@ -31,7 +31,19 @@ router.get("/weekly/:userId", async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
 
+router.get('/:activityId/ad', async (req, res, next) => {
+  try {
+    const ad = await Ad.find({
+      where: {
+        activityId: +req.params.activityId,
+      },
+    })
+    res.json(ad)
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.get('/:activityId/comments', async (req, res, next) => {

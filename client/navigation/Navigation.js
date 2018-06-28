@@ -1,10 +1,6 @@
 import React from 'react'
 import { Button } from 'react-native'
-import {
-  createStackNavigator,
-  createDrawerNavigator,
-  createSwitchNavigator,
-} from 'react-navigation'
+import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
 import {
   Login,
   AddActivity,
@@ -19,7 +15,11 @@ import {
   ActivityCard,
   SearchUsers,
   AddComment,
+<<<<<<< HEAD
   CommentCard
+=======
+  SocialMedia
+>>>>>>> 9e48737643d57cf6ba712cb868d4397ac42ad157
 } from '../components'
 
 const Drawer = createDrawerNavigator(
@@ -34,6 +34,7 @@ const Drawer = createDrawerNavigator(
     leaderboard: { screen: Leaderboard },
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
+    socialMedia: {screen: SocialMedia},
     searchUsers: { screen: SearchUsers },
     addComment: { screen: AddComment },
     commentCard: { screen: CommentCard }
