@@ -11,7 +11,7 @@ import {
   AddAd,
   Camera,
   MapComp,
-  Dashboard,
+  UserDashboard,
   Activity,
   LoadingScreen,
   Leaderboard,
@@ -27,7 +27,7 @@ import {
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: { screen: Dashboard },
+    dashboard: { screen: UserDashboard },
     addActivity: { screen: AddActivity },
     addAd: { screen: AddAd },
     map: { screen: MapComp },
@@ -37,7 +37,6 @@ const Drawer = createDrawerNavigator(
     leaderboard: { screen: Leaderboard },
     feed: { screen: Feed },
     friends: { screen: Friends },
-    singleFriend: { screen: Dashboard },
     socialMedia: { screen: SocialMedia },
     searchUsers: { screen: SearchUsers },
     addComment: { screen: AddComment },
