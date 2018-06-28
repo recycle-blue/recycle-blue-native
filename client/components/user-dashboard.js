@@ -4,7 +4,7 @@ import Dashboard from './Dashboard'
 
 const UserDashboard = props => {
   const { user } = props
-  return <Dashboard user={user} />
+  return <Dashboard user={user} navigation={props.navigation} />
 }
 
 const mapState = state => {
