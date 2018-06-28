@@ -33,7 +33,6 @@ class AddAd extends React.Component {
     }
     return (
       <KeyboardAvoidingView
-        style={styles.container}
         behavior="position"
         keyboardVerticalOffset={Platform.OS === 'ios' ? -110 : -85}
         contentContainerStyle={styles.container}
