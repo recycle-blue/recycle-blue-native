@@ -15,8 +15,5 @@ export { default as SocialMedia } from './Social-Media'
 export { default as SearchUsers } from './search-users'
 export { default as AddComment } from './AddComment'
 export { default as AddAd } from './AddAd'
-<<<<<<< HEAD
 export { default as CommentCard } from './CommentCard'
-=======
 export { default as AdView } from './AdView'
->>>>>>> 9e48737643d57cf6ba712cb868d4397ac42ad157
