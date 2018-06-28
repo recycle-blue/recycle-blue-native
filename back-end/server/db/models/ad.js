@@ -32,16 +32,13 @@ const Ad = db.define('ad', {
   }
 })
 
-Ad.filterByDistance = function(ads, userLocation) {
-  return ads.filter(ad => {
-    // need to parse out adLocation to get lat/lng
-    const adLocation = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${
-      ad.address
-    }&inputtype=textquery&key=${googleAPIKey}`
-    // need to parse out distance to get to a Number data type
-    const distance = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adLocation}&units=imperial&key=${googleAPIKey}`
-    return distance <= 10
-  })
+Ad.filterByDistance = async function(userLocation) {
+  const ads = await this.findAll()
+  const adAddresses = ads.map(ad => ad.address.replace(/\s/g, '+')).join('|')
+  // need to parse out distance to get to a Number data type
+  // const distance = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${googleAPIKey}`
+  // return distance <= 10
+  return adAddresses
 }
 
 module.exports = Ad
