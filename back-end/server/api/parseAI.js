@@ -38,6 +38,7 @@ const parseImgTags = async (imgTagResults) => {
       return matchedTag
     })
   )
+  console.log('matchCategory', matchCategory)
   if (!matchCategory.length) {
     const defaultCategory = await Category.findById(1)
     matchCategory.push(defaultCategory.dataValues)
@@ -48,7 +49,7 @@ const parseImgTags = async (imgTagResults) => {
   }
   return {
     tags: tagsList,
-    categories: matchCategory,
+    category: matchCategory[0],
     product: matchProduct
   }
 }

@@ -21,7 +21,10 @@ const defaultActivity = {
   unit: 'qty',
   type: 'activity',
   productId: 1,
+  categoryId: 1,
   activities: [],
+  category: '',
+  name: '',
 }
 
 /**
@@ -59,6 +62,7 @@ export const addActivityThunk = (activity) => async dispatch => {
     await dispatch(setActivity(res.data.activity || defaultActivity))
     await dispatch(setProduct(res.data.product))
     await dispatch(setCategory(res.data.category))
+    console.log('activity', res.data.activity, 'product', res.data.product, 'category', res.data.category)
   } catch (err) {
     console.error(err)
   }
@@ -68,15 +72,14 @@ export const savePhotoThunk = (photo) => async dispatch => {
   try {
     dispatch(savePhoto(photo))
     const res = await axios.post(`${ENV_PATH}/api/activity/photo`, { photo })
-    const category = res.data.categoryList[0].name
     await dispatch(setActivity({
       name: res.data.product.name,
-      category,
       imageUrl: res.data.imageUrl,
+      categoryId: res.data.category.id,
       productId: res.data.product.id
     }))
     await dispatch(setProduct(res.data.product))
-    await dispatch(setCategory(res.data.categoryList[0]))
+    await dispatch(setCategory(res.data.category))
   } catch (err) {
     console.error(err)
   }
