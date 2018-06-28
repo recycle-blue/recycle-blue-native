@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Button } from 'react-native'
+import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
@@ -17,32 +18,42 @@ class Activity extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <View style={{ flex: 1, alignItems: 'center' }}>
-            <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
-            <Image
-              style={styles.image}
-              source={{ uri: this.props.photo }}
-            />
-            <Text>{this.props.points}</Text>
-            <Text>{this.props.description}</Text>
-            <Text>{this.props.recycleUse}</Text>
-            <Button
-              onPress={() => {
-                this.props.navigation.navigate('map')
-              }}
-              title='Find Recycling Near You'
-              color='#58A4B0'
-            />
-          </View>
-          {this.props.type === 'ad' && <AdView />}
-          {this.props.comments.length ?
+      // // <KeyboardAvoidingView
+      // //   enabled={true}
+      // //   behavior="padding"
+      // //   keyboardVerticalOffset={Platform.OS === 'ios' ? -110 : -85}
+      // // >
+      // //   <View>
+      //     <ScrollView>
+      <KeyboardAwareScrollView>
+        <View style={{ flex: 1, alignItems: 'center' }}>
+          <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
+          <Image
+            style={styles.image}
+            source={{ uri: this.props.photo }}
+          />
+          <Text>{this.props.points}</Text>
+          <Text>{this.props.description}</Text>
+          <Text>{this.props.recycleUse}</Text>
+          <Button
+            onPress={() => {
+              this.props.navigation.navigate('map')
+            }}
+            title='Find Recycling Near You'
+            color='#58A4B0'
+          />
+        </View>
+        {this.props.type === 'ad' && <AdView />}
+        {
+          this.props.comments.length ?
             this.props.comments.map((singlecomment) => <CommentCard key={singlecomment.id} comment={singlecomment} />) :
-            <Text>There are no comments</Text>}
-          <AddComment navigation={this.props.navigation} />
-        </Content>
-      </Container>
+            <Text>There are no comments</Text>
+        }
+        <AddComment navigation={this.props.navigation} />
+      </KeyboardAwareScrollView>
+      //     </ScrollView>
+      //   </View>
+      // </KeyboardAvoidingView>
     )
   }
 }

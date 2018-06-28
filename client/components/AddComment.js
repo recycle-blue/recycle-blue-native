@@ -24,7 +24,11 @@ class AddComment extends React.Component {
     this.props.navigation.navigate('activity')
 
   }
+  async componentDidMount() {
+    await this.props.getComments(this.state.activityId)
+  }
   render() {
+    console.log("is this true or false?", !this.state.text.length)
     return (
       <View>
         <Text>
@@ -37,7 +41,9 @@ class AddComment extends React.Component {
             onChangeText={(comment) => this.setState({ text: comment })}
             value={this.state.text} />
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} />
+        {this.state.text.length ?
+          <Button title='submit' onPress={this.handleSubmit} />
+          : <Button title='submit' onPress={this.handleSubmit} disabled={true} />}
       </View>
     )
   }
