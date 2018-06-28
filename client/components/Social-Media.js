@@ -1,10 +1,12 @@
 import React from 'react'
 import { StyleSheet, Text, Share, TouchableOpacity, View } from 'react-native';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { Icon } from 'native-base'
 
 class SocialMedia extends React.Component {
-
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     const activity = this.props.activity;
     let shareImageBase64 = {
@@ -16,13 +18,14 @@ class SocialMedia extends React.Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={()=>{
+        <TouchableOpacity onPress={() => {
           Share.share(shareImageBase64)
-          .then((res) => console.log(res))
-          .catch((err) => {
-            if(err) {
-              return
-            }})
+            .then((res) => console.log(res))
+            .catch((err) => {
+              if (err) {
+                return
+              }
+            })
         }}>
           <View style={styles.instructions}>
             <Icon name='share' />

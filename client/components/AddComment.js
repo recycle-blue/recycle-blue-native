@@ -14,6 +14,9 @@ class AddComment extends React.Component {
     }
 
   }
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   handleSubmit = async () => {
     await this.props.addComment(this.state)
     this.setState({ text: '' })
