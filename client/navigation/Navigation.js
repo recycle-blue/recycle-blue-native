@@ -15,7 +15,7 @@ import {
   ActivityCard,
   SearchUsers,
   AddComment,
-  CommentCard
+  CommentCard,
   SocialMedia
 } from '../components'
 
