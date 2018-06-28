@@ -30,7 +30,7 @@ router.get('/:userId/activities', async (req, res, next) => {
       where: {
         userId: req.params.userId
       },
-      include: [Product, Category]
+      include: [Product, Category, User]
     })
     res.json(activities)
   } catch (err) {
@@ -70,7 +70,7 @@ router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
       where: {
         userId: req.params.friendId
       },
-      include: [Product, Category]
+      include: [Product, Category, User]
     })
     res.json(activities)
   } catch (err) {
@@ -94,6 +94,26 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
   }
 })
 
+router.get('/:userId/feed', async (req,res,next) => {
+  try{
+    const friends = await Friends.findAll({
+      where: {
+        myId: req.params.userId
+      }
+    })
+    const initialFeed = await Promise.all([...friends.map( friend => {
+      return Activity.findAll({where: { userId: friend.friendId}, include: [Product, Category, User]})}),
+      Activity.findAll({
+        where: { userId: req.params.userId}, include: [Product, Category, User]
+      })]
+    )
+    const finalFeed = await generateFeed(initialFeed);
+    res.json(finalFeed);
+  } catch (err) {
+    next(err)
+  }
+})
+
 // post route to follow another user
 
 router.post('/:userId/friends/:friendId', async (req, res, next) => {
@@ -104,3 +124,22 @@ router.post('/:userId/friends/:friendId', async (req, res, next) => {
   const friend = await User.findById(req.params.friendId)
   res.json(friend)
 })
+
+const generateFeed = initialFeed =>
+  initialFeed.reduce( (prev,curr) => {
+    curr.forEach( activity => {
+      if(prev.length > 0) {
+        let i=0
+        for(;i<prev.length;i++){
+          if(activity.createdAt > prev[i].createdAt) {
+            prev.splice(i,0,activity)
+            break;
+          }
+        }
+        if(i === prev.length) prev.push(activity)
+      } else {
+        prev.push(activity)
+      }
+    })
+    return prev
+  }, [])

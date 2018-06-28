@@ -16,7 +16,8 @@ import {
   SearchUsers,
   AddComment,
   SocialMedia,
-  Logout
+  Logout,
+  Feed
 } from '../components'
 
 const Drawer = createDrawerNavigator(
@@ -29,6 +30,7 @@ const Drawer = createDrawerNavigator(
     activity: { screen: Activity },
     loadingScreen: { screen: LoadingScreen },
     leaderboard: { screen: Leaderboard },
+    feed: { screen: Feed},
     friends: { screen: Friends },
     singleFriend: { screen: Dashboard },
     socialMedia: {screen: SocialMedia},
