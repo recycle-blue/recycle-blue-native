@@ -39,7 +39,6 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method, firstName, lastName) => async dispatch => {
   let res
   try {
-    console.log("In thunk", email, password, firstName, lastName)
     res = await axios.post(`${ENV_PATH}/auth/${method}`, { email, password, firstName, lastName })
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
