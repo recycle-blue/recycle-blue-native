@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import { getProductThunk, getCommentsThunk } from '../store'
+import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
 import { AddComment, AdView, CommentCard } from './'
 
 class Activity extends React.Component {

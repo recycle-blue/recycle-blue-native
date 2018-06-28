@@ -71,7 +71,7 @@ const sendPhotoToCloud = async (photo) => {
   const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
     product: parsedTags.product,
-    categoryList: parsedTags.categories,
+    category: parsedTags.category,
     tags: parsedTags.tags,
     imageUrl
   }
