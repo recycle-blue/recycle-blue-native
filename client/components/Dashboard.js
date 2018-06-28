@@ -100,12 +100,13 @@ class Dashboard extends React.Component {
               </Body>
             </Left>
             <Right>
-              <Thumbnail
+              { user.milestone && <Thumbnail
                 name="userMilestoneThumbnail"
                 large
                 square
                 source={{ uri: user.milestone.badgeIcon }}
               />
+              }
             </Right>
           </CardItem>
         </Card>
