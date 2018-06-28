@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectUserAction } from '../store'
+import { getUserThunk } from '../store'
 import {
   Card,
   CardItem,
@@ -52,9 +52,14 @@ const UserCard = props => {
   )
 }
 
+// const mapState = state => {
+//   return {
+//     selectedUser: state.userSearch.selectedUser,
+//   }
+// }
 const mapDispatch = dispatch => {
   return {
-    selectUser: userId => dispatch(selectUserAction(userId)),
+    selectUser: userId => dispatch(getUserThunk(userId)),
   }
 }
 

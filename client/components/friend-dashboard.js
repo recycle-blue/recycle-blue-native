@@ -16,6 +16,8 @@ import {
 } from 'native-base'
 
 const FriendDashboard = props => {
+  const { user } = props
+  if (!user.id) return <Text>LOADING...</Text>
   return (
     <Container>
       <Header>
@@ -28,15 +30,21 @@ const FriendDashboard = props => {
           </Button>
         </Left>
         <Body>
-          <Title>Friend Dashboard</Title>
+          <Title>Dashboard</Title>
         </Body>
         <Right />
       </Header>
       <Content>
-        <Text>Stuff will go here</Text>
+        <Dashboard user={user} navigation={props.navigation} />
       </Content>
     </Container>
   )
 }
 
-export default FriendDashboard
+const mapState = state => {
+  return {
+    user: state.userSearch.selectedUser,
+  }
+}
+
+export default connect(mapState)(FriendDashboard)
