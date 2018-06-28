@@ -19,7 +19,9 @@ const UserCard = props => {
     <Card key={user.id}>
       <CardItem onPress={() => console.log('pressed!')}>
         <Left>
-          {user.milestone && <Thumbnail source={{ uri: user.milestone.badgeIcon }} small /> }
+          {user.milestone && (
+            <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
+          )}
           <Body>
             <Text>{user.name}</Text>
             <Text note>{user.totalPoints}</Text>
@@ -38,7 +40,7 @@ const UserCard = props => {
               primary
               onPress={() => {
                 props.selectUser(user.id)
-                props.navigate('dashboard')
+                navigate('friendDashboard')
               }}
             >
               <Text> View Dashboard </Text>

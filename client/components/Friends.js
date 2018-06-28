@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Tabs, Tab, ScrollableTab } from 'native-base'
+import FriendCard from './user-card'
 import {
   getFriendsThunk,
   selectedFriendThunk,
@@ -22,19 +23,19 @@ class Friends extends React.Component {
   }
 
   render() {
-    const { friends } = this.props
+    const { friends, navigation } = this.props
     return (
       <ScrollView>
         {friends.length ? (
-          friends.map(friend => (
-            <View key={friend.id}>
-              <Image source={{ uri: friend.imageUrl }} style={styles.image} />
-              <Text onPress={() => this.singleFriend(friend.id)}>
-                {friend.name}
-              </Text>
-              <Text>{friend.totalPoints}</Text>
-            </View>
-          ))
+          friends.map(friend => {
+            return (
+              <FriendCard
+                key={friend.id}
+                user={friend}
+                navigate={navigation.navigate}
+              />
+            )
+          })
         ) : (
           <Text> No response </Text>
         )}

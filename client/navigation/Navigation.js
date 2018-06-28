@@ -12,6 +12,7 @@ import {
   Camera,
   MapComp,
   UserDashboard,
+  FriendDashboard,
   Activity,
   LoadingScreen,
   Leaderboard,
@@ -95,6 +96,7 @@ const PrimaryNav = createStackNavigator(
 const InitialNav = createSwitchNavigator({
   login: { screen: Login },
   primaryNav: { screen: PrimaryNav },
+  friendDashboard: { screen: FriendDashboard },
 })
 
 export default InitialNav
