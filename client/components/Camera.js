@@ -49,9 +49,6 @@ class TestCamera extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA)
     this.setState({ hasCameraPermission: status === 'granted' })
   }
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: null,

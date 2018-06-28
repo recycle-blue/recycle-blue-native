@@ -25,9 +25,9 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('activity')
     }
   }
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null
+  // }
   render() {
     return (
       <KeyboardAvoidingView
@@ -40,7 +40,7 @@ class AddActivity extends React.Component {
           {this.state.imageUrl === 'default' ?
             <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
             : <Image
-              style={styles.image}
+              style={{ styles.image }}
               source={{ uri: this.state.imgUrl }}
             />
           }
