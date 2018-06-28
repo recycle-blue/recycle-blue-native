@@ -7,18 +7,23 @@ const mapStateToProps = (store) => ({
   loading: '/recycleloading.gif'
 })
 
-const LoadingScreen = (props) => {
-  return (
-    <Container style={styles.container}>
-      <Content>
-        <Image
-          style={styles.image}
-          source={require('../recycleloading.gif')}
-        />
-        <Text>Loading</Text>
-      </Content>
-    </Container>
-  )
+class LoadingScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
+  render() {
+    return (
+      <Container style={styles.container} >
+        <Content>
+          <Image
+            style={styles.image}
+            source={require('../recycleloading.gif')}
+          />
+          <Text>Loading</Text>
+        </Content>
+      </Container>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

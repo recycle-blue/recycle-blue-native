@@ -11,6 +11,9 @@ class Activity extends React.Component {
     this.props.getCategory(this.props.categoryId)
     this.props.getComments(this.props.activityId)
   }
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
 
   render() {
     return (

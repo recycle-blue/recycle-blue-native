@@ -22,6 +22,9 @@ class AddAd extends React.Component {
     await this.props.addAd(this.state)
     this.props.navigation.navigate('activity')
   }
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     const activity = {
       ...this.props.activity,
