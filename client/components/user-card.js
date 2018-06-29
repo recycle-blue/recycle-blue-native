@@ -18,7 +18,6 @@ class UserCard extends React.Component {
     super()
     this.state = {
       isFriendOfUser: null,
-      addedAsFriend: false,
     }
   }
 
@@ -38,7 +37,7 @@ class UserCard extends React.Component {
   }
 
   render() {
-    const { user, navigate, currentUser } = this.props
+    const { user, navigate, currentUser, friends } = this.props
     return (
       <Card key={user.id}>
         <CardItem>
@@ -72,14 +71,15 @@ class UserCard extends React.Component {
             </Body>
           </Left>
           <Right>
-            {!this.state.isFriendOfUser && (
-              <Button
-                success
-                onPress={() => this.addFriend(currentUser.id, user.id)}
-              >
-                <Text> Add Friend </Text>
-              </Button>
-            )}
+            {!friends &&
+              !this.state.isFriendOfUser && (
+                <Button
+                  success
+                  onPress={() => this.addFriend(currentUser.id, user.id)}
+                >
+                  <Text> Add Friend </Text>
+                </Button>
+              )}
           </Right>
         </CardItem>
       </Card>

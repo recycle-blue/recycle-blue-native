@@ -31,6 +31,7 @@ class Friends extends React.Component {
                 key={friend.id}
                 user={friend}
                 navigate={navigation.navigate}
+                friends={true}
               />
             )
           })
