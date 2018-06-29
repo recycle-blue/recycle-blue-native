@@ -44,7 +44,6 @@ const Drawer = createDrawerNavigator(
     addComment: { screen: AddComment },
     commentCard: { screen: CommentCard },
     logout: { screen: Logout },
-    email: { screen: EmailMedia }
   },
   {
     drawerOpenRoute: 'DrawerOpen',
