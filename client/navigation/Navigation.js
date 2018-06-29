@@ -24,6 +24,7 @@ import {
   SocialMedia,
   Logout,
   Feed,
+  Dashboard,
 } from '../components'
 
 const Drawer = createDrawerNavigator(
