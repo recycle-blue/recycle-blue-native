@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Form, Picker, Icon, Spinner, Content } from 'native-base'
+import { Container, Spinner, Content } from 'native-base'
 import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
@@ -15,20 +15,18 @@ import MarkerDetail from './MarkerDetail'
 const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      selected: 'recycling',
-    }
-  }
   componentDidMount() {
+    const { view } = this.props
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
-      this.props.fetchRecycleLocations(locationStr)
+      view === 'recycle'
+        ? this.props.fetchRecycleLocations(locationStr)
+        : this.props.fetchAdLocations(locationStr)
+
       this.props.setUserLocation(userLocation)
       this.props.setFetch(false)
     })
@@ -36,31 +34,16 @@ class MapComp extends React.Component {
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
   }
-  handleChange = value => {
-    this.setState({ selected: value })
-  }
+
   render() {
-    const { recycleLocations, selectedMarker, isFetching } = this.props
+    const { locations, selectedMarker, isFetching } = this.props
     const { latitude, longitude } = this.props.userLocation
+    console.log('MARKERS:', locations, 'VIEW:', this.props.view)
     if (isFetching) {
       return <Spinner color="blue" />
     }
     return (
       <Container>
-        <Form>
-          <Picker
-            mode="dropdown"
-            iosHeader="What do you want to see?"
-            iosIcon={<Icon name="ios-arrow-down-outline" />}
-            style={{ width: undefined }}
-            onValueChange={this.handleChange}
-            placeholder="What do you want to see?"
-            selectedValue={this.state.selected}
-          >
-            <Picker.Item label="Recycling Locations" value="recycling" />
-            <Picker.Item label="Ads" value="ads" />
-          </Picker>
-        </Form>
         <MapView
           provider="google"
           style={{ flex: 1 }}
@@ -72,7 +55,7 @@ class MapComp extends React.Component {
             showUserLocation: true,
           }}
         >
-          {recycleLocations.map(marker => {
+          {locations.map(marker => {
             const location = {
               latitude: marker.geometry.location.lat,
               longitude: marker.geometry.location.lng,
@@ -94,7 +77,7 @@ class MapComp extends React.Component {
 
 const mapState = state => {
   return {
-    recycleLocations: state.location.recycleLocations,
+    locations: state.location.locations,
     userLocation: state.location.userLocation,
     selectedMarker: state.location.selectedMarker,
     isFetching: state.location.isFetching,
@@ -104,6 +87,7 @@ const mapDispatch = dispatch => {
   return {
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
+    fetchAdLocations: locationStr => dispatch(getAdLocationsThunk(locationStr)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),

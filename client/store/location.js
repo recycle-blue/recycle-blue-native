@@ -1,25 +1,19 @@
 import axios from 'axios'
-import { googleAPIKey } from '../secrets'
+import { googleAPIKey, ENV_PATH } from '../secrets'
 
-const GET_RECYCLE_LOCATIONS = 'GET_RECYCLE_LOCATIONS'
-const GET_AD_LOCATIONS = 'GET_AD_LOCATIONS'
+const GET_LOCATIONS = 'GET_LOCATIONS'
 const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
 const SELECT_MARKER = 'SELECT_MARKER'
 const SET_FETCH = 'SET_FETCH'
 
-const getRecycleLocationsAction = locations => {
+const getLocationsAction = locations => {
   return {
-    type: GET_RECYCLE_LOCATIONS,
+    type: GET_LOCATIONS,
     locations,
   }
 }
-const getAdLocationsAction = locations => {
-  return {
-    type: GET_AD_LOCATIONS,
-    locations,
-  }
-}
+
 export const getUserLocationAction = location => {
   return {
     type: GET_USER_LOCATION,
@@ -48,18 +42,20 @@ export const setFetch = status => {
 
 export const getRecycleLocationsThunk = locationStr => {
   return async dispatch => {
+    console.log('recycle thunk called')
     const { data } = await axios.get(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=recycle&radius=3000&key=${googleAPIKey}`
     )
-    dispatch(getRecycleLocationsAction(data.results))
+    dispatch(getLocationsAction(data.results))
   }
 }
-export const getAdLocationsThunk = (locationStr, address) => {
+export const getAdLocationsThunk = locationStr => {
   return async dispatch => {
+    console.log('ad thunk called')
     const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=${address}&radius=3000&key=${googleAPIKey}`
+      `${ENV_PATH}/api/activity/marketplace?location=${locationStr}`
     )
-    dispatch(getAdLocationsAction(data.results))
+    dispatch(getLocationsAction(data))
   }
 }
 export const getDistanceThunk = (markerId, origin, destination) => {
@@ -79,8 +75,7 @@ const defaultLocation = {
 }
 
 const initialState = {
-  recycleLocations: [],
-  adLocations: [],
+  locations: [],
   userLocation: defaultLocation,
   selectedMarker: {},
   isFetching: true,
@@ -88,10 +83,8 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_RECYCLE_LOCATIONS:
-      return { ...state, recycleLocations: action.locations }
-    case GET_AD_LOCATIONS:
-      return { ...state, adLocations: action.locations }
+    case GET_LOCATIONS:
+      return { ...state, locations: action.locations }
     case GET_USER_LOCATION:
       return { ...state, userLocation: action.location }
     case GET_DISTANCE:
