@@ -118,10 +118,10 @@ class Login extends React.Component {
                   <Text style={styles.buttonFont}>Sign Up</Text>
                 </TouchableHighlight>
                 <View>
-                  <Text>
+                  <Text style={{ textAlign: 'center' }}>
+                    Already have an account?
                     {' '}
-                    Already have an account ?
-                  <Text
+                    <Text
                       onPress={() => this.setState({ method: 'login' })}
                       style={{ textAlign: 'center', color: '#003366' }}
                     >

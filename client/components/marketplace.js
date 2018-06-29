@@ -15,7 +15,7 @@ import {
   Spinner
 } from 'native-base'
 import { getMarketplaceAdsThunk } from '../store'
-import { ActivityCard } from '.'
+import { MapComp, AdCard } from '.'
 
 class Marketplace extends React.Component {
   constructor(props) {
@@ -39,64 +39,71 @@ class Marketplace extends React.Component {
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          {/* <Form> */}
-          <Item rounded style={styles.searchBar}>
-            <Picker
-              name="category"
-              style={Platform.OS === 'ios' ? styles.iosPicker : styles.androidPicker}
-              mode="dropdown"
-              selectedValue={this.state.category}
-              onValueChange={(category) => this.setState({ category })}
-            >
-              <Picker.Item label="Category" value="" />
-              <Picker.Item label="Plastic" value="Plastic" />
-              <Picker.Item label="Glass" value="Glass" />
-              <Picker.Item label="Metal" value="Metal" />
-              <Picker.Item label="Paper" value="Paper" />
-              <Picker.Item label="Wood" value="Wood" />
-              <Picker.Item label="Compost" value="Compost" />
-              <Picker.Item label="Landfill" value="Landfill" />
-              <Picker.Item label="Other" value="Other" />
-            </Picker>
-
-            <Input
-              placeholder="Search For Other Users"
-              onChangeText={(searchText) => this.setState({ searchText })}
-            />
-            <Icon active name="search" style={styles.searchIcon} />
-          </Item>
-
-          <Tabs tabBarPosition='bottom' renderTabBar={() => <ScrollableTab />}>
-            <Tab heading="List">
-              <Card style={{ maxHeight: 40 }}>
-                <CardItem style={{ justifyContent: 'space-between' }}>
-                  <Text style={{ paddingLeft: 10 }}>Img</Text>
-                  <Text style={{ paddingLeft: 10 }}>Product Name</Text>
-                  <Text>Points</Text>
-                </CardItem>
-              </Card>
-              {/* <ScrollView>
-                {marketplace.length ? (
-                  marketplace.map(ad => (
-                    <ActivityCard
-                      key={ad.id}
-                      ad={ad}
-                      navigation={this.props.navigation}
-                    />
-                  ))
-                ) : (
-                    <Text> No Activity Yet! </Text>
-                  )}
-              </ScrollView> */}
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: 'rgba(208, 230, 237, 1)' }} >
+            <Tab heading="List" >
+              <View style={{ position: 'absolute', top: 55, width: '100%' }}>
+                <Card style={{ maxHeight: 40 }}>
+                  <CardItem style={{ justifyContent: 'space-between' }}>
+                    <Text style={{ paddingLeft: 10 }}>Img</Text>
+                    <Text style={{ paddingLeft: 10 }}>Product Name</Text>
+                    <Text>Points</Text>
+                  </CardItem>
+                </Card>
+                <ScrollView>
+                  {marketplace.length ? (
+                    marketplace.map(ad => (
+                      <AdCard
+                        key={ad.id}
+                        ad={ad}
+                        navigation={this.props.navigation}
+                      />
+                    ))
+                  ) : (
+                      <Text style={{ textAlign: 'center' }}> No Available Products Yet! </Text>
+                    )}
+                </ScrollView>
+              </View>
             </Tab>
-            <Tab heading="Map">
+            <Tab heading="Map" >
               <ScrollView>
-                <Text>MAP VIEWWWWWWW</Text>
+                <MapComp />
               </ScrollView>
             </Tab>
           </Tabs>
-        </View>
-      </Container>
+          <View style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}>
+            <Item rounded style={styles.searchBar}>
+              <View style={styles.picker} >
+                <Picker
+                  name="category"
+                  style={Platform.OS === 'ios' ? styles.iosPicker : styles.androidPicker}
+                  mode="dropdown"
+                  prompt='Category'
+                  selectedValue={this.state.category}
+                  onValueChange={(category) => this.setState({ category })}
+                >
+                  <Picker.Item label="Category" value="" />
+                  <Picker.Item label="Plastic" value="Plastic" />
+                  <Picker.Item label="Glass" value="Glass" />
+                  <Picker.Item label="Metal" value="Metal" />
+                  <Picker.Item label="Paper" value="Paper" />
+                  <Picker.Item label="Wood" value="Wood" />
+                  <Picker.Item label="Compost" value="Compost" />
+                  <Picker.Item label="Landfill" value="Landfill" />
+                  <Picker.Item label="Other" value="Other" />
+                </Picker>
+              </View>
+              <Input
+                style={{ flex: 2 }}
+                placeholder="Search For Products"
+                onChangeText={(searchText) => this.setState({ searchText })}
+              />
+              <View style={styles.searchIcon} >
+                <Icon active name="search" />
+              </View>
+            </Item>
+          </View>
+        </View >
+      </Container >
     )
   }
 }
@@ -110,23 +117,35 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     margin: 5,
-    backgroundColor: 'rgba(255,255,255, 0.3)',
+    backgroundColor: 'rgba(255,255,255, 0.8)',
+  },
+  picker: {
+    flex: 1,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    backgroundColor: 'rgba(208, 230, 237, 0.3)',
   },
   iosPicker: {
     height: 50,
     width: 1000,
   },
-  androidPicker: {},
+  androidPicker: {
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
   searchIcon: {
-    borderRight: 1,
-  }
-  // topView: {
-  //   width: 250,
-  //   height: 250,
-  //   justifyContent: 'center',
-  //   alignSelf: 'center',
-  //   margin: 10,
-  // },
+    paddingRight: 3,
+    backgroundColor: 'rgba(208, 230, 237, 0.3)',
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+  },
+  tabs: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   card: {
     minHeight: 70,
     flex: 0.1,

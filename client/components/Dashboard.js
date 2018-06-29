@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
           </CardItem>
         </Card>
         <View style={styles.container}>
-          <Tabs renderTabBar={() => <ScrollableTab />}>
+          <Tabs >
             <Tab heading="Progess">
               <ScrollView>
                 <ProgressChart />
