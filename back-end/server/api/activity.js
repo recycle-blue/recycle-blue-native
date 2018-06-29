@@ -165,8 +165,8 @@ router.post('/:activityId/comment', async (req, res, next) => {
 })
 
 // get all ads and filter by location
-router.post('/ads', async (req, res, next) => {
+router.get('/ads', async (req, res, next) => {
   // this code won't work, but it can serve as a foundation for filtering ads
-  const filteredAds = await Ad.filterByDistance()
+  const filteredAds = await Ad.filterByDistance('45.677,-123.45')
   res.json(filteredAds)
 })

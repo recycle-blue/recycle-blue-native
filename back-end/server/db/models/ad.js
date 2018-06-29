@@ -1,6 +1,8 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const googleAPIKey = require('../../../secrets')
+const axios = require('axios')
 
 const Ad = db.define('ad', {
   address: {
@@ -34,11 +36,21 @@ const Ad = db.define('ad', {
 
 Ad.filterByDistance = async function(userLocation) {
   const ads = await this.findAll()
-  const adAddresses = ads.map(ad => ad.address.replace(/\s/g, '+')).join('|')
+  const adAddresses = ads
+    .map(ad => `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`)
+    .join('|')
   // need to parse out distance to get to a Number data type
-  // const distance = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${googleAPIKey}`
-  // return distance <= 10
-  return adAddresses
+  const {data} = await axios.get(
+    `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${googleAPIKey}`
+  )
+  const distanceArray = data.rows[0].elements
+  const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
+    const distanceInKm = distanceData.distance.value / 1000
+    const distanceInMiles = distanceInKm * 0.62137119
+    if (distanceInMiles < 3000) return [...newArray, ads[i]]
+    return newArray
+  }, [])
+  return filteredAds
 }
 
 module.exports = Ad
