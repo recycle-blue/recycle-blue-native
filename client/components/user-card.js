@@ -18,25 +18,23 @@ class UserCard extends React.Component {
     super()
     this.state = {
       isFriendOfUser: null,
+      addedAsFriend: false,
     }
   }
 
   componentDidMount() {
-    console.log('componentDidMount called')
     this.checkIfFriend()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate called')
-    if (prevState.isFriendOfUser !== this.state.isFriendOfUser) {
-      this.checkIfFriend()
-    }
   }
 
   checkIfFriend() {
     const { user, friendsObj } = this.props
     if (friendsObj[user.id]) return this.setState({ isFriendOfUser: true })
     this.setState({ isFriendOfUser: false })
+  }
+
+  addFriend = async (currentUserId, selectedUserId) => {
+    await this.props.addFriend(currentUserId, selectedUserId)
+    this.setState({ isFriendOfUser: true })
   }
 
   render() {
@@ -77,7 +75,7 @@ class UserCard extends React.Component {
             {!this.state.isFriendOfUser && (
               <Button
                 success
-                onPress={() => this.props.addFriend(currentUser.id, user.id)}
+                onPress={() => this.addFriend(currentUser.id, user.id)}
               >
                 <Text> Add Friend </Text>
               </Button>
