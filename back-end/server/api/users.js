@@ -7,7 +7,8 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      include: [Milestone]
+      include: [Milestone],
+      order: ['firstName']
     })
     res.json(users)
   } catch (err) {
@@ -17,7 +18,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId)
+    const user = await User.findById(req.params.userId, {include: [Milestone]})
     res.json(user)
   } catch (err) {
     next(err)
@@ -47,7 +48,14 @@ router.get('/:userId/friends', async (req, res, next) => {
       include: ['Friends']
     })
     const friends = await User.friendsInAlphabeticalOrder(Friends)
-    res.json(friends)
+    let response = friends
+    if (req.query.res === 'hash') {
+      response = {}
+      friends.forEach(friend => {
+        response[friend.id] = true
+      })
+    }
+    res.json(response)
   } catch (err) {
     next(err)
   }
@@ -94,21 +102,27 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/feed', async (req,res,next) => {
-  try{
+router.get('/:userId/feed', async (req, res, next) => {
+  try {
     const friends = await Friends.findAll({
       where: {
         myId: req.params.userId
       }
     })
-    const initialFeed = await Promise.all([...friends.map( friend => {
-      return Activity.findAll({where: { userId: friend.friendId}, include: [Product, Category, User]})}),
+    const initialFeed = await Promise.all([
+      ...friends.map(friend => {
+        return Activity.findAll({
+          where: {userId: friend.friendId},
+          include: [Product, Category, User]
+        })
+      }),
       Activity.findAll({
-        where: { userId: req.params.userId}, include: [Product, Category, User]
-      })]
-    )
-    const finalFeed = await generateFeed(initialFeed);
-    res.json(finalFeed);
+        where: {userId: req.params.userId},
+        include: [Product, Category, User]
+      })
+    ])
+    const finalFeed = await generateFeed(initialFeed)
+    res.json(finalFeed)
   } catch (err) {
     next(err)
   }
@@ -126,17 +140,17 @@ router.post('/:userId/friends/:friendId', async (req, res, next) => {
 })
 
 const generateFeed = initialFeed =>
-  initialFeed.reduce( (prev,curr) => {
-    curr.forEach( activity => {
-      if(prev.length > 0) {
-        let i=0
-        for(;i<prev.length;i++){
-          if(activity.createdAt > prev[i].createdAt) {
-            prev.splice(i,0,activity)
-            break;
+  initialFeed.reduce((prev, curr) => {
+    curr.forEach(activity => {
+      if (prev.length > 0) {
+        let i = 0
+        for (; i < prev.length; i++) {
+          if (activity.createdAt > prev[i].createdAt) {
+            prev.splice(i, 0, activity)
+            break
           }
         }
-        if(i === prev.length) prev.push(activity)
+        if (i === prev.length) prev.push(activity)
       } else {
         prev.push(activity)
       }
