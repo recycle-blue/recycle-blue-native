@@ -66,7 +66,7 @@ class Marketplace extends React.Component {
             </Tab>
             <Tab heading="Map" >
               <ScrollView>
-                <MapComp />
+                <MapComp view='ads' />
               </ScrollView>
             </Tab>
           </Tabs>
