@@ -73,7 +73,21 @@ Ad.filterByDistance = async function(userLocation) {
 Ad.afterCreate(async ad => {
   const address = `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`
   const {data} = await axios.get(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${address}&key=${googleAPIKey}`
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${address}&fields=geometry&key=${googleAPIKey}`
+  )
+  const latitude = data.candidates[0].geometry.location.lat
+  const longitude = data.candidates[0].geometry.location.lng
+
+  await Ad.update(
+    {
+      latitude,
+      longitude
+    },
+    {
+      where: {
+        id: ad.id
+      }
+    }
   )
 })
 
