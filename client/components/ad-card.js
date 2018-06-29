@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
+import { Card, CardItem, Left, Right, Row, Thumbnail, Textarea } from 'native-base'
 import { setActivity } from '../store'
 import { SocialMedia } from './'
 
@@ -16,16 +16,18 @@ class ActivityCard extends React.Component {
     }
   }
   render() {
-    const { activity } = this.props
+    const { activity, ad } = this.props
     return (
       <Card style={styles.card}>
         <CardItem button style={styles.cardItem} onPress={this.handlePress} >
           <Thumbnail medium square
             source={{ uri: activity.imageUrl }}
           />
-          <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
-          <Text style={styles.points} >{activity.points}</Text>
-          <SocialMedia activity={activity}/>
+          <View style={styles.indo}>
+            <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
+            <Text style={styles.quantity} >{activity.quantity}</Text>
+            <Text>{activity.description}</Text>
+          </View>
         </CardItem>
       </Card>
     )
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
   },
-  points: {
+  quantity: {
     flex: 1,
     width: '100%',
     textAlign: 'center',
