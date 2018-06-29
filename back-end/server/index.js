@@ -61,7 +61,7 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
 
   const gateway = (req, res, next) => {
-    req.user ? next() : res.sendStatus(403)
+    req.user ? next() : res.sendStatus(401)
   }
 
   app.use('/api', gateway, require('./api'))
