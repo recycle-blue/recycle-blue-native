@@ -21,7 +21,7 @@ class Activity extends React.Component {
       <KeyboardAvoidingView
         enabled={true}
         behavior="padding"
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 75 : 50}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 85 : 85}
       >
         <View>
           <ScrollView>

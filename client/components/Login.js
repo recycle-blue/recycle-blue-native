@@ -109,28 +109,28 @@ class Login extends React.Component {
               </TouchableHighlight>
             </View>
           ) : (
-            <View>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={this.handleSubmit}
-                underlayColor="#fff"
-              >
-                <Text style={styles.buttonFont}>Sign Up</Text>
-              </TouchableHighlight>
               <View>
-                <Text>
-                  {' '}
-                  Already have an account ?
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={this.handleSubmit}
+                  underlayColor="#fff"
+                >
+                  <Text style={styles.buttonFont}>Sign Up</Text>
+                </TouchableHighlight>
+                <View>
+                  <Text>
+                    {' '}
+                    Already have an account ?
                   <Text
-                    onPress={() => this.setState({ method: 'login' })}
-                    style={{ textAlign: 'center', color: '#003366' }}
-                  >
-                    Login
+                      onPress={() => this.setState({ method: 'login' })}
+                      style={{ textAlign: 'center', color: '#003366' }}
+                    >
+                      Login
                   </Text>
-                </Text>
+                  </Text>
+                </View>
               </View>
-            </View>
-          )}
+            )}
           {error &&
             error.response && (
               <Text style={{ textAlign: 'center' }}>

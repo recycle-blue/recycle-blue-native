@@ -44,6 +44,7 @@ export const getUserThunk = userId => {
     }
   }
 }
+
 export const getFriendsHashThunk = userId => {
   return async dispatch => {
     try {

@@ -8,6 +8,7 @@ import { ENV_PATH } from '../secrets'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
+
 /**
  * INITIAL STATE
  */
@@ -60,6 +61,17 @@ export const logout = () => async dispatch => {
   }
 }
 
+
+export const getMeThunk = userId => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`${ENV_PATH}/api/users/${userId}`)
+      dispatch(getUser(data))
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+}
 /**
  * REDUCER
  */

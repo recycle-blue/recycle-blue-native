@@ -28,7 +28,6 @@ class AddComment extends React.Component {
     await this.props.getComments(this.state.activityId)
   }
   render() {
-    console.log("is this true or false?", !this.state.text.length)
     return (
       <View>
         <Text>
