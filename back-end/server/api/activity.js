@@ -70,7 +70,6 @@ const sendPhotoToCloud = async (photo) => {
   const optionsIndex = fullImageUrl.lastIndexOf('/')
   const cutIndex = fullImageUrl.lastIndexOf('upload/')
   const imageUrl = fullImageUrl.slice(0, cutIndex + 8) + 'c_fit,w_250,h_250' + fullImageUrl.slice(optionsIndex)
-  console.log(imageUrl)
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
