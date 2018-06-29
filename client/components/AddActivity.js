@@ -38,7 +38,7 @@ class AddActivity extends React.Component {
       >
         <View style={styles.topView}>
           {this.state.imageUrl === 'default' ?
-            <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
+            <Button title='Take Picture' onPress={() => this.props.navigation.navigate('Post Activity')} />
             : <Image
               style={styles.image}
               source={{ uri: this.state.imageUrl }}
