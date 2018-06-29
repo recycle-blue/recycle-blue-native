@@ -133,16 +133,19 @@ router.post('/', async (req, res, next) => {
 
 router.post('/ad', async (req, res, next) => {
   try {
-    const newAdRes = await Ad.create({
-      activityId: req.body.activityId,
-      address: req.body.address,
-      city: req.body.city,
-      state: req.body.state,
-      zipCode: req.body.zipCode,
-      email: req.body.email,
-      phone: req.body.phone,
-      description: req.body.description
-    })
+    const newAdRes = await Ad.create(
+      {
+        activityId: req.body.activityId,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zipCode: req.body.zipCode,
+        email: req.body.email,
+        phone: req.body.phone,
+        description: req.body.description
+      },
+      {individualHooks: true}
+    )
     const newAd = newAdRes.dataValues
     res.json(newAd)
   } catch (err) {
@@ -166,8 +169,7 @@ router.post('/:activityId/comment', async (req, res, next) => {
 
 // get all ads and filter by location
 router.get('/marketplace', async (req, res, next) => {
-  // this code won't work, but it can serve as a foundation for filtering ads
-  const userLocation = req.query.userLocation
-  const filteredAds = await Ad.filterByDistance(userLocation)
+  // const userLocation = req.query.userLocation
+  const filteredAds = await Ad.filterByDistance('41.895495,-87.639014')
   res.json(filteredAds)
 })
