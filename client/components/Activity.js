@@ -17,7 +17,6 @@ class Activity extends React.Component {
   // }
 
   render() {
-    console.log(this.props.photo)
     return (
       <KeyboardAvoidingView
         enabled={true}
