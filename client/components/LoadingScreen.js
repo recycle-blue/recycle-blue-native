@@ -8,9 +8,9 @@ const mapStateToProps = (store) => ({
 })
 
 class LoadingScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null
+  // }
   render() {
     return (
       <Container style={styles.container} >

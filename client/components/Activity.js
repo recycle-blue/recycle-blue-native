@@ -11,18 +11,19 @@ class Activity extends React.Component {
     this.props.getCategory(this.props.categoryId)
     this.props.getComments(this.props.activityId)
   }
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null
+  // }
 
   render() {
+    console.log(this.props.photo)
     return (
       <Container>
         <Content>
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={{ fontSize: 25, padding: 8 }}>{this.props.name}</Text>
             <Image
-              style={styles.image}
+              style={{ height: 250, width: 250 }}
               source={{ uri: this.props.photo }}
             />
             <Text>{this.props.points}</Text>
