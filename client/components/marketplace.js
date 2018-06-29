@@ -8,24 +8,33 @@ import {
   ScrollableTab,
   Card,
   CardItem,
-  Body,
-  Left,
-  Right,
-  Thumbnail,
-  Form,
+  Icon,
   Item,
   Input,
   Picker,
+  Spinner
 } from 'native-base'
 import { getMarketplaceAdsThunk } from '../store'
 import { ActivityCard } from '.'
 
 class Marketplace extends React.Component {
-  componentDidMount() {
-    this.props.getMarketplaceAdsThunk()
+  constructor(props) {
+    super(props)
+    this.state = {
+      category: '',
+      searchText: '',
+      isLoading: false,
+    }
+  }
+
+  async componentDidMount() {
+    this.setState({ isLoading: true })
+    // await this.props.getMarketplaceAdsThunk()
+    this.setState({ isLoading: false })
   }
 
   render() {
+    if (this.state.isLoading) return <Spinner color="blue" />
     const { marketplace } = this.props
     return (
       <Container>
@@ -39,7 +48,7 @@ class Marketplace extends React.Component {
               selectedValue={this.state.category}
               onValueChange={(category) => this.setState({ category })}
             >
-              <Picker.Item label="Category" value="Other" />
+              <Picker.Item label="Category" value="" />
               <Picker.Item label="Plastic" value="Plastic" />
               <Picker.Item label="Glass" value="Glass" />
               <Picker.Item label="Metal" value="Metal" />
@@ -47,28 +56,18 @@ class Marketplace extends React.Component {
               <Picker.Item label="Wood" value="Wood" />
               <Picker.Item label="Compost" value="Compost" />
               <Picker.Item label="Landfill" value="Landfill" />
-              <Picker.Item label="Category" value="Other" />
+              <Picker.Item label="Other" value="Other" />
             </Picker>
 
-            {/* <Item> */}
-            {/* <Item> */}
             <Input
               placeholder="Search For Other Users"
-              onChangeText={this.handleChange}
+              onChangeText={(searchText) => this.setState({ searchText })}
             />
             <Icon active name="search" />
-            {/* </Item> */}
           </Item>
-          {/* </Form> */}
 
-          <Tabs renderTabBar={() => <ScrollableTab />}>
-            <Tab heading="Progess">
-              <ScrollView>
-                <ProgressChart />
-                <ActivityChart />
-              </ScrollView>
-            </Tab>
-            <Tab heading="Activity">
+          <Tabs tabBarPosition='bottom' renderTabBar={() => <ScrollableTab />}>
+            <Tab heading="List">
               <Card style={{ maxHeight: 40 }}>
                 <CardItem style={{ justifyContent: 'space-between' }}>
                   <Text style={{ paddingLeft: 10 }}>Img</Text>
@@ -76,18 +75,23 @@ class Marketplace extends React.Component {
                   <Text>Points</Text>
                 </CardItem>
               </Card>
-              <ScrollView>
-                {activities.length ? (
-                  activities.map(activity => (
+              {/* <ScrollView>
+                {marketplace.length ? (
+                  marketplace.map(ad => (
                     <ActivityCard
-                      key={activity.id}
-                      activity={activity}
+                      key={ad.id}
+                      ad={ad}
                       navigation={this.props.navigation}
                     />
                   ))
                 ) : (
                     <Text> No Activity Yet! </Text>
                   )}
+              </ScrollView> */}
+            </Tab>
+            <Tab heading="Map">
+              <ScrollView>
+                <Text>MAP VIEWWWWWWW</Text>
               </ScrollView>
             </Tab>
           </Tabs>
@@ -119,9 +123,9 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = store => {
   return {
-    marketplace: state.activity.marketplace
+    marketplace: store.ad.marketplace
   }
 }
 

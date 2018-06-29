@@ -72,14 +72,14 @@ async function seed() {
   )
 
   await Promise.all(
-    users.map(user => {
+    users.map((user, i) => {
       const randomProducts = products.sort(shuffle).slice(0, 5)
       const quantity = randomIndexGenerator(5)
       const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
-      const type = quantity > 3 ? 'activity' : 'ad'
       return Promise.all(
-        randomProducts.map(product => {
+        randomProducts.map((product, j) => {
           const categoryId = randomIndexGenerator(categories.length)
+          const type = ((i + j) % 2 || i + j > 13) ? 'activity' : 'ad'
           return Activity.create({
             productId: product.id,
             categoryId,
