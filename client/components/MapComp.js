@@ -17,6 +17,7 @@ const geoLocation = navigator.geolocation
 class MapComp extends React.Component {
   componentDidMount() {
     const { view } = this.props
+    this.props.setFetch(true)
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
