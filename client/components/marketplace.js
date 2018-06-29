@@ -40,10 +40,10 @@ class Marketplace extends React.Component {
       <Container>
         <View name='StaticFrame' style={styles.container}>
           {/* <Form> */}
-          <Item>
+          <Item rounded style={styles.searchBar}>
             <Picker
               name="category"
-              style={Platform.OS === 'ios' ? styles.ios : styles.android}
+              style={Platform.OS === 'ios' ? styles.iosPicker : styles.androidPicker}
               mode="dropdown"
               selectedValue={this.state.category}
               onValueChange={(category) => this.setState({ category })}
@@ -63,7 +63,7 @@ class Marketplace extends React.Component {
               placeholder="Search For Other Users"
               onChangeText={(searchText) => this.setState({ searchText })}
             />
-            <Icon active name="search" />
+            <Icon active name="search" style={styles.searchIcon} />
           </Item>
 
           <Tabs tabBarPosition='bottom' renderTabBar={() => <ScrollableTab />}>
@@ -108,15 +108,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  image: {
-    flex: 0.5,
-    width: 350,
-    height: 100,
-    borderWidth: 1,
-    borderColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+  searchBar: {
+    margin: 5,
+    backgroundColor: 'rgba(255,255,255, 0.3)',
   },
+  iosPicker: {
+    height: 50,
+    width: 1000,
+  },
+  androidPicker: {},
+  searchIcon: {
+    borderRight: 1,
+  }
+  // topView: {
+  //   width: 250,
+  //   height: 250,
+  //   justifyContent: 'center',
+  //   alignSelf: 'center',
+  //   margin: 10,
+  // },
   card: {
     minHeight: 70,
     flex: 0.1,
