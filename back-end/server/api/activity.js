@@ -69,7 +69,14 @@ const sendPhotoToCloud = async photo => {
     categorization: 'google_tagging,imagga_tagging,aws_rek_tagging',
     auto_tagging: 0.5
   })
-  const imageUrl = cloudData.secure_url
+  const fullImageUrl = cloudData.secure_url
+  const optionsIndex = fullImageUrl.lastIndexOf('/')
+  const cutIndex = fullImageUrl.lastIndexOf('upload/')
+  const imageUrl =
+    fullImageUrl.slice(0, cutIndex + 8) +
+    'c_fit,w_250,h_250' +
+    fullImageUrl.slice(optionsIndex)
+  console.log(imageUrl)
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
@@ -110,7 +117,8 @@ router.post('/', async (req, res, next) => {
       }
     }
     const user = userData.dataValues
-    const activityPoints = category.multiplier * product.points
+    const activityPoints =
+      category.multiplier * product.points * Number(req.body.quantity)
     const newTotalPoints = activityPoints + user.totalPoints
     User.update({totalPoints: newTotalPoints}, {where: {id: user.id}})
     const newActivityData = await Activity.create({

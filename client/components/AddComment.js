@@ -14,12 +14,18 @@ class AddComment extends React.Component {
     }
 
   }
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   handleSubmit = async () => {
     await this.props.addComment(this.state)
     this.setState({ text: '' })
     await this.props.getComments(this.state.activityId)
     this.props.navigation.navigate('activity')
 
+  }
+  async componentDidMount() {
+    await this.props.getComments(this.state.activityId)
   }
   render() {
     return (
@@ -34,7 +40,9 @@ class AddComment extends React.Component {
             onChangeText={(comment) => this.setState({ text: comment })}
             value={this.state.text} />
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} />
+        {this.state.text.length ?
+          <Button title='submit' onPress={this.handleSubmit} />
+          : <Button title='submit' onPress={this.handleSubmit} disabled={true} />}
       </View>
     )
   }
