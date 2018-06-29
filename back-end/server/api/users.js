@@ -7,7 +7,8 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      include: [Milestone]
+      include: [Milestone],
+      order: ['firstName']
     })
     res.json(users)
   } catch (err) {
@@ -47,7 +48,14 @@ router.get('/:userId/friends', async (req, res, next) => {
       include: ['Friends']
     })
     const friends = await User.friendsInAlphabeticalOrder(Friends)
-    res.json(friends)
+    let response = friends
+    if (req.query.res === 'hash') {
+      response = {}
+      friends.forEach(friend => {
+        response[friend.id] = true
+      })
+    }
+    res.json(response)
   } catch (err) {
     next(err)
   }

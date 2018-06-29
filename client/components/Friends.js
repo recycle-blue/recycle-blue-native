@@ -11,9 +11,7 @@ import {
 
 class Friends extends React.Component {
   componentDidMount() {
-    if (!this.props.friends.length) {
-      this.props.getFriends(this.props.user.id)
-    }
+    this.props.getFriends(this.props.user.id)
   }
 
   singleFriend = async friendId => {
