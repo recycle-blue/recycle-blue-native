@@ -25,9 +25,9 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('activity')
     }
   }
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null
+  // }
   render() {
     return (
       <KeyboardAvoidingView
@@ -41,7 +41,7 @@ class AddActivity extends React.Component {
             <Button title='Take Picture' onPress={() => this.props.navigation.navigate('camera')} />
             : <Image
               style={styles.image}
-              source={{ uri: this.state.imgUrl }}
+              source={{ uri: this.state.imageUrl }}
             />
           }
         </View>
@@ -142,8 +142,6 @@ const styles = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    // borderWidth: 1,
-    // borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -166,8 +164,6 @@ const styles = StyleSheet.create({
   topView: {
     width: 250,
     height: 250,
-    borderWidth: 1,
-    borderColor: 'blue',
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,

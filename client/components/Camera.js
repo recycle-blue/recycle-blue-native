@@ -60,6 +60,15 @@ class TestCamera extends React.Component {
       drawerLabel: () => null
     }
   }
+  // fakePicture = () => {
+  //   this.setState({ ...this.state, loadingToggle: true })
+  // }
+  // componentDidUpdate() {
+  //   console.log('cdm', this.state.loadingToggle)
+  //   if (this.state.loadingToggle) {
+  //     this.takePicture()
+  //   }
+  // }
   takePicture = async () => {
     if (this.camera) {
       const options = {
@@ -71,14 +80,14 @@ class TestCamera extends React.Component {
       console.log('nope! still working for now!')
       await this.props.clearActivity()
       this.savePicture(data)
-      this.setState({ ...this.state, loadingToggle: true })
+      this.setState({ loadingToggle: true })
     }
   }
 
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
     await this.props.storePicture(photoData)
-    this.props.navigation.navigate('addActivity') //Change to nav to loading screen!
+    this.props.navigation.navigate('addActivity')
   }
 
   render() {
