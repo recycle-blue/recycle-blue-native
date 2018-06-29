@@ -24,6 +24,8 @@ import {
   SocialMedia,
   Logout,
   Feed,
+  Dashboard,
+  EmailMedia
 } from '../components'
 
 const Drawer = createDrawerNavigator(
@@ -43,6 +45,7 @@ const Drawer = createDrawerNavigator(
     addComment: { screen: AddComment },
     commentCard: { screen: CommentCard },
     logout: { screen: Logout },
+    email: { screen: EmailMedia }
   },
   {
     drawerOpenRoute: 'DrawerOpen',

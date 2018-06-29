@@ -22,9 +22,9 @@ class AddAd extends React.Component {
     await this.props.addAd(this.state)
     this.props.navigation.navigate('activity')
   }
-  static navigationOptions = {
-    drawerLabel: () => null
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null
+  // }
   render() {
     const activity = {
       ...this.props.activity,
@@ -33,7 +33,6 @@ class AddAd extends React.Component {
     }
     return (
       <KeyboardAvoidingView
-        style={styles.container}
         behavior="position"
         keyboardVerticalOffset={Platform.OS === 'ios' ? -110 : -85}
         contentContainerStyle={styles.container}

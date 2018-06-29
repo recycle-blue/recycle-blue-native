@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base'
 import moment from 'moment'
 export default class CommentCard extends Component {
+  static navigationOptions = {
+    drawerLabel: () => null
+  }
   render() {
     const imageurl = 'https://i.imgur.com/lsoomRq.jpg'
     return (
@@ -29,7 +32,7 @@ export default class CommentCard extends Component {
         </Content>
       </View>
 
-    );
+    )
   }
 }
 

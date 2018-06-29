@@ -3,11 +3,9 @@ const { Tag, Product, Category } = require('../db/models')
 
 const parseImgTags = async (imgTagResults) => {
   const confidenceLimit = 0.5
-  console.log(imgTagResults)
   const googleTags = imgTagResults.google_tagging.data
   const imaggaTags = imgTagResults.imagga_tagging.data
   const awsRekTags = imgTagResults.aws_rek_tagging.data
-  console.log(googleTags, imaggaTags, awsRekTags)
   const allTags = [...googleTags, ...imaggaTags, ...awsRekTags]
   const trimmedTags = {}
   allTags.forEach(tag => {
@@ -40,7 +38,6 @@ const parseImgTags = async (imgTagResults) => {
       return matchedTag
     })
   )
-  console.log('matchCategory', matchCategory)
   if (!matchCategory.length) {
     const defaultCategory = await Category.findById(1)
     matchCategory.push(defaultCategory.dataValues)

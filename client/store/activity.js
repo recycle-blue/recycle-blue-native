@@ -62,7 +62,6 @@ export const addActivityThunk = (activity) => async dispatch => {
     await dispatch(setActivity(res.data.activity || defaultActivity))
     await dispatch(setProduct(res.data.product))
     await dispatch(setCategory(res.data.category))
-    console.log('activity', res.data.activity, 'product', res.data.product, 'category', res.data.category)
   } catch (err) {
     console.error(err)
   }
