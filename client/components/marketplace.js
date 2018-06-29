@@ -17,7 +17,7 @@ import {
   Input,
   Picker,
 } from 'native-base'
-import { getUserActivitiesThunk } from '../store'
+import { getMarketplaceAdsThunk } from '../store'
 import { ActivityCard } from '.'
 
 class Marketplace extends React.Component {
@@ -26,7 +26,7 @@ class Marketplace extends React.Component {
   }
 
   render() {
-    const { activities, user } = this.props
+    const { marketplace } = this.props
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
@@ -121,13 +121,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    activities: state.userActivities,
+    marketplace: state.activity.marketplace
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserActivitiesThunk: userId => dispatch(getUserActivitiesThunk(userId)),
+    getMarketplaceAds: location => dispatch(getMarketplaceAdsThunk(location)),
   }
 }
 

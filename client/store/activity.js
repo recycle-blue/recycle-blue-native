@@ -9,7 +9,7 @@ const SET_ACTIVITY = 'SET_ACTIVITY'
 const SAVE_PHOTO = 'SAVE_PHOTO'
 const SET_ACTIVITY_WEEK = 'SET_ACTIVITY_WEEK'
 const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
-const SET_MARKETPLACE_ACTIVITY = 'SET_MARKETPLACE_ACTIVITY'
+const SET_MARKETPLACE_ADS = 'SET_MARKETPLACE_ADS'
 
 /**
  * INITIAL STATE
@@ -40,8 +40,8 @@ const setActivityWeek = activities => ({
   type: SET_ACTIVITY_WEEK,
   activities
 })
-const setMarketplaceActivity = marketplace => ({
-  type: SET_MARKETPLACE_ACTIVITY,
+const setMarketplaceAds = marketplace => ({
+  type: SET_MARKETPLACE_ADS,
   marketplace
 })
 
@@ -62,10 +62,10 @@ export const setActivityWeekThunk = (userId) => async dispatch => {
   }
 }
 
-export const getMarketplaceActivitiesThunk = (location) => async dispatch => {
+export const getMarketplaceAdsThunk = (location) => async dispatch => {
   try {
     const res = await axios.get(`${ENV_PATH}/api/activity/marketplace/?location=${location}`)
-    dispatch(setMarketplaceActivity(res.data || defaultActivity))
+    dispatch(setMarketplaceAds(res.data || defaultActivity))
   } catch (err) {
     console.error(err)
   }
@@ -112,7 +112,7 @@ export default function (state = defaultActivity, action) {
       return { activities: action.activities }
     case CLEAR_ACTIVITY:
       return { ...defaultActivity }
-    case SET_MARKETPLACE_ACTIVITY:
+    case SET_MARKETPLACE_ADS:
       return { marketplace: action.marketplace }
     default:
       return state

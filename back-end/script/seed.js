@@ -8,7 +8,8 @@ const {
   Comments,
   User,
   Activity,
-  Tag
+  Tag,
+  Ad
 } = require('../server/db/models')
 const {
   productsData,
@@ -16,7 +17,8 @@ const {
   categoriesData,
   commentsData,
   milestonesData,
-  tagsData
+  tagsData,
+  adsData
 } = require('./seed-data')
 
 const shuffle = () => 0.5 - Math.random()
@@ -125,6 +127,12 @@ async function seed() {
         userId: user.id,
         text: randomComment.text
       })
+    })
+  )
+
+  await Promise.all(
+    adsData.map(ad => {
+      return Ad.create(ad)
     })
   )
 
