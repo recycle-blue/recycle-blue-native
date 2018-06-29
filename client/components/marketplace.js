@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, Platform } from 'react-native'
 import {
   Container,
   Tabs,
@@ -12,6 +12,10 @@ import {
   Left,
   Right,
   Thumbnail,
+  Form,
+  Item,
+  Input,
+  Picker,
 } from 'native-base'
 import { getUserActivitiesThunk } from '../store'
 import { ActivityCard } from '.'
@@ -25,33 +29,38 @@ class Marketplace extends React.Component {
     const { activities, user } = this.props
     return (
       <Container>
-        <Card style={styles.card}>
-          <CardItem>
-            <Left>
-              <Thumbnail
-                name="userThunmbnail"
-                large
-                square
-                source={{ uri: user.imageUrl }}
-              />
-              <Body>
-                <Text>{user.name}</Text>
-                <Text>{user.totalPoints}</Text>
-              </Body>
-            </Left>
-            <Right>
-              {user.milestone && (
-                <Thumbnail
-                  name="userMilestoneThumbnail"
-                  large
-                  square
-                  source={{ uri: user.milestone.badgeIcon }}
-                />
-              )}
-            </Right>
-          </CardItem>
-        </Card>
-        <View style={styles.container}>
+        <View name='StaticFrame' style={styles.container}>
+          {/* <Form> */}
+          <Item>
+            <Picker
+              name="category"
+              style={Platform.OS === 'ios' ? styles.ios : styles.android}
+              mode="dropdown"
+              selectedValue={this.state.category}
+              onValueChange={(category) => this.setState({ category })}
+            >
+              <Picker.Item label="Category" value="Other" />
+              <Picker.Item label="Plastic" value="Plastic" />
+              <Picker.Item label="Glass" value="Glass" />
+              <Picker.Item label="Metal" value="Metal" />
+              <Picker.Item label="Paper" value="Paper" />
+              <Picker.Item label="Wood" value="Wood" />
+              <Picker.Item label="Compost" value="Compost" />
+              <Picker.Item label="Landfill" value="Landfill" />
+              <Picker.Item label="Category" value="Other" />
+            </Picker>
+
+            {/* <Item> */}
+            {/* <Item> */}
+            <Input
+              placeholder="Search For Other Users"
+              onChangeText={this.handleChange}
+            />
+            <Icon active name="search" />
+            {/* </Item> */}
+          </Item>
+          {/* </Form> */}
+
           <Tabs renderTabBar={() => <ScrollableTab />}>
             <Tab heading="Progess">
               <ScrollView>
