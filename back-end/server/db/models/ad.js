@@ -31,6 +31,18 @@ const Ad = db.define('ad', {
   description: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  latitude: {
+    type: Sequelize.STRING
+  },
+  longitude: {
+    type: Sequelize.STRING
+  },
+  location: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.getDataValue('latitude')
+    }
   }
 })
 
@@ -53,6 +65,16 @@ Ad.filterByDistance = async function(userLocation) {
     return newArray
   }, [])
   return filteredAds
+}
+
+Ad.afterCreate = async function(ad) {
+  const address = `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`
+  const {data} = await axios.get(
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${address}&inputtype=textquery&key=${googleAPIKey}`
+  )
+  ad.latitude = data.results[0].geometry.location.lat
+  ad.longitude = data.results[0].geometry.location.lng
+  console.log('AD:', ad)
 }
 
 module.exports = Ad
