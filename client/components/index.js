@@ -21,4 +21,4 @@ export { default as FeedCard } from './feed-card'
 export { default as UserDashboard } from './user-dashboard'
 export { default as FriendDashboard } from './friend-dashboard'
 export { default as Dashboard } from './Dashboard'
-
+export { default as Marketplace } from './marketplace'

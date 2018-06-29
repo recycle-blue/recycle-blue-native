@@ -1,34 +1,34 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
-import {connect} from 'react-redux'
-import { Container, Tabs,Tab, ScrollableTab } from 'native-base';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+import { Container, Tabs, Tab, ScrollableTab } from 'native-base';
 import { getLeadersThunk } from '../store'
 
 class Leaderboard extends React.Component {
 
-    componentDidMount() {
-      this.props.getLeaderboard(this.props.user.id)
-    }
+  componentDidMount() {
+    this.props.getLeaderboard(this.props.user.id)
+  }
 
-    render(){
-      const {leaders} = this.props
-      return (
-        <ScrollView>
-          {leaders.length ?
-            leaders.map(leader =>
-              <View key={leader.id}>
-                <Image
-                  source={{uri: leader.imageUrl}}
-                  style={styles.image}
-                />
-                <Text>{leader.name}</Text>
-                <Text>{leader.totalPoints}</Text>
-              </View>
-            )
-            : <Text> No response </Text>}
-        </ScrollView>
-      )
-    }
+  render() {
+    const { leaders } = this.props
+    return (
+      <ScrollView>
+        {leaders.length ?
+          leaders.map(leader =>
+            <View key={leader.id}>
+              <Image
+                source={{ uri: leader.imageUrl }}
+                style={styles.image}
+              />
+              <Text>{leader.name}</Text>
+              <Text>{leader.totalPoints}</Text>
+            </View>
+          )
+          : <Text style={{ textAlign: 'center' }}> No response </Text>}
+      </ScrollView>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
