@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container } from 'native-base'
+import { Container, Spinner } from 'native-base'
 import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
@@ -33,11 +33,7 @@ class MapComp extends React.Component {
     const { recycleLocations, selectedMarker, isFetching } = this.props
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
-      return (
-        <View>
-          <Text>LOADING MAP...</Text>
-        </View>
-      )
+      return <Spinner color="blue" />
     }
     return (
       <Container>

@@ -1,13 +1,18 @@
 import React from 'react'
-import { Button } from 'react-native'
-import { createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
+import { Button, Icon, Text } from 'native-base'
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+  createSwitchNavigator,
+} from 'react-navigation'
 import {
   Login,
   AddActivity,
   AddAd,
   Camera,
   MapComp,
-  Dashboard,
+  UserDashboard,
+  FriendDashboard,
   Activity,
   LoadingScreen,
   Leaderboard,
@@ -18,12 +23,12 @@ import {
   CommentCard,
   SocialMedia,
   Logout,
-  Feed
+  Feed,
 } from '../components'
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: { screen: Dashboard },
+    dashboard: { screen: UserDashboard },
     addActivity: { screen: AddActivity },
     addAd: { screen: AddAd },
     map: { screen: MapComp },
@@ -37,7 +42,7 @@ const Drawer = createDrawerNavigator(
     searchUsers: { screen: SearchUsers },
     addComment: { screen: AddComment },
     commentCard: { screen: CommentCard },
-    logout: { screen: Logout }
+    logout: { screen: Logout },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
@@ -62,19 +67,27 @@ const PrimaryNav = createStackNavigator(
       headerTintColor: 'white',
       headerLeft: (
         <Button
-          title="Menu"
+          transparent
           onPress={() => {
             navigation.toggleDrawer()
           }}
-        />
+        >
+          <Text>
+            <Icon ios="ios-menu" android="md-menu" style={{ color: 'white' }} />
+          </Text>
+        </Button>
       ),
       headerRight: (
         <Button
-          title="Cam"
+          transparent
           onPress={() => {
             navigation.navigate('camera')
           }}
-        />
+        >
+          <Text>
+            <Icon name="add" style={{ color: 'white' }} />
+          </Text>
+        </Button>
       ),
     }),
   }
@@ -83,6 +96,7 @@ const PrimaryNav = createStackNavigator(
 const InitialNav = createSwitchNavigator({
   login: { screen: Login },
   primaryNav: { screen: PrimaryNav },
+  friendDashboard: { screen: FriendDashboard },
 })
 
 export default InitialNav
