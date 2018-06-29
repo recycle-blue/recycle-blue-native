@@ -54,7 +54,7 @@ class Friends extends React.Component {
               )
             })
           ) : (
-            <View> No Result </View>
+            <Text> No Result </Text>
           )}
         </ScrollView>
       </Container>

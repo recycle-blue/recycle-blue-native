@@ -24,10 +24,10 @@ const getFriendsAction = friends => {
   }
 }
 
-export const getUsersThunk = () => {
+export const getUsersThunk = (text) => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${ENV_PATH}/api/users`)
+      const { data } = await axios.get(`${ENV_PATH}/api/users/search?name=${text}`)
       dispatch(getUsersAction(data))
     } catch (err) {
       console.error(err.message)

@@ -72,7 +72,7 @@ class UserCard extends React.Component {
           </Left>
           <Right>
             {!friends &&
-              !this.state.isFriendOfUser && (
+              !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) &&(
                 <Button
                   success
                   onPress={() => this.addFriend(currentUser.id, user.id)}
