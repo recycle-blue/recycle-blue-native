@@ -25,7 +25,6 @@ import {
   Logout,
   Feed,
   Dashboard,
-  EmailMedia
 } from '../components'
 
 const Drawer = createDrawerNavigator(
