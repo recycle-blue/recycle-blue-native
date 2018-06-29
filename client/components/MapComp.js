@@ -23,7 +23,7 @@ class MapComp extends React.Component {
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
-      view === 'recycle'
+      view === 'recycling'
         ? this.props.fetchRecycleLocations(locationStr)
         : this.props.fetchAdLocations(locationStr)
 
@@ -35,9 +35,10 @@ class MapComp extends React.Component {
     if (prevProps.view !== this.props.view) {
       const { userLocation } = this.props
       const locationStr = `${userLocation.latitude},${userLocation.longitude}`
-      this.props.view === 'recycle'
+      this.props.view === 'recycling'
         ? await this.props.fetchRecycleLocations(locationStr)
         : await this.props.fetchAdLocations(locationStr)
+      this.props.setFetch(false)
     }
   }
   handleMarkerPress = marker => {
@@ -64,22 +65,24 @@ class MapComp extends React.Component {
           }}
         >
           {locations.map(marker => {
-            let location
-            if (view === 'recycle') {
+            let location, id
+            if (view === 'recycling') {
               location = {
                 latitude: marker.geometry.location.lat,
                 longitude: marker.geometry.location.lng,
               }
+              id = marker.id
             } else {
               location = {
-                latitude: marker.ad.latitude,
-                longitude: marker.ad.longitude,
+                latitude: +marker.ad.latitude,
+                longitude: +marker.ad.longitude,
               }
+              id = marker.ad.id
             }
 
             return (
               <MapView.Marker
-                key={marker.id}
+                key={id}
                 coordinate={location}
                 onPress={() => this.handleMarkerPress(marker)}
               />
