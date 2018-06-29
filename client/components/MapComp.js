@@ -31,14 +31,22 @@ class MapComp extends React.Component {
       this.props.setFetch(false)
     })
   }
+  async componentDidUpdate(prevProps) {
+    if (prevProps.view !== this.props.view) {
+      const { userLocation } = this.props
+      const locationStr = `${userLocation.latitude},${userLocation.longitude}`
+      this.props.view === 'recycle'
+        ? await this.props.fetchRecycleLocations(locationStr)
+        : await this.props.fetchAdLocations(locationStr)
+    }
+  }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
   }
 
   render() {
-    const { locations, selectedMarker, isFetching } = this.props
+    const { locations, selectedMarker, isFetching, view } = this.props
     const { latitude, longitude } = this.props.userLocation
-    console.log('MARKERS:', locations, 'VIEW:', this.props.view)
     if (isFetching) {
       return <Spinner color="blue" />
     }
@@ -56,10 +64,19 @@ class MapComp extends React.Component {
           }}
         >
           {locations.map(marker => {
-            const location = {
-              latitude: marker.geometry.location.lat,
-              longitude: marker.geometry.location.lng,
+            let location
+            if (view === 'recycle') {
+              location = {
+                latitude: marker.geometry.location.lat,
+                longitude: marker.geometry.location.lng,
+              }
+            } else {
+              location = {
+                latitude: marker.ad.latitude,
+                longitude: marker.ad.longitude,
+              }
             }
+
             return (
               <MapView.Marker
                 key={marker.id}

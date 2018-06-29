@@ -1,6 +1,8 @@
 import React from 'react'
-import { Form, Picker, Icon, Container } from 'native-base'
+import { connect } from 'react-redux'
+import { Form, Picker, Icon, Container, Spinner } from 'native-base'
 import MapComp from './MapComp'
+import { setFetch } from '../store'
 
 class MapWrapper extends React.Component {
   constructor() {
@@ -12,6 +14,7 @@ class MapWrapper extends React.Component {
 
   handleChange = value => {
     this.setState({ view: value })
+    this.props.setFetch(true)
   }
   render() {
     return (
@@ -36,4 +39,18 @@ class MapWrapper extends React.Component {
   }
 }
 
-export default MapWrapper
+const mapState = state => {
+  return {
+    isFetching: state.location.isFetching,
+  }
+}
+const mapDispatch = dispatch => {
+  return {
+    setFetch: status => dispatch(setFetch(status)),
+  }
+}
+
+export default connect(
+  mapState,
+  mapDispatch
+)(MapWrapper)

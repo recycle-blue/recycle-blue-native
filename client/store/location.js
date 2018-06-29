@@ -42,7 +42,7 @@ export const setFetch = status => {
 
 export const getRecycleLocationsThunk = locationStr => {
   return async dispatch => {
-    console.log('recycle thunk called')
+    console.log('fetch recycle called')
     const { data } = await axios.get(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=recycle&radius=3000&key=${googleAPIKey}`
     )
@@ -51,7 +51,7 @@ export const getRecycleLocationsThunk = locationStr => {
 }
 export const getAdLocationsThunk = locationStr => {
   return async dispatch => {
-    console.log('ad thunk called')
+    console.log('fetchAd called')
     const { data } = await axios.get(
       `${ENV_PATH}/api/activity/marketplace?location=${locationStr}`
     )
