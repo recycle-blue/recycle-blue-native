@@ -56,7 +56,8 @@ class TestCamera extends React.Component {
         <Button transparent onPress={() => navigation.goBack()}>
           <Icon style={{ color: 'white' }} name='arrow-back' />
         </Button>
-      )
+      ),
+      drawerLabel: () => null
     }
   }
   // fakePicture = () => {

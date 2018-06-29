@@ -22,7 +22,7 @@ const Activity = db.define('activity', {
   },
   points: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 1
   },
   type: {
     type: Sequelize.STRING,

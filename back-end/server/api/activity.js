@@ -110,7 +110,7 @@ router.post('/', async (req, res, next) => {
       }
     }
     const user = userData.dataValues
-    const activityPoints = category.multiplier * product.points
+    const activityPoints = category.multiplier * product.points * Number(req.body.quantity)
     const newTotalPoints = activityPoints + user.totalPoints
     User.update({ totalPoints: newTotalPoints }, { where: { id: user.id } })
     const newActivityData = await Activity.create({

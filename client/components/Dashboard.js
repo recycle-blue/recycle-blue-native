@@ -79,8 +79,8 @@ class Dashboard extends React.Component {
                     />
                   ))
                 ) : (
-                  <Text> No Activity Yet! </Text>
-                )}
+                    <Text> No Activity Yet! </Text>
+                  )}
               </ScrollView>
             </Tab>
           </Tabs>

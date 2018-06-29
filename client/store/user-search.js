@@ -44,6 +44,7 @@ export const getUserThunk = userId => {
     }
   }
 }
+
 export const getFriendsHashThunk = userId => {
   return async dispatch => {
     try {
@@ -63,7 +64,7 @@ const initialState = {
   friends: {},
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ALL_USERS:
       return { ...state, users: action.users }
