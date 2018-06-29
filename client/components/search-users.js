@@ -3,7 +3,15 @@ import { connect } from 'react-redux'
 import { getUsersThunk, getFriendsHashThunk } from '../store'
 import { ScrollView } from 'react-native'
 import UserCard from './user-card'
-import { Container, Content, Item, Icon, Input, Text } from 'native-base'
+import {
+  Container,
+  Content,
+  Item,
+  Icon,
+  Input,
+  Text,
+  Spinner,
+} from 'native-base'
 
 class SearchUsers extends React.Component {
   constructor() {
@@ -49,7 +57,7 @@ class SearchUsers extends React.Component {
   }
 
   render() {
-    if (this.state.isLoading) return <Text>LOADING...</Text>
+    if (this.state.isLoading) return <Spinner color="blue" />
     const { users } = this.props
     const { text } = this.state
     const filteredUsers = this.filterResults(users, text)
