@@ -17,11 +17,23 @@ class UserCard extends React.Component {
   constructor() {
     super()
     this.state = {
-      isFriendOfUser: false,
+      isFriendOfUser: null,
     }
   }
 
   componentDidMount() {
+    console.log('componentDidMount called')
+    this.checkIfFriend()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate called')
+    if (prevState.isFriendOfUser !== this.state.isFriendOfUser) {
+      this.checkIfFriend()
+    }
+  }
+
+  checkIfFriend() {
     const { user, friendsObj } = this.props
     if (friendsObj[user.id]) return this.setState({ isFriendOfUser: true })
     this.setState({ isFriendOfUser: false })

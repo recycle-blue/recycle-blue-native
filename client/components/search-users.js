@@ -10,12 +10,15 @@ class SearchUsers extends React.Component {
     super()
     this.state = {
       text: '',
+      isLoading: true,
     }
   }
 
   async componentDidMount() {
+    this.setState({ isLoading: true })
     await this.props.fetchUsers()
     await this.props.getFriends(this.props.user.id)
+    this.setState({ isLoading: false })
   }
 
   handleChange = text => {
@@ -46,6 +49,7 @@ class SearchUsers extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) return <Text>LOADING...</Text>
     const { users } = this.props
     const { text } = this.state
     const filteredUsers = this.filterResults(users, text)

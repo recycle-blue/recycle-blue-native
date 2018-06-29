@@ -50,7 +50,7 @@ export const getFriendsHashThunk = userId => {
       const { data } = await axios.get(
         `${ENV_PATH}/api/users/${userId}/friends?res=hash`
       )
-      dispatch(getFriendsAction(data))
+      return dispatch(getFriendsAction(data))
     } catch (err) {
       console.error(err.message)
     }
