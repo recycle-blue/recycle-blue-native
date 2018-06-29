@@ -29,7 +29,7 @@ class Marketplace extends React.Component {
 
   async componentDidMount() {
     this.setState({ isLoading: true })
-    // await this.props.getMarketplaceAdsThunk()
+    // await this.props.getMarketplaceAds()
     this.setState({ isLoading: false })
   }
 
