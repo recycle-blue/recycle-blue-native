@@ -17,14 +17,10 @@ import {
   LoadingScreen,
   Leaderboard,
   Friends,
-  ActivityCard,
   SearchUsers,
-  AddComment,
-  CommentCard,
-  SocialMedia,
   Logout,
   Feed,
-  Dashboard,
+  Marketplace,
 } from '../components'
 
 const Drawer = createDrawerNavigator(
@@ -36,13 +32,12 @@ const Drawer = createDrawerNavigator(
     camera: { screen: Camera },
     activity: { screen: Activity },
     loadingScreen: { screen: LoadingScreen },
+    'Post Activity': { screen: Camera },
+    Marketplace: { screen: Marketplace },
     leaderboard: { screen: Leaderboard },
     feed: { screen: Feed },
     friends: { screen: Friends },
-    socialMedia: { screen: SocialMedia },
     searchUsers: { screen: SearchUsers },
-    addComment: { screen: AddComment },
-    commentCard: { screen: CommentCard },
     logout: { screen: Logout },
   },
   {
@@ -56,7 +51,7 @@ const Drawer = createDrawerNavigator(
 const PrimaryNav = createStackNavigator(
   {
     drawerStack: { screen: Drawer },
-    camera: { screen: Camera },
+    'Post Activity': { screen: Camera },
   },
   {
     title: 'main',
@@ -82,7 +77,7 @@ const PrimaryNav = createStackNavigator(
         <Button
           transparent
           onPress={() => {
-            navigation.navigate('camera')
+            navigation.navigate('Post Activity')
           }}
         >
           <Text>

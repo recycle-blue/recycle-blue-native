@@ -15,6 +15,8 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  */
 const defaultActivity = {
   id: 1,
+  name: '',
+  category: '',
   photo: '',
   quantity: '1',
   imageUrl: 'default',
@@ -23,8 +25,6 @@ const defaultActivity = {
   productId: 1,
   categoryId: 1,
   activities: [],
-  category: '',
-  name: '',
 }
 
 /**
@@ -90,11 +90,11 @@ export const savePhotoThunk = (photo) => async dispatch => {
 export default function (state = defaultActivity, action) {
   switch (action.type) {
     case SET_ACTIVITY:
-      return { ...state, ...action.activity }
+      return { ...action.activity }
     case SAVE_PHOTO:
-      return { ...state, photo: action.photo }
+      return { photo: action.photo }
     case SET_ACTIVITY_WEEK:
-      return { ...state, activities: action.activities }
+      return { activities: action.activities }
     case CLEAR_ACTIVITY:
       return { ...defaultActivity }
     default:
