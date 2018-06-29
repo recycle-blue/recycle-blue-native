@@ -5,8 +5,7 @@ import { ENV_PATH } from '../secrets'
  * ACTION TYPES
  */
 const SET_AD = 'SET_AD'
-// const CLEAR_AD = 'CLEAR_AD'
-// const SET_AD_WEEK = 'SET_AD_WEEK'
+const SET_MARKETPLACE_ADS = 'SET_MARKETPLACE_ADS'
 
 
 /**
@@ -21,6 +20,7 @@ const defaultAd = {
   email: '',
   phone: '',
   description: '',
+  marketplace: []
 }
 
 /**
@@ -30,23 +30,19 @@ export const setAd = ad => ({
   type: SET_AD,
   ad
 })
-// const setAdWeek = activities => ({
-//   type: SET_AD_WEEK,
-//   activities
-// })
-// export const clearAdAction = () => ({ type: CLEAR_AD })
-/**
- * THUNK CREATORS
- */
+const setMarketplaceAds = marketplace => ({
+  type: SET_MARKETPLACE_ADS,
+  marketplace
+})
 
-// export const setAdWeekThunk = (userId) => async dispatch => {
-//   try {
-//     const res = await axios.get(`${ENV_PATH}/api/activity/ad/weekly/${userId}`)
-//     dispatch(setAdWeek(res.data || defaultAd))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
+export const getMarketplaceAdsThunk = (location) => async dispatch => {
+  try {
+    const res = await axios.get(`${ENV_PATH}/api/activity/marketplace/?location=${location}`)
+    dispatch(setMarketplaceAds(res.data || defaultAd))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const addAdThunk = (ad) => async dispatch => {
   try {
@@ -72,10 +68,8 @@ export default function (state = defaultAd, action) {
   switch (action.type) {
     case SET_AD:
       return { ...state, ...action.ad }
-    // case SET_AD_WEEK:
-    //   return action.activities
-    // case CLEAR_AD:
-    //   return { ...defaultAd }
+    case SET_MARKETPLACE_ADS:
+      return { marketplace: action.marketplace }
     default:
       return state
   }

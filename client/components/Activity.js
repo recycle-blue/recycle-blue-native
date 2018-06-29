@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ class Activity extends React.Component {
   // }
 
   render() {
-    console.log(this.props.photo)
+    console.log("this.props.type", this.props.type)
     return (
       <KeyboardAvoidingView
         enabled={true}

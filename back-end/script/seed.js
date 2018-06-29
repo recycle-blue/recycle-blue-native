@@ -8,7 +8,8 @@ const {
   Comments,
   User,
   Activity,
-  Tag
+  Tag,
+  Ad
 } = require('../server/db/models')
 const {
   productsData,
@@ -16,7 +17,8 @@ const {
   categoriesData,
   commentsData,
   milestonesData,
-  tagsData
+  tagsData,
+  adsData
 } = require('./seed-data')
 
 const shuffle = () => 0.5 - Math.random()
@@ -70,14 +72,14 @@ async function seed() {
   )
 
   await Promise.all(
-    users.map(user => {
+    users.map((user, i) => {
       const randomProducts = products.sort(shuffle).slice(0, 5)
       const quantity = randomIndexGenerator(5)
       const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
-      const type = quantity > 3 ? 'activity' : 'ad'
       return Promise.all(
-        randomProducts.map(product => {
+        randomProducts.map((product, j) => {
           const categoryId = randomIndexGenerator(categories.length)
+          const type = ((i + j) % 2 || i + j > 13) ? 'activity' : 'ad'
           return Activity.create({
             productId: product.id,
             categoryId,
@@ -125,6 +127,12 @@ async function seed() {
         userId: user.id,
         text: randomComment.text
       })
+    })
+  )
+
+  await Promise.all(
+    adsData.map(ad => {
+      return Ad.create(ad)
     })
   )
 
