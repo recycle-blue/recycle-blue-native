@@ -56,6 +56,14 @@ export const addAdThunk = (ad) => async dispatch => {
     console.error(err)
   }
 }
+export const getAdThunk = (activityId) => async dispatch => {
+  try {
+    const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}/ad`)
+    dispatch(setAd(res.data || defaultAd))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 /**
  * REDUCER

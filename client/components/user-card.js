@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectUserAction } from '../store'
+import { getUserThunk, addFriendThunk } from '../store'
 import {
   Card,
   CardItem,
@@ -13,50 +13,95 @@ import {
 } from 'native-base'
 import { Image } from 'react-native'
 
-const UserCard = props => {
-  const { user, navigate } = props
-  return (
-    <Card key={user.id}>
-      <CardItem onPress={() => console.log('pressed!')}>
-        <Left>
-          <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
-          <Body>
-            <Text>{user.name}</Text>
-            <Text note>{user.totalPoints}</Text>
-          </Body>
-        </Left>
-      </CardItem>
-      <CardItem cardBody>
-        <Left />
-        <Thumbnail source={{ uri: user.imageUrl }} large />
-        <Right />
-      </CardItem>
-      <CardItem>
-        <Left>
-          <Body>
-            <Button
-              primary
-              onPress={() => {
-                props.selectUser(user.id)
-                props.navigate('dashboard')
-              }}
-            >
-              <Text> View Dashboard </Text>
-            </Button>
-          </Body>
-        </Left>
-      </CardItem>
-    </Card>
-  )
+class UserCard extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isFriendOfUser: null,
+    }
+  }
+
+  componentDidMount() {
+    this.checkIfFriend()
+  }
+
+  checkIfFriend() {
+    const { user, friendsObj } = this.props
+    if (friendsObj[user.id]) return this.setState({ isFriendOfUser: true })
+    this.setState({ isFriendOfUser: false })
+  }
+
+  addFriend = async (currentUserId, selectedUserId) => {
+    await this.props.addFriend(currentUserId, selectedUserId)
+    this.setState({ isFriendOfUser: true })
+  }
+
+  render() {
+    const { user, navigate, currentUser, friends } = this.props
+    return (
+      <Card key={user.id}>
+        <CardItem>
+          <Left>
+            {user.milestone && (
+              <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
+            )}
+            <Body>
+              <Text>{user.name}</Text>
+              <Text note>{user.totalPoints}</Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem cardBody>
+          <Left />
+          <Thumbnail source={{ uri: user.imageUrl }} large />
+          <Right />
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Body>
+              <Button
+                primary
+                onPress={() => {
+                  this.props.selectUser(user.id)
+                  navigate('friendDashboard')
+                }}
+              >
+                <Text> View Dashboard </Text>
+              </Button>
+            </Body>
+          </Left>
+          <Right>
+            {!friends &&
+              !this.state.isFriendOfUser && (
+                <Button
+                  success
+                  onPress={() => this.addFriend(currentUser.id, user.id)}
+                >
+                  <Text> Add Friend </Text>
+                </Button>
+              )}
+          </Right>
+        </CardItem>
+      </Card>
+    )
+  }
 }
 
+const mapState = state => {
+  return {
+    friendsObj: state.userSearch.friends,
+    currentUser: state.user,
+  }
+}
 const mapDispatch = dispatch => {
   return {
-    selectUser: userId => dispatch(selectUserAction(userId)),
+    selectUser: userId => dispatch(getUserThunk(userId)),
+    addFriend: (currentUserId, selectedUserId) =>
+      dispatch(addFriendThunk(currentUserId, selectedUserId)),
   }
 }
 
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(UserCard)

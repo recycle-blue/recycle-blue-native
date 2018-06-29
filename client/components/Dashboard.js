@@ -14,62 +14,17 @@ import {
   Thumbnail,
   Button,
 } from 'native-base'
-import {
-  getUserActivitiesThunk,
-  setSelectedFriend,
-  selectUserAction,
-  addFriendThunk,
-  getFriendsThunk,
-} from '../store'
+import { getUserActivitiesThunk } from '../store'
 import { ProgressChart, ActivityChart, ActivityCard } from '.'
 
 class Dashboard extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isFriendOrSelf: true,
-    }
-  }
+  // static navigationOptions = { drawerLabel: () => null }
   componentDidMount() {
-    if (!this.props.selectedFriend.id && !this.props.selectedUser.id) {
-      this.props.getUserActivitiesThunk(this.props.user.id)
-    }
-    this.checkIfFriendOrSelf()
-  }
-
-  componentWillUnmount() {
-    this.props.removeSelectedFriend()
-    this.props.removeSelectedUser()
-  }
-
-  addFriend = async (currentUserId, selectedUserId) => {
-    await this.props.addFriend(currentUserId, selectedUserId)
-    this.props.navigation.navigate('friends')
-  }
-
-  async checkIfFriendOrSelf() {
-    const { selectedFriend, selectedUser, user } = this.props
-    // if selectedFriend.id is defined, then we immediately know this is a friend
-    if (selectedFriend.id || selectedUser.id === user.id || !selectedUser.id) {
-      this.setState({ isFriendOrSelf: true })
-    } else {
-      if (!this.props.friends.length) {
-        await this.props.getFriends(user.id)
-      }
-      const isFriendOrSelf =
-        this.props.friends.filter(friend => friend.id === selectedUser.id)
-          .length > 0
-      this.setState({ isFriendOrSelf })
-    }
+    this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
   render() {
-    let user = this.props.selectedFriend.id
-      ? this.props.selectedFriend
-      : this.props.user
-    if (this.props.selectedUser.id) user = this.props.selectedUser
-    const { activities } = this.props
-    // this.checkIfFriendOrSelf(this.props.user, user)
+    const { activities, user } = this.props
     return (
       <Container>
         <Card style={styles.card}>
@@ -84,28 +39,17 @@ class Dashboard extends React.Component {
               <Body>
                 <Text>{user.name}</Text>
                 <Text>{user.totalPoints}</Text>
-                {!this.state.isFriendOrSelf && (
-                  <Button
-                    primary
-                    onPress={() =>
-                      this.addFriend(
-                        this.props.user.id,
-                        this.props.selectedUser.id
-                      )
-                    }
-                  >
-                    <Text style={{ color: 'white' }}> Add Friend </Text>
-                  </Button>
-                )}
               </Body>
             </Left>
             <Right>
-              <Thumbnail
-                name="userMilestoneThumbnail"
-                large
-                square
-                source={{ uri: user.milestone.badgeIcon }}
-              />
+              {user.milestone && (
+                <Thumbnail
+                  name="userMilestoneThumbnail"
+                  large
+                  square
+                  source={{ uri: user.milestone.badgeIcon }}
+                />
+              )}
             </Right>
           </CardItem>
         </Card>
@@ -135,8 +79,8 @@ class Dashboard extends React.Component {
                     />
                   ))
                 ) : (
-                    <Text> No Activity Yet! </Text>
-                  )}
+                  <Text> No Activity Yet! </Text>
+                )}
               </ScrollView>
             </Tab>
           </Tabs>
@@ -170,22 +114,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
-    selectedFriend: state.selectedFriend,
-    selectedUser: state.userSearch.selectedUser,
     activities: state.userActivities,
-    friends: state.friends,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getUserActivitiesThunk: userId => dispatch(getUserActivitiesThunk(userId)),
-    removeSelectedFriend: () => dispatch(setSelectedFriend({})),
-    removeSelectedUser: () => dispatch(selectUserAction(0)),
-    addFriend: (currentUserId, selectedUserId) =>
-      dispatch(addFriendThunk(currentUserId, selectedUserId)),
-    getFriends: userId => dispatch(getFriendsThunk(userId)),
   }
 }
 

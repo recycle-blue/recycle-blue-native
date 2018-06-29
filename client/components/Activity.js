@@ -2,12 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import { getProductThunk } from '../store/product'
-import { AddComment } from './'
+import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
+import { AddComment, AdView, CommentCard } from './'
 
 class Activity extends React.Component {
   componentWillMount() {
     this.props.getProduct(this.props.productId)
+    this.props.getCategory(this.props.categoryId)
+    this.props.getComments(this.props.activityId)
+  }
+  static navigationOptions = {
+    drawerLabel: () => null
   }
 
   render() {
@@ -31,9 +36,12 @@ class Activity extends React.Component {
               color='#58A4B0'
             />
           </View>
+          {this.props.type === 'ad' && <AdView />}
+          {this.props.comments.length ?
+            this.props.comments.map((singlecomment) => <CommentCard key={singlecomment.id} comment={singlecomment} />) :
+            <Text>There are no comments</Text>}
           <AddComment navigation={this.props.navigation} />
         </Content>
-
       </Container>
     )
   }
@@ -59,14 +67,18 @@ const mapStateToProps = state => {
     recycleUse: state.product.recycleUse,
     photo: state.activity.imageUrl || state.activity.photo,
     productId: state.activity.productId,
-    activityId: state.activity.id
-
+    activityId: state.activity.id,
+    categoryId: state.activity.categoryId,
+    comments: state.comments,
+    type: state.activity.type,
   })
 }
 
 const mapDispatchToProps = dispacth => {
   return ({
-    getProduct: (productId) => dispacth(getProductThunk(productId))
+    getProduct: (productId) => dispacth(getProductThunk(productId)),
+    getCategory: (categoryId) => dispacth(getCategoryThunk(categoryId)),
+    getComments: (activityId) => dispacth(getCommentsThunk(activityId))
   })
 }
 

@@ -43,11 +43,7 @@ class MapComp extends React.Component {
     const { recycleLocations, selectedMarker, isFetching } = this.props
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
-      return (
-        <Container>
-          <Spinner color="blue" />
-        </Container>
-      )
+      return <Spinner color="blue" />
     }
     return (
       <Container>

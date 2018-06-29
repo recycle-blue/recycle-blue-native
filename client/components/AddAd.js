@@ -9,7 +9,7 @@ class AddAd extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activityId: this.props.activityId,
+      activityId: this.props.activity.id,
       address: this.props.address,
       city: this.props.city,
       state: this.props.state,
@@ -21,6 +21,9 @@ class AddAd extends React.Component {
   handleSubmit = async () => {
     await this.props.addAd(this.state)
     this.props.navigation.navigate('activity')
+  }
+  static navigationOptions = {
+    drawerLabel: () => null
   }
   render() {
     const activity = {

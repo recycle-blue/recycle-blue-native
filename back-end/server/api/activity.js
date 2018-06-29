@@ -39,6 +39,30 @@ router.get('/weekly/:userId', async (req, res, next) => {
   }
 })
 
+router.get('/:activityId/ad', async (req, res, next) => {
+  try {
+    const ad = await Ad.find({
+      where: {
+        activityId: +req.params.activityId
+      }
+    })
+    res.json(ad)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:activityId/comments', async (req, res, next) => {
+  try {
+    const comments = await Activity.findById(req.params.activityId, {
+      include: [{model: Comments, include: [User]}]
+    })
+    res.json(comments)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // POST Routes
 const sendPhotoToCloud = async photo => {
   const cloudData = await cloudinary.v2.uploader.upload(photo, {
@@ -50,7 +74,7 @@ const sendPhotoToCloud = async photo => {
   const parsedTags = await parseImgTags(imgRecognitionResults)
   return {
     product: parsedTags.product,
-    categoryList: parsedTags.categories,
+    category: parsedTags.category,
     tags: parsedTags.tags,
     imageUrl
   }
