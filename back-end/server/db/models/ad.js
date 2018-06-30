@@ -4,6 +4,8 @@ const Op = Sequelize.Op
 const axios = require('axios')
 const Activity = require('./activity')
 
+if (!process.env.GOOGLE_API_KEY) require('../../../secrets')
+
 const Ad = db.define('ad', {
   address: {
     type: Sequelize.STRING,
