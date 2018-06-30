@@ -24,12 +24,14 @@ class AdMarker extends React.Component {
       <Card>
         <CardItem>
           <Body>
-            <Text>{marker.ad.email}</Text>
+            <Text style={{ fontWeight: 'bold' }}>{marker.ad.email}</Text>
+            <Text>{marker.ad.description}</Text>
           </Body>
         </CardItem>
         <CardItem>
           <Body>
             <Text>{marker.ad.address}</Text>
+            <Text>{`${marker.ad.city}, ${marker.ad.state}`}</Text>
           </Body>
         </CardItem>
         <CardItem>
