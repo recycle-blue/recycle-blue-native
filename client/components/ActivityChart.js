@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from 'react-redux'
 import { VictoryChart, VictoryTheme, VictoryArea } from "victory-native";
+import Svg, { Text } from 'react-native-svg';
 
 const data = [
   { day: "Mon", recycled: 13000 },
@@ -18,11 +19,20 @@ class ActivityChart extends React.Component {
 
     return (
       <View style={styles.container}>
-        <VictoryChart width={350} theme={VictoryTheme.material} animate={{
-          duration: 1000,
-          onLoad: { duration: 700 }
-        }}>
-          <VictoryArea data={data} x="day" y="recycled" />
+        <VictoryChart
+          width={350}
+          theme={VictoryTheme.material}
+          animate={{
+            duration: 1000,
+            onLoad: { duration: 700 }
+          }}>
+          <VictoryArea
+            data={data}
+            x="day"
+            y="recycled"
+            style={{
+              data: { fill: "#c43a31" }
+            }} />
         </VictoryChart>
       </View>
     );

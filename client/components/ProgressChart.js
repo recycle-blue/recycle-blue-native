@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { ProgressCircle } from 'react-native-svg-charts'
 import { VictoryPie, VictoryTheme } from 'victory-native'
-import { View, Dimensions } from 'react-native'
+import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg';
 
 
@@ -21,7 +20,7 @@ class ProgressChart extends React.Component {
     console.log("what is my height here?", height)
 
     return (
-      <View>
+      <View style={styles.container}>
         <Svg height={halfheight} width={width}>
           <VictoryPie
             data={[
@@ -42,7 +41,6 @@ class ProgressChart extends React.Component {
             labelRadius={1}
             colorScale={["#3880f4", "#3880f4",]}
             width={350}
-            theme={VictoryTheme.material}
             innerRadius={100}
             standalone={false}
           />
@@ -51,7 +49,7 @@ class ProgressChart extends React.Component {
             fontSize="20"
             fontWeight="bold"
             x={`${width / 2}`}
-            y={`${(halfheight / .9)}`}
+            y={`${(halfheight / 7)}`}
             textAnchor="middle"
           >Mile Stone Progress</Text>
           <Text
@@ -68,6 +66,15 @@ class ProgressChart extends React.Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5fcff"
+  }
+});
 
 
 export default connect(mapStateToProps)(ProgressChart);
