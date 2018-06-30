@@ -1,13 +1,15 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Spinner } from 'native-base'
+import { Container, Spinner, Content } from 'native-base'
 import { Text, View } from 'react-native'
 import {
   getRecycleLocationsThunk,
+  getAdLocationsThunk,
   getUserLocationAction,
   selectMarkerAction,
   setFetch,
+  getLocationsAction,
 } from '../store/location'
 import MarkerDetail from './MarkerDetail'
 
@@ -15,22 +17,42 @@ const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
   componentDidMount() {
+    const { view } = this.props
+    this.props.setFetch(true)
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
-      this.props.fetchRecycleLocations(locationStr)
+      view === 'recycling'
+        ? this.props.fetchRecycleLocations(locationStr)
+        : this.props.fetchAdLocations(locationStr)
+
       this.props.setUserLocation(userLocation)
       this.props.setFetch(false)
     })
   }
+  async componentDidUpdate(prevProps) {
+    if (prevProps.view !== this.props.view) {
+      const { userLocation } = this.props
+      const locationStr = `${userLocation.latitude},${userLocation.longitude}`
+      this.props.view === 'recycling'
+        ? await this.props.fetchRecycleLocations(locationStr)
+        : await this.props.fetchAdLocations(locationStr)
+      this.props.setFetch(false)
+    }
+  }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
   }
+
+  componentWillUnmount() {
+    this.props.resetLocations()
+  }
+
   render() {
-    const { recycleLocations, selectedMarker, isFetching } = this.props
+    const { locations, selectedMarker, isFetching, view } = this.props
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
       return <Spinner color="blue" />
@@ -48,14 +70,25 @@ class MapComp extends React.Component {
             showUserLocation: true,
           }}
         >
-          {recycleLocations.map(marker => {
-            const location = {
-              latitude: marker.geometry.location.lat,
-              longitude: marker.geometry.location.lng,
+          {locations.map(marker => {
+            let location, id
+            if (view === 'recycling') {
+              location = {
+                latitude: marker.geometry.location.lat,
+                longitude: marker.geometry.location.lng,
+              }
+              id = marker.id
+            } else {
+              location = {
+                latitude: +marker.ad.latitude,
+                longitude: +marker.ad.longitude,
+              }
+              id = marker.ad.id
             }
+
             return (
               <MapView.Marker
-                key={marker.id}
+                key={id}
                 coordinate={location}
                 onPress={() => this.handleMarkerPress(marker)}
               />
@@ -70,7 +103,7 @@ class MapComp extends React.Component {
 
 const mapState = state => {
   return {
-    recycleLocations: state.location.recycleLocations,
+    locations: state.location.locations,
     userLocation: state.location.userLocation,
     selectedMarker: state.location.selectedMarker,
     isFetching: state.location.isFetching,
@@ -80,9 +113,11 @@ const mapDispatch = dispatch => {
   return {
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
+    fetchAdLocations: locationStr => dispatch(getAdLocationsThunk(locationStr)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),
+    resetLocations: () => dispatch(getLocationsAction([])),
   }
 }
 
