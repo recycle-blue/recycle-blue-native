@@ -1,14 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail, Textarea } from 'native-base'
 import { setActivity } from '../store'
-import { SocialMedia } from './'
 
-class ActivityCard extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+class AdCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
       await this.props.selectActivity(this.props.activity)
@@ -23,13 +19,18 @@ class ActivityCard extends React.Component {
           <Thumbnail medium square
             source={{ uri: activity.imageUrl }}
           />
-          <View style={styles.indo}>
+          <View style={styles.info}>
             <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
             <Text style={styles.quantity} >{activity.quantity}</Text>
             <Text>{activity.description}</Text>
           </View>
+          <TouchableOpacity onPress={() => { }}>
+            <Text>TO BE MAP BUTTON</Text>
+            <Thumbnail medium source={{ uri: activity.imageUrl }} />
+            <Text>{ad.distance}</Text>
+          </TouchableOpacity>
         </CardItem>
-      </Card>
+      </Card >
     )
   }
 }
@@ -40,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = StyleSheet.create({
   card: {
-    maxHeight: 80,
+    maxHeight: 100,
     // flex: 0.1,
   },
   cardItem: {
@@ -72,4 +73,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, mapDispatchToProps)(ActivityCard)
+export default connect(null, mapDispatchToProps)(AdCard)
