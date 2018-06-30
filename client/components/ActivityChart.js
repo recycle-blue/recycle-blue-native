@@ -1,21 +1,28 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from 'react-redux'
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryArea } from "victory-native";
+import { VictoryChart, VictoryTheme, VictoryArea } from "victory-native";
 
 const data = [
-  { quarter: 1, earnings: 13000 },
-  { quarter: 2, earnings: 16500 },
-  { quarter: 3, earnings: 14250 },
-  { quarter: 4, earnings: 19000 }
+  { day: "Mon", recycled: 13000 },
+  { day: "Tues", recycled: 16500 },
+  { day: "Wed", recycled: 14250 },
+  { day: "Thurs", recycled: 19000 },
+  { day: "Fri", recycled: 19000 },
+  { day: "Sat", recycled: 19000 },
+  { day: "Sun", recycled: 19000 }
 ];
 
 class ActivityChart extends React.Component {
   render() {
+
     return (
       <View style={styles.container}>
-        <VictoryChart width={300} theme={VictoryTheme.material}>
-          <VictoryArea data={data} x="quarter" y="earnings" />
+        <VictoryChart width={350} theme={VictoryTheme.material} animate={{
+          duration: 1000,
+          onLoad: { duration: 700 }
+        }}>
+          <VictoryArea data={data} x="day" y="recycled" />
         </VictoryChart>
       </View>
     );

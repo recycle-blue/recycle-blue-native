@@ -19,6 +19,7 @@ class Activity extends React.Component {
   // }
 
   render() {
+    console.log("this.props", this.props)
     return (
       <KeyboardAvoidingView
         enabled={true}
@@ -91,7 +92,8 @@ const mapStateToProps = state => {
     comments: state.comments,
     type: state.activity.type,
     email: state.activity.user.email,
-    name: state.activity.product.name
+    name: state.activity.product.name,
+    activity: state.activity
   })
 }
 
