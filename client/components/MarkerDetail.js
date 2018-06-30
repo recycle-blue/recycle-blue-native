@@ -16,16 +16,15 @@ class MarkerDetail extends React.Component {
     }
   }
   componentDidUpdate(prevProps) {
-    if (
-      prevProps.marker.id !== this.props.marker.id &&
-      this.props.view === 'recycling'
-    ) {
-      const { userLocation, marker } = this.props
-      const destination = `${marker.geometry.location.lat},${
-        marker.geometry.location.lng
-      }`
-      const origin = `${userLocation.latitude},${userLocation.longitude}`
-      this.props.getDistance(marker.id, origin, destination)
+    if (prevProps.marker.id !== this.props.marker.id) {
+      if (this.props.view === 'recycling') {
+        const { userLocation, marker } = this.props
+        const destination = `${marker.geometry.location.lat},${
+          marker.geometry.location.lng
+        }`
+        const origin = `${userLocation.latitude},${userLocation.longitude}`
+        this.props.getDistance(marker.id, origin, destination)
+      }
     }
   }
 

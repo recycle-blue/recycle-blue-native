@@ -1,6 +1,8 @@
 import React from 'react'
-import { Card, CardItem, Body, Text, Button } from 'native-base'
+import { connect } from 'react-redux'
+import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
 import { Popup } from 'react-native-map-link'
+import { showDetailAction } from '../store/location'
 
 class AdMarker extends React.Component {
   constructor() {
@@ -16,10 +18,13 @@ class AdMarker extends React.Component {
   makeInvisible = () => {
     this.setState({ isVisible: false })
   }
+  closeDetail = () => {
+    this.props.showDetail(false)
+  }
 
   render() {
-    const { marker } = this.props
-    if (!marker.ad) return null
+    const { marker, detailStatus } = this.props
+    if (!marker.ad || !detailStatus) return null
     return (
       <Card>
         <CardItem>
@@ -27,6 +32,11 @@ class AdMarker extends React.Component {
             <Text style={{ fontWeight: 'bold' }}>{marker.ad.email}</Text>
             <Text>{marker.ad.description}</Text>
           </Body>
+          <Right>
+            <Button transparent onPress={this.closeDetail}>
+              <Text> Close </Text>
+            </Button>
+          </Right>
         </CardItem>
         <CardItem>
           <Body>
@@ -68,4 +78,18 @@ class AdMarker extends React.Component {
   }
 }
 
-export default AdMarker
+const mapState = state => {
+  return {
+    detailStatus: state.location.showDetail,
+  }
+}
+const mapDispatch = dispatch => {
+  return {
+    showDetail: status => dispatch(showDetailAction(status)),
+  }
+}
+
+export default connect(
+  mapState,
+  mapDispatch
+)(AdMarker)
