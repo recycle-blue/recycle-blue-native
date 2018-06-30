@@ -12,6 +12,10 @@ class Activity extends React.Component {
     this.props.getCategory(this.props.categoryId)
     this.props.getComments(this.props.activityId)
   }
+
+  handleSubmit = async () => {
+    await Linking.openURL(`mailto:${this.props.email}?subject= I would like to claim: ${this.props.name}`)
+  }
   // static navigationOptions = {
   //   drawerLabel: () => null
   // }
@@ -40,6 +44,13 @@ class Activity extends React.Component {
                   this.props.navigation.navigate('map')
                 }}
                 title='Find Recycling Near You'
+                color='#58A4B0'
+              />
+              <Button
+                onPress={() => {
+                  this.handleSubmit()
+                }}
+                title='Email'
                 color='#58A4B0'
               />
             </View>
