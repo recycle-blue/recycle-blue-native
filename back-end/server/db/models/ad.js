@@ -65,7 +65,7 @@ Ad.filterByDistance = async function(userLocation) {
   const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
     const distanceInKm = distanceData.distance.value / 1000
     const distanceInMiles = distanceInKm * 0.62137119
-    if (distanceInMiles < 5) {
+    if (distanceInMiles < 4000) {
       return [...newArray, {ad: ads[i], distance: distanceInMiles}]
     }
     return newArray

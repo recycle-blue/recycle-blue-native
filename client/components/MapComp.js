@@ -95,7 +95,7 @@ class MapComp extends React.Component {
             )
           })}
         </MapView>
-        {selectedMarker.id && (
+        {(selectedMarker.id || selectedMarker.ad) && (
           <MarkerDetail marker={selectedMarker} view={view} />
         )}
       </Container>

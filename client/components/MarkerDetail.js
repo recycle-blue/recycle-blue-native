@@ -1,19 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import RecycleMarker from './recycle-marker'
+import AdMarker from './ad-marker'
 import { getDistanceThunk } from '../store/location'
 
 class MarkerDetail extends React.Component {
   componentDidMount() {
-    const { userLocation, marker } = this.props
-    const destination = `${marker.geometry.location.lat},${
-      marker.geometry.location.lng
-    }`
-    const origin = `${userLocation.latitude},${userLocation.longitude}`
-    this.props.getDistance(marker.id, origin, destination)
+    if (this.props.view === 'recycling') {
+      const { userLocation, marker } = this.props
+      const destination = `${marker.geometry.location.lat},${
+        marker.geometry.location.lng
+      }`
+      const origin = `${userLocation.latitude},${userLocation.longitude}`
+      this.props.getDistance(marker.id, origin, destination)
+    }
   }
   componentDidUpdate(prevProps) {
-    if (prevProps.marker.id !== this.props.marker.id) {
+    if (
+      prevProps.marker.id !== this.props.marker.id &&
+      this.props.view === 'recycling'
+    ) {
       const { userLocation, marker } = this.props
       const destination = `${marker.geometry.location.lat},${
         marker.geometry.location.lng
@@ -24,8 +30,9 @@ class MarkerDetail extends React.Component {
   }
 
   render() {
-    const { marker } = this.props
-    return <RecycleMarker marker={marker} />
+    const { marker, view } = this.props
+    if (view === 'recycling') return <RecycleMarker marker={marker} />
+    else return <AdMarker marker={marker} />
   }
 }
 
