@@ -7,7 +7,7 @@ const GET_DISTANCE = 'GET_DISTANCE'
 const SELECT_MARKER = 'SELECT_MARKER'
 const SET_FETCH = 'SET_FETCH'
 
-const getLocationsAction = locations => {
+export const getLocationsAction = locations => {
   return {
     type: GET_LOCATIONS,
     locations,

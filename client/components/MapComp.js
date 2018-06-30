@@ -9,6 +9,7 @@ import {
   getUserLocationAction,
   selectMarkerAction,
   setFetch,
+  getLocationsAction,
 } from '../store/location'
 import MarkerDetail from './MarkerDetail'
 
@@ -44,6 +45,10 @@ class MapComp extends React.Component {
   }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
+  }
+
+  componentWillUnmount() {
+    this.props.resetLocations()
   }
 
   render() {
@@ -112,6 +117,7 @@ const mapDispatch = dispatch => {
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),
+    resetLocations: () => dispatch(getLocationsAction([])),
   }
 }
 
