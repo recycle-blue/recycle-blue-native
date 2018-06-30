@@ -1,17 +1,26 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView} from 'react-native'
+import {Container, Item, Icon, Input, Text, Spinner} from 'native-base'
 import { connect } from 'react-redux'
-import { Container, Tabs, Tab, ScrollableTab } from 'native-base'
 import FriendCard from './user-card'
 import {
   getFriendsThunk,
   selectedFriendThunk,
-  selectedFriendActivitiesThunk,
+  selectedFriendActivitiesThunk
 } from '../store'
 
 class Friends extends React.Component {
-  componentDidMount() {
-    this.props.getFriends(this.props.user.id)
+
+  constructor() {
+    super()
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  async componentDidMount() {
+    await this.props.getFriends(this.props.user.id)
+    this.setState({isLoading: false})
   }
 
   singleFriend = async friendId => {
@@ -21,24 +30,34 @@ class Friends extends React.Component {
   }
 
   render() {
-    const { friends, navigation } = this.props
+    const {user, friends, navigation, getFriends } = this.props
+    if(this.state.isLoading) return <Spinner color="blue" />
     return (
-      <ScrollView>
-        {friends.length ? (
-          friends.map(friend => {
-            return (
-              <FriendCard
-                key={friend.id}
-                user={friend}
-                navigate={navigation.navigate}
-                friends={true}
-              />
-            )
-          })
-        ) : (
-          <Text> No response </Text>
-        )}
-      </ScrollView>
+      <Container>
+        <ScrollView stickyHeaderIndices={[0]}>
+          <Item>
+            <Input
+              placeholder="Search"
+              onChangeText={text => getFriends(user.id,text)}
+            />
+            <Icon active name="search" />
+          </Item>
+          {friends.length ? (
+            friends.map(friend => {
+              return (
+                <FriendCard
+                  key={friend.id}
+                  user={friend}
+                  navigate={navigation.navigate}
+                  friends={true}
+                />
+              )
+            })
+          ) : (
+            <Text> No Result </Text>
+          )}
+        </ScrollView>
+      </Container>
     )
   }
 }
@@ -68,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFriends: userId => dispatch(getFriendsThunk(userId)),
+    getFriends: (userId,text) => dispatch(getFriendsThunk(userId,text)),
     selectFriend: (userId, friendId) =>
       dispatch(selectedFriendThunk(userId, friendId)),
     selectFriendActivities: (userId, friendId) =>

@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const Op = require('sequelize').Op
 const db = require('../db')
 const {User, Activity, Product, Milestone, Category} = require('../db/models')
 const Friends = db.model('friends')
@@ -15,6 +16,32 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/search', async (req, res, next) => {
+  try {
+    let users
+    if(req.query.name !== 'undefined' && req.query.name !== '') {
+      let [firstName, lastName] = req.query.name && req.query.name.split(' ')
+      lastName = lastName || firstName;
+      users = await User.findAll({
+        where: {
+          [Op.or]: [
+            { firstName: { [Op.iLike]: `${firstName}%`} },
+            { lastName: { [Op.iLike]: `${lastName}%`} } ],
+          },
+        order: [['firstName','ASC']],
+      })
+    } else {
+      users = await User.findAll({
+        order: [['firstName','ASC']]
+      })
+    }
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 router.get('/:userId', async (req, res, next) => {
   try {
@@ -56,6 +83,41 @@ router.get('/:userId/friends', async (req, res, next) => {
       })
     }
     res.json(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/friends/search', async (req,res,next) => {
+  try {
+    const getfriends = await Friends.findAll({
+      where: {
+        myId: req.params.userId
+      }
+    })
+    const friendIds = getfriends.map(friend => friend.friendId)
+    let friends
+    if(req.query.name !== 'undefined' && req.query.name !== '') {
+      let [firstName, lastName] = req.query.name && req.query.name.split(' ')
+      lastName = lastName || firstName;
+      friends = await User.findAll({
+        where: {
+          id: { [Op.in]: friendIds},
+          [Op.or]: [
+            { firstName: { [Op.iLike]: `${firstName}%`} },
+            { lastName: { [Op.iLike]: `${lastName}%`} } ],
+          },
+        order: [['firstName','ASC']],
+      })
+    } else {
+      friends = await User.findAll({
+        where: {
+          id: { [Op.in]: friendIds},
+        },
+        order: [['firstName','ASC']]
+      })
+    }
+    res.json(friends)
   } catch (err) {
     next(err)
   }

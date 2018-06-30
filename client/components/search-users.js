@@ -17,63 +17,43 @@ class SearchUsers extends React.Component {
   constructor() {
     super()
     this.state = {
-      text: '',
       isLoading: true,
     }
   }
 
   async componentDidMount() {
-    this.setState({ isLoading: true })
     await this.props.fetchUsers()
     await this.props.getFriends(this.props.user.id)
     this.setState({ isLoading: false })
   }
 
-  handleChange = text => {
-    this.setState({ text })
-  }
-
-  filterResults(users, text) {
-    // filter based on state the users array
-    return users.filter(user => {
-      return user.name.toLowerCase().search(text.toLowerCase().trim()) > -1
-    })
-  }
-
-  resultsFound(filteredUsers) {
-    if (filteredUsers.length) {
-      return filteredUsers.map(user => {
-        return (
-          <UserCard
-            key={user.id}
-            user={user}
-            navigate={this.props.navigation.navigate}
-          />
-        )
-      })
-    } else {
-      return <Text>No results found</Text>
-    }
+  handleSearch = (text) => {
+    this.props.fetchUsers(text)
   }
 
   render() {
     if (this.state.isLoading) return <Spinner color="blue" />
     const { users } = this.props
-    const { text } = this.state
-    const filteredUsers = this.filterResults(users, text)
-    const results = this.resultsFound(filteredUsers)
     return (
       <Container>
         <Content>
           <ScrollView stickyHeaderIndices={[1]}>
             <Item>
               <Input
-                placeholder="Search For Other Users"
-                onChangeText={this.handleChange}
+                placeholder="Search"
+                onChangeText={ (text) => this.handleSearch(text)}
               />
               <Icon active name="search" />
             </Item>
-            {results}
+            {/* {results} */}
+            { users.length ? users.map( user => {
+                return (
+                  <UserCard
+                    key={user.id}
+                    user={user}
+                    navigate={this.props.navigation.navigate}
+                  />
+            )}) : <Text> No Result </Text>}
           </ScrollView>
         </Content>
       </Container>
@@ -89,7 +69,7 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    fetchUsers: () => dispatch(getUsersThunk()),
+    fetchUsers: (text) => dispatch(getUsersThunk(text)),
     getFriends: userId => dispatch(getFriendsHashThunk(userId)),
   }
 }
