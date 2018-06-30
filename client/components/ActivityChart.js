@@ -22,7 +22,7 @@ class ActivityChart extends React.Component {
       <View style={styles.container}>
         <Svg height={halfheight} width={width}>
           <VictoryChart
-            width={350}
+            width={width}
             theme={VictoryTheme.material}
             animate={{
               duration: 1000,
