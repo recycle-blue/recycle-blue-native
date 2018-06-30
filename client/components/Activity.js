@@ -1,7 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Container, Content } from 'native-base'
+import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView, Platform, Linking } from 'react-native'
 import { connect } from 'react-redux'
 import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
 import { AddComment, AdView, CommentCard } from './'
@@ -21,7 +19,6 @@ class Activity extends React.Component {
   // }
 
   render() {
-    console.log("this.props.type", this.props.type)
     return (
       <KeyboardAvoidingView
         enabled={true}
@@ -46,13 +43,14 @@ class Activity extends React.Component {
                 title='Find Recycling Near You'
                 color='#58A4B0'
               />
-              <Button
-                onPress={() => {
-                  this.handleSubmit()
-                }}
-                title='Email'
-                color='#58A4B0'
-              />
+              {this.props.type === 'ad' &&
+                <Button
+                  onPress={() => {
+                    this.handleSubmit()
+                  }}
+                  title='Email'
+                  color='#58A4B0'
+                />}
             </View>
             {this.props.type === 'ad' && <AdView />}
             {
@@ -92,6 +90,8 @@ const mapStateToProps = state => {
     categoryId: state.activity.categoryId,
     comments: state.comments,
     type: state.activity.type,
+    email: state.activity.user.email,
+    name: state.activity.product.name
   })
 }
 
