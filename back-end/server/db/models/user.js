@@ -63,6 +63,14 @@ const User = db.define('user', {
 module.exports = User
 
 /**
+ * Hooks
+ */
+
+User.beforeCreate((user) => {
+  user.firstName = user.firstName[0].toUpperCase() + user.firstName.slice(1);
+  user.lastName = user.lastName[0].toUpperCase() + user.lastName.slice(1);
+})
+/**
  * instanceMethods
  */
 User.prototype.correctPassword = function(candidatePwd) {
