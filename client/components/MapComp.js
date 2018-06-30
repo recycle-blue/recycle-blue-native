@@ -1,8 +1,7 @@
 import React from 'react'
 import { MapView } from 'expo'
 import { connect } from 'react-redux'
-import { Container, Spinner, Content } from 'native-base'
-import { Text, View } from 'react-native'
+import { Container, Spinner } from 'native-base'
 import {
   getRecycleLocationsThunk,
   getAdLocationsThunk,
@@ -10,6 +9,7 @@ import {
   selectMarkerAction,
   setFetch,
   getLocationsAction,
+  showDetailAction,
 } from '../store/location'
 import MarkerDetail from './MarkerDetail'
 
@@ -45,10 +45,12 @@ class MapComp extends React.Component {
   }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
+    this.props.showDetail(true)
   }
 
   componentWillUnmount() {
     this.props.resetLocations()
+    this.props.selectMarker({})
   }
 
   render() {
@@ -95,7 +97,9 @@ class MapComp extends React.Component {
             )
           })}
         </MapView>
-        {selectedMarker.id && <MarkerDetail marker={selectedMarker} />}
+        {(selectedMarker.id || selectedMarker.ad) && (
+          <MarkerDetail marker={selectedMarker} view={view} />
+        )}
       </Container>
     )
   }
@@ -118,6 +122,7 @@ const mapDispatch = dispatch => {
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),
     resetLocations: () => dispatch(getLocationsAction([])),
+    showDetail: status => dispatch(showDetailAction(status)),
   }
 }
 
