@@ -33,11 +33,11 @@ class ActivityChart extends React.Component {
               x="day"
               y="points"
               style={{
-                data: { fill: "#3880f4" }
+                data: { fill: "#005b96" }
               }} />
           </VictoryChart>
           <Text
-            fill="#3880f4"
+            fill="#011f4b"
             fontSize="20"
             fontWeight="bold"
             x={`${width / 2}`}

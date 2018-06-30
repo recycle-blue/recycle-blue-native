@@ -39,21 +39,21 @@ class ProgressChart extends React.Component {
             }}
 
             labelRadius={1}
-            colorScale={["#3880f4", "#3880f4",]}
+            colorScale={["#005b96", "#005b96",]}
             width={width}
             innerRadius={100}
             standalone={false}
           />
           <Text
-            fill="#3880f4"
+            fill="#011f4b"
             fontSize="20"
             fontWeight="bold"
             x={`${width / 2}`}
-            y={`${(halfheight / 7)}`}
+            y={`${(halfheight / 8)}`}
             textAnchor="middle"
           >Mile Stone Progress</Text>
           <Text
-            fill="#3880f4"
+            fill="#011f4b"
             fontSize="20"
             fontWeight="bold"
             x={`${width / 2}`}
