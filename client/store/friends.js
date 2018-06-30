@@ -26,9 +26,9 @@ const addFriend = friend => {
  * THUNK CREATORS
  */
 
-export const getFriendsThunk = userId => async dispatch => {
+export const getFriendsThunk = (userId,text) => async dispatch => {
   try {
-    const res = await axios.get(`${ENV_PATH}/api/users/${userId}/friends`)
+    const res = await axios.get(`${ENV_PATH}/api/users/${userId}/friends/search?name=${text}`)
     dispatch(getFriends(res.data))
   } catch (err) {
     console.error(err)
