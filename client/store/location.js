@@ -51,7 +51,7 @@ export const getRecycleLocationsThunk = locationStr => {
 export const getAdLocationsThunk = locationStr => {
   return async dispatch => {
     const { data } = await axios.get(
-      `${ENV_PATH}/api/activity/marketplace?location=${locationStr}`
+      `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}`
     )
     dispatch(getLocationsAction(data))
   }

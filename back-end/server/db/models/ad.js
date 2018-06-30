@@ -58,6 +58,7 @@ Ad.filterByDistance = async function(userLocation) {
   const {data} = await axios.get(
     `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${googleAPIKey}`
   )
+  console.log('userLocation string', userLocation)
   const distanceArray = data.rows[0].elements
   const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
     const distanceInKm = distanceData.distance.value / 1000
