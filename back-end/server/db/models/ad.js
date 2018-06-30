@@ -1,7 +1,6 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
-const googleAPIKey = require('../../../secrets')
 const axios = require('axios')
 const Activity = require('./activity')
 
@@ -56,7 +55,9 @@ Ad.filterByDistance = async function(userLocation) {
     .join('|')
 
   const {data} = await axios.get(
-    `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${googleAPIKey}`
+    `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${userLocation}&destinations=${adAddresses}&units=imperial&key=${
+      process.env.GOOGLE_API_KEY
+    }`
   )
   const distanceArray = data.rows[0].elements
   const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
@@ -73,7 +74,9 @@ Ad.filterByDistance = async function(userLocation) {
 Ad.afterCreate(async ad => {
   const address = `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`
   const {data} = await axios.get(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${address}&fields=geometry&key=${googleAPIKey}`
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=${address}&fields=geometry&key=${
+      process.env.GOOGLE_API_KEY
+    }`
   )
   const latitude = data.candidates[0].geometry.location.lat
   const longitude = data.candidates[0].geometry.location.lng
