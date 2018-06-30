@@ -16,10 +16,6 @@ import MarkerDetail from './MarkerDetail'
 const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
-  // constructor(props) {
-  //   super()
-  //   props.resetLocations()
-  // }
   componentDidMount() {
     const { view } = this.props
     this.props.setFetch(true)

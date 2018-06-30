@@ -20,7 +20,6 @@ class MapWrapper extends React.Component {
   render() {
     const { view } = this.state
     const { locations } = this.props
-    console.log('locations on state', this.props.locations)
     if (locations.length && (view === 'recycling' && locations[0].ad)) {
       return <Spinner color="blue" />
     }
