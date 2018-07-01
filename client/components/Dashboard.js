@@ -56,15 +56,10 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-            <Tab heading="Progess"
-              tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
-            >
-              <ScrollView style={styles.tabView}>
-                <ProgressChart />
+            <Tab heading="Progess">
+              <ScrollView>
                 <ActivityChart />
+                <ProgressChart />
               </ScrollView>
             </Tab>
             <Tab heading="Activity"

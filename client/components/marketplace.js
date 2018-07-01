@@ -14,8 +14,16 @@ import {
   Picker,
   Spinner
 } from 'native-base'
-import { getMarketplaceAdsThunk } from '../store'
+import {
+  getMarketplaceAdsThunk, getRecycleLocationsThunk,
+  getAdLocationsThunk,
+  getUserLocationAction,
+  selectMarkerAction,
+  setFetch,
+  getLocationsAction,
+} from '../store'
 import { MapComp, AdCard } from '.'
+const geoLocation = navigator.geolocation
 
 class Marketplace extends React.Component {
   constructor(props) {
@@ -23,46 +31,51 @@ class Marketplace extends React.Component {
     this.state = {
       category: '',
       searchText: '',
-      isLoading: false,
+      isLoading: true
     }
   }
 
-  async componentDidMount() {
-    this.setState({ isLoading: true })
-    // await this.props.getMarketplaceAds()
-    this.setState({ isLoading: false })
+  componentDidMount() {
+    const defaultLocation = {
+      latitude: 41.8956689,
+      longitude: -87.6394469,
+    }
+    geoLocation.getCurrentPosition(location => {
+      const { latitude, longitude } = location.coords
+      const userLocation = { latitude: defaultLocation.latitude, longitude: defaultLocation.longitude }
+      const locationStr = Object.keys(userLocation)
+        .map(key => userLocation[key])
+        .join(',')
+      this.props.fetchAdLocations(locationStr)
+      this.props.setUserLocation(userLocation)
+      if (this.state.isLoading) this.setState({ isLoading: false })
+    })
   }
 
   render() {
-    if (this.state.isLoading) return <Spinner color="blue" />
-    const { marketplace } = this.props
+    const { locations } = this.props
+    if (this.state.isLoading) {
+      return <Spinner color="blue" />
+    }
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
           <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: 'rgba(208, 230, 237, 1)' }} >
             <Tab heading="List" >
-              <View style={{ position: 'absolute', top: 55, width: '100%' }}>
-                <Card style={{ maxHeight: 40 }}>
-                  <CardItem style={{ justifyContent: 'space-between' }}>
-                    <Text style={{ paddingLeft: 10 }}>Img</Text>
-                    <Text style={{ paddingLeft: 10 }}>Product Name</Text>
-                    <Text>Points</Text>
-                  </CardItem>
-                </Card>
-                <ScrollView>
-                  {marketplace.length ? (
-                    marketplace.map(ad => (
-                      <AdCard
-                        key={ad.id}
-                        ad={ad}
-                        navigation={this.props.navigation}
-                      />
-                    ))
-                  ) : (
-                      <Text style={{ textAlign: 'center' }}> No Available Products Yet! </Text>
-                    )}
-                </ScrollView>
-              </View>
+              <View style={{ backgroundColor: 'rgba(255,255,255,0)', height: 60 }} />
+              <ScrollView>
+                {locations.length ? (
+                  locations.map((ad) => {
+                    return <AdCard
+                      key={ad.ad.id}
+                      ad={{ ...ad.ad, distance: ad.distance }}
+                      navigation={this.props.navigation}
+                    />
+                  })
+                ) : (
+                    <Text style={{ textAlign: 'center' }}> No Available Products Yet! </Text>
+                  )}
+              </ScrollView>
             </Tab>
             <Tab heading="Map" >
               <ScrollView>
@@ -154,13 +167,23 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = store => {
   return {
-    marketplace: store.ad.marketplace
+    marketplace: store.ad.marketplace,
+    locations: store.location.locations,
+    userLocation: store.location.userLocation,
+    isFetching: store.location.isFetching,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getMarketplaceAds: location => dispatch(getMarketplaceAdsThunk(location)),
+    fetchRecycleLocations: locationStr =>
+      dispatch(getRecycleLocationsThunk(locationStr)),
+    fetchAdLocations: locationStr => dispatch(getAdLocationsThunk(locationStr)),
+    setUserLocation: location => dispatch(getUserLocationAction(location)),
+    selectMarker: marker => dispatch(selectMarkerAction(marker)),
+    setFetch: status => dispatch(setFetch(status)),
+    resetLocations: () => dispatch(getLocationsAction([])),
   }
 }
 

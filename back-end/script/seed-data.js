@@ -186,6 +186,11 @@ const commentsData = [
 
 const milestonesData = [
   {
+    pointsNeeded: 0,
+    description: 'potato',
+    badgeIcon: 'https://i.imgur.com/G3Jq9xM.png'
+  },
+  {
     pointsNeeded: 500,
     description: 'Bronze',
     badgeIcon: 'https://5.imimg.com/data5/EI/RR/MY-42585217/bronze-medals-500x500.jpg'
@@ -244,12 +249,12 @@ const tagsData = [
 ]
 
 const adsData = [
-  { activityId: 2, email: 'adsEmail@email.com', address: '405 W Superior St', city: 'Chicago', state: 'IL', zipCode: 60654, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
-  { activityId: 4, email: 'adsEmail@email.com', address: '233 S Wacker Dr', city: 'Chicago', state: 'IL', zipCode: 60606, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
-  { activityId: 6, email: 'adsEmail@email.com', address: '4400 N Lake Shore Dr,', city: 'Chicago', state: 'IL', zipCode: 60640, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
-  { activityId: 8, email: 'adsEmail@email.com', address: '1110 West Wolfram Street', city: 'Chicago', state: 'IL', zipCode: 60657, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
-  { activityId: 10, email: 'adsEmail@email.com', address: '600 E Grand Ave,', city: 'Chicago', state: 'IL', zipCode: 60611, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
-  { activityId: 12, email: 'adsEmail@email.com', address: '201 E Randolph St', city: 'Chicago', state: 'IL', zipCode: 60602, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '405 W Superior St', city: 'Chicago', state: 'IL', zipCode: 60654, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '233 S Wacker Dr', city: 'Chicago', state: 'IL', zipCode: 60606, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '4400 N Lake Shore Dr,', city: 'Chicago', state: 'IL', zipCode: 60640, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '1110 West Wolfram Street', city: 'Chicago', state: 'IL', zipCode: 60657, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '600 E Grand Ave,', city: 'Chicago', state: 'IL', zipCode: 60611, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
+  { email: 'adsEmail@email.com', address: '201 E Randolph St', city: 'Chicago', state: 'IL', zipCode: 60602, description: 'Come and pick up this wonderful, lovely, whatever this is. It is still in great condition! I promise?' },
 
 
 ]
