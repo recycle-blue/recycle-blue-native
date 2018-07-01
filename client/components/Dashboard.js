@@ -55,12 +55,6 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-            <Tab heading="Progess">
-              <ScrollView>
-                <ProgressChart />
-                <ActivityChart />
-              </ScrollView>
-            </Tab>
             <Tab heading="Activity">
               <Card style={{ maxHeight: 40 }}>
                 <CardItem style={{ justifyContent: 'space-between' }}>
@@ -81,6 +75,12 @@ class Dashboard extends React.Component {
                 ) : (
                     <Text> No Activity Yet! </Text>
                   )}
+              </ScrollView>
+            </Tab>
+            <Tab heading="Progess">
+              <ScrollView>
+                <ProgressChart />
+                <ActivityChart />
               </ScrollView>
             </Tab>
           </Tabs>
