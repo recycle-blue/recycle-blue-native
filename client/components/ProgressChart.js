@@ -1,20 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { VictoryPie, VictoryTheme } from 'victory-native'
+import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg';
 
 
 const mapStateToProps = (state) => {
   return ({
-    totalPoints: state.user.totalPoints
+    totalPoints: state.user.totalPoints,
+    what: state
   })
 }
 
 class ProgressChart extends React.Component {
   render() {
-    const totalPoints = this.props.totalPoints / 1000
-    const nextMileStone = 1000 - this.props.totalPoints
+
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
     console.log("what is my height here?", height)

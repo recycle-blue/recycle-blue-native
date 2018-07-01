@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { connect } from 'react-redux'
-import { VictoryChart, VictoryTheme, VictoryArea } from "victory-native";
+import { VictoryChart, VictoryArea, VictoryTheme } from "victory-native";
 import Svg, { Text } from 'react-native-svg';
 
 const data = [
