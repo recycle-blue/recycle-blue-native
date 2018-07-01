@@ -37,7 +37,7 @@ class Activity extends React.Component {
               <Text>{this.props.recycleUse}</Text>
               <Button
                 onPress={() => {
-                  this.props.navigation.navigate('map')
+                  this.props.navigation.navigate('Map')
                 }}
                 title='Find Recycling Near You'
                 color='#58A4B0'

@@ -87,7 +87,7 @@ class TestCamera extends React.Component {
   savePicture = async (photo) => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
     await this.props.storePicture(photoData)
-    this.props.navigation.navigate('addActivity')
+    this.props.navigation.navigate('AddActivity')
   }
 
   render() {

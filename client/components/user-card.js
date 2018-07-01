@@ -63,7 +63,7 @@ class UserCard extends React.Component {
                 primary
                 onPress={() => {
                   this.props.selectUser(user.id)
-                  navigate('friendDashboard')
+                  navigate('FriendDashboard')
                 }}
               >
                 <Text> View Dashboard </Text>

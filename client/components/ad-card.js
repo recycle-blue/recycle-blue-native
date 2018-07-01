@@ -12,7 +12,7 @@ class ActivityCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
       await this.props.selectActivity(this.props.activity)
-      this.props.navigation.navigate('activity')
+      this.props.navigation.navigate('Activity')
     }
   }
   render() {

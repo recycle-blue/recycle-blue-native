@@ -21,7 +21,7 @@ class AddComment extends React.Component {
     await this.props.addComment(this.state)
     this.setState({ text: '' })
     await this.props.getComments(this.state.activityId)
-    this.props.navigation.navigate('activity')
+    this.props.navigation.navigate('Activity')
 
   }
   async componentDidMount() {

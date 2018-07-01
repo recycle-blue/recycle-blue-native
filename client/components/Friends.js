@@ -17,7 +17,7 @@ class Friends extends React.Component {
   singleFriend = async friendId => {
     await this.props.selectFriend(this.props.user.id, friendId)
     await this.props.selectFriendActivities(this.props.user.id, friendId)
-    this.props.navigation.navigate('dashboard')
+    this.props.navigation.navigate('Dashboard')
   }
 
   render() {

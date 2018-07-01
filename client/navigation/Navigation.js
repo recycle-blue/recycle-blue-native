@@ -25,25 +25,25 @@ import {
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: { screen: UserDashboard },
+    Dashboard: { screen: UserDashboard },
     'Post Activity': { screen: Camera },
     Marketplace: { screen: Marketplace },
-    map: { screen: MapComp },
-    leaderboard: { screen: Leaderboard },
-    feed: { screen: Feed },
-    friends: { screen: Friends },
-    searchUsers: { screen: SearchUsers },
-    addActivity: { screen: AddActivity },
-    addAd: { screen: AddAd },
-    activity: { screen: Activity },
-    loadingScreen: { screen: LoadingScreen },
-    logout: { screen: Logout },
+    Map: { screen: MapComp },
+    Leaderboard: { screen: Leaderboard },
+    Feed: { screen: Feed },
+    Friends: { screen: Friends },
+    'Search Users': { screen: SearchUsers },
+    AddActivity: { screen: AddActivity },
+    AddAd: { screen: AddAd },
+    Activity: { screen: Activity },
+    'Loading Screen': { screen: LoadingScreen },
+    Logout: { screen: Logout },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'dashboard',
+    initialRouteName: 'Dashboard',
   }
 )
 
@@ -89,9 +89,9 @@ const PrimaryNav = createStackNavigator(
 )
 
 const InitialNav = createSwitchNavigator({
-  login: { screen: Login },
+  Login: { screen: Login },
   primaryNav: { screen: PrimaryNav },
-  friendDashboard: { screen: FriendDashboard },
+  FriendDashboard: { screen: FriendDashboard },
 })
 
 export default InitialNav

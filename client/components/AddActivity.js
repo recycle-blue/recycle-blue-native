@@ -20,9 +20,9 @@ class AddActivity extends React.Component {
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
     if (this.state.type === 'ad') {
-      this.props.navigation.navigate('addAd')
+      this.props.navigation.navigate('AddAd')
     } else {
-      this.props.navigation.navigate('activity')
+      this.props.navigation.navigate('Activity')
     }
   }
   // static navigationOptions = {

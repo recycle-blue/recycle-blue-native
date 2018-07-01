@@ -24,7 +24,7 @@ const FriendDashboard = props => {
         <Left>
           <Button
             transparent
-            onPress={() => props.navigation.navigate('friends')}
+            onPress={() => props.navigation.navigate('Friends')}
           >
             <Icon name="arrow-back" />
           </Button>

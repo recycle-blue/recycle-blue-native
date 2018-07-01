@@ -20,7 +20,7 @@ class AddAd extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addAd(this.state)
-    this.props.navigation.navigate('activity')
+    this.props.navigation.navigate('Activity')
   }
   // static navigationOptions = {
   //   drawerLabel: () => null
