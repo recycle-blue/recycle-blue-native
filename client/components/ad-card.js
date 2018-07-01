@@ -7,27 +7,28 @@ import { setActivity } from '../store'
 class AdCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
-      await this.props.selectActivity(this.props.activity)
+      await this.props.selectActivity(this.props.ad.activity)
       this.props.navigation.navigate('activity')
     }
   }
   render() {
-    const { activity, ad } = this.props
+    const { ad } = this.props
     return (
       <Card style={styles.card}>
         <CardItem button style={styles.cardItem} onPress={this.handlePress} >
-          <Thumbnail medium square
-            source={{ uri: activity.imageUrl }}
-          />
-          <View style={styles.info}>
-            <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
-            <Text style={styles.quantity} >{activity.quantity}</Text>
-            <Text>{activity.description}</Text>
+          <View style={styles.left}>
+            <Thumbnail medium square source={{ uri: ad.activity.imageUrl }} />
           </View>
-          <TouchableOpacity onPress={() => { }}>
-            <Text>TO BE MAP BUTTON</Text>
-            <Thumbnail medium source={{ uri: activity.imageUrl }} />
-            <Text>{ad.distance}</Text>
+          <View style={styles.info}>
+            <Text style={styles.name} >{ad.activity.category.name + ' ' + ad.activity.product.name}</Text>
+            <Text style={styles.quantity} >Qty: {ad.activity.quantity}</Text>
+            <Text style={styles.quantity}>{ad.description}</Text>
+          </View>
+          <TouchableOpacity style={styles.right} onPress={() => { }}>
+            <Text>ToMap</Text>
+            <Thumbnail small source={{ uri: ad.activity.imageUrl }} />
+            <Text style={{ fontWeight: 'bold', paddingTop: 5 }} >{Math.round(ad.distance * 100) / 100}</Text>
+            <Text style={{ fontWeight: 'bold' }} >mi</Text>
           </TouchableOpacity>
         </CardItem>
       </Card >
@@ -36,21 +37,28 @@ class AdCard extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  selectActivity: (activity) => dispatch(setActivity(activity))
+  selectActivity: (activity) => dispatch(setActivity(activity)),
 })
 
 const styles = StyleSheet.create({
   card: {
-    maxHeight: 100,
-    // flex: 0.1,
+    maxHeight: 200,
   },
   cardItem: {
-    // flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     width: '100%',
+  },
+  left: {
+  },
+  right: {
+    alignItems: 'center',
+  },
+  info: {
+    flex: 1,
+    paddingHorizontal: 5,
   },
   image: {
     flex: 0.5,
@@ -62,12 +70,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   name: {
-    flex: 4,
+    fontWeight: 'bold',
     width: '100%',
     textAlign: 'center',
+    paddingBottom: 5,
   },
   quantity: {
-    flex: 1,
     width: '100%',
     textAlign: 'center',
   },

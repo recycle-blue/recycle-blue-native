@@ -32,7 +32,7 @@ const reducer = combineReducers({
   feed
 })
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware,createLogger({ collapsed: true }))
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 )
 const store = createStore(reducer, middleware)
 
@@ -49,3 +49,4 @@ export * from './selected-friend'
 export * from './ad'
 export * from './comments'
 export * from './feed'
+export * from './location'
