@@ -11,6 +11,7 @@ import { Container, Form, Item, Input, Content } from 'native-base'
 import { auth } from '../store'
 import { connect } from 'react-redux'
 import { devEmail } from '../secrets'
+import { colors } from './color-palette'
 
 class Login extends React.Component {
   constructor() {
@@ -153,7 +154,7 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f4fcff',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   title: {
-    color: '#006D8A',
+    color: colors.dark,
     textAlign: 'center',
     fontSize: 36,
     fontWeight: 'bold',
@@ -177,15 +178,15 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 5,
     padding: 10,
-    backgroundColor: '#68a0cf',
+    backgroundColor: colors.main,
     width: '60%',
     borderRadius: 100,
-    borderColor: '#fff',
+    borderColor: colors.main,
     borderWidth: 1,
     alignSelf: 'center',
   },
   buttonFont: {
-    color: '#fff',
+    color: colors.light,
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
@@ -194,10 +195,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     padding: 10,
-    backgroundColor: '#878787',
+    backgroundColor: colors.midLight,
     width: '60%',
     borderRadius: 100,
-    borderColor: '#fff',
+    borderColor: colors.midLight,
     borderWidth: 1,
     alignSelf: 'center',
   },
