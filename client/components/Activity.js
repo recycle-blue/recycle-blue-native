@@ -90,8 +90,7 @@ const mapStateToProps = state => {
     categoryId: state.activity.categoryId,
     comments: state.comments,
     type: state.activity.type,
-    email: state.activity.user.email,
-    name: state.activity.product.name
+    email: state.ad.email,
   })
 }
 

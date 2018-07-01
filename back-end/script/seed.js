@@ -130,9 +130,12 @@ async function seed() {
     })
   )
 
+  const adActivities = await Activity.findAll({ where: { type: 'ad' } })
   await Promise.all(
-    adsData.map(ad => {
-      return Ad.create(ad)
+    adActivities.map(adActivity => {
+      let adId = Math.floor(Math.random() * adsData.length)
+      let ad = adsData[adId]
+      return Ad.create({ ...ad, activityId: adActivity.dataValues.id })
     })
   )
 
