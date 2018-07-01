@@ -18,7 +18,6 @@ const defaultAd = {
   state: '',
   zipCode: '',
   email: '',
-  phone: '',
   description: '',
   marketplace: []
 }
@@ -44,10 +43,10 @@ export const getMarketplaceAdsThunk = (location) => async dispatch => {
   }
 }
 
-export const addAdThunk = (ad) => async dispatch => {
+export const addAdThunk = (ad, email) => async dispatch => {
   try {
     const res = await axios.post(`${ENV_PATH}/api/activity/ad`, ad)
-    dispatch(setAd(res.data || defaultAd))
+    dispatch(setAd({ ...res.data, email } || defaultAd))
   } catch (err) {
     console.error(err)
   }
@@ -55,7 +54,7 @@ export const addAdThunk = (ad) => async dispatch => {
 export const getAdThunk = (activityId) => async dispatch => {
   try {
     const res = await axios.get(`${ENV_PATH}/api/activity/${activityId}/ad`)
-    dispatch(setAd(res.data || defaultAd))
+    dispatch(setAd({ ...res.data, email: res.data.activity.user.email } || defaultAd))
   } catch (err) {
     console.error(err)
   }
