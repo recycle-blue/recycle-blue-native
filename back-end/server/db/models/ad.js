@@ -25,13 +25,6 @@ const Ad = db.define('ad', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  phone: {
-    type: Sequelize.STRING
-  },
   description: {
     type: Sequelize.STRING,
     allowNull: false
@@ -57,6 +50,9 @@ Ad.filterByDistance = async function (userLocation) {
     include: [
       {
         model: Activity,
+        where: {
+          type: 'ad'
+        },
         include: [
           {
             model: Category,
