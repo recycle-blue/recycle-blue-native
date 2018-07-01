@@ -47,14 +47,10 @@ router.get('/:userId', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId, { include: [Milestone] })
     const [potato, bronze, silver, gold] = await Milestone.findAll()
-    console.log("user's total points?", user.totalPoints)
-
     if ((user.totalPoints >= 0) && (user.totalPoints < 500)) {
-      console.log("i should be getting here?")
       user.setMilestone(potato)
     }
     if ((user.totalPoints >= 500) && (user.totalPoints < 2000)) {
-      console.log("and here as well?")
       user.setMilestone(bronze)
     }
     if ((user.totalPoints >= 2000) && (user.totalPoints < 5000)) {
@@ -63,7 +59,6 @@ router.get('/:userId', async (req, res, next) => {
     if (user.totalPoints >= 5000) {
       user.setMilestone(gold)
     }
-    console.log("what is the user here?", user)
     res.json(user)
   } catch (err) {
     next(err)
