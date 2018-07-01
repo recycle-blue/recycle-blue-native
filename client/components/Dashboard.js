@@ -63,7 +63,6 @@ class Dashboard extends React.Component {
               activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
             >
               <ScrollView style={styles.tabView}>
-                <ProgressChart />
                 <ActivityChart />
                 <ProgressChart />
               </ScrollView>
