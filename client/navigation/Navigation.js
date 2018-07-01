@@ -22,6 +22,7 @@ import {
   Feed,
   Marketplace,
 } from '../components'
+import { ColorPalette, colors } from '../components/color-palette'
 
 const Drawer = createDrawerNavigator(
   {
@@ -58,8 +59,9 @@ const PrimaryNav = createStackNavigator(
     initialRouteName: 'drawerStack',
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: 'blue' },
-      title: 'RecycleBlue',
+      headerStyle: { backgroundColor: colors.main, height: 45 },
+      title: 'Recycle Blue',
+      headerTitleStyle: { textAlign: 'center', alignSelf: 'center', width: '100%', paddingRight: 30 },
       headerTintColor: 'white',
       headerLeft: (
         <Button

@@ -14,8 +14,6 @@ class AddAd extends React.Component {
       city: this.props.city,
       state: this.props.state,
       zipCode: this.props.zipCode,
-      email: this.props.email,
-      phone: this.props.phone,
     }
   }
   handleSubmit = async () => {
@@ -76,23 +74,6 @@ class AddAd extends React.Component {
             </Item>
           </View>
           <Item rounded>
-            <Input
-              name="email"
-              placeholder="Email"
-              onChangeText={(email) => this.setState({ email })}
-              value={this.state.email}
-            />
-          </Item>
-          {/* <Item rounded>
-            <Input
-              name="phone"
-              placeholder="Phone Number"
-              onChangeText={(phone) => this.setState({ phone })}
-              value={this.state.phone}
-              keyboardType='numeric'
-            />
-          </Item> */}
-          <Item rounded>
             <Textarea
               style={{ width: '100%', paddingTop: 8, paddingBottom: 8 }}
               name="description"
@@ -118,8 +99,7 @@ const mapStateToProps = (store) => {
     city: store.ad.city,
     state: store.ad.state,
     zipCode: store.ad.zipCode,
-    email: store.ad.email,
-    phone: store.ad.phone,
+    email: store.user.email
   }
 }
 

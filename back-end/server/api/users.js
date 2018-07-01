@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const Op = require('sequelize').Op
 const db = require('../db')
-const {User, Activity, Product, Milestone, Category} = require('../db/models')
+const { User, Activity, Product, Milestone, Category } = require('../db/models')
 const Friends = db.model('friends')
 module.exports = router
 
@@ -20,20 +20,20 @@ router.get('/', async (req, res, next) => {
 router.get('/search', async (req, res, next) => {
   try {
     let users
-    if(req.query.name !== 'undefined' && req.query.name !== '') {
+    if (req.query.name !== 'undefined' && req.query.name !== '') {
       let [firstName, lastName] = req.query.name && req.query.name.split(' ')
       lastName = lastName || firstName;
       users = await User.findAll({
         where: {
           [Op.or]: [
-            { firstName: { [Op.iLike]: `${firstName}%`} },
-            { lastName: { [Op.iLike]: `${lastName}%`} } ],
-          },
-        order: [['firstName','ASC']],
+            { firstName: { [Op.iLike]: `${firstName}%` } },
+            { lastName: { [Op.iLike]: `${lastName}%` } }],
+        },
+        order: [['firstName', 'ASC']],
       })
     } else {
       users = await User.findAll({
-        order: [['firstName','ASC']]
+        order: [['firstName', 'ASC']]
       })
     }
     res.json(users)
@@ -45,7 +45,20 @@ router.get('/search', async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId, {include: [Milestone]})
+    const user = await User.findById(req.params.userId, { include: [Milestone] })
+    const [potato, bronze, silver, gold] = await Milestone.findAll()
+    if ((user.totalPoints >= 0) && (user.totalPoints < 500)) {
+      user.setMilestone(potato)
+    }
+    if ((user.totalPoints >= 500) && (user.totalPoints < 2000)) {
+      user.setMilestone(bronze)
+    }
+    if ((user.totalPoints >= 2000) && (user.totalPoints < 5000)) {
+      user.setMilestone(silver)
+    }
+    if (user.totalPoints >= 5000) {
+      user.setMilestone(gold)
+    }
     res.json(user)
   } catch (err) {
     next(err)
@@ -68,7 +81,7 @@ router.get('/:userId/activities', async (req, res, next) => {
 
 router.get('/:userId/friends', async (req, res, next) => {
   try {
-    const {Friends} = await User.findOne({
+    const { Friends } = await User.findOne({
       where: {
         id: req.params.userId
       },
@@ -88,7 +101,7 @@ router.get('/:userId/friends', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/friends/search', async (req,res,next) => {
+router.get('/:userId/friends/search', async (req, res, next) => {
   try {
     const getfriends = await Friends.findAll({
       where: {
@@ -97,24 +110,24 @@ router.get('/:userId/friends/search', async (req,res,next) => {
     })
     const friendIds = getfriends.map(friend => friend.friendId)
     let friends
-    if(req.query.name !== 'undefined' && req.query.name !== '') {
+    if (req.query.name !== 'undefined' && req.query.name !== '') {
       let [firstName, lastName] = req.query.name && req.query.name.split(' ')
       lastName = lastName || firstName;
       friends = await User.findAll({
         where: {
-          id: { [Op.in]: friendIds},
+          id: { [Op.in]: friendIds },
           [Op.or]: [
-            { firstName: { [Op.iLike]: `${firstName}%`} },
-            { lastName: { [Op.iLike]: `${lastName}%`} } ],
-          },
-        order: [['firstName','ASC']],
+            { firstName: { [Op.iLike]: `${firstName}%` } },
+            { lastName: { [Op.iLike]: `${lastName}%` } }],
+        },
+        order: [['firstName', 'ASC']],
       })
     } else {
       friends = await User.findAll({
         where: {
-          id: { [Op.in]: friendIds},
+          id: { [Op.in]: friendIds },
         },
-        order: [['firstName','ASC']]
+        order: [['firstName', 'ASC']]
       })
     }
     res.json(friends)
@@ -150,7 +163,7 @@ router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
 
 router.get('/:userId/leaderboard', async (req, res, next) => {
   try {
-    const {Friends} = await User.findOne({
+    const { Friends } = await User.findOne({
       where: {
         id: req.params.userId
       },
@@ -174,12 +187,12 @@ router.get('/:userId/feed', async (req, res, next) => {
     const initialFeed = await Promise.all([
       ...friends.map(friend => {
         return Activity.findAll({
-          where: {userId: friend.friendId},
+          where: { userId: friend.friendId },
           include: [Product, Category, User]
         })
       }),
       Activity.findAll({
-        where: {userId: req.params.userId},
+        where: { userId: req.params.userId },
         include: [Product, Category, User]
       })
     ])
