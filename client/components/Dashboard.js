@@ -57,8 +57,8 @@ class Dashboard extends React.Component {
           <Tabs >
             <Tab heading="Progess">
               <ScrollView>
-                <ProgressChart />
                 <ActivityChart />
+                <ProgressChart />
               </ScrollView>
             </Tab>
             <Tab heading="Activity">
