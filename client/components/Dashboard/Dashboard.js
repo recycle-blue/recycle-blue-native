@@ -56,35 +56,6 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-<<<<<<< HEAD:client/components/Dashboard/Dashboard.js
-            <Tab heading="Activity">
-              <Card style={{ maxHeight: 40 }}>
-                <CardItem style={{ justifyContent: 'space-between' }}>
-                  <Text style={{ paddingLeft: 10 }}>Img</Text>
-                  <Text style={{ paddingLeft: 10 }}>Product Name</Text>
-                  <Text>Points</Text>
-                </CardItem>
-              </Card>
-              <ScrollView>
-                {activities.length ? (
-                  activities.map(activity => (
-                    <ActivityCard
-                      key={activity.id}
-                      activity={activity}
-                      navigation={this.props.navigation}
-                    />
-                  ))
-                ) : (
-                    <Text> No Activity Yet! </Text>
-                  )}
-              </ScrollView>
-=======
-            <Tab heading="Progess">
-              <ScrollView>
-                <ActivityChart />
-                <ProgressChart />
-              </ScrollView>
-            </Tab>
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midDark }}
@@ -113,7 +84,6 @@ class Dashboard extends React.Component {
                     )}
                 </ScrollView>
               </View>
->>>>>>> master:client/components/Dashboard.js
             </Tab>
             <Tab heading="Progess">
               <ScrollView>
