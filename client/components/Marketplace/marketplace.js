@@ -14,8 +14,8 @@ import {
   Picker,
   Spinner
 } from 'native-base'
-import { getMarketplaceAdsThunk } from '../store'
-import { MapComp, AdCard } from '.'
+import { getMarketplaceAdsThunk } from '../../store'
+import { MapComp, AdCard } from '../'
 
 class Marketplace extends React.Component {
   constructor(props) {

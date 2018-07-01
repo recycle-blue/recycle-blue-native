@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView, Platform, Linking } from 'react-native'
 import { connect } from 'react-redux'
-import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
-import { AddComment, AdView, CommentCard } from './'
+import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../../store'
+import { AddComment, AdView, CommentCard } from '../'
 
 class Activity extends React.Component {
   componentWillMount() {

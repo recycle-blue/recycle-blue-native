@@ -14,8 +14,8 @@ import {
   Thumbnail,
   Button,
 } from 'native-base'
-import { getUserActivitiesThunk } from '../store'
-import { ProgressChart, ActivityChart, ActivityCard } from '.'
+import { getUserActivitiesThunk } from '../../store'
+import { ProgressChart, ActivityChart, ActivityCard } from '../'
 
 class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }

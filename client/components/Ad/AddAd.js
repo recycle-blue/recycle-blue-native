@@ -2,8 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Button, Platform, KeyboardAvoidingView } from 'react-native'
 import { Form, Item, Input, Textarea } from 'native-base'
 import { connect } from 'react-redux'
-import { addAdThunk } from '../store'
-import { ActivityCard } from '.'
+import { addAdThunk } from '../../store'
+import { ActivityCard } from '../'
 
 class AddAd extends React.Component {
   constructor(props) {

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Tabs, Tab, ScrollableTab } from 'native-base';
-import { getLeadersThunk } from '../store'
+import { getLeadersThunk } from '../../store'
 
 class Leaderboard extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserThunk, addFriendThunk } from '../store'
+import { getUserThunk, addFriendThunk } from '../../store'
 import {
   Card,
   CardItem,

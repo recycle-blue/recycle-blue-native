@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Dashboard from './Dashboard'
+import { Dashboard } from '../'
 import { View } from 'react-native'
 import {
   Button,

@@ -2,8 +2,8 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
-import { setActivity } from '../store'
-import { SocialMedia } from './'
+import { setActivity } from '../../store'
+import { SocialMedia } from '../'
 
 class ActivityCard extends React.Component {
   constructor(props) {

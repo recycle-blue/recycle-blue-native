@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../store'
+import { addActivityThunk } from '../../store'
 
 class AddActivity extends React.Component {
   constructor(props) {

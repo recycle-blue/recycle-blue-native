@@ -8,7 +8,7 @@ import {
   Ionicons,
   MaterialIcons,
 } from '@expo/vector-icons'
-import { LoadingScreen } from '.'
+import { LoadingScreen } from './'
 
 const mapDispatchToProps = (dispatch) => ({
   storePicture: (data) => dispatch(savePhotoThunk(data)),

@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, ScrollView} from 'react-native'
 import {Container, Item, Icon, Input, Text, Spinner} from 'native-base'
 import { connect } from 'react-redux'
-import FriendCard from './user-card'
+import FriendCard from '../Dashboard/user-card'
 import {
   getFriendsThunk,
   selectedFriendThunk,
   selectedFriendActivitiesThunk
-} from '../store'
+} from '../../store'
 
 class Friends extends React.Component {
 

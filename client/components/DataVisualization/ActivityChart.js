@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
 import { View, StyleSheet } from 'react-native'
-import { setActivityWeekThunk } from '../store/activity'
+import { setActivityWeekThunk } from '../../store/activity'
 
 class ActivityChart extends React.Component {
   componentWillMount() {

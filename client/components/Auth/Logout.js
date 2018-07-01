@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout } from '../store'
+import { logout } from '../../store'
 import { connect } from 'react-redux'
 
 class Logout extends React.Component {
