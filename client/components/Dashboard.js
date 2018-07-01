@@ -65,6 +65,7 @@ class Dashboard extends React.Component {
               <ScrollView style={styles.tabView}>
                 <ProgressChart />
                 <ActivityChart />
+                <ProgressChart />
               </ScrollView>
             </Tab>
             <Tab heading="Activity"
