@@ -17,7 +17,7 @@ class AddAd extends React.Component {
     }
   }
   handleSubmit = async () => {
-    await this.props.addAd(this.state)
+    await this.props.addAd(this.state, this.props.email)
     this.props.navigation.navigate('Activity')
   }
   // static navigationOptions = {

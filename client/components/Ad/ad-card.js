@@ -7,7 +7,7 @@ import { setActivity } from '../../store'
 class AdCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
-      await this.props.selectActivity(this.props.activity)
+      await this.props.selectActivity(this.props.ad.activity)
       this.props.navigation.navigate('Activity')
     }
   }
