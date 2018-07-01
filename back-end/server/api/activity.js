@@ -8,7 +8,7 @@ const {
   Comments
 } = require('../db/models')
 const cloudinary = require('cloudinary')
-const {parseImgTags} = require('./parseAI')
+const { parseImgTags } = require('./parseAI')
 module.exports = router
 
 cloudinary.config({
@@ -44,7 +44,14 @@ router.get('/:activityId/ad', async (req, res, next) => {
     const ad = await Ad.find({
       where: {
         activityId: +req.params.activityId
-      }
+      },
+      include: [{
+        model: Activity,
+        include: [{
+          model: User,
+          attributes: ['email']
+        }]
+      }]
     })
     res.json(ad)
   } catch (err) {
@@ -55,7 +62,7 @@ router.get('/:activityId/ad', async (req, res, next) => {
 router.get('/:activityId/comments', async (req, res, next) => {
   try {
     const comments = await Activity.findById(req.params.activityId, {
-      include: [{model: Comments, include: [User]}]
+      include: [{ model: Comments, include: [User] }]
     })
     res.json(comments)
   } catch (err) {
@@ -97,8 +104,8 @@ router.post('/photo', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const categoryData = await Category.find({where: {name: req.body.category}})
-    const productData = await Product.find({where: {name: req.body.name}})
+    const categoryData = await Category.find({ where: { name: req.body.category } })
+    const productData = await Product.find({ where: { name: req.body.name } })
     const userData = await User.findById(req.body.userId)
     const category = categoryData.dataValues
     let product
@@ -119,7 +126,7 @@ router.post('/', async (req, res, next) => {
     const activityPoints =
       category.multiplier * product.points * Number(req.body.quantity)
     const newTotalPoints = activityPoints + user.totalPoints
-    User.update({totalPoints: newTotalPoints}, {where: {id: user.id}})
+    User.update({ totalPoints: newTotalPoints }, { where: { id: user.id } })
     const newActivityData = await Activity.create({
       userId: req.body.userId,
       productId: product.id,
@@ -131,7 +138,7 @@ router.post('/', async (req, res, next) => {
     })
     const activity = newActivityData.dataValues
     activity.points = activityPoints
-    const resData = {activity, category, product}
+    const resData = { activity, category, product }
     res.json(resData)
   } catch (err) {
     next(err)
@@ -147,11 +154,9 @@ router.post('/ad', async (req, res, next) => {
         city: req.body.city,
         state: req.body.state,
         zipCode: req.body.zipCode,
-        email: req.body.email,
-        phone: req.body.phone,
         description: req.body.description
       },
-      {individualHooks: true}
+      { individualHooks: true }
     )
     const newAd = newAdRes.dataValues
     res.json(newAd)

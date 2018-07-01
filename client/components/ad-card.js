@@ -1,53 +1,64 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
+import { Card, CardItem, Left, Right, Row, Thumbnail, Textarea } from 'native-base'
 import { setActivity } from '../store'
-import { SocialMedia } from './'
 
-class ActivityCard extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+class AdCard extends React.Component {
   handlePress = async () => {
     if (!this.props.disabled) {
-      await this.props.selectActivity(this.props.activity)
+      await this.props.selectActivity(this.props.ad.activity)
       this.props.navigation.navigate('activity')
     }
   }
   render() {
-    const { activity } = this.props
+    const { ad } = this.props
     return (
       <Card style={styles.card}>
         <CardItem button style={styles.cardItem} onPress={this.handlePress} >
-          <Thumbnail medium square
-            source={{ uri: activity.imageUrl }}
-          />
-          <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
-          <Text style={styles.points} >{activity.points}</Text>
-          <SocialMedia activity={activity}/>
+          <View style={styles.left}>
+            <Thumbnail medium square source={{ uri: ad.activity.imageUrl }} />
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.name} >{ad.activity.category.name + ' ' + ad.activity.product.name}</Text>
+            <Text style={styles.quantity} >Qty: {ad.activity.quantity}</Text>
+            <Text style={styles.quantity}>{ad.description}</Text>
+          </View>
+          <TouchableOpacity style={styles.right} onPress={() => { }}>
+            <Text>ToMap</Text>
+            <Thumbnail small source={{ uri: ad.activity.imageUrl }} />
+            <Text style={{ fontWeight: 'bold', paddingTop: 5 }} >{Math.round(ad.distance * 100) / 100}</Text>
+            <Text style={{ fontWeight: 'bold' }} >mi</Text>
+          </TouchableOpacity>
         </CardItem>
-      </Card>
+      </Card >
     )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  selectActivity: (activity) => dispatch(setActivity(activity))
+  selectActivity: (activity) => dispatch(setActivity(activity)),
 })
 
 const styles = StyleSheet.create({
   card: {
-    maxHeight: 80,
-    // flex: 0.1,
+    maxHeight: 200,
   },
   cardItem: {
-    // flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     width: '100%',
+  },
+  left: {
+  },
+  right: {
+    alignItems: 'center',
+  },
+  info: {
+    flex: 1,
+    paddingHorizontal: 5,
   },
   image: {
     flex: 0.5,
@@ -59,15 +70,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   name: {
-    flex: 4,
+    fontWeight: 'bold',
     width: '100%',
     textAlign: 'center',
+    paddingBottom: 5,
   },
-  points: {
-    flex: 1,
+  quantity: {
     width: '100%',
     textAlign: 'center',
   },
 })
 
-export default connect(null, mapDispatchToProps)(ActivityCard)
+export default connect(null, mapDispatchToProps)(AdCard)
