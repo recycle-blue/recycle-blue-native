@@ -8,7 +8,6 @@ import Svg, { Text } from 'react-native-svg';
 const mapStateToProps = (state) => {
   return ({
     totalPoints: state.user.totalPoints,
-    what: state
   })
 }
 
@@ -17,8 +16,6 @@ class ProgressChart extends React.Component {
 
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
-    console.log("what is my height here?", height)
-
     return (
       <View style={styles.container}>
         <Svg height={halfheight} width={width}>

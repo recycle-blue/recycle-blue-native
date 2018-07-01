@@ -25,7 +25,6 @@ class Dashboard extends React.Component {
 
   render() {
     const { activities, user } = this.props
-    console.log("what do i have on props here", this.props)
     return (
       <Container>
         <Card style={styles.card}>
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     activities: state.userActivities,
-    what: state
   }
 }
 
