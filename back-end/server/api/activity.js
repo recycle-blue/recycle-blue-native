@@ -81,7 +81,7 @@ const sendPhotoToCloud = async photo => {
   const cutIndex = fullImageUrl.lastIndexOf('upload/')
   const imageUrl =
     fullImageUrl.slice(0, cutIndex + 8) +
-    'c_fit,w_250,h_250' +
+    'w_250,h_250,c_fit' +
     fullImageUrl.slice(optionsIndex)
   const imgRecognitionResults = cloudData.info.categorization
   const parsedTags = await parseImgTags(imgRecognitionResults)
@@ -134,10 +134,11 @@ router.post('/', async (req, res, next) => {
       quantity: Number(req.body.quantity),
       imageUrl: req.body.imageUrl,
       type: req.body.type,
-      unit: req.body.unit
+      unit: req.body.unit,
+      points: activityPoints
     })
     const activity = newActivityData.dataValues
-    activity.points = activityPoints
+    // activity.points = activityPoints
     const resData = { activity, category, product }
     res.json(resData)
   } catch (err) {

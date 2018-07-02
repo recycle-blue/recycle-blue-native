@@ -12,8 +12,8 @@ class AddActivity extends React.Component {
       userId: this.props.userId,
       name: this.props.name,
       category: this.props.category,
-      quantity: this.props.quantity,
-      unit: this.props.unit,
+      quantity: this.props.quantity || '1',
+      unit: this.props.unit || 'qty',
       type: this.props.type || 'activity',
       imageUrl: this.props.imageUrl
     }
