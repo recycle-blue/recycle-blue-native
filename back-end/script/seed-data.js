@@ -36,15 +36,14 @@ const productsData = [
     description:
       'tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris.',
     recycleUse:
-      'Fusce mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit.'
+      'There are various resources for DIY projects that can be completed with various used items around your house.'
   },
   {
     name: 'bottle',
     points: 3,
     description:
       'In condimentum. Donec at arcu. Vestibulum ante ipsum primis in',
-    recycleUse:
-      'sed, facilisis vitae, orci. Phasellus dapibus quam quis diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac'
+    recycleUse: 'These are great for science projects or even planters!'
   },
   {
     name: 'jug',
@@ -52,21 +51,20 @@ const productsData = [
     description:
       'odio a purus. Duis elementum, dui quis accumsan convallis, ante',
     recycleUse:
-      'scelerisque neque. Nullam nisl. Maecenas malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut lacus.'
+      'Used milk jugs can be cleaned and used for water storage in case of emergencies.'
   },
   {
     name: 'can',
     points: 3,
     description: 'urna. Nunc quis arcu vel quam dignissim pharetra. Nam ac',
     recycleUse:
-      'semper cursus. Integer mollis. Integer tincidunt aliquam arcu. Aliquam ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus.'
+      'These can provide great material for cookie cutters for the next time your family wants a delicious treat.'
   },
   {
     name: 'box',
     points: 1,
     description: 'nunc ac mattis ornare, lectus ante dictum mi, ac mattis',
-    recycleUse:
-      'consectetuer mauris id sapien. Cras dolor dolor, tempus non, lacinia at, iaculis quis, pede. Praesent eu dui. Cum sociis natoque'
+    recycleUse: 'Boxes are some of the best toys your kids will ever have!'
   },
   {
     name: 'sheet',
@@ -97,8 +95,7 @@ const productsData = [
     points: 0,
     description:
       'non dui nec urna suscipit nonummy. Fusce fermentum fermentum arcu.',
-    recycleUse:
-      'congue a, aliquet vel, vulputate eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend'
+    recycleUse: 'This is the opposite of recycling...'
   },
   {
     name: 'cup',
@@ -187,14 +184,12 @@ const categoriesData = [
   },
   {
     name: 'Compost',
-    description:
-      'In lorem. Donec elementum, lorem ut aliquam iaculis, lacus pede sagittis augue, eu tempor erat',
+    description: 'Compost is amazing. Good job!',
     multiplier: 1
   },
   {
     name: 'Landfill',
-    description:
-      'molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim.',
+    description: 'Plastic bottles can take 700 years to decompose.',
     multiplier: 0
   }
 ]
