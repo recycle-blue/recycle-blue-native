@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, ScrollView} from 'react-native'
-import {Container, Item, Icon, Input, Text, Spinner} from 'native-base'
+import { StyleSheet, ScrollView } from 'react-native'
+import { Container, Item, Icon, Input, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 import FriendCard from '../Dashboard/user-card'
 import {
@@ -8,6 +8,7 @@ import {
   selectedFriendThunk,
   selectedFriendActivitiesThunk
 } from '../../store'
+import { colors } from '../color-palette'
 
 class Friends extends React.Component {
 
@@ -20,7 +21,7 @@ class Friends extends React.Component {
 
   async componentDidMount() {
     await this.props.getFriends(this.props.user.id)
-    this.setState({isLoading: false})
+    this.setState({ isLoading: false })
   }
 
   singleFriend = async friendId => {
@@ -30,15 +31,15 @@ class Friends extends React.Component {
   }
 
   render() {
-    const {user, friends, navigation, getFriends } = this.props
-    if(this.state.isLoading) return <Spinner color="blue" />
+    const { user, friends, navigation, getFriends } = this.props
+    if (this.state.isLoading) return <Spinner color="blue" />
     return (
       <Container>
         <ScrollView stickyHeaderIndices={[0]}>
           <Item>
             <Input
               placeholder="Search"
-              onChangeText={text => getFriends(user.id,text)}
+              onChangeText={text => getFriends(user.id, text)}
             />
             <Icon active name="search" />
           </Item>
@@ -54,8 +55,8 @@ class Friends extends React.Component {
               )
             })
           ) : (
-            <Text> No Result </Text>
-          )}
+              <Text> No Result </Text>
+            )}
         </ScrollView>
       </Container>
     )
@@ -65,7 +66,7 @@ class Friends extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -87,7 +88,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getFriends: (userId,text) => dispatch(getFriendsThunk(userId,text)),
+    getFriends: (userId, text) => dispatch(getFriendsThunk(userId, text)),
     selectFriend: (userId, friendId) =>
       dispatch(selectedFriendThunk(userId, friendId)),
     selectFriendActivities: (userId, friendId) =>

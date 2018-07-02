@@ -23,6 +23,7 @@ import {
   setFetch,
   getLocationsAction,
 } from '../../store'
+import { colors } from '../color-palette'
 const geoLocation = navigator.geolocation
 
 class Marketplace extends React.Component {
@@ -36,13 +37,9 @@ class Marketplace extends React.Component {
   }
 
   componentDidMount() {
-    const defaultLocation = {
-      latitude: 41.8956689,
-      longitude: -87.6394469,
-    }
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
-      const userLocation = { latitude: defaultLocation.latitude, longitude: defaultLocation.longitude }
+      const userLocation = { latitude: latitude, longitude: longitude }
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
@@ -55,12 +52,12 @@ class Marketplace extends React.Component {
   render() {
     const { locations } = this.props
     if (this.state.isLoading) {
-      return <Spinner color="blue" />
+      return <Spinner color={colors.main} />
     }
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: 'rgba(208, 230, 237, 1)' }} >
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.light }} >
             <Tab heading="List" >
               <View style={{ backgroundColor: 'rgba(255,255,255,0)', height: 60 }} />
               <ScrollView>
@@ -124,30 +121,30 @@ class Marketplace extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   searchBar: {
     margin: 5,
-    backgroundColor: 'rgba(255,255,255, 0.8)',
+    backgroundColor: colors.white + 'FF',
   },
   picker: {
     flex: 1,
     borderTopLeftRadius: 100,
     borderBottomLeftRadius: 100,
-    backgroundColor: 'rgba(208, 230, 237, 0.3)',
+    backgroundColor: colors.light,
   },
   iosPicker: {
     height: 50,
     width: 1000,
   },
   androidPicker: {
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
   },
   searchIcon: {
     paddingRight: 3,
-    backgroundColor: 'rgba(208, 230, 237, 0.3)',
+    backgroundColor: colors.light,
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',

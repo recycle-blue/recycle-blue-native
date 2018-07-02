@@ -4,6 +4,7 @@ import { Form, Item, Input, Textarea } from 'native-base'
 import { connect } from 'react-redux'
 import { addAdThunk } from '../../store'
 import { ActivityCard } from '../'
+import { colors } from '../color-palette'
 
 class AddAd extends React.Component {
   constructor(props) {
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },

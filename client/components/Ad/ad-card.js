@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'rea
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
 import { setActivity } from '../../store'
+import { colors } from '../color-palette'
 
 class AdCard extends React.Component {
   handlePress = async () => {
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     maxHeight: 200,
   },
   cardItem: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
