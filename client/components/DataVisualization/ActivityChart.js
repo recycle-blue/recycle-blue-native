@@ -15,7 +15,6 @@ class ActivityChart extends React.Component {
     const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     const data = getWeeklyData(this.props.activities || [])
-    console.log("what do i have on props", this.props)
     return (
       <View style={styles.container} pointerEvents='none'>
         <VictoryChart
@@ -63,9 +62,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return ({
-    user: state.user || "",
-    activities: state.activity.activities.rows || [],
-    count: state.activity.activities.count || 0,
+    user: state.user,
+    activities: state.activity.activities.rows,
+    count: state.activity.activities.count,
   })
 }
 

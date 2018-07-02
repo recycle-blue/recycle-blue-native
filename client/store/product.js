@@ -31,7 +31,6 @@ export const setProduct = product => ({
 export const getProductThunk = (productId) => async dispatch => {
 
   try {
-    console.log("product id", productId)
     const res = await axios.get(`${ENV_PATH}/api/product/${productId}`)
     dispatch(setProduct(res.data || defaultProduct))
   } catch (err) {

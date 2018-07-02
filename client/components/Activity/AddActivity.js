@@ -20,8 +20,6 @@ class AddActivity extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
-    console.log("what is the user id", this.props.userId)
-    // await this.props.setActivityWeek(this.props.userId)
     if (this.state.type === 'ad') {
       this.props.navigation.navigate('AddAd')
     } else {
