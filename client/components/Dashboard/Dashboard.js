@@ -56,7 +56,6 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midDark }}
@@ -93,7 +92,6 @@ class Dashboard extends React.Component {
               activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
             >
               <ScrollView style={styles.tabView}>
-                <ProgressChart />
                 <ActivityChart />
                 <ProgressChart />
               </ScrollView>
