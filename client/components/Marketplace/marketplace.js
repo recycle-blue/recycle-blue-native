@@ -37,13 +37,9 @@ class Marketplace extends React.Component {
   }
 
   componentDidMount() {
-    const defaultLocation = {
-      latitude: 41.8956689,
-      longitude: -87.6394469,
-    }
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
-      const userLocation = { latitude: defaultLocation.latitude, longitude: defaultLocation.longitude }
+      const userLocation = { latitude: latitude, longitude: longitude }
       const locationStr = Object.keys(userLocation)
         .map(key => userLocation[key])
         .join(',')
@@ -56,12 +52,12 @@ class Marketplace extends React.Component {
   render() {
     const { locations } = this.props
     if (this.state.isLoading) {
-      return <Spinner color="blue" />
+      return <Spinner color={colors.main} />
     }
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: 'rgba(208, 230, 237, 1)' }} >
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.light }} >
             <Tab heading="List" >
               <View style={{ backgroundColor: 'rgba(255,255,255,0)', height: 60 }} />
               <ScrollView>
