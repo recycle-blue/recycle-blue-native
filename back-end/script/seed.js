@@ -36,12 +36,12 @@ const randomIndexGenerator = num => Math.floor(Math.random() * num + 1)
  */
 
 async function seed() {
-  await db.sync({ force: true })
+  await db.sync({force: true})
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
 
-  const userP = User.bulkCreate(usersData, { individualHooks: true }) // must hit salting hooks
+  const userP = User.bulkCreate(usersData, {individualHooks: true}) // must hit salting hooks
   const categoryP = Category.bulkCreate(categoriesData)
   const productP = Product.bulkCreate(productsData)
   //const commentP = Comments.bulkCreate(commentsData)
@@ -75,11 +75,12 @@ async function seed() {
     users.map((user, i) => {
       const randomProducts = products.sort(shuffle).slice(0, 5)
       const quantity = randomIndexGenerator(5)
-      const imageUrl = 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg'
+      const imageUrl =
+        'https://5.imimg.com/data5/DC/WQ/MY-11874215/empty-pet-bottle-500x500.jpg'
       return Promise.all(
         randomProducts.map((product, j) => {
           const categoryId = randomIndexGenerator(categories.length)
-          const type = ((i + j) % 2 || i + j > 13) ? 'activity' : 'ad'
+          const type = (i + j) % 2 || i + j > 13 ? 'activity' : 'ad'
           return Activity.create({
             productId: product.id,
             categoryId,
@@ -130,24 +131,24 @@ async function seed() {
     })
   )
 
-  const adActivities = await Activity.findAll({ where: { type: 'ad' } })
+  const adActivities = await Activity.findAll({where: {type: 'ad'}})
   await Promise.all(
     adActivities.map(adActivity => {
       let adId = Math.floor(Math.random() * adsData.length)
       let ad = adsData[adId]
-      return Ad.create({ ...ad, activityId: adActivity.dataValues.id })
+      return Ad.create({...ad, activityId: adActivity.dataValues.id})
     })
   )
 
   await Promise.all(
     tagsData.map(async tag => {
-      let product = { dataValues: 0 }
-      let category = { dataValues: 0 }
+      let product = {dataValues: 0}
+      let category = {dataValues: 0}
       if (tag.productName) {
-        product = await Product.find({ where: { name: tag.productName } })
+        product = await Product.find({where: {name: tag.productName}})
       }
       if (tag.categoryName) {
-        category = await Category.find({ where: { name: tag.categoryName } })
+        category = await Category.find({where: {name: tag.categoryName}})
       }
       return Tag.create({
         name: tag.name,
