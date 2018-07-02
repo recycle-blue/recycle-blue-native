@@ -93,7 +93,6 @@ class Dashboard extends React.Component {
 
             >
               <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
-                <ProgressChart />
                 <ActivityChart />
                 <ProgressChart />
               </ScrollView>
