@@ -64,7 +64,7 @@ const createApp = () => {
     req.user ? next() : res.sendStatus(401)
   }
 
-  app.use('/api', /*gateway,*/ require('./api'))
+  app.use('/api', gateway, require('./api'))
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
