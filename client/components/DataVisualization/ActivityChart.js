@@ -3,7 +3,7 @@ import { StyleSheet, View, Dimensions } from "react-native";
 import { connect } from 'react-redux'
 import { setActivityWeekThunk } from '../../store/activity'
 import { VictoryChart, VictoryArea, VictoryTheme, VictoryLabel } from "victory-native";
-import Svg, { Text } from 'react-native-svg';
+import { colors } from '../color-palette'
 
 const data = [
   { day: "Mon", points: 2 },
@@ -33,7 +33,7 @@ class ActivityChart extends React.Component {
             x="day"
             y="points"
             style={{
-              data: { fill: "#005b96" }
+              data: { fill: `${colors.main}` }
             }} />
           <VictoryLabel
             text='Weekly Activity'
@@ -41,7 +41,7 @@ class ActivityChart extends React.Component {
             dx={width / 2}
             dy={halfheight / 8}
             style={{
-              fill: "black",
+              fill: `${colors.dark}`,
               fontSize: 20,
               fontWeight: "bold",
               fontFamily: 'sans-serif'

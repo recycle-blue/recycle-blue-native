@@ -5,14 +5,12 @@ import {
   Container,
   Tabs,
   Tab,
-  ScrollableTab,
   Card,
   CardItem,
   Body,
   Left,
   Right,
   Thumbnail,
-  Button,
 } from 'native-base'
 import { getUserActivitiesThunk } from '../../store'
 import { ProgressChart, ActivityChart, ActivityCard } from '../'

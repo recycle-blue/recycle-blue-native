@@ -29,20 +29,20 @@ class ProgressChart extends React.Component {
                 opacity: (d) => d.opacity
               },
               labels: {
-                fill: "black",
+                fill: `${colors.main}`,
                 fontSize: 20,
                 fontWeight: "bold"
               }
             }}
 
             labelRadius={1}
-            colorScale={["#005b96", "#005b96",]}
+            colorScale={[`${colors.main}`, `${colors.main}`,]}
             width={width}
             innerRadius={100}
             standalone={false}
           />
           <Text
-            fill="#011f4b"
+            fill={colors.dark}
             fontSize="20"
             fontWeight="bold"
             style='font-family:sans-serif'
@@ -51,7 +51,7 @@ class ProgressChart extends React.Component {
             textAnchor="middle"
           >Milestone Progress</Text>
           <Text
-            fill="#011f4b"
+            fill={colors.dark}
             fontSize="20"
             fontWeight="bold"
             style='font-family:sans-serif'
