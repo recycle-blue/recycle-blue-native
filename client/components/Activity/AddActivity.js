@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../../store'
+import { addActivityThunk, setActivityWeekThunk } from '../../store'
 import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
@@ -51,8 +51,8 @@ class AddActivity extends React.Component {
               onPress={() => this.props.navigation.navigate('Post Activity')}
             />
           ) : (
-            <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          )}
+              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+            )}
         </View>
         <Form style={styles.form}>
           <Item rounded style={styles.items}>

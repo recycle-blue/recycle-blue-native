@@ -30,12 +30,13 @@ const Activity = db.define('activity', {
   },
 })
 
-Activity.activityCountWeek = function (userId) {
-  return (this.findAndCountAll({
+Activity.activityCountWeek = async function (userId) {
+  const activities = await this.findAndCountAll({
     where: {
       userId: userId,
       createdAt: { [Op.gte]: Date.now() - (7 * 86400000) }
     }
-  }))
+  })
+  return activities
 }
 module.exports = Activity

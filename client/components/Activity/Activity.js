@@ -38,6 +38,7 @@ class Activity extends React.Component {
   }
 
   render() {
+
     return (
       <KeyboardAvoidingView
         enabled={true}
