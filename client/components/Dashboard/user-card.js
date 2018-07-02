@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserThunk, addFriendThunk } from '../store'
+import { getUserThunk, addFriendThunk } from '../../store'
 import {
   Card,
   CardItem,
@@ -63,7 +63,7 @@ class UserCard extends React.Component {
                 primary
                 onPress={() => {
                   this.props.selectUser(user.id)
-                  navigate('friendDashboard')
+                  navigate('FriendDashboard')
                 }}
               >
                 <Text> View Dashboard </Text>

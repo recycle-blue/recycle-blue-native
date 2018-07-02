@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout } from '../store'
+import { logout } from '../../store'
 import { connect } from 'react-redux'
 
 class Logout extends React.Component {
@@ -10,7 +10,7 @@ class Logout extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(!nextProps.user.id) {
-      nextProps.navigation.navigate('login');
+      nextProps.navigation.navigate('Login');
     }
   }
 

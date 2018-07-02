@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Picker, Icon, Container, Spinner } from 'native-base'
-import MapComp from './MapComp'
-import { setFetch } from '../store/location'
+import { MapComp } from '../'
+import { setFetch } from '../../store/location'
 
 class MapWrapper extends React.Component {
   constructor() {

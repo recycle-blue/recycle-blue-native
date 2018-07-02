@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, Image, KeyboardAvoidingView } from 'react-native'
 import { Form, Textarea } from 'native-base'
 import { connect } from 'react-redux'
-import { postCommentThunk, getCommentsThunk } from '../store'
+import { postCommentThunk, getCommentsThunk } from '../../store'
 
 class AddComment extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class AddComment extends React.Component {
     await this.props.addComment(this.state)
     this.setState({ text: '' })
     await this.props.getComments(this.state.activityId)
-    this.props.navigation.navigate('activity')
+    this.props.navigation.navigate('Activity')
 
   }
   async componentDidMount() {

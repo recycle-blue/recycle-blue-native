@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { connect } from 'react-redux'
+import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
+import { setActivityWeekThunk } from '../../store/activity'
 import { VictoryChart, VictoryArea, VictoryTheme } from "victory-native";
 import Svg, { Text } from 'react-native-svg';
 

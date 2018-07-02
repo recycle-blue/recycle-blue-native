@@ -8,10 +8,10 @@ import {
   TouchableHighlight,
 } from 'react-native'
 import { Container, Form, Item, Input, Content } from 'native-base'
-import { auth } from '../store'
+import { auth } from '../../store'
 import { connect } from 'react-redux'
-import { devEmail } from '../secrets'
-import { colors } from './color-palette'
+import { devEmail } from '../../secrets'
+import { colors } from '../color-palette'
 
 class Login extends React.Component {
   constructor() {
