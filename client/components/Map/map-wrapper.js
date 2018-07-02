@@ -27,7 +27,7 @@ class MapWrapper extends React.Component {
   }
   render() {
     const { view } = this.state
-    const { locations } = this.props
+    const { locations, navigation } = this.props
     if (locations.length && (view === 'recycling' && locations[0].ad)) {
       return <Spinner color="blue" />
     }
@@ -47,7 +47,7 @@ class MapWrapper extends React.Component {
             <Picker.Item label="Ads" value="ads" />
           </Picker>
         </Form>
-        <MapComp view={this.state.view} />
+        <MapComp view={this.state.view} navigation={navigation} />
       </Container>
     )
   }

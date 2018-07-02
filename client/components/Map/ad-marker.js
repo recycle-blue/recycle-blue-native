@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
 import { Popup } from 'react-native-map-link'
 import { showDetailAction } from '../../store/location'
+import AdCard from '../Ad/ad-card'
 
 class AdMarker extends React.Component {
   constructor() {
@@ -23,35 +24,13 @@ class AdMarker extends React.Component {
   }
 
   render() {
-    const { marker, detailStatus } = this.props
+    const { marker, detailStatus, navigation } = this.props
     if (!marker.ad || !detailStatus) return null
     return (
-      <Card>
-        <CardItem>
-          <Body>
-            <Text style={{ fontWeight: 'bold' }}>{marker.ad.email}</Text>
-            <Text>{marker.ad.description}</Text>
-          </Body>
-          <Right>
-            <Button transparent onPress={this.closeDetail}>
-              <Text> Close </Text>
-            </Button>
-          </Right>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Text>{marker.ad.address}</Text>
-            <Text>{`${marker.ad.city}, ${marker.ad.state}`}</Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Text style={{ fontWeight: 'bold' }}>
-              {Math.round(marker.distance * 100) / 100} miles from current
-              location
-            </Text>
-          </Body>
-        </CardItem>
+      <AdCard
+        ad={{ ...marker.ad, distance: marker.distance }}
+        navigation={navigation}
+      >
         <CardItem>
           <Body>
             <Button success onPress={this.handlePress}>
@@ -73,7 +52,7 @@ class AdMarker extends React.Component {
             longitude: marker.ad.longitude,
           }}
         />
-      </Card>
+      </AdCard>
     )
   }
 }

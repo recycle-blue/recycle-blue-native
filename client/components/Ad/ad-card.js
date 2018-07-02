@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
 import { setActivity } from '../../store'
@@ -16,29 +23,34 @@ class AdCard extends React.Component {
     const { ad } = this.props
     return (
       <Card style={styles.card}>
-        <CardItem button style={styles.cardItem} onPress={this.handlePress} >
+        <CardItem button style={styles.cardItem} onPress={this.handlePress}>
           <View style={styles.left}>
             <Thumbnail medium square source={{ uri: ad.activity.imageUrl }} />
           </View>
           <View style={styles.info}>
-            <Text style={styles.name} >{ad.activity.category.name + ' ' + ad.activity.product.name}</Text>
-            <Text style={styles.quantity} >Qty: {ad.activity.quantity}</Text>
+            <Text style={styles.name}>
+              {ad.activity.category.name + ' ' + ad.activity.product.name}
+            </Text>
+            <Text style={styles.quantity}>Qty: {ad.activity.quantity}</Text>
             <Text style={styles.quantity}>{ad.description}</Text>
           </View>
-          <TouchableOpacity style={styles.right} onPress={() => { }}>
+          <TouchableOpacity style={styles.right} onPress={() => {}}>
             <Text>ToMap</Text>
             <Thumbnail small source={{ uri: ad.activity.imageUrl }} />
-            <Text style={{ fontWeight: 'bold', paddingTop: 5 }} >{Math.round(ad.distance * 100) / 100}</Text>
-            <Text style={{ fontWeight: 'bold' }} >mi</Text>
+            <Text style={{ fontWeight: 'bold', paddingTop: 5 }}>
+              {Math.round(ad.distance * 100) / 100}
+            </Text>
+            <Text style={{ fontWeight: 'bold' }}>mi</Text>
           </TouchableOpacity>
         </CardItem>
-      </Card >
+        {this.props.children}
+      </Card>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  selectActivity: (activity) => dispatch(setActivity(activity)),
+const mapDispatchToProps = dispatch => ({
+  selectActivity: activity => dispatch(setActivity(activity)),
 })
 
 const styles = StyleSheet.create({
@@ -52,8 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
   },
-  left: {
-  },
+  left: {},
   right: {
     alignItems: 'center',
   },
@@ -82,4 +93,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, mapDispatchToProps)(AdCard)
+export default connect(
+  null,
+  mapDispatchToProps
+)(AdCard)
