@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, Button, Platform, KeyboardAvoidingView, Dimensions } from 'react-native'
 import { Form, Item, Input, Textarea } from 'native-base'
 import { connect } from 'react-redux'
 import { addAdThunk } from '../../store'
@@ -33,13 +33,13 @@ class AddAd extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior="position"
-        keyboardVerticalOffset={Platform.OS === 'ios' ? -110 : -85}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? -300 : -210}
         contentContainerStyle={styles.container}
         enabled={true}
       >
         <ActivityCard activity={activity} disabled={true} />
         <Form style={styles.form} >
-          <Item rounded>
+          <Item rounded style={styles.items}>
             <Input
               name="address"
               placeholder="Address"
@@ -48,7 +48,7 @@ class AddAd extends React.Component {
             />
           </Item>
           <View style={styles.splitRow}>
-            <Item rounded style={styles.city}>
+            <Item rounded style={[styles.city, styles.items]}>
               <Input
                 name="city"
                 placeholder="City"
@@ -56,7 +56,7 @@ class AddAd extends React.Component {
                 value={this.state.city}
               />
             </Item>
-            <Item rounded style={styles.state}>
+            <Item rounded style={[styles.state, styles.items]}>
               <Input
                 name="state"
                 placeholder="State"
@@ -64,7 +64,7 @@ class AddAd extends React.Component {
                 value={this.state.state}
               />
             </Item>
-            <Item rounded style={styles.zipCode}>
+            <Item rounded style={[styles.zipCode, styles.items]}>
               <Input
                 name="zipCode"
                 placeholder="Zip Code"
@@ -74,7 +74,7 @@ class AddAd extends React.Component {
               />
             </Item>
           </View>
-          <Item rounded>
+          <Item rounded style={styles.items} >
             <Textarea
               style={{ width: '100%', paddingTop: 8, paddingBottom: 8 }}
               name="description"
@@ -85,7 +85,7 @@ class AddAd extends React.Component {
             />
           </Item>
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} />
+        <Button title='submit' onPress={this.handleSubmit} style={styles.button} />
       </KeyboardAvoidingView>
     )
   }
@@ -112,20 +112,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: Dimensions.get('screen').height,
     width: '100%',
     backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  image: {
-    // flex: 1,
-    width: 250,
-    height: 250,
-    // borderWidth: 1,
-    // borderColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
+  items: {
+    backgroundColor: colors.white,
   },
   form: {
     paddingBottom: 10,
@@ -157,6 +151,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,
+  },
+  button: {
+    backgroundColor: colors.midLight,
   }
 })
 
