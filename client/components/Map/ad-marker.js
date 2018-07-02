@@ -37,6 +37,11 @@ class AdMarker extends React.Component {
               <Text> Navigate to Location </Text>
             </Button>
           </Body>
+          <Right>
+            <Button transparent onPress={this.closeDetail}>
+              <Text> Close </Text>
+            </Button>
+          </Right>
         </CardItem>
         <Popup
           isVisible={this.state.isVisible}
