@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg'
-import { colors } from '../color-palette'
+import {
+  s
+} from '../color-palette'
 
 
 const mapStateToProps = (state) => {
