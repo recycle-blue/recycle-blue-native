@@ -1,27 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // import { Button } from 'react-native'
-import { Popup } from 'react-native-map-link'
-import { Card, CardItem, Body, Text, Right, Button } from 'native-base'
+import RecycleMarker from './recycle-marker'
+import AdMarker from './ad-marker'
 import { getDistanceThunk } from '../../store/location'
 
 class MarkerDetail extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isVisible: false,
-    }
-  }
   componentDidMount() {
-    const { userLocation, marker } = this.props
-    const destination = `${marker.geometry.location.lat},${
-      marker.geometry.location.lng
-    }`
-    const origin = `${userLocation.latitude},${userLocation.longitude}`
-    this.props.getDistance(marker.id, origin, destination)
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.marker.id !== this.props.marker.id) {
+    if (this.props.view === 'recycling') {
       const { userLocation, marker } = this.props
       const destination = `${marker.geometry.location.lat},${
         marker.geometry.location.lng
@@ -30,57 +16,23 @@ class MarkerDetail extends React.Component {
       this.props.getDistance(marker.id, origin, destination)
     }
   }
-  handlePress = () => {
-    this.setState({ isVisible: true })
-  }
-  makeInvisible = () => {
-    this.setState({ isVisible: false })
+  componentDidUpdate(prevProps) {
+    if (prevProps.marker.id !== this.props.marker.id) {
+      if (this.props.view === 'recycling') {
+        const { userLocation, marker } = this.props
+        const destination = `${marker.geometry.location.lat},${
+          marker.geometry.location.lng
+        }`
+        const origin = `${userLocation.latitude},${userLocation.longitude}`
+        this.props.getDistance(marker.id, origin, destination)
+      }
+    }
   }
 
   render() {
-    const { marker } = this.props
-    return (
-      <Card>
-        <CardItem>
-          <Body>
-            <Text>{marker.name}</Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Text>{marker.vicinity}</Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Text style={{ fontWeight: 'bold' }}>
-              {marker.distance} from current location
-            </Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Button success onPress={this.handlePress}>
-              <Text> Navigate to Location </Text>
-            </Button>
-          </Body>
-        </CardItem>
-        <Popup
-          isVisible={this.state.isVisible}
-          onCancelPressed={this.makeInvisible}
-          onAppPressed={this.makeInvisible}
-          onBackButtonPressed={this.makeInvisible}
-          modalProps={{
-            animationIn: 'slideInUp',
-          }}
-          appsWhiteList={['google-maps', 'apple-maps']}
-          options={{
-            latitude: marker.geometry.location.lat,
-            longitude: marker.geometry.location.lng,
-          }}
-        />
-      </Card>
-    )
+    const { marker, view } = this.props
+    if (view === 'recycling') return <RecycleMarker marker={marker} />
+    else return <AdMarker marker={marker} />
   }
 }
 

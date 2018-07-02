@@ -6,6 +6,7 @@ const GET_USER_LOCATION = 'GET_USER_LOCATION'
 const GET_DISTANCE = 'GET_DISTANCE'
 const SELECT_MARKER = 'SELECT_MARKER'
 const SET_FETCH = 'SET_FETCH'
+const SHOW_DETAIL = 'SHOW_DETAIL'
 
 export const getLocationsAction = locations => {
   return {
@@ -36,6 +37,12 @@ export const selectMarkerAction = marker => {
 export const setFetch = status => {
   return {
     type: SET_FETCH,
+    status,
+  }
+}
+export const showDetailAction = status => {
+  return {
+    type: SHOW_DETAIL,
     status,
   }
 }
@@ -77,6 +84,7 @@ const initialState = {
   userLocation: defaultLocation,
   selectedMarker: {},
   isFetching: true,
+  showDetail: true,
 }
 
 export default function(state = initialState, action) {
@@ -94,6 +102,8 @@ export default function(state = initialState, action) {
       return { ...state, selectedMarker: action.marker }
     case SET_FETCH:
       return { ...state, isFetching: action.status }
+    case SHOW_DETAIL:
+      return { ...state, showDetail: action.status }
     default:
       return state
   }
