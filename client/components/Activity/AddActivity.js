@@ -1,8 +1,15 @@
 import React from 'react'
-import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Button,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../../store'
+import { addActivityThunk, setActivityWeekThunk } from '../../store'
 import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
@@ -12,10 +19,10 @@ class AddActivity extends React.Component {
       userId: this.props.userId,
       name: this.props.name,
       category: this.props.category,
-      quantity: this.props.quantity,
-      unit: this.props.unit,
+      quantity: this.props.quantity || '1',
+      unit: this.props.unit || 'qty',
       type: this.props.type || 'activity',
-      imageUrl: this.props.imageUrl
+      imageUrl: this.props.imageUrl,
     }
   }
   handleSubmit = async () => {
@@ -26,9 +33,9 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('Activity')
     }
   }
-  // static navigationOptions = {
-  //   drawerLabel: () => null
-  // }
+  static navigationOptions = {
+    drawerLabel: () => null,
+  }
   render() {
     return (
       <KeyboardAvoidingView
@@ -38,30 +45,31 @@ class AddActivity extends React.Component {
         enabled={true}
       >
         <View style={styles.topView}>
-          {this.state.imageUrl === 'default' ?
-            <Button title='Take Picture' onPress={() => this.props.navigation.navigate('Post Activity')} />
-            : <Image
-              style={styles.image}
-              source={{ uri: this.state.imageUrl }}
+          {this.state.imageUrl === 'default' ? (
+            <Button
+              title="Take Picture"
+              onPress={() => this.props.navigation.navigate('Post Activity')}
             />
-          }
+          ) : (
+              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+            )}
         </View>
-        <Form style={styles.form} >
-          <Item rounded>
+        <Form style={styles.form}>
+          <Item rounded style={styles.items}>
             <Input
               name="name"
               placeholder="Recycleable Name"
-              onChangeText={(text) => this.setState({ name: text })}
+              onChangeText={text => this.setState({ name: text })}
               value={this.state.name}
             />
           </Item>
-          <Item rounded>
+          <Item rounded style={styles.items}>
             <Picker
               name="category"
               style={Platform.OS === 'ios' ? styles.ios : styles.android}
               mode="dropdown"
               selectedValue={this.state.category}
-              onValueChange={(category) => this.setState({ category })}
+              onValueChange={category => this.setState({ category })}
             >
               <Picker.Item label="Category" value="Other" />
               <Picker.Item label="Plastic" value="Plastic" />
@@ -75,35 +83,35 @@ class AddActivity extends React.Component {
             </Picker>
           </Item>
           <View style={styles.qtyInputs}>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Input
                 name="amount"
-                placeholder='1'
-                onChangeText={(text) => this.setState({ quantity: text })}
+                placeholder="1"
+                onChangeText={text => this.setState({ quantity: text })}
                 value={this.state.qty}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </Item>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Picker
                 name="unit"
                 style={Platform.OS === 'ios' ? styles.ios : styles.android}
                 mode="dropdown"
                 selectedValue={this.state.unit}
-                onValueChange={(unit) => this.setState({ unit })}
+                onValueChange={unit => this.setState({ unit })}
               >
                 <Picker.Item label="#" value="qty" />
                 <Picker.Item label="lbs" value="lbs" />
                 <Picker.Item label="kg" value="kg" />
               </Picker>
             </Item>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Picker
                 name="type"
                 style={Platform.OS === 'ios' ? styles.ios : styles.android}
                 mode="dropdown"
                 selectedValue={this.state.type}
-                onValueChange={(type) => this.setState({ type })}
+                onValueChange={type => this.setState({ type })}
               >
                 <Picker.Item label="Activity" value="activity" />
                 <Picker.Item label="Ad" value="ad" />
@@ -111,27 +119,31 @@ class AddActivity extends React.Component {
             </Item>
           </View>
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} />
+        <Button
+          title="submit"
+          onPress={this.handleSubmit}
+          style={styles.button}
+        />
       </KeyboardAvoidingView>
     )
   }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = store => {
   return {
-    userId: store.user.id,// || 1,
-    name: store.product.name,// || "bottle",
-    category: store.category.name,// || "Plastic",
-    quantity: store.activity.quantity,// || 1,
-    unit: store.activity.unit,// || 'qty',
+    userId: store.user.id, // || 1,
+    name: store.product.name, // || "bottle",
+    category: store.category.name, // || "Plastic",
+    quantity: store.activity.quantity, // || 1,
+    unit: store.activity.unit, // || 'qty',
     type: store.activity.type,
-    photo: store.activity.photo,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
-    imageUrl: store.activity.imageUrl,// || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+    photo: store.activity.photo, // || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+    imageUrl: store.activity.imageUrl, // || 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity))
+const mapDispatchToProps = dispatch => ({
+  addActivity: activity => dispatch(addActivityThunk(activity)),
 })
 
 const styles = StyleSheet.create({
@@ -157,6 +169,9 @@ const styles = StyleSheet.create({
   splitInput: {
     flex: 1,
   },
+  items: {
+    backgroundColor: colors.white,
+  },
   ios: {
     height: 50,
     width: 1000,
@@ -168,7 +183,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,
-  }
+  },
+  button: {
+    backgroundColor: colors.midLight,
+  },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddActivity)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddActivity)

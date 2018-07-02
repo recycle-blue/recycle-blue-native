@@ -4,17 +4,17 @@ import { Container, Form, Item, Input, Content } from 'native-base'
 import { connect } from 'react-redux'
 import { colors } from './color-palette'
 
-const mapStateToProps = (store) => ({
-  loading: '/recycleloading.gif'
+const mapStateToProps = store => ({
+  loading: '/recycleloading.gif',
 })
 
 class LoadingScreen extends React.Component {
-  // static navigationOptions = {
-  //   drawerLabel: () => null
-  // }
+  static navigationOptions = {
+    drawerLabel: () => null,
+  }
   render() {
     return (
-      <Container style={styles.container} >
+      <Container style={styles.container}>
         <Content>
           <Image
             style={styles.image}
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50,
-  }, image: {
+  },
+  image: {
     flex: 1,
     width: 250,
     height: 250,
@@ -44,4 +45,3 @@ const styles = StyleSheet.create({
 })
 
 export default connect(mapStateToProps)(LoadingScreen)
-

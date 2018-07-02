@@ -163,15 +163,20 @@ router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
 
 router.get('/:userId/leaderboard', async (req, res, next) => {
   try {
-    const { Friends } = await User.findOne({
+    const getfriends = await Friends.findAll({
       where: {
-        id: req.params.userId
-      },
-      include: ['Friends']
+        myId: req.params.userId
+      }
     })
-    const currentUser = await User.findById(req.params.userId)
-    const users = await User.leaderboard(currentUser, Friends)
-    res.json(users)
+    const friendIds = getfriends.map(friend => friend.friendId)
+    const leaders = await User.findAll({
+      where: {
+        id: { [Op.in]: [req.params.userId, ...friendIds] }
+      },
+      include: [Milestone],
+      order: [['totalPoints','DESC']]
+    })
+    res.json(leaders);
   } catch (err) {
     next(err)
   }
@@ -179,25 +184,20 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
 
 router.get('/:userId/feed', async (req, res, next) => {
   try {
-    const friends = await Friends.findAll({
+    const getfriends = await Friends.findAll({
       where: {
         myId: req.params.userId
       }
     })
-    const initialFeed = await Promise.all([
-      ...friends.map(friend => {
-        return Activity.findAll({
-          where: { userId: friend.friendId },
-          include: [Product, Category, User]
-        })
-      }),
-      Activity.findAll({
-        where: { userId: req.params.userId },
-        include: [Product, Category, User]
-      })
-    ])
-    const finalFeed = await generateFeed(initialFeed)
-    res.json(finalFeed)
+    const friendIds = getfriends.map(friend => friend.friendId)
+    const feed = await Activity.findAll({
+      where: {
+        userId: { [Op.in]: [req.params.userId,...friendIds]}
+      },
+      include: [Product,Category,User],
+      order: [['createdAt','DESC']]
+    })
+    res.json(feed);
   } catch (err) {
     next(err)
   }
@@ -213,22 +213,3 @@ router.post('/:userId/friends/:friendId', async (req, res, next) => {
   const friend = await User.findById(req.params.friendId)
   res.json(friend)
 })
-
-const generateFeed = initialFeed =>
-  initialFeed.reduce((prev, curr) => {
-    curr.forEach(activity => {
-      if (prev.length > 0) {
-        let i = 0
-        for (; i < prev.length; i++) {
-          if (activity.createdAt > prev[i].createdAt) {
-            prev.splice(i, 0, activity)
-            break
-          }
-        }
-        if (i === prev.length) prev.push(activity)
-      } else {
-        prev.push(activity)
-      }
-    })
-    return prev
-  }, [])

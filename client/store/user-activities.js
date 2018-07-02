@@ -28,7 +28,7 @@ export const getUserActivitiesThunk = (userId) => async dispatch => {
   }
 }
 
-export const selectedFriendActivitiesThunk = (userId,friendId) =>  async dispatch => {
+export const selectedFriendActivitiesThunk = (userId, friendId) => async dispatch => {
   try {
     const res = await axios.get(`${ENV_PATH}/api/users/${userId}/friends/${friendId}/activities`);
     dispatch(getUserActivities(res.data));
