@@ -5,6 +5,7 @@ import store from './store'
 import { Navigation } from './navigation'
 import { Font } from 'expo'
 import { LoadingPage } from './components'
+import { colors } from './components/color-palette'
 
 export default class App extends React.Component {
   constructor() {
@@ -36,7 +37,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
   },

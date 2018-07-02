@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
 import { setActivity } from '../../store'
 import { SocialMedia } from '../'
+import { colors } from '../color-palette'
 
 class ActivityCard extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class ActivityCard extends React.Component {
           />
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
-          <SocialMedia activity={activity}/>
+          <SocialMedia activity={activity} />
         </CardItem>
       </Card>
     )
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
   cardItem: {
     // flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
