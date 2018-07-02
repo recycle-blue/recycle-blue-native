@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
 import { connect } from 'react-redux'
-import { Container, Tabs, Tab, ScrollableTab } from 'native-base'
-import { getLeadersThunk } from '../../store'
+import { Container, Card, CardItem, Title, Header, Left, Right, Icon } from 'native-base';
+import { getLeadersThunk, getUserThunk } from '../../store'
 import { colors } from '../color-palette'
 
 class Leaderboard extends React.Component {
@@ -11,23 +11,41 @@ class Leaderboard extends React.Component {
     this.props.getLeaderboard(this.props.user.id)
   }
 
+  handlePress = async (userId) => {
+      await this.props.selectUser(userId)
+      this.props.navigation.navigate('FriendDashboard')
+  }
+
   render() {
     const { leaders } = this.props
     return (
-      <ScrollView>
-        {leaders.length ?
-          leaders.map(leader =>
-            <View key={leader.id}>
-              <Image
-                source={{ uri: leader.imageUrl }}
-                style={styles.image}
-              />
-              <Text>{leader.name}</Text>
-              <Text>{leader.totalPoints}</Text>
-            </View>
-          )
-          : <Text style={{ textAlign: 'center' }}> No response </Text>}
-      </ScrollView>
+      <Container>
+        <Header>
+          <Title style={{ color: 'blue', fontSize: 30 }}>
+            Leaderboard
+          </Title>
+        </Header>
+        <ScrollView>
+          {leaders.length ?
+            leaders.map( (leader, idx) =>
+              <Card key={leader.id} >
+                <CardItem button onPress={() => this.handlePress(leader.id)}>
+                  <Left>
+                    <Text>{idx + 1}</Text>
+                  </Left>
+                  <Left>
+                    <Text>{leader.name}</Text>
+                  </Left>
+                  <Right>
+                    <Icon name='star' style={{color: 'gold'}} />
+                    <Text>{leader.totalPoints}</Text>
+                  </Right>
+                </CardItem>
+              </Card>
+            )
+            : <Text style={{ textAlign: 'center' }}> No response </Text>}
+        </ScrollView>
+      </Container>
     )
   }
 }
@@ -57,7 +75,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLeaderboard: (userId) => dispatch(getLeadersThunk(userId))
+    getLeaderboard: (userId) => dispatch(getLeadersThunk(userId)),
+    selectUser: userId => dispatch(getUserThunk(userId))
   }
 }
 
