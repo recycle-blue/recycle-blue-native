@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
 import { connect } from 'react-redux'
-import { Container, Card, CardItem, Title, Header, Left, Right, Icon } from 'native-base';
+import { Container, Card, CardItem, Title, Header, Left, Right, Icon, Thumbnail } from 'native-base';
 import { getLeadersThunk, getUserThunk } from '../../store'
 import { colors } from '../color-palette'
 
@@ -37,7 +37,15 @@ class Leaderboard extends React.Component {
                     <Text>{leader.name}</Text>
                   </Left>
                   <Right>
-                    <Icon name='star' style={{color: 'gold'}} />
+                  {leader.milestone && (
+                    <Thumbnail
+                      name="userMilestoneThumbnail"
+                      small
+                      square
+                      source={{ uri: leader.milestone.badgeIcon }}
+                    />
+                  )}
+                    {/* <Icon name='star' style={{color: 'gold'}} /> */}
                     <Text>{leader.totalPoints}</Text>
                   </Right>
                 </CardItem>
