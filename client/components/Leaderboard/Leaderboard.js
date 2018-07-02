@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Card, CardItem, Title, Header, Left, Right, Icon } from 'native-base';
 import { getLeadersThunk, getUserThunk } from '../../store'
+import { colors } from '../color-palette'
 
 class Leaderboard extends React.Component {
 
@@ -52,7 +53,7 @@ class Leaderboard extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
   },

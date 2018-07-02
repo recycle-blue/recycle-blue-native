@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Image, Text, View, Button } from 'react-native'
 import { Container, Form, Item, Input, Content } from 'native-base'
 import { connect } from 'react-redux'
+import { colors } from './color-palette'
 
 const mapStateToProps = (store) => ({
   loading: '/recycleloading.gif'
@@ -29,7 +30,7 @@ class LoadingScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50,
