@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Dashboard } from '../'
-import { View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import {
   Button,
   Text,
@@ -14,13 +14,14 @@ import {
   Content,
   Icon,
 } from 'native-base'
+import { colors, StatusBarHeight } from '../color-palette'
 
 const FriendDashboard = props => {
   const { user } = props
   if (!user.id) return <Text>LOADING...</Text>
   return (
     <Container>
-      <Header>
+      <Header style={styles.header} >
         <Left>
           <Button
             transparent
@@ -46,5 +47,13 @@ const mapState = state => {
     user: state.userSearch.selectedUser,
   }
 }
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: colors.main,
+    paddingTop: StatusBarHeight(),
+    height: 45 + StatusBarHeight(),
+  },
+})
 
 export default connect(mapState)(FriendDashboard)
