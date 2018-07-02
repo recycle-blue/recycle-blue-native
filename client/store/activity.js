@@ -15,11 +15,11 @@ const CLEAR_ACTIVITY = 'CLEAR_ACTIVITY'
  */
 const defaultActivity = {
   id: 1,
-  name: '',
+  name: 'a',
   category: '',
   photo: '',
   quantity: '1',
-  imageUrl: 'default',
+  imageUrl: 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
   unit: 'qty',
   type: 'activity',
   productId: 1,
@@ -43,10 +43,10 @@ const savePhoto = photo => ({
   type: SAVE_PHOTO, photo
 })
 export const clearActivityAction = () => ({ type: CLEAR_ACTIVITY })
+
 /**
  * THUNK CREATORS
  */
-
 export const setActivityWeekThunk = (userId) => async dispatch => {
   try {
     const res = await axios.get(`${ENV_PATH}/api/activity/weekly/${userId}`)

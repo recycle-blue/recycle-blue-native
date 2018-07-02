@@ -18,6 +18,7 @@ class ActivityCard extends React.Component {
   }
   render() {
     const { activity } = this.props
+    console.log('activity', activity)
     return (
       <Card style={styles.card}>
         <CardItem button style={styles.cardItem} onPress={this.handlePress} >
@@ -26,7 +27,7 @@ class ActivityCard extends React.Component {
           />
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
-          <SocialMedia activity={activity} />
+          {/* <SocialMedia activity={activity} /> */}
         </CardItem>
       </Card>
     )
