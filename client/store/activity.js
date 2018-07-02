@@ -91,7 +91,7 @@ export const savePhotoThunk = (photo) => async dispatch => {
 export default function (state = defaultActivity, action) {
   switch (action.type) {
     case SET_ACTIVITY:
-      return { ...action.activity }
+      return { ...state, ...action.activity }
     case SAVE_PHOTO:
       return { photo: action.photo }
     case SET_ACTIVITY_WEEK:
