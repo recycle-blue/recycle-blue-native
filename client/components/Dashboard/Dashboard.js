@@ -55,13 +55,14 @@ class Dashboard extends React.Component {
           </CardItem>
         </Card>
         <View style={styles.container}>
-          <Tabs >
-
+          <Tabs
+            tabBarUnderlineStyle={{ backgroundColor: colors.light }}
+          >
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+              textStyle={{ color: colors.light }}
+              activeTextStyle={{ color: colors.light }}
             >
               <View style={styles.tabView}>
                 <Card style={{ maxHeight: 40 }}>
@@ -89,10 +90,11 @@ class Dashboard extends React.Component {
             <Tab heading="Progess"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+              textStyle={{ color: colors.light }}
+              activeTextStyle={{ color: colors.light }}
+
             >
-              <ScrollView style={styles.tabView}>
+              <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
                 <ProgressChart />
                 <ActivityChart />
                 <ProgressChart />
