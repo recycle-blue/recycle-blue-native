@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg';
-
+import { colors } from '../color-palette'
 
 const mapStateToProps = (state) => {
   return ({
@@ -45,14 +45,16 @@ class ProgressChart extends React.Component {
             fill="#011f4b"
             fontSize="20"
             fontWeight="bold"
+            style='font-family:sans-serif'
             x={`${width / 2}`}
             y={`${(halfheight / 8)}`}
             textAnchor="middle"
-          >Mile Stone Progress</Text>
+          >Milestone Progress</Text>
           <Text
             fill="#011f4b"
             fontSize="20"
             fontWeight="bold"
+            style='font-family:sans-serif'
             x={`${width / 2}`}
             y={`${(halfheight / 1.7)}`}
             textAnchor="middle"
