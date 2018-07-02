@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// import { Button } from 'react-native'
 import RecycleMarker from './recycle-marker'
 import AdMarker from './ad-marker'
-import { getDistanceThunk } from '../store/location'
+import { getDistanceThunk } from '../../store/location'
 
 class MarkerDetail extends React.Component {
   componentDidMount() {

@@ -14,9 +14,9 @@ import {
   Thumbnail,
   Button,
 } from 'native-base'
-import { getUserActivitiesThunk } from '../store'
-import { ProgressChart, ActivityChart, ActivityCard } from '.'
-import { ColorPalette, colors } from './color-palette'
+import { getUserActivitiesThunk } from '../../store'
+import { ProgressChart, ActivityChart, ActivityCard } from '../'
+import { ColorPalette, colors } from '../color-palette'
 
 class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }
@@ -56,18 +56,7 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-            <Tab heading="Progess"
-              tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
-            >
-              <ScrollView style={styles.tabView}>
-                <ProgressChart />
-                <ActivityChart />
-                <ProgressChart />
-              </ScrollView>
-            </Tab>
+
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midDark }}
@@ -96,6 +85,18 @@ class Dashboard extends React.Component {
                     )}
                 </ScrollView>
               </View>
+            </Tab>
+            <Tab heading="Progess"
+              tabStyle={{ backgroundColor: colors.main }}
+              activeTabStyle={{ backgroundColor: colors.midDark }}
+              textStyle={Platform.OS === 'android' && { color: colors.light }}
+              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+            >
+              <ScrollView style={styles.tabView}>
+                <ProgressChart />
+                <ActivityChart />
+                <ProgressChart />
+              </ScrollView>
             </Tab>
           </Tabs>
         </View>

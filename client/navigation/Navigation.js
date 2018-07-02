@@ -26,26 +26,26 @@ import { ColorPalette, colors } from '../components/color-palette'
 
 const Drawer = createDrawerNavigator(
   {
-    dashboard: { screen: UserDashboard },
-    addActivity: { screen: AddActivity },
-    addAd: { screen: AddAd },
-    map: { screen: Map },
-    camera: { screen: Camera },
-    activity: { screen: Activity },
-    loadingScreen: { screen: LoadingScreen },
+    Dashboard: { screen: UserDashboard },
+    AddActivity: { screen: AddActivity },
+    AddAd: { screen: AddAd },
+    Map: { screen: Map },
+    Camera: { screen: Camera },
+    Activity: { screen: Activity },
+    LoadingScreen: { screen: LoadingScreen },
     'Post Activity': { screen: Camera },
     Marketplace: { screen: Marketplace },
-    leaderboard: { screen: Leaderboard },
-    feed: { screen: Feed },
-    friends: { screen: Friends },
-    searchUsers: { screen: SearchUsers },
-    logout: { screen: Logout },
+    Leaderboard: { screen: Leaderboard },
+    Feed: { screen: Feed },
+    Friends: { screen: Friends },
+    SearchUsers: { screen: SearchUsers },
+    Logout: { screen: Logout },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    initialRouteName: 'dashboard',
+    initialRouteName: 'Dashboard',
   }
 )
 
@@ -92,9 +92,9 @@ const PrimaryNav = createStackNavigator(
 )
 
 const InitialNav = createSwitchNavigator({
-  login: { screen: Login },
+  Login: { screen: Login },
   primaryNav: { screen: PrimaryNav },
-  friendDashboard: { screen: FriendDashboard },
+  FriendDashboard: { screen: FriendDashboard },
 })
 
 export default InitialNav

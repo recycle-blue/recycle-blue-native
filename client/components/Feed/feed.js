@@ -1,8 +1,8 @@
 import React from 'react'
-import { getFeedThunk } from '../store'
+import { getFeedThunk } from '../../store'
 import { connect } from 'react-redux'
 import { ScrollView, Text } from 'react-native'
-import { FeedCard } from './'
+import { FeedCard } from '../'
 
 class Feed extends React.Component {
 

@@ -8,10 +8,10 @@ import {
   TouchableHighlight,
 } from 'react-native'
 import { Container, Form, Item, Input, Content } from 'native-base'
-import { auth } from '../store'
+import { auth } from '../../store'
 import { connect } from 'react-redux'
-import { devEmail } from '../secrets'
-import { colors } from './color-palette'
+import { devEmail } from '../../secrets'
+import { colors } from '../color-palette'
 
 class Login extends React.Component {
   constructor() {
@@ -97,14 +97,14 @@ class Login extends React.Component {
               <TouchableHighlight
                 style={styles.button}
                 onPress={this.handleSubmit}
-                underlayColor="#fff"
+                underlayColor={colors.white}
               >
                 <Text style={styles.buttonFont}>Login</Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button}
                 onPress={() => this.setState({ method: 'signup' })}
-                underlayColor="#fff"
+                underlayColor={colors.white}
               >
                 <Text style={styles.buttonFont}>Sign Up</Text>
               </TouchableHighlight>
@@ -114,7 +114,7 @@ class Login extends React.Component {
                 <TouchableHighlight
                   style={styles.button}
                   onPress={this.handleSubmit}
-                  underlayColor="#fff"
+                  underlayColor={colors.white}
                 >
                   <Text style={styles.buttonFont}>Sign Up</Text>
                 </TouchableHighlight>
@@ -124,7 +124,7 @@ class Login extends React.Component {
                     {' '}
                     <Text
                       onPress={() => this.setState({ method: 'login' })}
-                      style={{ textAlign: 'center', color: '#003366' }}
+                      style={{ textAlign: 'center', color: colors.dark }}
                     >
                       Login
                   </Text>
@@ -143,7 +143,7 @@ class Login extends React.Component {
         <TouchableHighlight
           style={styles.devButton}
           onPress={this.devLogin}
-          underlayColor="#fff"
+          underlayColor={colors.white}
         >
           <Text style={styles.buttonFont}>Dev Login</Text>
         </TouchableHighlight>

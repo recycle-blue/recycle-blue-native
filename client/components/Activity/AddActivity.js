@@ -2,7 +2,8 @@ import React from 'react'
 import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../store'
+import { addActivityThunk } from '../../store'
+import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class AddActivity extends React.Component {
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
     if (this.state.type === 'ad') {
-      this.props.navigation.navigate('addAd')
+      this.props.navigation.navigate('AddAd')
     } else {
-      this.props.navigation.navigate('activity')
+      this.props.navigation.navigate('Activity')
     }
   }
   // static navigationOptions = {
@@ -136,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     justifyContent: 'flex-start',
   },
   image: {

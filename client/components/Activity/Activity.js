@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, Button, ScrollView, KeyboardAvoidingView, Platform, Linking } from 'react-native'
 import { connect } from 'react-redux'
-import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../store'
-import { AddComment, AdView, CommentCard } from './'
+import { getProductThunk, getCommentsThunk, getCategoryThunk } from '../../store'
+import { AddComment, AdView, CommentCard } from '../'
+import { colors } from '../color-palette'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -38,10 +39,10 @@ class Activity extends React.Component {
               <Text>{this.props.recycleUse}</Text>
               <Button
                 onPress={() => {
-                  this.props.navigation.navigate('map')
+                  this.props.navigation.navigate('Map')
                 }}
                 title='Find Recycling Near You'
-                color='#58A4B0'
+                color={colors.main}
               />
               {this.props.type === 'ad' &&
                 <Button
@@ -49,7 +50,7 @@ class Activity extends React.Component {
                     this.handleSubmit()
                   }}
                   title='Email'
-                  color='#58A4B0'
+                  color={colors.main}
                 />}
             </View>
             {this.props.type === 'ad' && <AdView />}

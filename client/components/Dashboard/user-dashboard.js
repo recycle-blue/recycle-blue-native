@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Dashboard from './Dashboard'
-import { getMeThunk } from '../store'
+import { Dashboard } from '../'
+import { getMeThunk } from '../../store'
 
 class UserDashboard extends React.Component {
 
