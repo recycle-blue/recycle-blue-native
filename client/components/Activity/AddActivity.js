@@ -51,8 +51,8 @@ class AddActivity extends React.Component {
               onPress={() => this.props.navigation.navigate('Post Activity')}
             />
           ) : (
-            <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          )}
+              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+            )}
         </View>
         <Form style={styles.form}>
           <Item rounded style={styles.items}>
@@ -142,15 +142,8 @@ const mapStateToProps = store => {
   }
 }
 
-<<<<<<< HEAD
-const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity)),
-  setActivityWeek: (userId) => dispatch(setActivityWeekThunk(userId))
-
-=======
 const mapDispatchToProps = dispatch => ({
   addActivity: activity => dispatch(addActivityThunk(activity)),
->>>>>>> 23e54171134bc640600683cba64cdd0e0205f607
 })
 
 const styles = StyleSheet.create({
