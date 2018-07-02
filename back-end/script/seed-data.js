@@ -80,7 +80,7 @@ const productsData = [
     description:
       'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',
     recycleUse:
-      'sed dictum eleifend, nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum.'
+      'The paper from this notebook can be used as packing material the next time you need to ship something.'
   },
   {
     name: 'bag',
@@ -103,15 +103,14 @@ const productsData = [
     description:
       'Integer vulputate, risus a ultricies adipiscing, enim mi tempor lorem,',
     recycleUse:
-      'mi tempor lorem, eget mollis lectus pede et risus. Quisque libero lacus, varius et, euismod et, commodo at, libero. Morbi'
+      'Paper cups can be used a firestarter. Use this as an excuse to get out of the house!'
   },
   {
     name: 'jar',
     points: 4,
     description:
       'mus. Donec dignissim magna a tortor. Nunc commodo auctor velit.',
-    recycleUse:
-      'iaculis quis, pede. Praesent eu dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eget'
+    recycleUse: 'Perfect for a piggie bank or a tip jar!'
   },
   {
     name: 'food',
