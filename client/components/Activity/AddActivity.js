@@ -12,8 +12,8 @@ class AddActivity extends React.Component {
       userId: this.props.userId,
       name: this.props.name,
       category: this.props.category,
-      quantity: this.props.quantity,
-      unit: this.props.unit,
+      quantity: this.props.quantity || '1',
+      unit: this.props.unit || 'qty',
       type: this.props.type || 'activity',
       imageUrl: this.props.imageUrl
     }
@@ -47,7 +47,7 @@ class AddActivity extends React.Component {
           }
         </View>
         <Form style={styles.form} >
-          <Item rounded>
+          <Item rounded style={styles.items}>
             <Input
               name="name"
               placeholder="Recycleable Name"
@@ -55,7 +55,7 @@ class AddActivity extends React.Component {
               value={this.state.name}
             />
           </Item>
-          <Item rounded>
+          <Item rounded style={styles.items}>
             <Picker
               name="category"
               style={Platform.OS === 'ios' ? styles.ios : styles.android}
@@ -75,7 +75,7 @@ class AddActivity extends React.Component {
             </Picker>
           </Item>
           <View style={styles.qtyInputs}>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Input
                 name="amount"
                 placeholder='1'
@@ -84,7 +84,7 @@ class AddActivity extends React.Component {
                 keyboardType='numeric'
               />
             </Item>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Picker
                 name="unit"
                 style={Platform.OS === 'ios' ? styles.ios : styles.android}
@@ -97,7 +97,7 @@ class AddActivity extends React.Component {
                 <Picker.Item label="kg" value="kg" />
               </Picker>
             </Item>
-            <Item rounded style={styles.splitInput}>
+            <Item rounded style={[styles.splitInput, styles.items]}>
               <Picker
                 name="type"
                 style={Platform.OS === 'ios' ? styles.ios : styles.android}
@@ -111,7 +111,7 @@ class AddActivity extends React.Component {
             </Item>
           </View>
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} />
+        <Button title='submit' onPress={this.handleSubmit} style={styles.button} />
       </KeyboardAvoidingView>
     )
   }
@@ -157,6 +157,9 @@ const styles = StyleSheet.create({
   splitInput: {
     flex: 1,
   },
+  items: {
+    backgroundColor: colors.white
+  },
   ios: {
     height: 50,
     width: 1000,
@@ -168,6 +171,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,
+  },
+  button: {
+    backgroundColor: colors.midLight,
   }
 })
 

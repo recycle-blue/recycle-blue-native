@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform, StatusBar } from 'react-native'
 
 export const colors = {
   white: '#FFFFFF',
@@ -35,6 +35,10 @@ export const ColorPalette = StyleSheet.create({
     color: colors.dark
   },
 })
+
+export const StatusBarHeight = () => {
+  return Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
+}
 
 /* 
 COLOR PALLETE OPTIONS:

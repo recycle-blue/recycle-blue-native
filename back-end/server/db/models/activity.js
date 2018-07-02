@@ -13,7 +13,6 @@ const Activity = db.define('activity', {
   },
   likes: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     defaultValue: 0
   },
   imageUrl: {
@@ -22,6 +21,7 @@ const Activity = db.define('activity', {
   },
   points: {
     type: Sequelize.INTEGER,
+    allowNull: false,
     defaultValue: 1
   },
   type: {
