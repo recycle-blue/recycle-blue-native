@@ -3,6 +3,8 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 const axios = require('axios')
 const Activity = require('./activity')
+const Category = require('./category')
+const Product = require('./product')
 
 if (!process.env.GOOGLE_API_KEY) require('../../../secrets')
 
@@ -22,13 +24,6 @@ const Ad = db.define('ad', {
   zipCode: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  phone: {
-    type: Sequelize.STRING
   },
   description: {
     type: Sequelize.STRING,
@@ -51,7 +46,26 @@ const Ad = db.define('ad', {
 })
 
 Ad.filterByDistance = async function(userLocation) {
-  const ads = await this.findAll({include: [Activity]})
+  const ads = await this.findAll({
+    include: [
+      {
+        model: Activity,
+        where: {
+          type: 'ad'
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ['name']
+          },
+          {
+            model: Product,
+            attributes: ['name']
+          }
+        ]
+      }
+    ]
+  })
   const adAddresses = ads
     .map(ad => `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`)
     .join('|')
@@ -65,7 +79,7 @@ Ad.filterByDistance = async function(userLocation) {
   const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
     const distanceInKm = distanceData.distance.value / 1000
     const distanceInMiles = distanceInKm * 0.62137119
-    if (distanceInMiles < 4000) {
+    if (distanceInMiles < 5) {
       return [...newArray, {ad: ads[i], distance: distanceInMiles}]
     }
     return newArray

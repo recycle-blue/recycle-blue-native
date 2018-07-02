@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, Platform } from 'react-native'
 import {
   Container,
   Tabs,
@@ -16,6 +16,7 @@ import {
 } from 'native-base'
 import { getUserActivitiesThunk } from '../store'
 import { ProgressChart, ActivityChart, ActivityCard } from '.'
+import { ColorPalette, colors } from './color-palette'
 
 class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }
@@ -26,7 +27,7 @@ class Dashboard extends React.Component {
   render() {
     const { activities, user } = this.props
     return (
-      <Container>
+      <Container style={ColorPalette.background}>
         <Card style={styles.card}>
           <CardItem>
             <Left>
@@ -55,33 +56,46 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs >
-            <Tab heading="Progess">
-              <ScrollView>
+            <Tab heading="Progess"
+              tabStyle={{ backgroundColor: colors.main }}
+              activeTabStyle={{ backgroundColor: colors.midDark }}
+              textStyle={Platform.OS === 'android' && { color: colors.light }}
+              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+            >
+              <ScrollView style={styles.tabView}>
                 <ProgressChart />
                 <ActivityChart />
+                <ProgressChart />
               </ScrollView>
             </Tab>
-            <Tab heading="Activity">
-              <Card style={{ maxHeight: 40 }}>
-                <CardItem style={{ justifyContent: 'space-between' }}>
-                  <Text style={{ paddingLeft: 10 }}>Img</Text>
-                  <Text style={{ paddingLeft: 10 }}>Product Name</Text>
-                  <Text>Points</Text>
-                </CardItem>
-              </Card>
-              <ScrollView>
-                {activities.length ? (
-                  activities.map(activity => (
-                    <ActivityCard
-                      key={activity.id}
-                      activity={activity}
-                      navigation={this.props.navigation}
-                    />
-                  ))
-                ) : (
-                    <Text> No Activity Yet! </Text>
-                  )}
-              </ScrollView>
+            <Tab heading="Activity"
+              tabStyle={{ backgroundColor: colors.main }}
+              activeTabStyle={{ backgroundColor: colors.midDark }}
+              textStyle={Platform.OS === 'android' && { color: colors.light }}
+              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+            >
+              <View style={styles.tabView}>
+                <Card style={{ maxHeight: 40 }}>
+                  <CardItem style={{ justifyContent: 'space-between' }}>
+                    <Text style={{ paddingLeft: 10 }}>Img</Text>
+                    <Text style={{ paddingLeft: 10 }}>Product Name</Text>
+                    <Text>Points</Text>
+                  </CardItem>
+                </Card>
+                <ScrollView>
+                  {activities.length ? (
+                    activities.map(activity => (
+                      <ActivityCard
+                        key={activity.id}
+                        activity={activity}
+                        navigation={this.props.navigation}
+                      />
+                    ))
+                  ) : (
+                      <Text> No Activity Yet! </Text>
+                    )}
+                </ScrollView>
+              </View>
             </Tab>
           </Tabs>
         </View>
@@ -93,23 +107,18 @@ class Dashboard extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  image: {
-    flex: 0.5,
-    width: 350,
-    height: 100,
-    borderWidth: 1,
-    borderColor: 'blue',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   card: {
     minHeight: 70,
     flex: 0.1,
+    backgroundColor: colors.white,
   },
+  tabView: {
+    backgroundColor: colors.light,
+  }
 })
 
 const mapStateToProps = state => {
