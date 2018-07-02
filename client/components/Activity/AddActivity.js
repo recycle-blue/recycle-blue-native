@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../../store'
+import { addActivityThunk, setActivityWeekThunk } from '../../store'
 import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
@@ -20,6 +20,8 @@ class AddActivity extends React.Component {
   }
   handleSubmit = async () => {
     await this.props.addActivity(this.state)
+    console.log("what is the user id", this.props.userId)
+    // await this.props.setActivityWeek(this.props.userId)
     if (this.state.type === 'ad') {
       this.props.navigation.navigate('AddAd')
     } else {
@@ -131,7 +133,9 @@ const mapStateToProps = (store) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addActivity: (activity) => dispatch(addActivityThunk(activity))
+  addActivity: (activity) => dispatch(addActivityThunk(activity)),
+  setActivityWeek: (userId) => dispatch(setActivityWeekThunk(userId))
+
 })
 
 const styles = StyleSheet.create({

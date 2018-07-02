@@ -7,6 +7,7 @@ import { colors } from '../color-palette'
 
 class Activity extends React.Component {
   componentWillMount() {
+    console.log("props in component will mount", this.props)
     this.props.getProduct(this.props.productId)
     this.props.getCategory(this.props.categoryId)
     this.props.getComments(this.props.activityId)
@@ -20,6 +21,7 @@ class Activity extends React.Component {
   // }
 
   render() {
+
     return (
       <KeyboardAvoidingView
         enabled={true}

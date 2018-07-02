@@ -32,7 +32,8 @@ cloudinary.config({
 // GET Routes
 router.get('/weekly/:userId', async (req, res, next) => {
   try {
-    const response = await Activity.activityCountWeek(req.params.userId)
+    const response = await Activity.activityCountWeek(Number(req.params.userId))
+    console.log("response in api route", req.params.userId, typeof (req.params.userId))
     res.json(response)
   } catch (err) {
     next(err)
@@ -104,11 +105,13 @@ router.post('/photo', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    console.log("getting here?")
     const categoryData = await Category.find({ where: { name: req.body.category } })
     const productData = await Product.find({ where: { name: req.body.name } })
     const userData = await User.findById(req.body.userId)
     const category = categoryData.dataValues
     let product
+    console.log("product data", productData)
     if (productData) {
       product = productData.dataValues
     } else {

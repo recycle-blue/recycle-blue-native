@@ -63,9 +63,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return ({
-    user: state.user,
-    activities: state.activity.activities.rows,
-    count: state.activity.activities.count,
+    user: state.user || "",
+    activities: state.activity.activities.rows || [],
+    count: state.activity.activities.count || 0,
   })
 }
 
