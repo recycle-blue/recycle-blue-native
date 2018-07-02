@@ -187,7 +187,7 @@ const commentsData = [
 const milestonesData = [
   {
     pointsNeeded: 0,
-    description: 'potato',
+    description: 'Potato',
     badgeIcon: 'https://i.imgur.com/G3Jq9xM.png'
   },
   {

@@ -8,12 +8,23 @@ import { colors } from '../color-palette'
 const mapStateToProps = (state) => {
   return ({
     totalPoints: state.user.totalPoints,
+    currentMilestone: state.user.milestone.description
   })
 }
 
 class ProgressChart extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      Potato: 500,
+      Bronze: 2000,
+      Silver: 5000,
+    }
+  }
   render() {
-
+    const totalPoints = this.props.totalPoints
+    const nextMilestonePoints = this.state[this.props.currentMilestone]
+    const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100)
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
     return (
@@ -21,8 +32,8 @@ class ProgressChart extends React.Component {
         <Svg height={halfheight} width={width}>
           <VictoryPie
             data={[
-              { x: 1, y: 10, label: ' ' },
-              { x: 2, y: 90, opacity: 0.3, label: " " }
+              { x: 1, y: totalPoints, label: ' ' },
+              { x: 2, y: nextMilestonePoints - totalPoints, opacity: 0.3, label: " " }
             ]}
             style={{
               data: {
@@ -58,7 +69,7 @@ class ProgressChart extends React.Component {
             x={`${width / 2}`}
             y={`${(halfheight / 1.7)}`}
             textAnchor="middle"
-          >10%</Text>
+          >{percentComplete}%</Text>
         </Svg>
       </View >
     )
