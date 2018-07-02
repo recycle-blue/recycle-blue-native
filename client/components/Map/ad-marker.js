@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
 import { Popup } from 'react-native-map-link'
-import { showDetailAction } from '../store/location'
+import { showDetailAction } from '../../store/location'
 
 class AdMarker extends React.Component {
   constructor() {

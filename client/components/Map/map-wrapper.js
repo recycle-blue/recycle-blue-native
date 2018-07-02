@@ -2,7 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Picker, Icon, Container, Spinner } from 'native-base'
 import { MapComp } from '../'
-import { setFetch, selectMarkerAction } from '../../store/location'
+import {
+  setFetch,
+  selectMarkerAction,
+  getLocationsAction,
+} from '../../store/location'
 
 class MapWrapper extends React.Component {
   constructor() {
@@ -10,6 +14,10 @@ class MapWrapper extends React.Component {
     this.state = {
       view: 'recycling',
     }
+  }
+
+  componentDidMount() {
+    this.props.resetLocations()
   }
 
   handleChange = value => {
@@ -55,6 +63,7 @@ const mapDispatch = dispatch => {
   return {
     setFetch: status => dispatch(setFetch(status)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
+    resetLocations: () => dispatch(getLocationsAction([])),
   }
 }
 
