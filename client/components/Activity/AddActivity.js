@@ -30,7 +30,6 @@ class AddActivity extends React.Component {
   //   drawerLabel: () => null
   // }
   render() {
-    console.log(this.state.imageUrl)
     return (
       <KeyboardAvoidingView
         style={styles.container}
