@@ -15,6 +15,7 @@ import ad from './ad'
 import category from './category'
 import comments from './comments'
 import feed from './feed'
+import categories from './categories'
 
 const reducer = combineReducers({
   user,
@@ -29,7 +30,8 @@ const reducer = combineReducers({
   ad,
   category,
   comments,
-  feed
+  feed,
+  categories
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -50,3 +52,4 @@ export * from './ad'
 export * from './comments'
 export * from './feed'
 export * from './location'
+export * from './categories'

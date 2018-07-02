@@ -45,8 +45,8 @@ const Ad = db.define('ad', {
   }
 })
 
-Ad.filterByDistance = async function(userLocation) {
-  const ads = await this.findAll({
+Ad.filterByDistance = async function(userLocation, name) {
+  let ads = await this.findAll({
     include: [
       {
         model: Activity,
@@ -64,8 +64,14 @@ Ad.filterByDistance = async function(userLocation) {
           }
         ]
       }
-    ]
+    ],
   })
+  if(name !== undefined) {
+    ads = ads.filter( ad => {
+      return (ad.activity.category.name.toLowerCase() + ' ' + ad.activity.product.name.toLowerCase()).indexOf(name.toLowerCase().trim()) > -1
+    })
+  }
+
   const adAddresses = ads
     .map(ad => `${ad.address.replace(/\s/g, '+')}+${ad.city}+${ad.state}`)
     .join('|')
@@ -75,7 +81,7 @@ Ad.filterByDistance = async function(userLocation) {
       process.env.GOOGLE_API_KEY
     }`
   )
-  const distanceArray = data.rows[0].elements
+  const distanceArray =  data.rows[0] && data.rows[0].elements || []
   const filteredAds = distanceArray.reduce((newArray, distanceData, i) => {
     const distanceInKm = distanceData.distance.value / 1000
     const distanceInMiles = distanceInKm * 0.62137119
