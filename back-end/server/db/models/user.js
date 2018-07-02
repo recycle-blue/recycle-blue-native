@@ -121,20 +121,3 @@ User.friendsInAlphabeticalOrder = friends => {
     })
   )
 }
-
-User.leaderboard = (user, friends) => {
-  const all = [user, ...friends]
-  return Promise.all(
-    all.sort(function(a, b) {
-      var pointsA = a.totalPoints
-      var pointsB = b.totalPoints
-      if (pointsA < pointsB) {
-        return 1
-      }
-      if (pointsA > pointsB) {
-        return -1
-      }
-      return 0
-    })
-  )
-}
