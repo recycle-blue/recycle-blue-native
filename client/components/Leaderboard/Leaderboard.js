@@ -45,7 +45,6 @@ class Leaderboard extends React.Component {
                       source={{ uri: leader.milestone.badgeIcon }}
                     />
                   )}
-                    {/* <Icon name='star' style={{color: 'gold'}} /> */}
                     <Text>{leader.totalPoints}</Text>
                   </Right>
                 </CardItem>
