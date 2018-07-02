@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
-import Svg, { Text } from 'react-native-svg';
+import Svg, { Text } from 'react-native-svg'
+import { colors } from '../color-palette'
 
 
 const mapStateToProps = (state) => {
@@ -14,7 +15,7 @@ const mapStateToProps = (state) => {
 class ProgressChart extends React.Component {
   render() {
 
-    const { height, width } = Dimensions.get('screen');
+    const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     return (
       <View style={styles.container}>
@@ -69,9 +70,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5fcff"
+    backgroundColor: colors.white
   }
-});
+})
 
 
-export default connect(mapStateToProps)(ProgressChart);
+export default connect(mapStateToProps)(ProgressChart)

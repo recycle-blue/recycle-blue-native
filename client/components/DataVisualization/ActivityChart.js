@@ -1,10 +1,11 @@
-import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import React from "react"
+import { StyleSheet, View, Dimensions } from "react-native"
 import { connect } from 'react-redux'
 import { Grid, LineChart, XAxis, YAxis } from 'react-native-svg-charts'
 import { setActivityWeekThunk } from '../../store/activity'
-import { VictoryChart, VictoryArea, VictoryTheme } from "victory-native";
-import Svg, { Text } from 'react-native-svg';
+import { VictoryChart, VictoryArea, VictoryTheme } from "victory-native"
+import Svg, { Text } from 'react-native-svg'
+import { colors } from "../color-palette"
 
 const data = [
   { day: "Mon", points: 2 },
@@ -14,11 +15,11 @@ const data = [
   { day: "Fri", points: 1 },
   { day: "Sat", points: 4 },
   { day: "Sun", points: 9 }
-];
+]
 
 class ActivityChart extends React.Component {
   render() {
-    const { height, width } = Dimensions.get('screen');
+    const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     return (
       <View style={styles.container}>
@@ -48,7 +49,7 @@ class ActivityChart extends React.Component {
           >Weekly Activity</Text>
         </Svg>
       </View>
-    );
+    )
   }
 }
 
@@ -57,9 +58,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5fcff"
+    backgroundColor: colors.white,
   }
-});
+})
 
 
 

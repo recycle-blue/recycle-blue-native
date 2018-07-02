@@ -23,6 +23,7 @@ import {
   setFetch,
   getLocationsAction,
 } from '../../store'
+import { colors } from '../color-palette'
 const geoLocation = navigator.geolocation
 
 class Marketplace extends React.Component {
@@ -124,30 +125,30 @@ class Marketplace extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   searchBar: {
     margin: 5,
-    backgroundColor: 'rgba(255,255,255, 0.8)',
+    backgroundColor: colors.white + 'FF',
   },
   picker: {
     flex: 1,
     borderTopLeftRadius: 100,
     borderBottomLeftRadius: 100,
-    backgroundColor: 'rgba(208, 230, 237, 0.3)',
+    backgroundColor: colors.light,
   },
   iosPicker: {
     height: 50,
     width: 1000,
   },
   androidPicker: {
-    backgroundColor: 'rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
   },
   searchIcon: {
     paddingRight: 3,
-    backgroundColor: 'rgba(208, 230, 237, 0.3)',
+    backgroundColor: colors.light,
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',

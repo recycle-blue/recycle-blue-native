@@ -3,6 +3,7 @@ import { StyleSheet, View, Button, Image, KeyboardAvoidingView, Platform } from 
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
 import { addActivityThunk } from '../../store'
+import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
   constructor(props) {
@@ -136,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.light,
     justifyContent: 'flex-start',
   },
   image: {
