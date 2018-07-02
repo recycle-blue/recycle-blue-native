@@ -7,7 +7,6 @@ export default class CommentCard extends Component {
     drawerLabel: () => null
   }
   render() {
-    const imageurl = 'https://i.imgur.com/lsoomRq.jpg'
     return (
       <View>
         <Content>

@@ -32,7 +32,7 @@ cloudinary.config({
 // GET Routes
 router.get('/weekly/:userId', async (req, res, next) => {
   try {
-    const response = await Activity.activityCountWeek(req.params.userId)
+    const response = await Activity.activityCountWeek(Number(req.params.userId))
     res.json(response)
   } catch (err) {
     next(err)
