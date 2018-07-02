@@ -2,31 +2,21 @@ import React from "react"
 import { StyleSheet, View, Dimensions } from "react-native"
 import { connect } from 'react-redux'
 import { setActivityWeekThunk } from '../../store/activity'
-<<<<<<< HEAD
 import { VictoryChart, VictoryArea, VictoryTheme, VictoryLabel } from "victory-native";
 import { colors } from '../color-palette'
-=======
-import { VictoryChart, VictoryArea, VictoryTheme } from "victory-native"
-import Svg, { Text } from 'react-native-svg'
-import { colors } from "../color-palette"
->>>>>>> 3e6ee75059e934e227d365d07a6735a364dc8098
+import { getWeeklyData } from '../sortedActivityData'
 
-const data = [
-  { day: "Mon", points: 2 },
-  { day: "Tues", points: 4 },
-  { day: "Wed", points: 6 },
-  { day: "Thurs", points: 0 },
-  { day: "Fri", points: 1 },
-  { day: "Sat", points: 4 },
-  { day: "Sun", points: 9 }
-]
 
 class ActivityChart extends React.Component {
+  async componentDidMount() {
+    await this.props.setActivityWeekThunk(this.props.user.id)
+  }
   render() {
     const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
+    const data = getWeeklyData(this.props.activities || [])
+    console.log("what do i have on props", this.props)
     return (
-<<<<<<< HEAD
       <View style={styles.container} pointerEvents='none'>
         <VictoryChart
           width={width}
@@ -57,36 +47,6 @@ class ActivityChart extends React.Component {
         </VictoryChart>
       </View >
     );
-=======
-      <View style={styles.container}>
-        <Svg height={halfheight} width={width}>
-          <VictoryChart
-            width={width}
-            theme={VictoryTheme.material}
-            animate={{
-              duration: 1000,
-              onLoad: { duration: 700 }
-            }}>
-            <VictoryArea
-              data={data}
-              x="day"
-              y="points"
-              style={{
-                data: { fill: "#005b96" }
-              }} />
-          </VictoryChart>
-          <Text
-            fill="#011f4b"
-            fontSize="20"
-            fontWeight="bold"
-            x={`${width / 2}`}
-            y={`${(halfheight / 8)}`}
-            textAnchor="middle"
-          >Weekly Activity</Text>
-        </Svg>
-      </View>
-    )
->>>>>>> 3e6ee75059e934e227d365d07a6735a364dc8098
   }
 }
 
@@ -104,8 +64,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return ({
     user: state.user,
-    activities: state.activity.rows,
-    count: state.activity.count
+    activities: state.activity.activities.rows,
+    count: state.activity.activities.count,
   })
 }
 
