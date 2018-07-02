@@ -10,7 +10,7 @@ import {
   selectMarkerAction,
   setFetch,
   getLocationsAction,
-} from '../store/location'
+} from '../../store/location'
 import MarkerDetail from './MarkerDetail'
 
 const geoLocation = navigator.geolocation

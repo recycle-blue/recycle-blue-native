@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, ScrollView} from 'react-native'
 import {Container, Item, Icon, Input, Text, Spinner} from 'native-base'
 import { connect } from 'react-redux'
-import FriendCard from './user-card'
+import FriendCard from '../Dashboard/user-card'
 import {
   getFriendsThunk,
   selectedFriendThunk,
   selectedFriendActivitiesThunk
-} from '../store'
+} from '../../store'
 
 class Friends extends React.Component {
 
@@ -26,7 +26,7 @@ class Friends extends React.Component {
   singleFriend = async friendId => {
     await this.props.selectFriend(this.props.user.id, friendId)
     await this.props.selectFriendActivities(this.props.user.id, friendId)
-    this.props.navigation.navigate('dashboard')
+    this.props.navigation.navigate('Dashboard')
   }
 
   render() {

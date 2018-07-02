@@ -2,17 +2,16 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
-import { setActivity } from '../store'
-import { SocialMedia } from './'
+import { setActivity } from '../../store'
 
-class ActivityCard extends React.Component {
+class FeedCard extends React.Component {
   constructor(props) {
     super(props)
   }
   handlePress = async () => {
     if (!this.props.disabled) {
       await this.props.selectActivity(this.props.activity)
-      this.props.navigation.navigate('activity')
+      this.props.navigation.navigate('Activity')
     }
   }
   render() {
@@ -21,11 +20,16 @@ class ActivityCard extends React.Component {
       <Card style={styles.card}>
         <CardItem button style={styles.cardItem} onPress={this.handlePress} >
           <Thumbnail medium square
+            source={{ uri: activity.user.imageUrl }}
+          />
+          <Text style={styles.name} >{activity.user.name}</Text>
+        </CardItem>
+        <CardItem button style={styles.cardItem} onPress={this.handlePress} >
+          <Thumbnail medium square
             source={{ uri: activity.imageUrl }}
           />
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
-          <SocialMedia activity={activity}/>
         </CardItem>
       </Card>
     )
@@ -38,7 +42,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = StyleSheet.create({
   card: {
-    maxHeight: 80,
+    maxHeight: 160,
     // flex: 0.1,
   },
   cardItem: {
@@ -70,4 +74,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(null, mapDispatchToProps)(ActivityCard)
+export default connect(null, mapDispatchToProps)(FeedCard)

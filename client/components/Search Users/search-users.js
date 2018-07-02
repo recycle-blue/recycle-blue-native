@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUsersThunk, getFriendsHashThunk } from '../store'
+import { getUsersThunk, getFriendsHashThunk } from '../../store'
 import { ScrollView } from 'react-native'
-import UserCard from './user-card'
+import UserCard from '../Dashboard/user-card'
 import {
   Container,
   Content,

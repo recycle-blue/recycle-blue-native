@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import { Container, Content } from 'native-base'
 import { connect } from 'react-redux'
-import { getAdThunk } from '../store'
+import { getAdThunk } from '../../store'
 
 class AdView extends React.Component {
   componentWillMount() {

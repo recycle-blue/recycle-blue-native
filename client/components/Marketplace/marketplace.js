@@ -14,6 +14,7 @@ import {
   Picker,
   Spinner
 } from 'native-base'
+import { MapComp, AdCard } from '../'
 import {
   getMarketplaceAdsThunk, getRecycleLocationsThunk,
   getAdLocationsThunk,
@@ -21,8 +22,7 @@ import {
   selectMarkerAction,
   setFetch,
   getLocationsAction,
-} from '../store'
-import { MapComp, AdCard } from '.'
+} from '../../store'
 const geoLocation = navigator.geolocation
 
 class Marketplace extends React.Component {

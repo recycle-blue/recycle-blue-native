@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 // import { Button } from 'react-native'
 import { Popup } from 'react-native-map-link'
 import { Card, CardItem, Body, Text, Right, Button } from 'native-base'
-import { getDistanceThunk } from '../store/location'
+import { getDistanceThunk } from '../../store/location'
 
 class MarkerDetail extends React.Component {
   constructor() {
