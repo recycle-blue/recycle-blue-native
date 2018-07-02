@@ -30,7 +30,6 @@ class AddAd extends React.Component {
       category: this.props.category,
       product: this.props.product
     }
-    console.log('sent to card', activity)
     return (
       <KeyboardAvoidingView
         behavior="position"

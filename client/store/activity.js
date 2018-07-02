@@ -19,7 +19,7 @@ const defaultActivity = {
   category: '',
   photo: '',
   quantity: '1',
-  imageUrl: 'https://i.ytimg.com/vi/1qT-rOXB6NI/maxresdefault.jpg',
+  imageUrl: 'default',
   unit: 'qty',
   type: 'activity',
   productId: 1,
