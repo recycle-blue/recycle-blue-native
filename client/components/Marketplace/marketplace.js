@@ -65,7 +65,6 @@ class Marketplace extends React.Component {
 
 
   componentWillUpdate(nextProps,nextState) {
-   // console.log(nextState)
     if(nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
       const category = this.props.categories.find( elem => elem.name === nextState.category)
       geoLocation.getCurrentPosition( async (location) => {
@@ -82,7 +81,6 @@ class Marketplace extends React.Component {
 
   render() {
     const { locations, categories } = this.props
-    console.log(locations.length);
     if (this.state.isLoading) {
       return <Spinner color={colors.main} />
     }

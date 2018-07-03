@@ -56,7 +56,7 @@ Ad.filterByDistance = async function(userLocation, categoryId, name) {
         include: [
           {
             model: Category,
-            attributes: ['name']
+            attributes: ['id','name']
           },
           {
             model: Product,
@@ -67,11 +67,11 @@ Ad.filterByDistance = async function(userLocation, categoryId, name) {
     ],
   })
 
-  // if(categoryId !== undefined) {
-  //   ads = ads.filter( ad => {
-  //     return ad.activity.category.id === categoryId
-  //   })
-  // }
+  if(categoryId !== undefined && categoryId!=='') {
+    ads = ads.filter( ad => {
+      return ad.activity.category.id === Number(categoryId)
+    })
+  }
 
   if(name !== undefined) {
     ads = ads.filter( ad => {
