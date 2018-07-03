@@ -263,7 +263,7 @@ const milestonesData = [
     pointsNeeded: 2000,
     description: 'Silver',
     badgeIcon:
-      'https://cdn1.vectorstock.com/i/1000x1000/77/50/silver-medal-vector-987750.jpg'
+      'https://cdn1.vectorstock.com/i/1000x1000/77/50/silver-medal-vector-987200.jpg'
   },
   {
     pointsNeeded: 5000,
@@ -371,6 +371,39 @@ const adsData = [
   }
 ]
 
+const images = {
+  miscellaneous:
+    'https://images.pexels.com/photos/1034887/pexels-photo-1034887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  bottle:
+    'https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  jug:
+    'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  can:
+    'https://images.pexels.com/photos/404178/pexels-photo-404178.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  box:
+    'https://images.pexels.com/photos/260184/pexels-photo-260184.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  sheet:
+    'https://images.pexels.com/photos/212269/pexels-photo-212269.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  notebook:
+    'https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  bag:
+    'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  trash:
+    'https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  cup:
+    'https://images.pexels.com/photos/758702/pexels-photo-758702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  jar:
+    'https://images.pexels.com/photos/5914/blue-glass-big-design.jpg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  food:
+    'https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  cloth:
+    'https://images.pexels.com/photos/459486/pexels-photo-459486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  mug:
+    'https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  package:
+    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200'
+}
+
 module.exports = {
   productsData,
   usersData,
@@ -378,5 +411,6 @@ module.exports = {
   commentsData,
   milestonesData,
   tagsData,
-  adsData
+  adsData,
+  images
 }
