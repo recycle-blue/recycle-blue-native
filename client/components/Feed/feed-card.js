@@ -18,21 +18,52 @@ class FeedCard extends React.Component {
   render() {
     const { activity } = this.props
     return (
-      <Card style={styles.card}>
-        <CardItem button style={styles.cardItem} onPress={this.handlePress} >
-          <Thumbnail medium square
-            source={{ uri: activity.user.imageUrl }}
-          />
-          <Text style={styles.name} >{activity.user.name}</Text>
+      <Card>
+        <CardItem>
+          <Left>
+            <Thumbnail source={{uri: activity.user.imageUrl}} />
+            <Body>
+              <Text>{activity.user.name}</Text>
+              <Text note>{activity.createdAt}</Text>
+            </Body>
+          </Left>
         </CardItem>
-        <CardItem button style={styles.cardItem} onPress={this.handlePress} >
-          <Thumbnail medium square
-            source={{ uri: activity.imageUrl }}
-          />
-          <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
-          <Text style={styles.points} >{activity.points}</Text>
+        <CardItem cardBody>
+          <Image source={{uri: activity.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
         </CardItem>
+        {/* <CardItem>
+          <Left>
+            <Button transparent>
+              <Icon active name="thumbs-up" />
+              <Text>12 Likes</Text>
+            </Button>
+          </Left>
+          <Body>
+            <Button transparent>
+              <Icon active name="chatbubbles" />
+              <Text>4 Comments</Text>
+            </Button>
+          </Body>
+          <Right>
+            <Text>11h ago</Text>
+          </Right>
+        </CardItem> */}
       </Card>
+      // <Card style={styles.card}>
+      //   <CardItem button style={styles.cardItem} onPress={this.handlePress} >
+      //     <Thumbnail medium square
+      //       source={{ uri: activity.user.imageUrl }}
+      //     />
+      //     <Text style={styles.name} >{activity.user.name}</Text>
+      //   </CardItem>
+      //   <CardItem button style={styles.cardItem} onPress={this.handlePress} >
+      //     <Thumbnail medium square
+      //       source={{ uri: activity.imageUrl }}
+      //     />
+      //     <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
+      //     <Text style={styles.points} >{activity.points}</Text>
+      //   </CardItem>
+      // </Card>
     )
   }
 }
