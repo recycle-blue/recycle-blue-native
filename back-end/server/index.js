@@ -7,7 +7,7 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const sessionStore = new SequelizeStore({db})
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
@@ -38,8 +38,8 @@ const createApp = () => {
   app.use(morgan('dev'))
 
   // body parsing middleware
-  app.use(bodyParser.json({limit: '6mb'}))
-  app.use(bodyParser.urlencoded({extended: true, limit: '6mb'}))
+  app.use(bodyParser.json({ limit: '6mb' }))
+  app.use(bodyParser.urlencoded({ extended: true, limit: '6mb' }))
 
   // compression middleware
   app.use(compression())

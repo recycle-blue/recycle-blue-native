@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
+import { Card, CardItem, Thumbnail } from 'native-base'
 import { setActivity } from '../../store'
 import { SocialMedia } from '../'
 import { colors } from '../color-palette'
@@ -27,6 +27,11 @@ class ActivityCard extends React.Component {
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
           <Text style={styles.points} >{activity.points}</Text>
           <SocialMedia activity={activity} />
+          {activity.type === 'ad' &&
+            <View style={styles.marketplaceTag}>
+              <Text style={styles.marketplaceTagText}>Marketplace Item</Text>
+            </View>
+          }
         </CardItem>
       </Card>
     )
@@ -54,8 +59,6 @@ const styles = StyleSheet.create({
     flex: 0.5,
     width: 300,
     height: 100,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -69,6 +72,21 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
   },
+  marketplaceTag: {
+    position: 'absolute',
+    width: 150,
+    height: 15,
+    top: 0,
+    left: Dimensions.get('screen').width / 2 - 75,
+    backgroundColor: colors.midDark,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  marketplaceTagText: {
+    textAlign: 'center',
+    fontSize: 10,
+    color: colors.white,
+  }
 })
 
 export default connect(null, mapDispatchToProps)(ActivityCard)

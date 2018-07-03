@@ -34,7 +34,7 @@ class AdCard extends React.Component {
             <Text style={styles.quantity}>Qty: {ad.activity.quantity}</Text>
             <Text style={styles.quantity}>{ad.description}</Text>
           </View>
-          <TouchableOpacity style={styles.right} onPress={() => {}}>
+          <TouchableOpacity style={styles.right} onPress={() => { }}>
             <Text>ToMap</Text>
             <Thumbnail small source={{ uri: ad.activity.imageUrl }} />
             <Text style={{ fontWeight: 'bold', paddingTop: 5 }}>
@@ -76,8 +76,6 @@ const styles = StyleSheet.create({
     flex: 0.5,
     width: 300,
     height: 100,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
   },

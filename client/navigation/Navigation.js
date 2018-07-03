@@ -60,7 +60,7 @@ const PrimaryNav = createStackNavigator(
     headerMode: 'float',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: colors.main, height: 45 },
-      title: 'Recycle Blue',
+      title: 'RecycleBlue',
       headerTitleStyle: { textAlign: 'center', alignSelf: 'center', width: '100%', paddingRight: 30 },
       headerTintColor: 'white',
       headerLeft: (

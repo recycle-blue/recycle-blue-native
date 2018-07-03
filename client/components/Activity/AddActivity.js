@@ -6,10 +6,12 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  TouchableHighlight,
+  Text
 } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
-import { addActivityThunk } from '../../store'
+import { addActivityThunk, setActivityWeekThunk } from '../../store'
 import { colors } from '../color-palette'
 
 class AddActivity extends React.Component {
@@ -33,14 +35,15 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('Activity')
     }
   }
-  static navigationOptions = {
-    drawerLabel: () => null,
-  }
+  // static navigationOptions = {
+  //   drawerLabel: () => null,
+  // }
   render() {
     return (
       <KeyboardAvoidingView
         style={styles.container}
         behavior="position"
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 50}
         contentContainerStyle={styles.container}
         enabled={true}
       >
@@ -51,8 +54,8 @@ class AddActivity extends React.Component {
               onPress={() => this.props.navigation.navigate('Post Activity')}
             />
           ) : (
-            <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          )}
+              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+            )}
         </View>
         <Form style={styles.form}>
           <Item rounded style={styles.items}>
@@ -119,11 +122,13 @@ class AddActivity extends React.Component {
             </Item>
           </View>
         </Form>
-        <Button
-          title="submit"
-          onPress={this.handleSubmit}
+        <TouchableHighlight
           style={styles.button}
-        />
+          onPress={this.handleSubmit}
+          underlayColor={colors.light}
+        >
+          <Text style={styles.buttonFont}>{this.state.type === 'ad' ? 'Add Contact Info' : 'Submit'}</Text>
+        </TouchableHighlight>
       </KeyboardAvoidingView>
     )
   }
@@ -171,6 +176,7 @@ const styles = StyleSheet.create({
   },
   items: {
     backgroundColor: colors.white,
+    marginBottom: 5,
   },
   ios: {
     height: 50,
@@ -185,7 +191,20 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   button: {
+    marginTop: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 25,
     backgroundColor: colors.midLight,
+    borderRadius: 100,
+    borderColor: colors.midLight,
+    borderWidth: 1,
+    alignSelf: 'center',
+  },
+  buttonFont: {
+    color: colors.white,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 })
 

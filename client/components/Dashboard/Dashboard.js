@@ -5,14 +5,12 @@ import {
   Container,
   Tabs,
   Tab,
-  ScrollableTab,
   Card,
   CardItem,
   Body,
   Left,
   Right,
   Thumbnail,
-  Button,
 } from 'native-base'
 import { getUserActivitiesThunk } from '../../store'
 import { ProgressChart, ActivityChart, ActivityCard } from '../'
@@ -22,6 +20,11 @@ class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }
   componentDidMount() {
     this.props.getUserActivitiesThunk(this.props.user.id)
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.props.getUserActivitiesThunk(this.props.user.id)
+    }
   }
 
   render() {
@@ -55,13 +58,14 @@ class Dashboard extends React.Component {
           </CardItem>
         </Card>
         <View style={styles.container}>
-          <Tabs >
-
+          <Tabs
+            tabBarUnderlineStyle={{ backgroundColor: colors.white }}
+          >
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
+              textStyle={{ color: colors.white }}
+              activeTextStyle={{ color: colors.white }}
             >
               <View style={styles.tabView}>
                 <Card style={{ maxHeight: 40 }}>
@@ -88,13 +92,13 @@ class Dashboard extends React.Component {
             </Tab>
             <Tab heading="Progess"
               tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={Platform.OS === 'android' && { color: colors.light }}
-              activeTextStyle={Platform.OS === 'android' && { color: colors.light }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
+              textStyle={{ color: colors.light }}
+              activeTextStyle={{ color: colors.light }}
+
             >
-              <ScrollView style={styles.tabView}>
-                <ProgressChart />
-                <ActivityChart />
+              <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
+                <ActivityChart currentUser={this.props.user.id} />
                 <ProgressChart />
               </ScrollView>
             </Tab>

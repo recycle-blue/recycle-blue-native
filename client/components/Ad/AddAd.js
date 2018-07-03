@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Button, Platform, KeyboardAvoidingView, Dimensions } from 'react-native'
-import { Form, Item, Input, Textarea } from 'native-base'
+import { StyleSheet, View, Button, Platform, KeyboardAvoidingView, Dimensions, TouchableHighlight, Text } from 'react-native'
+import { Form, Item, Input, Textarea, Container } from 'native-base'
 import { connect } from 'react-redux'
 import { addAdThunk } from '../../store'
 import { ActivityCard } from '../'
@@ -85,7 +85,13 @@ class AddAd extends React.Component {
             />
           </Item>
         </Form>
-        <Button title='submit' onPress={this.handleSubmit} style={styles.button} />
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleSubmit}
+          underlayColor={colors.light}
+        >
+          <Text style={styles.buttonFont}>Submit</Text>
+        </TouchableHighlight>
       </KeyboardAvoidingView>
     )
   }
@@ -120,6 +126,7 @@ const styles = StyleSheet.create({
   },
   items: {
     backgroundColor: colors.white,
+    marginBottom: 5,
   },
   form: {
     paddingBottom: 10,
@@ -145,16 +152,27 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: 250,
     height: 250,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
     margin: 10,
   },
   button: {
+    marginTop: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 25,
     backgroundColor: colors.midLight,
-  }
+    borderRadius: 100,
+    borderColor: colors.midLight,
+    borderWidth: 1,
+    alignSelf: 'center',
+  },
+  buttonFont: {
+    color: colors.white,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAd)

@@ -68,7 +68,7 @@ export default function (state = defaultAd, action) {
     case SET_AD:
       return { ...state, ...action.ad }
     case SET_MARKETPLACE_ADS:
-      return { marketplace: action.marketplace }
+      return { ...state, marketplace: action.marketplace }
     default:
       return state
   }

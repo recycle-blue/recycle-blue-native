@@ -62,6 +62,7 @@ export const addActivityThunk = (activity) => async dispatch => {
     await dispatch(setActivity(res.data.activity || defaultActivity))
     await dispatch(setProduct(res.data.product))
     await dispatch(setCategory(res.data.category))
+    await dispatch(setActivityWeekThunk(res.data.activity.userId))
   } catch (err) {
     console.error(err)
   }
@@ -90,11 +91,11 @@ export const savePhotoThunk = (photo) => async dispatch => {
 export default function (state = defaultActivity, action) {
   switch (action.type) {
     case SET_ACTIVITY:
-      return { ...action.activity }
+      return { ...state, ...action.activity }
     case SAVE_PHOTO:
       return { photo: action.photo }
     case SET_ACTIVITY_WEEK:
-      return { activities: action.activities }
+      return { ...state, activities: action.activities }
     case CLEAR_ACTIVITY:
       return { ...defaultActivity }
     default:
