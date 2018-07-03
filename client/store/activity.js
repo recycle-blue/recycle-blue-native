@@ -49,9 +49,7 @@ export const clearActivityAction = () => ({ type: CLEAR_ACTIVITY })
  */
 export const setActivityWeekThunk = (userId) => async dispatch => {
   try {
-    console.log("what is my user id in the thunk", userId)
     const res = await axios.get(`${ENV_PATH}/api/activity/weekly/${userId}`)
-    console.log("lojijdgjhgfgfgf", res.data)
     dispatch(setActivityWeek(res.data || defaultActivity))
   } catch (err) {
     console.error(err)
