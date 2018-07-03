@@ -25,7 +25,7 @@ export default class ProgressChart extends React.Component {
      const totalPoints = this.props.selectedUser.totalPoints
     const nextMilestonePoints = this.state[this.props.selectedUser.milestone.description]
     const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100)
-    const { height, width } = Dimensions.get('screen');
+    const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     return (
       <View style={styles.container}>
@@ -40,14 +40,14 @@ export default class ProgressChart extends React.Component {
                 opacity: (d) => d.opacity
               },
               labels: {
-                fill: `${colors.main}`,
+                fill: `${colors.midDark}`,
                 fontSize: 20,
                 fontWeight: "bold"
               }
             }}
 
             labelRadius={1}
-            colorScale={[`${colors.main}`, `${colors.main}`,]}
+            colorScale={[`${colors.midDark}`, `${colors.midDark}`,]}
             width={width}
             innerRadius={100}
             standalone={false}

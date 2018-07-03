@@ -31,7 +31,6 @@ const Drawer = createDrawerNavigator(
     AddActivity: { screen: AddActivity },
     AddAd: { screen: AddAd },
     Map: { screen: Map },
-    Camera: { screen: Camera },
     Activity: { screen: Activity },
     LoadingScreen: { screen: LoadingScreen },
     'Post Activity': { screen: Camera },
@@ -62,9 +61,16 @@ const PrimaryNav = createStackNavigator(
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: colors.main, height: 45 },
       title: 'RecycleBlue',
-      headerTitleStyle: [Platform.OS === 'ios' ?
-        { textAlign: 'center', alignSelf: 'center', width: '100%' }
-        : { textAlign: 'center', alignSelf: 'center', width: '100%', paddingRight: 30 }],
+      headerTitleStyle: [
+        Platform.OS === 'ios'
+          ? { textAlign: 'center', alignSelf: 'center', width: '100%' }
+          : {
+              textAlign: 'center',
+              alignSelf: 'center',
+              width: '100%',
+              paddingRight: 30,
+            },
+      ],
       headerTintColor: 'white',
       headerLeft: (
         <Button

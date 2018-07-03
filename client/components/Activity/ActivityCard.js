@@ -25,7 +25,7 @@ class ActivityCard extends React.Component {
             source={{ uri: activity.imageUrl }}
           />
           <Text style={styles.name} >{activity.category.name + ' ' + activity.product.name}</Text>
-          <Text style={styles.points} >{activity.points}</Text>
+          <Text style={styles.points} >Pts:  {activity.points}</Text>
           <SocialMedia activity={activity} />
           {activity.type === 'ad' &&
             <View style={styles.marketplaceTag}>

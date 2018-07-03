@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import { Container, Item, Icon, Input, Text, Spinner } from 'native-base'
 import { connect } from 'react-redux'
 import FriendCard from '../Dashboard/user-card'
@@ -35,28 +35,30 @@ class Friends extends React.Component {
     if (this.state.isLoading) return <Spinner color="blue" />
     return (
       <Container>
-        <ScrollView stickyHeaderIndices={[0]}>
-          <Item>
+        <Item>
             <Input
               placeholder="Search"
               onChangeText={text => getFriends(user.id, text)}
             />
             <Icon active name="search" />
           </Item>
-          {friends.length ? (
-            friends.map(friend => {
-              return (
-                <FriendCard
-                  key={friend.id}
-                  user={friend}
-                  navigate={navigation.navigate}
-                  friends={true}
-                />
-              )
-            })
-          ) : (
-              <Text> No Result </Text>
-            )}
+        <ScrollView >
+            <View style={{flexDirection: "row", flexWrap: "wrap", justifyContent: 'space-between' }}>
+            {friends.length ? (
+              friends.map(friend => {
+                return (
+                  <FriendCard
+                    key={friend.id}
+                    user={friend}
+                    navigate={navigation.navigate}
+                    friends={true}
+                  />
+                )
+              })
+            ) : (
+                <Text> No Result </Text>
+              )}
+            </View>
         </ScrollView>
       </Container>
     )

@@ -68,13 +68,13 @@ class Dashboard extends React.Component {
               activeTextStyle={{ color: colors.white }}
             >
               <View style={styles.tabView}>
-                <Card style={{ maxHeight: 40 }}>
+                {/* <Card style={{ maxHeight: 40 }}>
                   <CardItem style={{ justifyContent: 'space-between' }}>
                     <Text style={{ paddingLeft: 10 }}>Img</Text>
                     <Text style={{ paddingLeft: 10 }}>Product Name</Text>
                     <Text>Points</Text>
                   </CardItem>
-                </Card>
+                </Card> */}
                 <ScrollView>
                   {activities.length ? (
                     activities.map(activity => (
@@ -90,7 +90,7 @@ class Dashboard extends React.Component {
                 </ScrollView>
               </View>
             </Tab>
-            <Tab heading="Progess"
+            <Tab heading="Progress"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midLight }}
               textStyle={{ color: colors.light }}
