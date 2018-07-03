@@ -1,8 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardItem, Body, Text, Button, Right, Icon } from 'native-base'
+import {
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Button,
+  Right,
+  Icon,
+  Col,
+  Container,
+} from 'native-base'
+import { ScrollView, View } from 'react-native'
 import { Popup } from 'react-native-map-link'
 import { showDetailAction } from '../../store/location'
+import { ColorPalette } from '../color-palette'
 
 class RecycleMarker extends React.Component {
   constructor() {
@@ -26,24 +38,26 @@ class RecycleMarker extends React.Component {
     const { marker, detailStatus } = this.props
     if (!detailStatus) return null
     return (
-      <Card>
+      <View style={{ marginBottom: 20 }}>
         <CardItem>
           <Body>
-            <Text>{marker.name}</Text>
+            <Text style={{ fontSize: 20 }}>{marker.name}</Text>
           </Body>
           <Right>
             <Button transparent onPress={this.closeDetail}>
-              <Text> Close </Text>
+              <Icon name="close" style={{ color: 'black', fontSize: 50 }} />
             </Button>
           </Right>
         </CardItem>
         <CardItem>
           <Body>
+            <Icon name="car" style={{ color: 'black' }} />
             <Text>{marker.vicinity}</Text>
           </Body>
         </CardItem>
         <CardItem>
           <Body>
+            <Icon name="pin" style={{ color: 'black' }} />
             <Text style={{ fontWeight: 'bold' }}>
               {marker.distance} from current location
             </Text>
@@ -72,7 +86,7 @@ class RecycleMarker extends React.Component {
             dialogTitle: 'Choose a Maps App',
           }}
         />
-      </Card>
+      </View>
     )
   }
 }
