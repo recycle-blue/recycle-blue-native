@@ -51,19 +51,6 @@ class Marketplace extends React.Component {
     })
   }
 
-  // searchAds = (text) => {
-  //   geoLocation.getCurrentPosition(location => {
-  //     const { latitude, longitude } = location.coords
-  //     const userLocation = { latitude: latitude, longitude: longitude }
-  //     const locationStr = Object.keys(userLocation)
-  //       .map(key => userLocation[key])
-  //       .join(',')
-  //     this.props.fetchAdLocations(locationStr,this.state.category,text);
-
-  //   })
-  // }
-
-
   componentWillUpdate(nextProps,nextState) {
     if(nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
       const category = this.props.categories.find( elem => elem.name === nextState.category)
