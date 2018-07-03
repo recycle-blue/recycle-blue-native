@@ -8,8 +8,9 @@ import { getWeeklyData } from '../sortedActivityData'
 
 
 class ActivityChart extends React.Component {
+
   async componentDidMount() {
-    await this.props.setActivityWeekThunk(this.props.user.id)
+    await this.props.setActivityWeekThunk(this.props.currentUser)
   }
   render() {
     const { height, width } = Dimensions.get('screen')
