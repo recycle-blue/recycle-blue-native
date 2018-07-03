@@ -56,7 +56,7 @@ class MapComp extends React.Component {
     const { locations, selectedMarker, isFetching, view } = this.props
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
-      return <Spinner color="blue" />
+      return <Spinner color="blue" style={{ marginTop: 40 }} />
     }
     return (
       <Container>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
+import { Card, CardItem, Body, Text, Button, Right, Icon } from 'native-base'
 import { Popup } from 'react-native-map-link'
 import { withNavigation } from 'react-navigation'
 import { showDetailAction } from '../../store/location'
@@ -40,7 +40,7 @@ class AdMarker extends React.Component {
           </Body>
           <Right>
             <Button transparent onPress={this.closeDetail}>
-              <Text> Close </Text>
+              <Icon name="close" style={{ color: 'black', fontSize: 50 }} />
             </Button>
           </Right>
         </CardItem>
@@ -52,10 +52,12 @@ class AdMarker extends React.Component {
           modalProps={{
             animationIn: 'slideInUp',
           }}
-          appsWhiteList={['google-maps', 'apple-maps']}
           options={{
             latitude: marker.ad.latitude,
             longitude: marker.ad.longitude,
+            cancelText: 'Cancel',
+            appsWhiteList: ['google-maps', 'apple-maps'],
+            dialogTitle: 'Choose a Maps App',
           }}
         />
       </AdCard>
