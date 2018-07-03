@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     width: '100%',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   image: {
     flex: 1
