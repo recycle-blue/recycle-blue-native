@@ -71,8 +71,7 @@ const productsData = [
     points: 2,
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet,',
-    recycleUse:
-      'mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit. Cras'
+    recycleUse: 'Sheets have a myriad of uses!'
   },
   {
     name: 'notebook',
@@ -87,8 +86,7 @@ const productsData = [
     points: 0,
     description:
       'pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper,',
-    recycleUse:
-      'dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus'
+    recycleUse: 'Use this next time you go to the grocery store.'
   },
   {
     name: 'trash',
@@ -117,8 +115,7 @@ const productsData = [
     points: 1,
     description:
       'ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem',
-    recycleUse:
-      'feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,'
+    recycleUse: 'Put it in a tupperware container to eat later...or compost it!'
   },
   {
     name: 'cloth',
@@ -126,23 +123,21 @@ const productsData = [
     description:
       'quis accumsan convallis, ante lectus convallis est, vitae sodales nisi',
     recycleUse:
-      'arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend'
+      'Clothing has the word cloth in it, so it is safe to say that cloth can be used to make clothing.'
   },
   {
     name: 'mug',
     points: 1,
     description:
       'vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue',
-    recycleUse:
-      'facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis'
+    recycleUse: 'Painting a mug with your own design can be a fun art project.'
   },
   {
     name: 'package',
     points: 1,
     description:
       'vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue',
-    recycleUse:
-      'facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis'
+    recycleUse: 'Great for all of your future shipping needs!'
   }
 ]
 
