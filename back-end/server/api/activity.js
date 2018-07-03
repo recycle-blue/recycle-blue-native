@@ -184,10 +184,17 @@ router.post('/:activityId/comment', async (req, res, next) => {
 router.get('/marketplace', async (req, res, next) => {
   let filteredAds
   const userLocation = req.query.userLocation
-  if(req.query.search === undefined) {
+
+  if(req.query.search === undefined && req.query.categoryId === undefined) {
+    console.log('This fired!')
     filteredAds = await Ad.filterByDistance(userLocation)
-  } else {
-    filteredAds = await Ad.filterByDistance(userLocation,req.query.name)
   }
+  // } else if (req.query.search === undefined && req.query.categoryId) {
+  //   filteredAds = await Ad.filterByDistance(userLocation,req.query.categoryId)
+  // } else if (!req.query.category){
+  //   filteredAds = await Ad.filterByDistance(userLocation,null,req.query.name)
+  // } else {
+  //   filteredAds = await Ad.filterByDistance(userLocation,req.query.categoryId,req.query.name)
+  // }
   res.json(filteredAds)
 })

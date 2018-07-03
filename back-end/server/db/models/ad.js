@@ -45,7 +45,7 @@ const Ad = db.define('ad', {
   }
 })
 
-Ad.filterByDistance = async function(userLocation, name) {
+Ad.filterByDistance = async function(userLocation, categoryId, name) {
   let ads = await this.findAll({
     include: [
       {
@@ -66,6 +66,13 @@ Ad.filterByDistance = async function(userLocation, name) {
       }
     ],
   })
+
+  // if(categoryId !== undefined) {
+  //   ads = ads.filter( ad => {
+  //     return ad.activity.category.id === categoryId
+  //   })
+  // }
+
   if(name !== undefined) {
     ads = ads.filter( ad => {
       return (ad.activity.category.name.toLowerCase() + ' ' + ad.activity.product.name.toLowerCase()).indexOf(name.toLowerCase().trim()) > -1

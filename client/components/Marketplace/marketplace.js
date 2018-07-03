@@ -51,25 +51,38 @@ class Marketplace extends React.Component {
     })
   }
 
-  searchAds = (text) => {
-    geoLocation.getCurrentPosition(location => {
-      const { latitude, longitude } = location.coords
-      const userLocation = { latitude: latitude, longitude: longitude }
-      const locationStr = Object.keys(userLocation)
-        .map(key => userLocation[key])
-        .join(',')
-      this.props.fetchAdLocations(locationStr,text);
-      if (this.state.isLoading) this.setState({ isLoading: false })
-    })
-  }
+  // searchAds = (text) => {
+  //   geoLocation.getCurrentPosition(location => {
+  //     const { latitude, longitude } = location.coords
+  //     const userLocation = { latitude: latitude, longitude: longitude }
+  //     const locationStr = Object.keys(userLocation)
+  //       .map(key => userLocation[key])
+  //       .join(',')
+  //     this.props.fetchAdLocations(locationStr,this.state.category,text);
+
+  //   })
+  // }
 
 
   componentWillUpdate(nextProps,nextState) {
-    console.log(nextState)
+   // console.log(nextState)
+    if(nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
+      const category = this.props.categories.find( elem => elem.name === nextState.category)
+      geoLocation.getCurrentPosition( async (location) => {
+        const { latitude, longitude } = location.coords
+        const userLocation = { latitude: latitude, longitude: longitude }
+        const locationStr = Object.keys(userLocation)
+          .map(key => userLocation[key])
+          .join(',')
+        await this.props.fetchAdLocations(locationStr, category, nextState.searchText);
+        if (this.state.isLoading) this.setState({ isLoading: false })
+     })
+    }
   }
 
   render() {
     const { locations, categories } = this.props
+    console.log(locations.length);
     if (this.state.isLoading) {
       return <Spinner color={colors.main} />
     }
@@ -124,7 +137,7 @@ class Marketplace extends React.Component {
               <Input
                 style={{ flex: 2 }}
                 placeholder="Search For Products"
-                onChangeText={(text) => this.searchAds(text)}
+                onChangeText={(searchText) => this.setState({searchText})}
               />
               <View style={styles.searchIcon} >
                 <Icon active name="search" />
@@ -196,7 +209,7 @@ const mapDispatchToProps = dispatch => {
     getMarketplaceAds: location => dispatch(getMarketplaceAdsThunk(location)),
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
-    fetchAdLocations: (locationStr,text) => dispatch(getAdLocationsThunk(locationStr,text)),
+    fetchAdLocations: (locationStr,category,text) => dispatch(getAdLocationsThunk(locationStr,category,text)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),
