@@ -146,13 +146,13 @@ class Login extends React.Component {
               </Text>
             )}
         </Content>
-        {/* <TouchableHighlight
+        <TouchableHighlight
           style={styles.devButton}
           onPress={this.devLogin}
           underlayColor={colors.light}
         >
           <Text style={styles.buttonFont}>Dev Login</Text>
-        </TouchableHighlight> */}
+        </TouchableHighlight>
       </Container>
     )
   }

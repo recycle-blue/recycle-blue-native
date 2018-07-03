@@ -22,6 +22,7 @@ import {
   selectMarkerAction,
   setFetch,
   getLocationsAction,
+  getCategoriesThunk
 } from '../../store'
 import { colors } from '../color-palette'
 const geoLocation = navigator.geolocation
@@ -36,7 +37,8 @@ class Marketplace extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.getCategories();
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude: latitude, longitude: longitude }
@@ -49,8 +51,36 @@ class Marketplace extends React.Component {
     })
   }
 
+  // searchAds = (text) => {
+  //   geoLocation.getCurrentPosition(location => {
+  //     const { latitude, longitude } = location.coords
+  //     const userLocation = { latitude: latitude, longitude: longitude }
+  //     const locationStr = Object.keys(userLocation)
+  //       .map(key => userLocation[key])
+  //       .join(',')
+  //     this.props.fetchAdLocations(locationStr,this.state.category,text);
+
+  //   })
+  // }
+
+
+  componentWillUpdate(nextProps,nextState) {
+    if(nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
+      const category = this.props.categories.find( elem => elem.name === nextState.category)
+      geoLocation.getCurrentPosition( async (location) => {
+        const { latitude, longitude } = location.coords
+        const userLocation = { latitude: latitude, longitude: longitude }
+        const locationStr = Object.keys(userLocation)
+          .map(key => userLocation[key])
+          .join(',')
+        await this.props.fetchAdLocations(locationStr, category, nextState.searchText);
+        if (this.state.isLoading) this.setState({ isLoading: false })
+     })
+    }
+  }
+
   render() {
-    const { locations } = this.props
+    const { locations, categories } = this.props
     if (this.state.isLoading) {
       return <Spinner color={colors.main} />
     }
@@ -102,7 +132,7 @@ class Marketplace extends React.Component {
                   mode="dropdown"
                   prompt='Category'
                   selectedValue={this.state.category}
-                  onValueChange={(category) => this.setState({ category })}
+                  onValueChange={(category) => this.setState({ category})}
                 >
                   <Picker.Item label="Category" value="" />
                   <Picker.Item label="Plastic" value="Plastic" />
@@ -118,7 +148,7 @@ class Marketplace extends React.Component {
               <Input
                 style={{ flex: 2 }}
                 placeholder="Search For Products"
-                onChangeText={(searchText) => this.setState({ searchText })}
+                onChangeText={(searchText) => this.setState({searchText})}
               />
               <View style={styles.searchIcon} >
                 <Icon active name="search" style={{ color: colors.white }} />
@@ -183,6 +213,7 @@ const mapStateToProps = store => {
     locations: store.location.locations,
     userLocation: store.location.userLocation,
     isFetching: store.location.isFetching,
+    categories: store.categories
   }
 }
 
@@ -191,11 +222,12 @@ const mapDispatchToProps = dispatch => {
     getMarketplaceAds: location => dispatch(getMarketplaceAdsThunk(location)),
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
-    fetchAdLocations: locationStr => dispatch(getAdLocationsThunk(locationStr)),
+    fetchAdLocations: (locationStr,category,text) => dispatch(getAdLocationsThunk(locationStr,category,text)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),
     resetLocations: () => dispatch(getLocationsAction([])),
+    getCategories: () => dispatch(getCategoriesThunk())
   }
 }
 
