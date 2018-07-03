@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Linking,
+  TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -18,6 +19,7 @@ import {
 } from '../../store'
 import { AddComment, AdView, CommentCard } from '../'
 import { colors } from '../color-palette'
+import { Icon } from 'native-base'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -45,14 +47,14 @@ class Activity extends React.Component {
         behavior="padding"
         keyboardVerticalOffset={Platform.OS === 'ios' ? 85 : 85}
       >
-        <View>
+        <View style={{ backgroundColor: colors.light }}>
           <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <Text style={{ fontSize: 25, padding: 8 }}>
                 {this.props.name}
               </Text>
               <Image style={styles.image} source={{ uri: this.props.photo }} />
-              <Text>{this.props.points}</Text>
+              <Text style={{ paddingTop: 5 }}>Points: {this.props.points}</Text>
               <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                 Did You Know?
               </Text>
@@ -62,25 +64,37 @@ class Activity extends React.Component {
               <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 10 }}>
                 How Can You Reuse This Item?
               </Text>
-              <Text style={{ marginRight: 5, marginLeft: 5 }}>
+              <Text style={{ marginRight: 5, marginLeft: 5, marginBottom: 10 }}>
                 {this.props.recycleUse}
               </Text>
-              <Button
-                onPress={() => {
-                  this.props.navigation.navigate('Map')
-                }}
-                title="Find Recycling Near You"
-                color={colors.main}
-              />
-              {this.props.type === 'ad' && (
-                <Button
+              <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
                   onPress={() => {
-                    this.handleSubmit()
+                    this.props.navigation.navigate('Map')
                   }}
-                  title="Email"
-                  color={colors.main}
-                />
-              )}
+                  style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                >
+                  <Text
+                    style={{ fontWeight: 'bold', color: colors.white }}
+                  >
+                    Find Recycling Near You
+                </Text>
+                </TouchableOpacity>
+                {this.props.type === 'ad' && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.handleSubmit()
+                    }}
+                    style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                  >
+                    <Text
+                      style={{ fontWeight: 'bold', color: colors.white }}
+                    >
+                      Email
+                </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
             {this.props.type === 'ad' && <AdView />}
             {this.props.comments.length ? (
@@ -93,6 +107,12 @@ class Activity extends React.Component {
             <AddComment navigation={this.props.navigation} />
           </ScrollView>
         </View>
+        <TouchableOpacity
+          style={{ position: 'absolute', top: 8, left: 10 }}
+          onPress={() => { this.props.navigation.navigate('Dashboard') }}
+        >
+          <Icon name='arrow-back' style={{ fontSize: 32 }} />
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     )
   }
@@ -110,7 +130,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    name: `${state.category.name}: ${state.product.name}`,
+    name: `${state.category.name} ${state.product.name}`,
     points: state.activity.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,

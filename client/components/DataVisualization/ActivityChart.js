@@ -2,7 +2,7 @@ import React from "react"
 import { StyleSheet, View, Dimensions } from "react-native"
 import { connect } from 'react-redux'
 import { setActivityWeekThunk } from '../../store/activity'
-import { VictoryChart, VictoryArea, VictoryTheme, VictoryLabel } from "victory-native";
+import { VictoryChart, VictoryArea, VictoryTheme, VictoryLabel } from "victory-native"
 import { colors } from '../color-palette'
 import { getWeeklyData } from '../sortedActivityData'
 
@@ -30,7 +30,7 @@ class ActivityChart extends React.Component {
             x="day"
             y="points"
             style={{
-              data: { fill: `${colors.main}` }
+              data: { fill: `${colors.midDark}` }
             }} />
           <VictoryLabel
             text='Weekly Activity'
@@ -46,7 +46,7 @@ class ActivityChart extends React.Component {
           />
         </VictoryChart>
       </View >
-    );
+    )
   }
 }
 

@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   image: {
-    flex: 1
+    flex: 1,
+    alignSelf: 'center',
   },
   num: {
     flex: 1,
