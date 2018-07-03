@@ -54,13 +54,13 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs
-            tabBarUnderlineStyle={{ backgroundColor: colors.light }}
+            tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.white }}
           >
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
-              textStyle={{ color: colors.light }}
-              activeTextStyle={{ color: colors.light }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
+              textStyle={{ color: colors.white }}
+              activeTextStyle={{ color: colors.white }}
             >
               <View style={styles.tabView}>
                 <Card style={{ maxHeight: 40 }}>
@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
             </Tab>
             <Tab heading="Progess"
               tabStyle={{ backgroundColor: colors.main }}
-              activeTabStyle={{ backgroundColor: colors.midDark }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
               textStyle={{ color: colors.light }}
               activeTextStyle={{ color: colors.light }}
 
