@@ -38,7 +38,7 @@ const Drawer = createDrawerNavigator(
     Leaderboard: { screen: Leaderboard },
     Feed: { screen: Feed },
     Friends: { screen: Friends },
-    SearchUsers: { screen: SearchUsers },
+    'Search Users': { screen: SearchUsers },
     Logout: { screen: Logout },
   },
   {
