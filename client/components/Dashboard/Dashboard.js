@@ -99,7 +99,7 @@ class Dashboard extends React.Component {
             >
               <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
                 <ActivityChart currentUser={this.props.user.id} />
-                <ProgressChart />
+                <ProgressChart selectedUser={this.props.user} />
               </ScrollView>
             </Tab>
           </Tabs>

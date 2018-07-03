@@ -5,14 +5,14 @@ import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg'
 import { colors } from '../color-palette'
 
-const mapStateToProps = (state) => {
-  return ({
-    totalPoints: state.user.totalPoints,
-    currentMilestone: state.user.milestone.description
-  })
-}
+// const mapStateToProps = (state) => {
+//   return ({
+//     totalPoints: state.user.totalPoints,
+//     currentMilestone: state.user.milestone.description
+//   })
+// }
 
-class ProgressChart extends React.Component {
+export default class ProgressChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,8 +22,8 @@ class ProgressChart extends React.Component {
     }
   }
   render() {
-    const totalPoints = this.props.totalPoints
-    const nextMilestonePoints = this.state[this.props.currentMilestone]
+     const totalPoints = this.props.selectedUser.totalPoints
+    const nextMilestonePoints = this.state[this.props.selectedUser.milestone.description]
     const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100)
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps)(ProgressChart)
+// export default connect(null)(ProgressChart)
