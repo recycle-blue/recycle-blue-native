@@ -61,7 +61,7 @@ class UserCard extends React.Component {
             <Body>
               <Button
                 primary
-                onPress={() => {
+                onPress={async () => {
                   this.props.selectUser(user.id)
                   navigate('FriendDashboard')
                 }}
@@ -72,7 +72,7 @@ class UserCard extends React.Component {
           </Left>
           <Right>
             {!friends &&
-              !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) &&(
+              !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) && (
                 <Button
                   success
                   onPress={() => this.addFriend(currentUser.id, user.id)}
