@@ -1,5 +1,14 @@
 import React from 'react'
-import { StyleSheet, View, Button, Platform, KeyboardAvoidingView, Dimensions, TouchableHighlight, Text } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Button,
+  Platform,
+  KeyboardAvoidingView,
+  Dimensions,
+  TouchableHighlight,
+  Text,
+} from 'react-native'
 import { Form, Item, Input, Textarea, Container } from 'native-base'
 import { connect } from 'react-redux'
 import { addAdThunk } from '../../store'
@@ -21,14 +30,14 @@ class AddAd extends React.Component {
     await this.props.addAd(this.state, this.props.email)
     this.props.navigation.navigate('Activity')
   }
-  // static navigationOptions = {
-  //   drawerLabel: () => null
-  // }
+  static navigationOptions = {
+    drawerLabel: () => null,
+  }
   render() {
     const activity = {
       ...this.props.activity,
       category: this.props.category,
-      product: this.props.product
+      product: this.props.product,
     }
     return (
       <KeyboardAvoidingView
@@ -38,12 +47,12 @@ class AddAd extends React.Component {
         enabled={true}
       >
         <ActivityCard activity={activity} disabled={true} />
-        <Form style={styles.form} >
+        <Form style={styles.form}>
           <Item rounded style={styles.items}>
             <Input
               name="address"
               placeholder="Address"
-              onChangeText={(address) => this.setState({ address })}
+              onChangeText={address => this.setState({ address })}
               value={this.state.address}
             />
           </Item>
@@ -52,7 +61,7 @@ class AddAd extends React.Component {
               <Input
                 name="city"
                 placeholder="City"
-                onChangeText={(city) => this.setState({ city })}
+                onChangeText={city => this.setState({ city })}
                 value={this.state.city}
               />
             </Item>
@@ -60,7 +69,7 @@ class AddAd extends React.Component {
               <Input
                 name="state"
                 placeholder="State"
-                onChangeText={(state) => this.setState({ state })}
+                onChangeText={state => this.setState({ state })}
                 value={this.state.state}
               />
             </Item>
@@ -68,19 +77,19 @@ class AddAd extends React.Component {
               <Input
                 name="zipCode"
                 placeholder="Zip Code"
-                onChangeText={(zipCode) => this.setState({ zipCode })}
+                onChangeText={zipCode => this.setState({ zipCode })}
                 value={this.state.zipCode}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </Item>
           </View>
-          <Item rounded style={styles.items} >
+          <Item rounded style={styles.items}>
             <Textarea
               style={{ width: '100%', paddingTop: 8, paddingBottom: 8 }}
               name="description"
               placeholder="Description"
               rowSpan={4}
-              onChangeText={(description) => this.setState({ description })}
+              onChangeText={description => this.setState({ description })}
               value={this.state.description}
             />
           </Item>
@@ -97,7 +106,7 @@ class AddAd extends React.Component {
   }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = store => {
   return {
     activity: store.activity,
     product: store.product,
@@ -106,13 +115,13 @@ const mapStateToProps = (store) => {
     city: store.ad.city,
     state: store.ad.state,
     zipCode: store.ad.zipCode,
-    email: store.user.email
+    email: store.user.email,
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addAd: (ad) => dispatch(addAdThunk(ad)),
-  refreshUser: (userId) => dispatch(me(userId)),
+const mapDispatchToProps = dispatch => ({
+  addAd: ad => dispatch(addAdThunk(ad)),
+  refreshUser: userId => dispatch(me(userId)),
   refreshAd: () => dispatch(refreshAdThunk()),
 })
 
@@ -175,4 +184,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddAd)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddAd)
