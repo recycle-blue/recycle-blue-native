@@ -48,15 +48,37 @@ const usersData = [
     imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
   },
   {
-    firstName: 'Daniel',
-    lastName: 'Hawes',
-    email: 'conor@email.com',
+    firstName: 'Homum',
+    lastName: 'Ahsan',
+    email: 'homum@email.com',
     password: '1234',
-    totalPoints: 421,
-    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
+    totalPoints: 123,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Homum_Ahsan_zpsykqivwyq.jpeg'
   },
-
-
+  {
+    firstName: 'Emily',
+    lastName: 'Drevets',
+    email: 'emily@email.com',
+    password: '1234',
+    totalPoints: 2022,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Emily_Drevets_zpsswuwyglt.jpeg'
+  },
+  {
+    firstName: 'Jami',
+    lastName: 'Gibbs',
+    email: 'jami@email.com',
+    password: '1234',
+    totalPoints: 1242,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Jami_Gibbs_zpsylc3jcwb.jpeg'
+  },
+  {
+    firstName: 'Mary',
+    lastName: 'Warrick',
+    email: 'mary@email.com',
+    password: '1234',
+    totalPoints: 2412,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Mary_Warrick_zpspbhkcymd.jpeg'
+  }
 ]
 
 const productsData = [

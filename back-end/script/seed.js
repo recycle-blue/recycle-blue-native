@@ -97,12 +97,24 @@ async function seed() {
   )
 
   function getRandomUsers(user) {
-    return users.filter(checkUser => checkUser.id !== user.id)
+    return users.filter(checkUser => checkUser.id !== user.id && (checkUser.id % 2))
   }
 
   await Promise.all(
     users.map(user => {
-      return user.setMilestone(milestones[0])
+      let i = 0, stop = false
+      while(!stop){
+        if(i === milestonesData.length - 1){
+          stop = true
+        }
+        if(user.totalPoints > milestonesData[i].pointsNeeded) {
+            i++
+        } else {
+            stop = true
+        }
+      }
+      i--;
+      return user.setMilestone(milestones[i])
     })
   )
 
