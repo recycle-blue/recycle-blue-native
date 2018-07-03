@@ -15,7 +15,6 @@ class Feed extends React.Component {
     const activities = this.props.feed
     return (
       <Container>
-        <Header />
         <Content>
           <ScrollView>
             {activities.length ? (

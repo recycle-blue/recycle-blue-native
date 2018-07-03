@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { Card, CardItem, Left, Right, Row, Thumbnail } from 'native-base'
+import { Card, CardItem, Left, Right, Row, Thumbnail, Body, Button, Icon } from 'native-base'
 import { setActivity } from '../../store'
 import { colors } from '../color-palette'
+import moment from 'moment'
 
 class FeedCard extends React.Component {
   constructor(props) {
@@ -24,30 +25,31 @@ class FeedCard extends React.Component {
             <Thumbnail source={{uri: activity.user.imageUrl}} />
             <Body>
               <Text>{activity.user.name}</Text>
-              <Text note>{activity.createdAt}</Text>
+              <Text note>{moment(activity.createdAt).format('dddd, MMMM Do YYYY, h:mm a')}</Text>
             </Body>
           </Left>
         </CardItem>
         <CardItem cardBody>
-          <Image source={{uri: activity.imageUrl}} style={{height: 200, width: null, flex: 1}}/>
+          <Image source={{uri: activity.imageUrl}} style={{height: 300, width: null, flex: 1}}/>
         </CardItem>
-        {/* <CardItem>
+        <CardItem>
           <Left>
             <Button transparent>
               <Icon active name="thumbs-up" />
-              <Text>12 Likes</Text>
+              <Text> Likes</Text>
+            </Button>
+            <Body>
+              <Button transparent>
+                <Icon active name="chatbubbles" />
+                <Text>Comments</Text>
+              </Button>
+            </Body>
+            <Button transparent>
+                <Icon name="share" />
+                <Text> Share</Text>
             </Button>
           </Left>
-          <Body>
-            <Button transparent>
-              <Icon active name="chatbubbles" />
-              <Text>4 Comments</Text>
-            </Button>
-          </Body>
-          <Right>
-            <Text>11h ago</Text>
-          </Right>
-        </CardItem> */}
+        </CardItem>
       </Card>
       // <Card style={styles.card}>
       //   <CardItem button style={styles.cardItem} onPress={this.handlePress} >
