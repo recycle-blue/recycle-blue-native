@@ -182,7 +182,12 @@ router.post('/:activityId/comment', async (req, res, next) => {
 
 // get all ads and filter by location
 router.get('/marketplace', async (req, res, next) => {
+  let filteredAds
   const userLocation = req.query.userLocation
-  const filteredAds = await Ad.filterByDistance(userLocation)
+  if(req.query.search === undefined && req.query.categoryId === undefined) {
+    filteredAds = await Ad.filterByDistance(userLocation)
+  } else {
+    filteredAds = await Ad.filterByDistance(userLocation,req.query.categoryId,req.query.name)
+  }
   res.json(filteredAds)
 })
