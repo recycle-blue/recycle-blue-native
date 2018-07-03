@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
         </Card>
         <View style={styles.container}>
           <Tabs
-            tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.white }}
+            tabBarUnderlineStyle={{ backgroundColor: colors.white }}
           >
             <Tab heading="Activity"
               tabStyle={{ backgroundColor: colors.main }}

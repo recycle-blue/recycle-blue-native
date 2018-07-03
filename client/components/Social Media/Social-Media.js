@@ -18,18 +18,18 @@ class SocialMedia extends React.Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => {
-          Share.share(shareImageBase64)
-            .then((res) => console.log(res))
-            .catch((err) => {
-              if (err) {
-                console.error(err)
-              }
-            })
-        }}>
-          <View style={styles.instructions}>
-            <Icon name='share' />
-          </View>
+        <TouchableOpacity
+          style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}
+          onPress={() => {
+            Share.share(shareImageBase64)
+              .then((res) => console.log(res))
+              .catch((err) => {
+                if (err) {
+                  console.error(err)
+                }
+              })
+          }}>
+          <Icon name='share' style={{ paddingLeft: 10 }} />
         </TouchableOpacity>
       </View>
     )
