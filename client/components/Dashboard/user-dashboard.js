@@ -9,6 +9,12 @@ class UserDashboard extends React.Component {
     this.props.getUser(this.props.user.id)
   }
 
+  componentWillUpdate(prevProps) {
+    if (prevProps.user.milestone.id !== prevProps.user.milestoneId) {
+      this.props.getUser(this.props.user.id)
+    }
+  }
+
   render() {
     const { user, navigation } = this.props
     return (
