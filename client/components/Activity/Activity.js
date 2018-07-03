@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Linking,
+  TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -18,6 +19,7 @@ import {
 } from '../../store'
 import { AddComment, AdView, CommentCard } from '../'
 import { colors } from '../color-palette'
+import { Icon } from 'native-base'
 
 class Activity extends React.Component {
   componentWillMount() {
@@ -52,7 +54,7 @@ class Activity extends React.Component {
                 {this.props.name}
               </Text>
               <Image style={styles.image} source={{ uri: this.props.photo }} />
-              <Text>{this.props.points}</Text>
+              <Text style={{ paddingTop: 5 }}>Points: {this.props.points}</Text>
               <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                 Did You Know?
               </Text>
@@ -93,6 +95,12 @@ class Activity extends React.Component {
             <AddComment navigation={this.props.navigation} />
           </ScrollView>
         </View>
+        <TouchableOpacity
+          style={{ position: 'absolute', top: 8, left: 10 }}
+          onPress={() => { this.props.navigation.navigate('Dashboard') }}
+        >
+          <Icon name='arrow-back' style={{ fontSize: 32 }} />
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     )
   }
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    name: `${state.category.name}: ${state.product.name}`,
+    name: `${state.category.name} ${state.product.name}`,
     points: state.activity.points,
     description: state.product.description,
     recycleUse: state.product.recycleUse,
