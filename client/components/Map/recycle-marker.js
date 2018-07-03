@@ -1,16 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  Card,
-  CardItem,
-  Body,
-  Text,
-  Button,
-  Right,
-  Icon,
-  Col,
-  Container,
-} from 'native-base'
+import { CardItem, Body, Text, Button, Right, Icon, Left } from 'native-base'
 import { ScrollView, View } from 'react-native'
 import { Popup } from 'react-native-map-link'
 import { showDetailAction } from '../../store/location'
@@ -41,7 +31,7 @@ class RecycleMarker extends React.Component {
       <View style={{ marginBottom: 20 }}>
         <CardItem>
           <Body>
-            <Text style={{ fontSize: 20 }}>{marker.name}</Text>
+            <Text style={{ fontSize: 15 }}>{marker.name}</Text>
           </Body>
           <Right>
             <Button transparent onPress={this.closeDetail}>
@@ -50,14 +40,18 @@ class RecycleMarker extends React.Component {
           </Right>
         </CardItem>
         <CardItem>
-          <Body>
+          <Left>
             <Icon name="car" style={{ color: 'black' }} />
-            <Text>{marker.vicinity}</Text>
+          </Left>
+          <Body>
+            <Text style={{ fontSize: 10 }}>{marker.vicinity}</Text>
           </Body>
         </CardItem>
         <CardItem>
-          <Body>
+          <Left>
             <Icon name="pin" style={{ color: 'black' }} />
+          </Left>
+          <Body>
             <Text style={{ fontWeight: 'bold' }}>
               {marker.distance} from current location
             </Text>
