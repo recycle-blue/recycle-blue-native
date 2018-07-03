@@ -1,18 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
 import Svg, { Text } from 'react-native-svg'
 import { colors } from '../color-palette'
 
-const mapStateToProps = (state) => {
-  return ({
-    totalPoints: state.user.totalPoints,
-    currentMilestone: state.user.milestone.description
-  })
-}
-
-class ProgressChart extends React.Component {
+export default class ProgressChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,10 +14,10 @@ class ProgressChart extends React.Component {
     }
   }
   render() {
-    const totalPoints = this.props.totalPoints
-    const nextMilestonePoints = this.state[this.props.currentMilestone]
+    const totalPoints = this.props.selectedUser.totalPoints
+    const nextMilestonePoints = this.state[this.props.selectedUser.milestone.description]
     const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100)
-    const { height, width } = Dimensions.get('screen')
+    const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
     return (
       <View style={styles.container}>
@@ -40,14 +32,14 @@ class ProgressChart extends React.Component {
                 opacity: (d) => d.opacity
               },
               labels: {
-                fill: `${colors.midDark}`,
+                fill: `${colors.main}`,
                 fontSize: 20,
                 fontWeight: "bold"
               }
             }}
 
             labelRadius={1}
-            colorScale={[`${colors.midDark}`, `${colors.midDark}`,]}
+            colorScale={[`${colors.main}`, `${colors.main}`,]}
             width={width}
             innerRadius={100}
             standalone={false}
@@ -87,4 +79,3 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect(mapStateToProps)(ProgressChart)
