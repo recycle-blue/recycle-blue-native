@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardItem, Body, Text, Button, Right, Icon } from 'native-base'
+import { CardItem, Body, Text, Button, Right, Icon, Left } from 'native-base'
+import { ScrollView, View } from 'react-native'
 import { Popup } from 'react-native-map-link'
 import { showDetailAction } from '../../store/location'
+import { ColorPalette } from '../color-palette'
 
 class RecycleMarker extends React.Component {
   constructor() {
@@ -26,35 +28,27 @@ class RecycleMarker extends React.Component {
     const { marker, detailStatus } = this.props
     if (!detailStatus) return null
     return (
-      <Card>
-        <CardItem>
-          <Body>
-            <Text>{marker.name}</Text>
-          </Body>
-          <Right>
-            <Button transparent onPress={this.closeDetail}>
-              <Text> Close </Text>
-            </Button>
-          </Right>
+      <View style={{ marginBottom: 20 }}>
+        <CardItem style={{ justifyContent: 'space-between', width: '100%' }}>
+          <Text style={{ fontSize: 25, width: '80%' }}>{marker.name}</Text>
+          <Button transparent onPress={this.closeDetail}>
+            <Icon name="close" style={{ color: 'black', fontSize: 40 }} />
+          </Button>
         </CardItem>
         <CardItem>
-          <Body>
-            <Text>{marker.vicinity}</Text>
-          </Body>
+          <Icon name="car" style={{ color: 'black', paddingRight: 10 }} />
+          <Text>{marker.vicinity}</Text>
         </CardItem>
         <CardItem>
-          <Body>
-            <Text style={{ fontWeight: 'bold' }}>
-              {marker.distance} from current location
-            </Text>
-          </Body>
+          <Icon name="pin" style={{ color: 'black' }} />
+          <Text style={{ fontWeight: 'bold', paddingLeft: 5 }}>
+            {marker.distance} from current location
+          </Text>
         </CardItem>
-        <CardItem>
-          <Body>
-            <Button success onPress={this.handlePress}>
-              <Text> Navigate to Location </Text>
-            </Button>
-          </Body>
+        <CardItem style={{ justifyContent: 'center' }}>
+          <Button success onPress={this.handlePress}>
+            <Text> Navigate to Location </Text>
+          </Button>
         </CardItem>
         <Popup
           isVisible={this.state.isVisible}
@@ -64,13 +58,15 @@ class RecycleMarker extends React.Component {
           modalProps={{
             animationIn: 'slideInUp',
           }}
-          appsWhiteList={['google-maps', 'apple-maps']}
           options={{
             latitude: marker.geometry.location.lat,
             longitude: marker.geometry.location.lng,
+            cancelText: 'Cancel',
+            appsWhiteList: ['google-maps', 'apple-maps'],
+            dialogTitle: 'Choose a Maps App',
           }}
         />
-      </Card>
+      </View>
     )
   }
 }
