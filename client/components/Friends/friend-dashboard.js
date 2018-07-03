@@ -32,7 +32,7 @@ const FriendDashboard = props => {
           </Button>
         </Left>
         <Body>
-          <Title>Dashboard</Title>
+          <Title style={{ color: colors.white }}>Dashboard</Title>
         </Body>
         <Right />
       </Header>

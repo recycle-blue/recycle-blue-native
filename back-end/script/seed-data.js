@@ -4,28 +4,80 @@ const usersData = [
     lastName: 'Thakral',
     email: 'samir@email.com',
     password: '1234',
-    totalPoints: 560
+    totalPoints: 499,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Samir_Thakral_Photo_zpsag94hzhv.png'
   },
   {
     firstName: 'Lamine',
     lastName: 'Sadoun',
     email: 'lamine@email.com',
     password: '1234',
-    totalPoints: 500
+    totalPoints: 3214,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Lamine_Sadoun_zpszumlybyi.jpeg'
   },
   {
     firstName: 'Dustin',
     lastName: 'McDowell',
     email: 'dustin@email.com',
     password: '1234',
-    totalPoints: 600
+    totalPoints: 4253,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Dustin_McDowell_zpsz2hsy7ol.jpeg'
   },
   {
     firstName: 'Andrew',
     lastName: 'Trahan',
     email: 'andrew@email.com',
     password: '1234',
-    totalPoints: 540
+    totalPoints: 5001,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Andrew_Trahan_zps3widrebx.jpeg'
+  },
+  {
+    firstName: 'Conor',
+    lastName: 'Hawes',
+    email: 'conor@email.com',
+    password: '1234',
+    totalPoints: 1241,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Conor_Hawes_zpshb9muvka.jpeg'
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Gutt',
+    email: 'daniel@email.com',
+    password: '1234',
+    totalPoints: 421,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
+  },
+  {
+    firstName: 'Homum',
+    lastName: 'Ahsan',
+    email: 'homum@email.com',
+    password: '1234',
+    totalPoints: 123,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Homum_Ahsan_zpsykqivwyq.jpeg'
+  },
+  {
+    firstName: 'Emily',
+    lastName: 'Drevets',
+    email: 'emily@email.com',
+    password: '1234',
+    totalPoints: 2022,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Emily_Drevets_zpsswuwyglt.jpeg'
+  },
+  {
+    firstName: 'Jami',
+    lastName: 'Gibbs',
+    email: 'jami@email.com',
+    password: '1234',
+    totalPoints: 1242,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Jami_Gibbs_zpsylc3jcwb.jpeg'
+  },
+  {
+    firstName: 'Mary',
+    lastName: 'Warrick',
+    email: 'mary@email.com',
+    password: '1234',
+    totalPoints: 2412,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Mary_Warrick_zpspbhkcymd.jpeg'
   }
 ]
 
@@ -71,8 +123,7 @@ const productsData = [
     points: 2,
     description:
       'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet,',
-    recycleUse:
-      'mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit. Cras'
+    recycleUse: 'Sheets have a myriad of uses!'
   },
   {
     name: 'notebook',
@@ -87,8 +138,7 @@ const productsData = [
     points: 0,
     description:
       'pellentesque massa lobortis ultrices. Vivamus rhoncus. Donec est. Nunc ullamcorper,',
-    recycleUse:
-      'dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus'
+    recycleUse: 'Use this next time you go to the grocery store.'
   },
   {
     name: 'trash',
@@ -117,8 +167,7 @@ const productsData = [
     points: 1,
     description:
       'ornare placerat, orci lacus vestibulum lorem, sit amet ultricies sem',
-    recycleUse:
-      'feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,'
+    recycleUse: 'Put it in a tupperware container to eat later...or compost it!'
   },
   {
     name: 'cloth',
@@ -126,23 +175,21 @@ const productsData = [
     description:
       'quis accumsan convallis, ante lectus convallis est, vitae sodales nisi',
     recycleUse:
-      'arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend'
+      'Clothing has the word cloth in it, so it is safe to say that cloth can be used to make clothing.'
   },
   {
     name: 'mug',
     points: 1,
     description:
       'vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue',
-    recycleUse:
-      'facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis'
+    recycleUse: 'Painting a mug with your own design can be a fun art project.'
   },
   {
     name: 'package',
     points: 1,
     description:
       'vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue',
-    recycleUse:
-      'facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis'
+    recycleUse: 'Great for all of your future shipping needs!'
   }
 ]
 
@@ -268,7 +315,7 @@ const milestonesData = [
     pointsNeeded: 2000,
     description: 'Silver',
     badgeIcon:
-      'https://cdn1.vectorstock.com/i/1000x1000/77/50/silver-medal-vector-987750.jpg'
+      'https://cdn1.vectorstock.com/i/1000x1000/77/50/silver-medal-vector-987200.jpg'
   },
   {
     pointsNeeded: 5000,
@@ -376,6 +423,39 @@ const adsData = [
   }
 ]
 
+const images = {
+  miscellaneous:
+    'https://images.pexels.com/photos/1034887/pexels-photo-1034887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  bottle:
+    'https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  jug:
+    'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  can:
+    'https://images.pexels.com/photos/404178/pexels-photo-404178.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  box:
+    'https://images.pexels.com/photos/260184/pexels-photo-260184.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  sheet:
+    'https://images.pexels.com/photos/212269/pexels-photo-212269.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  notebook:
+    'https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  bag:
+    'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  trash:
+    'https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  cup:
+    'https://images.pexels.com/photos/758702/pexels-photo-758702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  jar:
+    'https://images.pexels.com/photos/5914/blue-glass-big-design.jpg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  food:
+    'https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  cloth:
+    'https://images.pexels.com/photos/459486/pexels-photo-459486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  mug:
+    'https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  package:
+    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200'
+}
+
 module.exports = {
   productsData,
   usersData,
@@ -383,5 +463,6 @@ module.exports = {
   commentsData,
   milestonesData,
   tagsData,
-  adsData
+  adsData,
+  images
 }
