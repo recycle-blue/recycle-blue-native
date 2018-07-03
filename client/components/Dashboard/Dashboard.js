@@ -19,6 +19,7 @@ import { ColorPalette, colors } from '../color-palette'
 class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }
   componentDidMount() {
+    console.log("this.props", this.props)
     this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
