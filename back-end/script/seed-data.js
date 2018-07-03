@@ -4,28 +4,80 @@ const usersData = [
     lastName: 'Thakral',
     email: 'samir@email.com',
     password: '1234',
-    totalPoints: 560
+    totalPoints: 499,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Samir_Thakral_Photo_zpsag94hzhv.png'
   },
   {
     firstName: 'Lamine',
     lastName: 'Sadoun',
     email: 'lamine@email.com',
     password: '1234',
-    totalPoints: 500
+    totalPoints: 3214,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Lamine_Sadoun_zpszumlybyi.jpeg'
   },
   {
     firstName: 'Dustin',
     lastName: 'McDowell',
     email: 'dustin@email.com',
     password: '1234',
-    totalPoints: 600
+    totalPoints: 4253,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Dustin_McDowell_zpsz2hsy7ol.jpeg'
   },
   {
     firstName: 'Andrew',
     lastName: 'Trahan',
     email: 'andrew@email.com',
     password: '1234',
-    totalPoints: 540
+    totalPoints: 5001,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Andrew_Trahan_zps3widrebx.jpeg'
+  },
+  {
+    firstName: 'Conor',
+    lastName: 'Hawes',
+    email: 'conor@email.com',
+    password: '1234',
+    totalPoints: 1241,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Conor_Hawes_zpshb9muvka.jpeg'
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Gutt',
+    email: 'daniel@email.com',
+    password: '1234',
+    totalPoints: 421,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
+  },
+  {
+    firstName: 'Homum',
+    lastName: 'Ahsan',
+    email: 'homum@email.com',
+    password: '1234',
+    totalPoints: 123,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Homum_Ahsan_zpsykqivwyq.jpeg'
+  },
+  {
+    firstName: 'Emily',
+    lastName: 'Drevets',
+    email: 'emily@email.com',
+    password: '1234',
+    totalPoints: 2022,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Emily_Drevets_zpsswuwyglt.jpeg'
+  },
+  {
+    firstName: 'Jami',
+    lastName: 'Gibbs',
+    email: 'jami@email.com',
+    password: '1234',
+    totalPoints: 1242,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Jami_Gibbs_zpsylc3jcwb.jpeg'
+  },
+  {
+    firstName: 'Mary',
+    lastName: 'Warrick',
+    email: 'mary@email.com',
+    password: '1234',
+    totalPoints: 2412,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Mary_Warrick_zpspbhkcymd.jpeg'
   }
 ]
 
