@@ -38,51 +38,34 @@ class UserCard extends React.Component {
   render() {
     const { user, navigate, currentUser, friends } = this.props
     return (
-      <Card key={user.id}>
-        <CardItem>
-          <Left>
-            {user.milestone && (
-              <Thumbnail source={{ uri: user.milestone.badgeIcon }} small />
-            )}
-            <Body>
-              <Text>{user.name}</Text>
-              <Text note>{user.totalPoints}</Text>
-            </Body>
-          </Left>
-        </CardItem>
-        <CardItem cardBody>
-          <Left />
-          <Thumbnail source={{ uri: user.imageUrl }} large />
-          <Right />
-        </CardItem>
-        <CardItem>
-          <Left>
-            <Body>
-              <Button
-                primary
-                onPress={async () => {
-                  this.props.selectUser(user.id)
-                  navigate('FriendDashboard')
-                }}
-              >
-                <Text> View Dashboard </Text>
-              </Button>
-            </Body>
-          </Left>
-          <Right>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.selectUser(user.id)
+          navigate('FriendDashboard')
+        }}
+        style={{width: '49%'}}
+      >
+        <Card key={user.id}>
+          <CardItem>
+            <Thumbnail source={{ uri: user.imageUrl }} large />
+            <View style={{width: '50%'}}>
+              <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{user.firstName}</Text>
+              <Text style={{textAlign: 'center', fontWeight: 'bold',paddingBottom: 5}}>{user.lastName} </Text>
+              <Text note style={{textAlign: 'center'}}>{user.totalPoints}</Text>
+           </View>
             {!friends &&
-              !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) && (
-                <Button
-                  success
-                  onPress={() => this.addFriend(currentUser.id, user.id)}
-                >
-                  <Text> Add Friend </Text>
-                </Button>
-              )}
+            !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) && (
+            <Button
+            success
+            onPress={() => this.addFriend(currentUser.id, user.id)}
+            >
+            <Text> Add Friend </Text>
+            </Button>
+            )}
           </CardItem>
         </Card>
       </TouchableOpacity>
-    )
+  )
   }
 }
 
