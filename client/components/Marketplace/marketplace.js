@@ -57,7 +57,7 @@ class Marketplace extends React.Component {
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.white } : { backgroundColor: colors.white }} >
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: colors.white }} >
             <Tab heading="List"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midLight }}
