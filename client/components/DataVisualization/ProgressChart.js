@@ -39,7 +39,7 @@ export default class ProgressChart extends React.Component {
             }}
 
             labelRadius={1}
-            colorScale={[`${colors.main}`, `${colors.main}`,]}
+            colorScale={[`${colors.midDark}`, `${colors.midDark}`,]}
             width={width}
             innerRadius={100}
             standalone={false}
