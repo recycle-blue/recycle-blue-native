@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { Container, Card, CardItem, Title, Header, Left, Right, Icon, Thumbnail } from 'native-base';
+import { Container, Card, CardItem, Title, Header, Left, Right, Icon, Thumbnail } from 'native-base'
 import { getLeadersThunk, getUserThunk } from '../../store'
 import { colors } from '../color-palette'
 
@@ -12,8 +12,8 @@ class Leaderboard extends React.Component {
   }
 
   handlePress = async (userId) => {
-      await this.props.selectUser(userId)
-      this.props.navigation.navigate('FriendDashboard')
+    await this.props.selectUser(userId)
+    this.props.navigation.navigate('FriendDashboard')
   }
 
   render() {
@@ -27,7 +27,7 @@ class Leaderboard extends React.Component {
         </Header>
         <ScrollView>
           {leaders.length ?
-            leaders.map( (leader, idx) =>
+            leaders.map((leader, idx) =>
               <Card key={leader.id} >
                 <CardItem button onPress={() => this.handlePress(leader.id)}>
                   <Left>
@@ -37,14 +37,14 @@ class Leaderboard extends React.Component {
                     <Text>{leader.name}</Text>
                   </Left>
                   <Right>
-                  {leader.milestone && (
-                    <Thumbnail
-                      name="userMilestoneThumbnail"
-                      small
-                      square
-                      source={{ uri: leader.milestone.badgeIcon }}
-                    />
-                  )}
+                    {leader.milestone && (
+                      <Thumbnail
+                        name="userMilestoneThumbnail"
+                        small
+                        square
+                        source={{ uri: leader.milestone.badgeIcon }}
+                      />
+                    )}
                     <Text>{leader.totalPoints}</Text>
                   </Right>
                 </CardItem>
@@ -67,8 +67,6 @@ const styles = StyleSheet.create({
   image: {
     width: 300,
     height: 100,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center'
   }
 })

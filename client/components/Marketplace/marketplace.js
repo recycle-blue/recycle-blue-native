@@ -87,7 +87,7 @@ class Marketplace extends React.Component {
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.white }} >
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={{ backgroundColor: colors.white }} >
             <Tab heading="List"
               tabStyle={{ backgroundColor: colors.main }}
               activeTabStyle={{ backgroundColor: colors.midLight }}
@@ -124,10 +124,11 @@ class Marketplace extends React.Component {
           </Tabs>
           <View style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}>
             <Item rounded style={styles.searchBar}>
-              <View style={styles.picker} >
+              <View style={Platform.OS === 'ios' ? [styles.picker, { paddingLeft: -5 }] : [styles.picker, { paddingLeft: 15 }]} >
                 <Picker
                   name="category"
                   style={Platform.OS === 'ios' ? styles.iosPicker : styles.androidPicker}
+                  textStyle={Platform.OS === 'ios' ? { color: colors.white, paddingLeft: 5 } : { color: colors.white }}
                   mode="dropdown"
                   prompt='Category'
                   selectedValue={this.state.category}
@@ -172,16 +173,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white + 'FF',
   },
   picker: {
-    paddingLeft: 15,
-    flex: 1,
+    // flex: 1,
     borderTopLeftRadius: 100,
     borderBottomLeftRadius: 100,
     backgroundColor: colors.midDark,
+    width: 80,
   },
   iosPicker: {
     height: 50,
     width: 1000,
-    color: colors.white,
   },
   androidPicker: {
     color: colors.white,
