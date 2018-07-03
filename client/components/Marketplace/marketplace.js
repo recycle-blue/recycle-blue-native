@@ -89,10 +89,17 @@ class Marketplace extends React.Component {
     return (
       <Container>
         <View name='StaticFrame' style={styles.container}>
-          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.light }} >
-            <Tab heading="List" >
-              <View style={{ backgroundColor: 'rgba(255,255,255,0)', height: 60 }} />
-              <ScrollView>
+          <Tabs style={styles.tabs} tabBarPosition='overlayBottom' tabBarUnderlineStyle={Platform.OS === 'ios' ? { backgroundColor: colors.midDark } : { backgroundColor: colors.white }} >
+            <Tab heading="List"
+              tabStyle={{ backgroundColor: colors.main }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
+              textStyle={{ color: colors.white }}
+              activeTextStyle={{ color: colors.white }}
+            >
+              <View style={{ backgroundColor: colors.light, height: 60 }} />
+              <ScrollView style={{
+                backgroundColor: colors.light
+              }}>
                 {locations.length ? (
                   locations.map((ad) => {
                     return <AdCard
@@ -106,7 +113,12 @@ class Marketplace extends React.Component {
                   )}
               </ScrollView>
             </Tab>
-            <Tab heading="Map" >
+            <Tab heading="Map"
+              tabStyle={{ backgroundColor: colors.main }}
+              activeTabStyle={{ backgroundColor: colors.midLight }}
+              textStyle={{ color: colors.light }}
+              activeTextStyle={{ color: colors.light }}
+            >
               <ScrollView>
                 <MapComp view='ads' />
               </ScrollView>
@@ -140,7 +152,7 @@ class Marketplace extends React.Component {
                 onChangeText={(searchText) => this.setState({searchText})}
               />
               <View style={styles.searchIcon} >
-                <Icon active name="search" />
+                <Icon active name="search" style={{ color: colors.white }} />
               </View>
             </Item>
           </View>
@@ -162,21 +174,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white + 'FF',
   },
   picker: {
+    paddingLeft: 15,
     flex: 1,
     borderTopLeftRadius: 100,
     borderBottomLeftRadius: 100,
-    backgroundColor: colors.light,
+    backgroundColor: colors.midDark,
   },
   iosPicker: {
     height: 50,
     width: 1000,
+    color: colors.white,
   },
   androidPicker: {
+    color: colors.white,
     backgroundColor: 'transparent',
   },
   searchIcon: {
     paddingRight: 3,
-    backgroundColor: colors.light,
+    backgroundColor: colors.midDark,
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',

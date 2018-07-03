@@ -1,11 +1,52 @@
 import { StyleSheet, Platform, StatusBar } from 'react-native'
 
+// // Palette 1
+// export const colors = {
+//   white: '#FFFFFF',
+//   light: '#ECFCF8',
+//   midLight: '#8EA8C3',
+//   main: '#406E8E',
+//   midDark: '#23395B',
+//   dark: '#161925',
+// }
+
+// // Palette 2
+// export const colors = {
+//   white: '#FFFFFF',
+//   light: '#CBD4C2',
+//   midLight: '#C3B299',
+//   main: '#247BA0',
+//   midDark: '#50514F',
+//   dark: '#08090A',
+// }
+
+// // Palette 3
+// export const colors = {
+//   white: '#FFFFFF',
+//   light: '#7EA3CC',
+//   midLight: '#CCAD8F',
+//   main: '#255C99',
+//   midDark: '#686868',
+//   dark: '#262626',
+// }
+
+// // Palette 4
+// export const colors = {
+//   white: '#F7F9F9',
+//   light: '#E1EDEB',
+//   midLight: '#78D5D7',
+//   main: '#63D2FF',
+//   midDark: '#2081C3',
+//   dark: '#2B303A',
+// }
+
+// Mashup Palette
 export const colors = {
   white: '#FFFFFF',
-  light: '#ECFCF8',
-  midLight: '#8EA8C3',
-  main: '#406E8E',
-  midDark: '#23395B',
+  light: '#E1EDEB',
+  midLight: '#DBAA18',
+  main: '#253E63',
+  midDark: '#55A7CA',
   dark: '#161925',
 }
 

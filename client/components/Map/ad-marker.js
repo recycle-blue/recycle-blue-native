@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Card, CardItem, Body, Text, Button, Right } from 'native-base'
 import { Popup } from 'react-native-map-link'
+import { withNavigation } from 'react-navigation'
 import { showDetailAction } from '../../store/location'
 import AdCard from '../Ad/ad-card'
 
@@ -73,7 +74,9 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(
+const ConnectedAdMarker = connect(
   mapState,
   mapDispatch
 )(AdMarker)
+
+export default withNavigation(ConnectedAdMarker)
