@@ -4,15 +4,12 @@ import { Camera, Permissions } from 'expo'
 import { Icon, Button } from 'native-base'
 import { connect } from 'react-redux'
 import { savePhotoThunk, clearActivityAction } from '../store'
-import {
-  Ionicons,
-  MaterialIcons,
-} from '@expo/vector-icons'
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { LoadingScreen } from './'
 
-const mapDispatchToProps = (dispatch) => ({
-  storePicture: (data) => dispatch(savePhotoThunk(data)),
-  clearActivity: () => dispatch(clearActivityAction())
+const mapDispatchToProps = dispatch => ({
+  storePicture: data => dispatch(savePhotoThunk(data)),
+  clearActivity: () => dispatch(clearActivityAction()),
 })
 
 const flashModeOrder = {
@@ -26,7 +23,7 @@ const flashIcons = {
   off: 'flash-off',
   on: 'flash-on',
   auto: 'flash-auto',
-  torch: 'highlight'
+  torch: 'highlight',
 }
 
 class TestCamera extends React.Component {
@@ -54,10 +51,9 @@ class TestCamera extends React.Component {
       headerRight: null,
       headerLeft: (
         <Button transparent onPress={() => navigation.goBack()}>
-          <Icon style={{ color: 'white' }} name='arrow-back' />
+          <Icon style={{ color: 'white' }} name="arrow-back" />
         </Button>
       ),
-      drawerLabel: () => null
     }
   }
   // fakePicture = () => {
@@ -73,7 +69,7 @@ class TestCamera extends React.Component {
     if (this.camera) {
       const options = {
         quality: 0.5,
-        base64: true
+        base64: true,
       }
       console.log('is expo broken?')
       const data = await this.camera.takePictureAsync(options)
@@ -84,7 +80,7 @@ class TestCamera extends React.Component {
     }
   }
 
-  savePicture = async (photo) => {
+  savePicture = async photo => {
     const photoData = `data:image/jpg;base64,${photo.base64}`
     await this.props.storePicture(photoData)
     this.props.navigation.navigate('AddActivity')
@@ -102,7 +98,9 @@ class TestCamera extends React.Component {
       return (
         <View style={{ flex: 1 }}>
           <Camera
-            ref={(cam) => { this.camera = cam }}
+            ref={cam => {
+              this.camera = cam
+            }}
             style={styles.preview}
             type={this.state.type}
             flashMode={this.state.flash}
@@ -111,17 +109,21 @@ class TestCamera extends React.Component {
             permissionDialogMessage="We need your permission to use your camera"
           >
             <View style={styles.topBar}>
-              <TouchableOpacity onPress={this.toggleFlash} >
-                <MaterialIcons name={flashIcons[this.state.flash]} size={36} color="white" />
+              <TouchableOpacity onPress={this.toggleFlash}>
+                <MaterialIcons
+                  name={flashIcons[this.state.flash]}
+                  size={36}
+                  color="white"
+                />
               </TouchableOpacity>
             </View>
             <View style={styles.bottomBar}>
-              <TouchableOpacity onPress={this.takePicture} >
+              <TouchableOpacity onPress={this.takePicture}>
                 <Ionicons name="ios-radio-button-on" size={100} color="white" />
               </TouchableOpacity>
             </View>
           </Camera>
-        </View >
+        </View>
       )
     }
   }
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
   preview: {
     flex: 1,
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   capture: {
     flex: 0,
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 15,
     paddingHorizontal: 20,
     alignSelf: 'center',
-    margin: 20
+    margin: 20,
   },
   bottomBar: {
     flex: 1,
@@ -159,7 +161,10 @@ const styles = StyleSheet.create({
     alignContent: 'flex-end',
     width: '100%',
     padding: 10,
-  }
+  },
 })
 
-export default connect(null, mapDispatchToProps)(TestCamera)
+export default connect(
+  null,
+  mapDispatchToProps
+)(TestCamera)

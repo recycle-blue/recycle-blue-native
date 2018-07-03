@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableHighlight,
-  Text
+  Text,
 } from 'react-native'
 import { Form, Item, Input, Picker } from 'native-base'
 import { connect } from 'react-redux'
@@ -35,9 +35,9 @@ class AddActivity extends React.Component {
       this.props.navigation.navigate('Activity')
     }
   }
-  // static navigationOptions = {
-  //   drawerLabel: () => null,
-  // }
+  static navigationOptions = {
+    drawerLabel: () => null,
+  }
   render() {
     return (
       <KeyboardAvoidingView
@@ -54,8 +54,8 @@ class AddActivity extends React.Component {
               onPress={() => this.props.navigation.navigate('Post Activity')}
             />
           ) : (
-              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-            )}
+            <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+          )}
         </View>
         <Form style={styles.form}>
           <Item rounded style={styles.items}>
@@ -127,7 +127,9 @@ class AddActivity extends React.Component {
           onPress={this.handleSubmit}
           underlayColor={colors.light}
         >
-          <Text style={styles.buttonFont}>{this.state.type === 'ad' ? 'Add Contact Info' : 'Submit'}</Text>
+          <Text style={styles.buttonFont}>
+            {this.state.type === 'ad' ? 'Add Contact Info' : 'Submit'}
+          </Text>
         </TouchableHighlight>
       </KeyboardAvoidingView>
     )
