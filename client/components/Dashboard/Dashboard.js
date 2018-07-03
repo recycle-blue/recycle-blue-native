@@ -21,6 +21,11 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getUserActivitiesThunk(this.props.user.id)
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.props.getUserActivitiesThunk(this.props.user.id)
+    }
+  }
 
   render() {
     const { activities, user } = this.props
