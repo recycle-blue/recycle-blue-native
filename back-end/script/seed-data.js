@@ -1,3 +1,4 @@
+
 const usersData = [
   {
     firstName: 'Samir',
@@ -308,62 +309,59 @@ const milestonesData = [
   {
     pointsNeeded: 500,
     description: 'Bronze',
-    badgeIcon:
-      'https://5.imimg.com/data5/EI/RR/MY-42585217/bronze-medals-500x500.jpg'
+    badgeIcon: `https://imgur.com/SFCbISh.png`
   },
   {
     pointsNeeded: 2000,
     description: 'Silver',
-    badgeIcon:
-      'https://cdn1.vectorstock.com/i/1000x1000/77/50/silver-medal-vector-987200.jpg'
+    badgeIcon: `https://imgur.com/ukLTCUH.png`
   },
   {
     pointsNeeded: 5000,
     description: 'Gold',
-    badgeIcon:
-      'https://4.imimg.com/data4/NC/FH/MY-11054919/gold-medals-500x500.jpg'
+    badgeIcon: `https://i.imgur.com/MB2tV2d.png`
   }
 ]
 
 const tagsData = [
-  {name: 'plastic', categoryName: 'Plastic'},
-  {name: 'glass', categoryName: 'Glass'},
-  {name: 'metal', categoryName: 'Metal'},
-  {name: 'paper', categoryName: 'Paper'},
-  {name: 'wood', categoryName: 'Wood'},
-  {name: 'compost', categoryName: 'Compost'},
-  {name: 'landfill', categoryName: 'Landfill'},
-  {name: 'bottle', productName: 'bottle'},
-  {name: 'water', productName: 'bottle', categoryName: 'Plastic'},
-  {name: 'jug', productName: 'jug', categoryName: 'Plastic'},
-  {name: 'can', productName: 'can', categoryName: 'Metal'},
-  {name: 'tin can', productName: 'can', categoryName: 'Metal'},
-  {name: 'tin', productName: 'can', categoryName: 'Metal'},
-  {name: 'mug', productName: 'mug'},
-  {name: 'box', productName: 'box', categoryName: 'Paper'},
-  {name: 'package', productName: 'package', categoryName: 'Paper'},
-  {name: 'pizza box', productName: 'box', categoryName: 'Paper'},
-  {name: 'paper', productName: 'sheet', categoryName: 'Paper'},
-  {name: 'notebook', productName: 'notebook', categoryName: 'Paper'},
-  {name: 'bag', productName: 'bag', categoryName: 'Plastic'},
-  {name: 'wrapper', productName: 'trash', categoryName: 'Landfill'},
-  {name: 'trash', productName: 'trash', categoryName: 'Landfill'},
-  {name: 'cup', productName: 'cup'},
-  {name: 'coffee', productName: 'cup'},
-  {name: 'coffee cup', productName: 'cup', categoryName: 'Paper'},
-  {name: 'jar', productName: 'jar', categoryName: 'Glass'},
-  {name: 'pickle', productName: 'jar', categoryName: 'Glass'},
-  {name: 'mason jar', productName: 'jar', categoryName: 'Glass'},
-  {name: 'pickle jar', productName: 'jar', categoryName: 'Glass'},
-  {name: 'food', productName: 'food', categoryName: 'Compost'},
-  {name: 'fruit', productName: 'food', categoryName: 'Compost'},
-  {name: 'vegetable', productName: 'food', categoryName: 'Compost'},
-  {name: 'dessert', productName: 'food', categoryName: 'Compost'},
-  {name: 'dinner', productName: 'food', categoryName: 'Compost'},
-  {name: 'breakfast', productName: 'food', categoryName: 'Compost'},
-  {name: 'lunch', productName: 'food', categoryName: 'Compost'},
-  {name: 'meal', productName: 'food', categoryName: 'Compost'},
-  {name: 'cloth', productName: 'cloth'}
+  { name: 'plastic', categoryName: 'Plastic' },
+  { name: 'glass', categoryName: 'Glass' },
+  { name: 'metal', categoryName: 'Metal' },
+  { name: 'paper', categoryName: 'Paper' },
+  { name: 'wood', categoryName: 'Wood' },
+  { name: 'compost', categoryName: 'Compost' },
+  { name: 'landfill', categoryName: 'Landfill' },
+  { name: 'bottle', productName: 'bottle' },
+  { name: 'water', productName: 'bottle', categoryName: 'Plastic' },
+  { name: 'jug', productName: 'jug', categoryName: 'Plastic' },
+  { name: 'can', productName: 'can', categoryName: 'Metal' },
+  { name: 'tin can', productName: 'can', categoryName: 'Metal' },
+  { name: 'tin', productName: 'can', categoryName: 'Metal' },
+  { name: 'mug', productName: 'mug' },
+  { name: 'box', productName: 'box', categoryName: 'Paper' },
+  { name: 'package', productName: 'package', categoryName: 'Paper' },
+  { name: 'pizza box', productName: 'box', categoryName: 'Paper' },
+  { name: 'paper', productName: 'sheet', categoryName: 'Paper' },
+  { name: 'notebook', productName: 'notebook', categoryName: 'Paper' },
+  { name: 'bag', productName: 'bag', categoryName: 'Plastic' },
+  { name: 'wrapper', productName: 'trash', categoryName: 'Landfill' },
+  { name: 'trash', productName: 'trash', categoryName: 'Landfill' },
+  { name: 'cup', productName: 'cup' },
+  { name: 'coffee', productName: 'cup' },
+  { name: 'coffee cup', productName: 'cup', categoryName: 'Paper' },
+  { name: 'jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'pickle', productName: 'jar', categoryName: 'Glass' },
+  { name: 'mason jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'pickle jar', productName: 'jar', categoryName: 'Glass' },
+  { name: 'food', productName: 'food', categoryName: 'Compost' },
+  { name: 'fruit', productName: 'food', categoryName: 'Compost' },
+  { name: 'vegetable', productName: 'food', categoryName: 'Compost' },
+  { name: 'dessert', productName: 'food', categoryName: 'Compost' },
+  { name: 'dinner', productName: 'food', categoryName: 'Compost' },
+  { name: 'breakfast', productName: 'food', categoryName: 'Compost' },
+  { name: 'lunch', productName: 'food', categoryName: 'Compost' },
+  { name: 'meal', productName: 'food', categoryName: 'Compost' },
+  { name: 'cloth', productName: 'cloth' }
 ]
 
 const adsData = [
