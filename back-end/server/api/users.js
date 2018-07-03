@@ -48,18 +48,19 @@ router.get('/:userId', async (req, res, next) => {
     const user = await User.findById(req.params.userId, { include: [Milestone] })
     const [potato, bronze, silver, gold] = await Milestone.findAll()
     if ((user.totalPoints >= 0) && (user.totalPoints < 500)) {
-      user.setMilestone(potato)
+      await user.setMilestone(potato)
     }
     if ((user.totalPoints >= 500) && (user.totalPoints < 2000)) {
-      user.setMilestone(bronze)
+      await user.setMilestone(bronze)
     }
     if ((user.totalPoints >= 2000) && (user.totalPoints < 5000)) {
-      user.setMilestone(silver)
+      await user.setMilestone(silver)
     }
     if (user.totalPoints >= 5000) {
-      user.setMilestone(gold)
+      await user.setMilestone(gold)
     }
-    res.json(user)
+    const updatedUser = await User.findById(req.params.userId, { include: [Milestone] })
+    res.json(updatedUser)
   } catch (err) {
     next(err)
   }

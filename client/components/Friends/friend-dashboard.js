@@ -17,6 +17,7 @@ import {
 import { colors, StatusBarHeight } from '../color-palette'
 
 const FriendDashboard = props => {
+  console.log("props in friends dashboard", props)
   const { user } = props
   if (!user.id) return <Text>LOADING...</Text>
   return (

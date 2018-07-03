@@ -38,7 +38,9 @@ export const getUserThunk = userId => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`${ENV_PATH}/api/users/${userId}`)
+      console.log("console.log data in store", data)
       dispatch(selectUserAction(data))
+
     } catch (err) {
       console.error(err.message)
     }
