@@ -72,7 +72,7 @@ class Activity extends React.Component {
                   onPress={() => {
                     this.props.navigation.navigate('Map')
                   }}
-                  style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                  style={{ paddingVertical: 5, paddingHorizontal: 10, backgroundColor: colors.midLight, borderRadius: 100 }}
                 >
                   <Text
                     style={{ fontWeight: 'bold', color: colors.white }}
@@ -85,7 +85,7 @@ class Activity extends React.Component {
                     onPress={() => {
                       this.handleSubmit()
                     }}
-                    style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                    style={{ paddingVertical: 5, paddingHorizontal: 10, marginLeft: 10, backgroundColor: colors.midLight, borderRadius: 100 }}
                   >
                     <Text
                       style={{ fontWeight: 'bold', color: colors.white }}
