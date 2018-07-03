@@ -11,6 +11,7 @@ import {
   Right,
 } from 'native-base'
 import { Image, TouchableOpacity, View, Text } from 'react-native'
+import {colors} from '../color-palette'
 
 class UserCard extends React.Component {
   constructor() {
@@ -38,34 +39,37 @@ class UserCard extends React.Component {
   render() {
     const { user, navigate, currentUser, friends } = this.props
     return (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.selectUser(user.id)
-          navigate('FriendDashboard')
-        }}
-        style={{width: '49%'}}
-      >
         <Card key={user.id}>
           <CardItem>
-            <Thumbnail source={{ uri: user.imageUrl }} large />
-            <View style={{width: '50%'}}>
-              <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{user.firstName}</Text>
-              <Text style={{textAlign: 'center', fontWeight: 'bold',paddingBottom: 5}}>{user.lastName} </Text>
-              <Text note style={{textAlign: 'center'}}>{user.totalPoints}</Text>
-           </View>
-            {!friends &&
-            !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) && (
-            <Button
-            success
-            onPress={() => this.addFriend(currentUser.id, user.id)}
+            <TouchableOpacity
+              style={{flexDirection: 'row', flex: 4, alignItems: 'center', paddingRight: 25}}
+              onPress={() => {
+                this.props.selectUser(user.id)
+                navigate('FriendDashboard')
+              }}
             >
-            <Text> Add Friend </Text>
-            </Button>
-            )}
+              <Thumbnail source={{ uri: user.imageUrl }} large />
+              <View style={{flex: 2, alignContent: 'center', justifyContent: 'center'}}>
+                <Text style={{textAlign: 'center', fontWeight: 'bold'}}>{user.firstName}</Text>
+                <Text style={{textAlign: 'center', fontWeight: 'bold',paddingBottom: 5}}>{user.lastName}</Text>
+              </View>
+                <Text note style={{textAlign: 'center'}}>{user.totalPoints}</Text>
+            </TouchableOpacity>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+            {!friends &&
+              !this.state.isFriendOfUser && (user.id !== this.props.currentUser.id) && (
+                <TouchableOpacity
+                  style={{ justifyContent: 'center'}}
+                  onPress={() => this.addFriend(currentUser.id, user.id)}
+                >
+                  <Text style={{fontSize: 35, textAlign: 'center', fontWeight: 'bold', color: colors.midDark}}> + </Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </CardItem>
         </Card>
-      </TouchableOpacity>
-  )
+
+    )
   }
 }
 
