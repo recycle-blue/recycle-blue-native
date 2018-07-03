@@ -8,10 +8,13 @@ import { getWeeklyData } from '../sortedActivityData'
 
 
 class ActivityChart extends React.Component {
+
   async componentDidMount() {
-    await this.props.setActivityWeekThunk(this.props.user.id)
+    console.log("this.props in my activity chart", this.props)
+    await this.props.setActivityWeekThunk(this.props.currentUser)
   }
   render() {
+    console.log("what are my props here?", this.props)
     const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     const data = getWeeklyData(this.props.activities || [])
@@ -65,6 +68,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     activities: state.activity.activities.rows,
     count: state.activity.activities.count,
+    what: state
   })
 }
 

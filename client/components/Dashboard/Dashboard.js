@@ -19,7 +19,6 @@ import { ColorPalette, colors } from '../color-palette'
 class Dashboard extends React.Component {
   // static navigationOptions = { drawerLabel: () => null }
   componentDidMount() {
-    console.log("this.props", this.props)
     this.props.getUserActivitiesThunk(this.props.user.id)
   }
 
@@ -94,7 +93,7 @@ class Dashboard extends React.Component {
 
             >
               <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
-                <ActivityChart />
+                <ActivityChart currentUser={this.props.user.id} />
                 <ProgressChart />
               </ScrollView>
             </Tab>
