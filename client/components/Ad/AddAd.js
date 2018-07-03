@@ -152,8 +152,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     width: 250,
     height: 250,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
