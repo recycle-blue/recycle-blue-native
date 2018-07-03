@@ -4,7 +4,7 @@ const usersData = [
     lastName: 'Thakral',
     email: 'samir@email.com',
     password: '1234',
-    totalPoints: 560,
+    totalPoints: 499,
     imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Samir_Thakral_Photo_zpsag94hzhv.png'
   },
   {
@@ -12,25 +12,51 @@ const usersData = [
     lastName: 'Sadoun',
     email: 'lamine@email.com',
     password: '1234',
-    totalPoints: 500,
-    imageUrl: 'https://miro.medium.com/fit/c/240/240/0*_Sd22C3kU7uUv1vn.'
+    totalPoints: 3214,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Lamine_Sadoun_zpszumlybyi.jpeg'
   },
   {
     firstName: 'Dustin',
     lastName: 'McDowell',
     email: 'dustin@email.com',
     password: '1234',
-    totalPoints: 600,
-    imageUrl: 'https://pbs.twimg.com/profile_images/838219276439932929/0BP0MJpo_400x400.jpg'
+    totalPoints: 4253,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Dustin_McDowell_zpsz2hsy7ol.jpeg'
   },
   {
     firstName: 'Andrew',
     lastName: 'Trahan',
     email: 'andrew@email.com',
     password: '1234',
-    totalPoints: 540,
+    totalPoints: 5001,
     imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Andrew_Trahan_zps3widrebx.jpeg'
-  }
+  },
+  {
+    firstName: 'Conor',
+    lastName: 'Hawes',
+    email: 'conor@email.com',
+    password: '1234',
+    totalPoints: 1241,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Conor_Hawes_zpshb9muvka.jpeg'
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Gutt',
+    email: 'daniel@email.com',
+    password: '1234',
+    totalPoints: 421,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
+  },
+  {
+    firstName: 'Daniel',
+    lastName: 'Hawes',
+    email: 'conor@email.com',
+    password: '1234',
+    totalPoints: 421,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Daniel_Gutt_zpsiy2kqvkj.jpeg'
+  },
+
+
 ]
 
 const productsData = [
