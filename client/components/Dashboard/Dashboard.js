@@ -21,6 +21,11 @@ class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getUserActivitiesThunk(this.props.user.id)
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.props.getUserActivitiesThunk(this.props.user.id)
+    }
+  }
 
   render() {
     const { activities, user } = this.props
@@ -93,7 +98,7 @@ class Dashboard extends React.Component {
 
             >
               <ScrollView style={[styles.tabView, { paddingTop: 5 }]}>
-                <ActivityChart />
+                <ActivityChart currentUser={this.props.user.id} />
                 <ProgressChart />
               </ScrollView>
             </Tab>

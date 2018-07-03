@@ -18,7 +18,8 @@ const {
   commentsData,
   milestonesData,
   tagsData,
-  adsData
+  adsData,
+  images
 } = require('./seed-data')
 
 const shuffle = () => 0.5 - Math.random()
@@ -75,10 +76,9 @@ async function seed() {
     users.map((user, i) => {
       const randomProducts = products.sort(shuffle).slice(0, 5)
       const quantity = randomIndexGenerator(5)
-      const imageUrl =
-        'https://5.imimg.com/data5/DC/WQ/MY-11874215/empty-pet-bottle-500x500.jpg'
       return Promise.all(
         randomProducts.map((product, j) => {
+          const imageUrl = images[product.name]
           const categoryId = randomIndexGenerator(categories.length)
           const type = (i + j) % 2 || i + j > 13 ? 'activity' : 'ad'
           return Activity.create({
