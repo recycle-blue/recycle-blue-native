@@ -30,9 +30,9 @@ class MarkerDetail extends React.Component {
   }
 
   render() {
-    const { marker, view, navigation } = this.props
+    const { marker, view } = this.props
     if (view === 'recycling') return <RecycleMarker marker={marker} />
-    else return <AdMarker marker={marker} navigation={navigation} />
+    else return <AdMarker marker={marker} />
   }
 }
 
