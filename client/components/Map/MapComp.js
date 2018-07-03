@@ -17,31 +17,30 @@ const geoLocation = navigator.geolocation
 
 class MapComp extends React.Component {
   componentDidMount() {
-    const { view } = this.props
     this.props.setFetch(true)
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude, longitude }
-      const locationStr = Object.keys(userLocation)
-        .map(key => userLocation[key])
-        .join(',')
-      view === 'recycling'
-        ? this.props.fetchRecycleLocations(locationStr)
-        : this.props.fetchAdLocations(locationStr)
-
-      this.props.setUserLocation(userLocation)
-      this.props.setFetch(false)
+      this.fetchLocations(userLocation, true)
     })
   }
-  async componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.view !== this.props.view) {
       const { userLocation } = this.props
-      const locationStr = `${userLocation.latitude},${userLocation.longitude}`
-      this.props.view === 'recycling'
-        ? await this.props.fetchRecycleLocations(locationStr)
-        : await this.props.fetchAdLocations(locationStr)
-      this.props.setFetch(false)
+      this.fetchLocations(userLocation, false)
     }
+  }
+
+  async fetchLocations(userLocation, needsLocation) {
+    const locationStr = `${userLocation.latitude},${userLocation.longitude}`
+    if (this.props.view === 'recycling') {
+      await this.props.fetchRecycleLocations(locationStr)
+    } else {
+      await this.props.fetchAdLocations(locationStr)
+    }
+    if (needsLocation) this.props.setUserLocation(userLocation)
+
+    this.props.setFetch(false)
   }
   handleMarkerPress = marker => {
     this.props.selectMarker(marker)
@@ -54,13 +53,7 @@ class MapComp extends React.Component {
   }
 
   render() {
-    const {
-      locations,
-      selectedMarker,
-      isFetching,
-      view,
-      navigation,
-    } = this.props
+    const { locations, selectedMarker, isFetching, view } = this.props
     const { latitude, longitude } = this.props.userLocation
     if (isFetching) {
       return <Spinner color="blue" />
@@ -104,11 +97,7 @@ class MapComp extends React.Component {
           })}
         </MapView>
         {(selectedMarker.id || selectedMarker.ad) && (
-          <MarkerDetail
-            marker={selectedMarker}
-            view={view}
-            navigation={navigation}
-          />
+          <MarkerDetail marker={selectedMarker} view={view} />
         )}
       </Container>
     )
