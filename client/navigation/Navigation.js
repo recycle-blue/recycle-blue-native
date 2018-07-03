@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { Button, Icon, Text } from 'native-base'
 import {
   createStackNavigator,
@@ -61,7 +62,9 @@ const PrimaryNav = createStackNavigator(
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: colors.main, height: 45 },
       title: 'RecycleBlue',
-      headerTitleStyle: { textAlign: 'center', alignSelf: 'center', width: '100%', paddingRight: 30 },
+      headerTitleStyle: [Platform.OS === 'ios' ?
+        { textAlign: 'center', alignSelf: 'center', width: '100%' }
+        : { textAlign: 'center', alignSelf: 'center', width: '100%', paddingRight: 30 }],
       headerTintColor: 'white',
       headerLeft: (
         <Button
