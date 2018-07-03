@@ -29,7 +29,7 @@ class Activity extends React.Component {
   handleSubmit = async () => {
     await Linking.openURL(
       `mailto:${this.props.email}?subject= I would like to claim: ${
-        this.props.name
+      this.props.name
       }`
     )
   }
@@ -88,8 +88,8 @@ class Activity extends React.Component {
                 <CommentCard key={singlecomment.id} comment={singlecomment} />
               ))
             ) : (
-              <Text>There are no comments</Text>
-            )}
+                <Text>There are no comments</Text>
+              )}
             <AddComment navigation={this.props.navigation} />
           </ScrollView>
         </View>
@@ -103,8 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 250,
     height: 250,
-    borderWidth: 1,
-    borderColor: 'blue',
     alignItems: 'center',
     justifyContent: 'center',
   },

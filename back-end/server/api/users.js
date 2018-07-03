@@ -71,7 +71,8 @@ router.get('/:userId/activities', async (req, res, next) => {
       where: {
         userId: req.params.userId
       },
-      include: [Product, Category, User]
+      include: [Product, Category, User],
+      order: [['createdAt', 'DESC']],
     })
     res.json(activities)
   } catch (err) {
@@ -153,7 +154,8 @@ router.get('/:userId/friends/:friendId/activities', async (req, res, next) => {
       where: {
         userId: req.params.friendId
       },
-      include: [Product, Category, User]
+      include: [Product, Category, User],
+      order: [['createdAt', 'DESC']],
     })
     res.json(activities)
   } catch (err) {
@@ -174,7 +176,7 @@ router.get('/:userId/leaderboard', async (req, res, next) => {
         id: { [Op.in]: [req.params.userId, ...friendIds] }
       },
       include: [Milestone],
-      order: [['totalPoints','DESC']]
+      order: [['totalPoints', 'DESC']]
     })
     res.json(leaders);
   } catch (err) {
@@ -192,10 +194,10 @@ router.get('/:userId/feed', async (req, res, next) => {
     const friendIds = getfriends.map(friend => friend.friendId)
     const feed = await Activity.findAll({
       where: {
-        userId: { [Op.in]: [req.params.userId,...friendIds]}
+        userId: { [Op.in]: [req.params.userId, ...friendIds] }
       },
-      include: [Product,Category,User],
-      order: [['createdAt','DESC']]
+      include: [Product, Category, User],
+      order: [['createdAt', 'DESC']]
     })
     res.json(feed);
   } catch (err) {
