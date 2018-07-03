@@ -55,12 +55,27 @@ export const getRecycleLocationsThunk = locationStr => {
     dispatch(getLocationsAction(data.results))
   }
 }
-export const getAdLocationsThunk = locationStr => {
+
+export const getAdLocationsThunk = (locationStr,category,text) => {
   return async dispatch => {
-    const { data } = await axios.get(
-      `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}`
-    )
-    dispatch(getLocationsAction(data))
+    let res
+    if(text === undefined || text === '' && !category) {
+      res = await axios.get(
+        `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}`
+      )
+    } else if(category && text === undefined || text === '') {
+      res = await axios.get(
+        `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}&categoryId=${category.id}`
+      )
+    } else if(!category && text) {
+      res = await axios.get(
+        `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}&search&name=${text}`
+      )
+    } else {
+      res = await axios.get(
+        `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}&categoryId=${category.id}&search&name=${text}`)
+    }
+    dispatch(getLocationsAction(res.data))
   }
 }
 export const getDistanceThunk = (markerId, origin, destination) => {
