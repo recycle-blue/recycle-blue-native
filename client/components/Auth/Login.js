@@ -46,13 +46,19 @@ class Login extends React.Component {
     return (
       <Container style={styles.container}>
         <Content style={styles.content}>
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                'https://i.pinimg.com/originals/23/05/a6/2305a658b57008997afd9dffa3c91300.png',
-            }}
-          />
+          <TouchableHighlight
+            // style={styles.devButton}
+            onPress={this.devLogin}
+            underlayColor={colors.light}
+          >
+            <Image
+              style={styles.image}
+              source={{
+                uri:
+                  'https://i.pinimg.com/originals/23/05/a6/2305a658b57008997afd9dffa3c91300.png',
+              }}
+            />
+          </TouchableHighlight>
           <Text style={styles.title}>Recycle Blue</Text>
           <Form>
             {method === 'signup' && (
@@ -93,7 +99,7 @@ class Login extends React.Component {
             </Item>
           </Form>
           {method === 'login' ? (
-            <View>
+            <View style={{ marginTop: 15 }}>
               <TouchableHighlight
                 style={styles.button}
                 onPress={this.handleSubmit}
@@ -110,11 +116,11 @@ class Login extends React.Component {
               </TouchableHighlight>
             </View>
           ) : (
-              <View>
+              <View style={{ marginTop: 15 }}>
                 <TouchableHighlight
                   style={styles.button}
                   onPress={this.handleSubmit}
-                  underlayColor={colors.white}
+                  underlayColor={colors.light}
                 >
                   <Text style={styles.buttonFont}>Sign Up</Text>
                 </TouchableHighlight>
@@ -140,13 +146,13 @@ class Login extends React.Component {
               </Text>
             )}
         </Content>
-        <TouchableHighlight
+        {/* <TouchableHighlight
           style={styles.devButton}
           onPress={this.devLogin}
-          underlayColor={colors.white}
+          underlayColor={colors.light}
         >
           <Text style={styles.buttonFont}>Dev Login</Text>
-        </TouchableHighlight>
+        </TouchableHighlight> */}
       </Container>
     )
   }
@@ -162,12 +168,14 @@ const styles = StyleSheet.create({
   },
   padVert: {
     marginTop: 5,
+    backgroundColor: colors.white
   },
   title: {
     color: colors.dark,
     textAlign: 'center',
     fontSize: 36,
     fontWeight: 'bold',
+    paddingBottom: 15,
   },
   image: {
     flex: 1,
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 5,
-    padding: 10,
+    padding: 7,
     backgroundColor: colors.main,
     width: '60%',
     borderRadius: 100,
@@ -186,7 +194,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonFont: {
-    color: colors.light,
+    color: colors.white,
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
