@@ -64,10 +64,12 @@ class RecycleMarker extends React.Component {
           modalProps={{
             animationIn: 'slideInUp',
           }}
-          appsWhiteList={['google-maps', 'apple-maps']}
           options={{
             latitude: marker.geometry.location.lat,
             longitude: marker.geometry.location.lng,
+            cancelText: 'Cancel',
+            appsWhiteList: ['google-maps', 'apple-maps'],
+            dialogTitle: 'Choose a Maps App',
           }}
         />
       </Card>
