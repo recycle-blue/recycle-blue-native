@@ -40,7 +40,7 @@ class AdMarker extends React.Component {
           </Body>
           <Right>
             <Button transparent onPress={this.closeDetail}>
-              <Icon name="close" style={{ color: 'black', fontSize: 50 }} />
+              <Icon name="close" style={{ color: 'black', fontSize: 40 }} />
             </Button>
           </Right>
         </CardItem>

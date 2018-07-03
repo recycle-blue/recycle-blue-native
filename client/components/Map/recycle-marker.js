@@ -29,40 +29,26 @@ class RecycleMarker extends React.Component {
     if (!detailStatus) return null
     return (
       <View style={{ marginBottom: 20 }}>
-        <CardItem>
-          <Body>
-            <Text style={{ fontSize: 15 }}>{marker.name}</Text>
-          </Body>
-          <Right>
-            <Button transparent onPress={this.closeDetail}>
-              <Icon name="close" style={{ color: 'black', fontSize: 50 }} />
-            </Button>
-          </Right>
+        <CardItem style={{ justifyContent: 'space-between', width: '100%' }}>
+          <Text style={{ fontSize: 25, width: '80%' }}>{marker.name}</Text>
+          <Button transparent onPress={this.closeDetail}>
+            <Icon name="close" style={{ color: 'black', fontSize: 40 }} />
+          </Button>
         </CardItem>
         <CardItem>
-          <Left>
-            <Icon name="car" style={{ color: 'black' }} />
-          </Left>
-          <Body>
-            <Text style={{ fontSize: 10 }}>{marker.vicinity}</Text>
-          </Body>
+          <Icon name="car" style={{ color: 'black', paddingRight: 10 }} />
+          <Text>{marker.vicinity}</Text>
         </CardItem>
         <CardItem>
-          <Left>
-            <Icon name="pin" style={{ color: 'black' }} />
-          </Left>
-          <Body>
-            <Text style={{ fontWeight: 'bold' }}>
-              {marker.distance} from current location
-            </Text>
-          </Body>
+          <Icon name="pin" style={{ color: 'black' }} />
+          <Text style={{ fontWeight: 'bold', paddingLeft: 5 }}>
+            {marker.distance} from current location
+          </Text>
         </CardItem>
-        <CardItem>
-          <Body>
-            <Button success onPress={this.handlePress}>
-              <Text> Navigate to Location </Text>
-            </Button>
-          </Body>
+        <CardItem style={{ justifyContent: 'center' }}>
+          <Button success onPress={this.handlePress}>
+            <Text> Navigate to Location </Text>
+          </Button>
         </CardItem>
         <Popup
           isVisible={this.state.isVisible}
