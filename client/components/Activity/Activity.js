@@ -47,7 +47,7 @@ class Activity extends React.Component {
         behavior="padding"
         keyboardVerticalOffset={Platform.OS === 'ios' ? 85 : 85}
       >
-        <View>
+        <View style={{ backgroundColor: colors.light }}>
           <ScrollView>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <Text style={{ fontSize: 25, padding: 8 }}>
@@ -64,25 +64,37 @@ class Activity extends React.Component {
               <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 10 }}>
                 How Can You Reuse This Item?
               </Text>
-              <Text style={{ marginRight: 5, marginLeft: 5 }}>
+              <Text style={{ marginRight: 5, marginLeft: 5, marginBottom: 10 }}>
                 {this.props.recycleUse}
               </Text>
-              <Button
-                onPress={() => {
-                  this.props.navigation.navigate('Map')
-                }}
-                title="Find Recycling Near You"
-                color={colors.main}
-              />
-              {this.props.type === 'ad' && (
-                <Button
+              <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
                   onPress={() => {
-                    this.handleSubmit()
+                    this.props.navigation.navigate('Map')
                   }}
-                  title="Email"
-                  color={colors.main}
-                />
-              )}
+                  style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                >
+                  <Text
+                    style={{ fontWeight: 'bold', color: colors.white }}
+                  >
+                    Find Recycling Near You
+                </Text>
+                </TouchableOpacity>
+                {this.props.type === 'ad' && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.handleSubmit()
+                    }}
+                    style={{ paddingVertical: 5, paddingHorizontal: 10, marginBottom: 5, backgroundColor: colors.midLight, borderRadius: 100 }}
+                  >
+                    <Text
+                      style={{ fontWeight: 'bold', color: colors.white }}
+                    >
+                      Email
+                </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
             {this.props.type === 'ad' && <AdView />}
             {this.props.comments.length ? (

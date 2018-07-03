@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Image, KeyboardAvoidingView } from 'rea
 import { Form, Textarea } from 'native-base'
 import { connect } from 'react-redux'
 import { postCommentThunk, getCommentsThunk } from '../../store'
+import { colors } from '../color-palette'
 
 class AddComment extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class AddComment extends React.Component {
             value={this.state.text} />
         </Form>
         {this.state.text.length ?
-          <Button title='submit' onPress={this.handleSubmit} />
+          <Button title='submit' onPress={this.handleSubmit} style={{ backgroundColor: colors.midLight }} />
           : <Button title='submit' onPress={this.handleSubmit} disabled={true} />}
       </View>
     )
