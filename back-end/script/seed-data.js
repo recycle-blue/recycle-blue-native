@@ -339,7 +339,7 @@ const tagsData = [
   { name: 'wood', categoryName: 'Wood' },
   { name: 'compost', categoryName: 'Compost' },
   { name: 'landfill', categoryName: 'Landfill' },
-  { name: 'bottle', productName: 'bottle', categoryName: 'Glass' },
+  { name: 'bottle', productName: 'bottle' },
   { name: 'water', productName: 'bottle', categoryName: 'Plastic' },
   { name: 'jug', productName: 'jug', categoryName: 'Plastic' },
   { name: 'can', productName: 'can', categoryName: 'Metal' },
@@ -462,7 +462,9 @@ const images = {
   mug:
     'https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
   package:
-    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200'
+    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  paper:
+    'https://images.pexels.com/photos/261949/pexels-photo-261949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 }
 
 const properSeedData = {
@@ -499,7 +501,8 @@ const properSeedData = {
   cloth: { productName: 'cloth', categoryName: 'Other' },
   clothing: { productName: 'cloth', categoryName: 'Other' },
   clothes: { productName: 'cloth', categoryName: 'Other' },
-  bed: { productName: 'sheet', categoryName: 'Other' },
+  sheet: { productName: 'sheet', categoryName: 'Other' },
+  miscellaneous: { productName: 'miscellaneous', categoryName: 'Other' },
 }
 
 module.exports = {
