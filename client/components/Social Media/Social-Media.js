@@ -11,7 +11,7 @@ class SocialMedia extends React.Component {
     const activity = this.props.activity
     let shareImageBase64 = {
       title: "React Native",
-      message: `I just recycled ${activity.quantity} units of ${activity.category.name} ${activity.product.name}. ${activity.product.description} #RecycleBlue`,
+      message: `I just recycled ${activity.quantity} units of ${activity.category.name} ${activity.product.name}. ${activity.category.description} #RecycleBlue`,
       subject: "Share Link", //  for email
       failOnCancel: false
     }
