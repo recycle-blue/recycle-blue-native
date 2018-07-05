@@ -53,7 +53,7 @@ class SearchUsers extends React.Component {
                     user={user}
                     navigate={this.props.navigation.navigate}
                   />
-            )}) : <Text> No Result </Text>}
+            )}) : <Text> </Text>}
           </ScrollView>
         </Content>
       </Container>
