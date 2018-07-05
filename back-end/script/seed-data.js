@@ -470,7 +470,7 @@ const images = {
 const properSeedData = {
   bottle: { productName: 'bottle', categoryName: 'Glass' },
   water: { productName: 'bottle', categoryName: 'Plastic' },
-  jug: { productName: 'jug', categoryName: 'Plastic' },
+  jug: { productName: 'jug', categoryName: 'Glass' },
   can: { productName: 'can', categoryName: 'Metal' },
   'tin can': { productName: 'can', categoryName: 'Metal' },
   tin: { productName: 'can', categoryName: 'Metal' },
