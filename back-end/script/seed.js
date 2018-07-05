@@ -25,13 +25,18 @@ const {
 
 const shuffle = () => 0.5 - Math.random()
 const randomIndexGenerator = num => Math.floor(Math.random() * num + 1)
+
 let index = 0
-const sequentialIndexGen = () => {
-  if (index < 8) {
-    return ++index
+const lastSevenDayGenerator = () => {
+  if (index < 7) {
+    const date = new Date(Date.now() - (index * 86400000)).toISOString().split("T").join(" ")
+    ++index
+    return date
   } else {
-    index = 1
-    return index
+    index = 0
+    const date = new Date(Date.now() - (index * 86400000)).toISOString().split("T").join(" ")
+    ++index
+    return date
   }
 }
 /**
@@ -105,7 +110,7 @@ async function seed() {
             type,
             unit: 'qty',
             points: quantity * product.points,
-            createdOn: `2018-07-0${sequentialIndexGen()} 09:36:41.875-05`
+            createdOn: lastSevenDayGenerator()
           })
         })
       )
