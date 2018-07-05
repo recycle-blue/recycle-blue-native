@@ -19,7 +19,8 @@ const {
   milestonesData,
   tagsData,
   adsData,
-  images
+  images,
+  properSeedData
 } = require('./seed-data')
 
 const shuffle = () => 0.5 - Math.random()
@@ -86,9 +87,14 @@ async function seed() {
       const randomProducts = products.sort(shuffle).slice(0, 5)
       const quantity = randomIndexGenerator(5)
       return Promise.all(
-        randomProducts.map((product, j) => {
+        randomProducts.map(async (product, j) => {
           const imageUrl = images[product.name]
-          const categoryId = randomIndexGenerator(categories.length)
+          const category = await Category.find({
+            where: {
+              name: properSeedData[product.name].categoryName
+            }
+          })
+          const categoryId = category.id
           const type = (i + j) % 2 || i + j > 13 ? 'activity' : 'ad'
           return Activity.create({
             productId: product.id,
