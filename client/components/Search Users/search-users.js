@@ -12,6 +12,7 @@ import {
   Text,
   Spinner,
 } from 'native-base'
+import {colors} from '../color-palette'
 
 class SearchUsers extends React.Component {
   constructor() {
@@ -37,7 +38,7 @@ class SearchUsers extends React.Component {
     return (
       <Container>
         <Content>
-          <ScrollView stickyHeaderIndices={[1]}>
+          <ScrollView stickyHeaderIndices={[1]} style={{backgroundColor: colors.light}}>
             <Item>
               <Input
                 placeholder="Search"
