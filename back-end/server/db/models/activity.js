@@ -28,6 +28,10 @@ const Activity = db.define('activity', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  createdOn: {
+    type: Sequelize.DATE,
+    allowNull: true
+  }
 })
 
 Activity.activityCountWeek = async function (userId) {
