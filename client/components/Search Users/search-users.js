@@ -12,6 +12,7 @@ import {
   Text,
   Spinner,
 } from 'native-base'
+import {colors} from '../color-palette'
 
 class SearchUsers extends React.Component {
   constructor() {
@@ -22,7 +23,6 @@ class SearchUsers extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchUsers()
     await this.props.getFriends(this.props.user.id)
     this.setState({ isLoading: false })
   }
@@ -37,7 +37,7 @@ class SearchUsers extends React.Component {
     return (
       <Container>
         <Content>
-          <ScrollView stickyHeaderIndices={[1]}>
+          <ScrollView stickyHeaderIndices={[1]} style={{backgroundColor: colors.light}}>
             <Item>
               <Input
                 placeholder="Search"
@@ -53,7 +53,7 @@ class SearchUsers extends React.Component {
                     user={user}
                     navigate={this.props.navigation.navigate}
                   />
-            )}) : <Text> No Result </Text>}
+            )}) : <Text> </Text>}
           </ScrollView>
         </Content>
       </Container>

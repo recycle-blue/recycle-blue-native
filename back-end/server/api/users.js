@@ -19,23 +19,16 @@ router.get('/', async (req, res, next) => {
 
 router.get('/search', async (req, res, next) => {
   try {
-    let users
-    if (req.query.name !== 'undefined' && req.query.name !== '') {
-      let [firstName, lastName] = req.query.name && req.query.name.split(' ')
-      lastName = lastName || firstName;
-      users = await User.findAll({
-        where: {
-          [Op.or]: [
-            { firstName: { [Op.iLike]: `${firstName}%` } },
-            { lastName: { [Op.iLike]: `${lastName}%` } }],
-        },
-        order: [['firstName', 'ASC']],
-      })
-    } else {
-      users = await User.findAll({
-        order: [['firstName', 'ASC']]
-      })
-    }
+    let [firstName, lastName] = req.query.name && req.query.name.split(' ')
+    lastName = lastName || firstName;
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          { firstName: { [Op.iLike]: `${firstName}%` } },
+          { lastName: { [Op.iLike]: `${lastName}%` } }],
+      },
+      order: [['firstName', 'ASC']],
+    })
     res.json(users)
   } catch (err) {
     next(err)
