@@ -32,29 +32,29 @@ class Dashboard extends React.Component {
     return (
       <Container style={ColorPalette.background}>
         <Card style={styles.card}>
-          <CardItem>
-            <Left>
+          <CardItem style={{ justifyContent: 'space-between' }}>
+            {/* <Left> */}
+            <Thumbnail
+              name="userThunmbnail"
+              large
+              square
+              source={{ uri: user.imageUrl }}
+            />
+            <View style={styles.body}>
+              <Text style={styles.text}>{user.name}</Text>
+              <Text >Points: {user.totalPoints}</Text>
+            </View>
+            {/* </Left> */}
+            {/* <Right> */}
+            {user.milestone && (
               <Thumbnail
-                name="userThunmbnail"
+                name="userMilestoneThumbnail"
                 large
                 square
-                source={{ uri: user.imageUrl }}
+                source={{ uri: user.milestone.badgeIcon }}
               />
-              <Body>
-                <Text>{user.name}</Text>
-                <Text>{user.totalPoints}</Text>
-              </Body>
-            </Left>
-            <Right>
-              {user.milestone && (
-                <Thumbnail
-                  name="userMilestoneThumbnail"
-                  large
-                  square
-                  source={{ uri: user.milestone.badgeIcon }}
-                />
-              )}
-            </Right>
+            )}
+            {/* </Right> */}
           </CardItem>
         </Card>
         <View style={styles.container}>
@@ -68,13 +68,6 @@ class Dashboard extends React.Component {
               activeTextStyle={{ color: colors.white }}
             >
               <View style={styles.tabView}>
-                {/* <Card style={{ maxHeight: 40 }}>
-                  <CardItem style={{ justifyContent: 'space-between' }}>
-                    <Text style={{ paddingLeft: 10 }}>Img</Text>
-                    <Text style={{ paddingLeft: 10 }}>Product Name</Text>
-                    <Text>Points</Text>
-                  </CardItem>
-                </Card> */}
                 <ScrollView>
                   {activities.length ? (
                     activities.map(activity => (
@@ -123,6 +116,16 @@ const styles = StyleSheet.create({
   },
   tabView: {
     backgroundColor: colors.light,
+  },
+  text: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
+    paddingBottom: 5,
+
+  },
+  body: {
+    alignItems: 'center',
   }
 })
 
