@@ -23,7 +23,6 @@ class SearchUsers extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchUsers()
     await this.props.getFriends(this.props.user.id)
     this.setState({ isLoading: false })
   }
