@@ -23,7 +23,7 @@ import {
   Feed,
   Marketplace,
 } from '../components'
-import DrawerHeader from './drawer'
+import DrawerContent from './drawer'
 import { ColorPalette, colors } from '../components/color-palette'
 
 const Drawer = createDrawerNavigator(
@@ -47,7 +47,14 @@ const Drawer = createDrawerNavigator(
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     initialRouteName: 'Dashboard',
-    contentComponent: DrawerHeader
+    contentComponent: DrawerContent,
+    contentOptions: {
+      activeLabelStyle: { color: colors.white },
+      inactiveLabelStyle: { color: colors.dark },
+      activeBackgroundColor: colors.midLight,
+      // inactiveBackgroundColor: colors.white,
+      // itemsContainerStyle: colors.light,
+    }
   }
 )
 
