@@ -33,7 +33,6 @@ class Dashboard extends React.Component {
       <Container style={ColorPalette.background}>
         <Card style={styles.card}>
           <CardItem style={{ justifyContent: 'space-between' }}>
-            {/* <Left> */}
             <Thumbnail
               name="userThunmbnail"
               large
@@ -44,8 +43,6 @@ class Dashboard extends React.Component {
               <Text style={styles.text}>{user.name}</Text>
               <Text >Points: {user.totalPoints}</Text>
             </View>
-            {/* </Left> */}
-            {/* <Right> */}
             {user.milestone && (
               <Thumbnail
                 name="userMilestoneThumbnail"
@@ -54,7 +51,6 @@ class Dashboard extends React.Component {
                 source={{ uri: user.milestone.badgeIcon }}
               />
             )}
-            {/* </Right> */}
           </CardItem>
         </Card>
         <View style={styles.container}>
