@@ -8,15 +8,16 @@ export default class ProgressChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      Potato: 500,
-      Bronze: 2000,
-      Silver: 5000,
+      0: 0,
+      1: 500,
+      2: 2000,
+      3: 5000,
     }
   }
   render() {
-    const totalPoints = this.props.selectedUser.totalPoints
-    const nextMilestonePoints = this.state[this.props.selectedUser.milestone.description]
-    const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100)
+    const totalPoints = this.props.selectedUser.totalPoints - this.state[this.props.selectedUser.milestoneId - 1]
+    const nextMilestonePoints = this.state[this.props.selectedUser.milestoneId] - this.state[this.props.selectedUser.milestoneId - 1]
+    const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100) ? Math.ceil((totalPoints / nextMilestonePoints) * 100) : 100
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
     return (
@@ -61,7 +62,7 @@ export default class ProgressChart extends React.Component {
             x={`${width / 2}`}
             y={`${(halfheight / 1.7)}`}
             textAnchor="middle"
-          >{percentComplete}%</Text>
+          >{percentComplete} %</Text>
         </Svg>
       </View >
     )

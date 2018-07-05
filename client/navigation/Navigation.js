@@ -23,6 +23,7 @@ import {
   Feed,
   Marketplace,
 } from '../components'
+import DrawerHeader from './drawer'
 import { ColorPalette, colors } from '../components/color-palette'
 
 const Drawer = createDrawerNavigator(
@@ -46,6 +47,7 @@ const Drawer = createDrawerNavigator(
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     initialRouteName: 'Dashboard',
+    contentComponent: DrawerHeader
   }
 )
 
@@ -65,11 +67,11 @@ const PrimaryNav = createStackNavigator(
         Platform.OS === 'ios'
           ? { textAlign: 'center', alignSelf: 'center', width: '100%' }
           : {
-              textAlign: 'center',
-              alignSelf: 'center',
-              width: '100%',
-              paddingRight: 30,
-            },
+            textAlign: 'center',
+            alignSelf: 'center',
+            width: '100%',
+            paddingRight: 30,
+          },
       ],
       headerTintColor: 'white',
       headerLeft: (

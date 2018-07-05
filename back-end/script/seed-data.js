@@ -135,6 +135,14 @@ const productsData = [
       'The paper from this notebook can be used as packing material the next time you need to ship something.'
   },
   {
+    name: 'paper',
+    points: 2,
+    description:
+      'semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In',
+    recycleUse:
+      'This paper can be used as packing material the next time you need to ship something.'
+  },
+  {
     name: 'bag',
     points: 0,
     description:
@@ -337,17 +345,17 @@ const tagsData = [
   { name: 'can', productName: 'can', categoryName: 'Metal' },
   { name: 'tin can', productName: 'can', categoryName: 'Metal' },
   { name: 'tin', productName: 'can', categoryName: 'Metal' },
-  { name: 'mug', productName: 'mug' },
+  { name: 'mug', productName: 'mug', categoryName: 'Other' },
   { name: 'box', productName: 'box', categoryName: 'Paper' },
   { name: 'package', productName: 'package', categoryName: 'Paper' },
   { name: 'pizza box', productName: 'box', categoryName: 'Paper' },
-  { name: 'paper', productName: 'sheet', categoryName: 'Paper' },
+  { name: 'paper', productName: 'paper', categoryName: 'Paper' },
   { name: 'notebook', productName: 'notebook', categoryName: 'Paper' },
   { name: 'bag', productName: 'bag', categoryName: 'Plastic' },
   { name: 'wrapper', productName: 'trash', categoryName: 'Landfill' },
   { name: 'trash', productName: 'trash', categoryName: 'Landfill' },
-  { name: 'cup', productName: 'cup' },
-  { name: 'coffee', productName: 'cup' },
+  { name: 'cup', productName: 'cup', categoryName: 'Paper' },
+  { name: 'coffee', productName: 'cup', categoryName: 'Paper' },
   { name: 'coffee cup', productName: 'cup', categoryName: 'Paper' },
   { name: 'jar', productName: 'jar', categoryName: 'Glass' },
   { name: 'pickle', productName: 'jar', categoryName: 'Glass' },
@@ -361,7 +369,10 @@ const tagsData = [
   { name: 'breakfast', productName: 'food', categoryName: 'Compost' },
   { name: 'lunch', productName: 'food', categoryName: 'Compost' },
   { name: 'meal', productName: 'food', categoryName: 'Compost' },
-  { name: 'cloth', productName: 'cloth' }
+  { name: 'cloth', productName: 'cloth', categoryName: 'Other' },
+  { name: 'clothing', productName: 'cloth', categoryName: 'Other' },
+  { name: 'clothes', productName: 'cloth', categoryName: 'Other' },
+  { name: 'bedding', productName: 'sheet', categoryName: 'Other' },
 ]
 
 const adsData = [
@@ -451,7 +462,47 @@ const images = {
   mug:
     'https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
   package:
-    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200'
+    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+  paper:
+    'https://images.pexels.com/photos/261949/pexels-photo-261949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+}
+
+const properSeedData = {
+  bottle: { productName: 'bottle', categoryName: 'Glass' },
+  water: { productName: 'bottle', categoryName: 'Plastic' },
+  jug: { productName: 'jug', categoryName: 'Glass' },
+  can: { productName: 'can', categoryName: 'Metal' },
+  'tin can': { productName: 'can', categoryName: 'Metal' },
+  tin: { productName: 'can', categoryName: 'Metal' },
+  mug: { productName: 'mug', categoryName: 'Other' },
+  box: { productName: 'box', categoryName: 'Paper' },
+  package: { productName: 'package', categoryName: 'Paper' },
+  'pizza box': { productName: 'box', categoryName: 'Paper' },
+  paper: { productName: 'paper', categoryName: 'Paper' },
+  notebook: { productName: 'notebook', categoryName: 'Paper' },
+  bag: { productName: 'bag', categoryName: 'Plastic' },
+  wrapper: { productName: 'trash', categoryName: 'Landfill' },
+  trash: { productName: 'trash', categoryName: 'Landfill' },
+  cup: { productName: 'cup', categoryName: 'Paper' },
+  coffee: { productName: 'cup', categoryName: 'Paper' },
+  'coffee cup': { productName: 'cup', categoryName: 'Paper' },
+  jar: { productName: 'jar', categoryName: 'Glass' },
+  pickle: { productName: 'jar', categoryName: 'Glass' },
+  'mason jar': { productName: 'jar', categoryName: 'Glass' },
+  'pickle jar': { productName: 'jar', categoryName: 'Glass' },
+  food: { productName: 'food', categoryName: 'Compost' },
+  fruit: { productName: 'food', categoryName: 'Compost' },
+  vegetable: { productName: 'food', categoryName: 'Compost' },
+  dessert: { productName: 'food', categoryName: 'Compost' },
+  dinner: { productName: 'food', categoryName: 'Compost' },
+  breakfast: { productName: 'food', categoryName: 'Compost' },
+  lunch: { productName: 'food', categoryName: 'Compost' },
+  meal: { productName: 'food', categoryName: 'Compost' },
+  cloth: { productName: 'cloth', categoryName: 'Other' },
+  clothing: { productName: 'cloth', categoryName: 'Other' },
+  clothes: { productName: 'cloth', categoryName: 'Other' },
+  sheet: { productName: 'sheet', categoryName: 'Other' },
+  miscellaneous: { productName: 'miscellaneous', categoryName: 'Other' },
 }
 
 module.exports = {
@@ -462,5 +513,6 @@ module.exports = {
   milestonesData,
   tagsData,
   adsData,
-  images
+  images,
+  properSeedData
 }

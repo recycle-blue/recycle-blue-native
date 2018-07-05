@@ -15,25 +15,25 @@ export const getWeeklyData = (activitiesArray) => {
 
 
   activitiesArray.forEach(activity => {
-    if (moment(activity.createdAt).format('"ddd"') === '"Mon"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Mon"') {
       data[0].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Tue"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Tue"') {
       data[1].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Wed"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Wed"') {
       data[2].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Thu"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Thu"') {
       data[3].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Fri"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Fri"') {
       data[4].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Sat"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Sat"') {
       data[5].points += activity.points
     }
-    if (moment(activity.createdAt).format('"ddd"') === '"Sun"') {
+    if (moment(activity.createdOn).format('"ddd"') === '"Sun"') {
       data[6].points += activity.points
     }
   });
