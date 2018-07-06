@@ -21,10 +21,10 @@ class ActivityChart extends React.Component {
         <VictoryChart
           width={width}
           theme={VictoryTheme.material}
-          animate={{
+         /* animate={{
             duration: 1000,
             onLoad: { duration: 700 }
-          }}>
+          }}*/>
           <VictoryArea
             data={data}
             x="day"
