@@ -175,13 +175,13 @@ const productsData = [
     description: 'nunc ac mattis ornare, lectus ante dictum mi, ac mattis',
     recycleUse: 'Boxes are some of the best toys your kids will ever have!'
   },
-  {
-    name: 'sheet',
-    points: 2,
-    description:
-      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet,',
-    recycleUse: 'Sheets have a myriad of uses!'
-  },
+  // {
+  //   name: 'sheet',
+  //   points: 2,
+  //   description:
+  //     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet,',
+  //   recycleUse: 'Sheets have a myriad of uses!'
+  // },
   {
     name: 'notebook',
     points: 2,
@@ -428,7 +428,7 @@ const tagsData = [
   { name: 'cloth', productName: 'cloth', categoryName: 'Other' },
   { name: 'clothing', productName: 'cloth', categoryName: 'Other' },
   { name: 'clothes', productName: 'cloth', categoryName: 'Other' },
-  { name: 'bedding', productName: 'sheet', categoryName: 'Other' },
+  // { name: 'bedding', productName: 'sheet', categoryName: 'Other' },
 ]
 
 const adsData = [
@@ -490,37 +490,37 @@ const adsData = [
 
 const images = {
   miscellaneous:
-    'https://images.pexels.com/photos/1034887/pexels-photo-1034887.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/hammock.jpg',
   bottle:
-    'https://images.pexels.com/photos/1000084/pexels-photo-1000084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/glass_bottle.jpg',
   jug:
-    'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://images.freeimages.com/images/large-previews/241/jug-1622711.jpg',
   can:
-    'https://images.pexels.com/photos/404178/pexels-photo-404178.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/tin_can.jpg',
   box:
-    'https://images.pexels.com/photos/260184/pexels-photo-260184.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
-  sheet:
-    'https://images.pexels.com/photos/212269/pexels-photo-212269.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/cardboard_box.jpg',
+  // sheet:
+  //   'https://images.pexels.com/photos/212269/pexels-photo-212269.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
   notebook:
-    'https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/notebook.jpg',
   bag:
-    'https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/bag.jpg',
   trash:
-    'https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/trash.jpg',
   cup:
-    'https://images.pexels.com/photos/758702/pexels-photo-758702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/paper_cup.jpg',
   jar:
-    'https://images.pexels.com/photos/5914/blue-glass-big-design.jpg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/glass_jar.jpg',
   food:
-    'https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/apple.jpg',
   cloth:
-    'https://images.pexels.com/photos/459486/pexels-photo-459486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://images.freeimages.com/images/large-previews/503/towels-1-1417062.jpg',
   mug:
-    'https://images.pexels.com/photos/606542/pexels-photo-606542.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/porcellain_mug.jpg',
   package:
-    'https://images.pexels.com/photos/712316/pexels-photo-712316.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=200',
+    'https://images.freeimages.com/images/large-previews/84b/package-1426094.jpg',
   paper:
-    'https://images.pexels.com/photos/261949/pexels-photo-261949.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    'https://images.freeimages.com/images/large-previews/d26/newspaper-1529884.jpg'
 }
 
 const properSeedData = {
@@ -557,7 +557,7 @@ const properSeedData = {
   cloth: { productName: 'cloth', categoryName: 'Other' },
   clothing: { productName: 'cloth', categoryName: 'Other' },
   clothes: { productName: 'cloth', categoryName: 'Other' },
-  sheet: { productName: 'sheet', categoryName: 'Other' },
+  // sheet: { productName: 'sheet', categoryName: 'Other' },
   miscellaneous: { productName: 'miscellaneous', categoryName: 'Other' },
 }
 
