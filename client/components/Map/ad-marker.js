@@ -37,7 +37,7 @@ class AdMarker extends React.Component {
         <CardItem style={{ justifyContent: 'space-between' }} >
           <TouchableHighlight
             style={styles.button}
-            onPress={this.handleSubmit}
+            onPress={this.handlePress}
             underlayColor={colors.light}
           >
             <Text style={styles.buttonFont}>
