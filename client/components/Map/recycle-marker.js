@@ -48,7 +48,7 @@ class RecycleMarker extends React.Component {
         <CardItem style={{ justifyContent: 'center' }}>
           <TouchableHighlight
             style={styles.button}
-            onPress={this.handleSubmit}
+            onPress={this.handlePress}
             underlayColor={colors.light}
           >
             <Text style={styles.buttonFont}>
