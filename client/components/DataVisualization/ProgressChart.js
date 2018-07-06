@@ -1,7 +1,7 @@
 import React from 'react'
 import { VictoryPie } from 'victory-native'
 import { View, Dimensions, StyleSheet } from 'react-native'
-import Svg, { Text } from 'react-native-svg'
+import Svg, { Text, Image } from 'react-native-svg'
 import { colors } from '../color-palette'
 
 export default class ProgressChart extends React.Component {
@@ -17,7 +17,10 @@ export default class ProgressChart extends React.Component {
   render() {
     const totalPoints = this.props.selectedUser.totalPoints - this.state[this.props.selectedUser.milestoneId - 1]
     const nextMilestonePoints = this.state[this.props.selectedUser.milestoneId] - this.state[this.props.selectedUser.milestoneId - 1]
-    const percentComplete = Math.floor((totalPoints / nextMilestonePoints) * 100) ? Math.floor((totalPoints / nextMilestonePoints) * 100) : 100
+    console.log("total points", totalPoints)
+    console.log('next mileStone', nextMilestonePoints)
+    const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100) <= 100 ? Math.ceil((totalPoints / nextMilestonePoints) * 100) : 100
+    console.log(percentComplete)
     const { height, width } = Dimensions.get('screen');
     const halfheight = height / 2
     return (
@@ -63,6 +66,15 @@ export default class ProgressChart extends React.Component {
             y={`${(halfheight / 1.7)}`}
             textAnchor="middle"
           >{percentComplete} %</Text>
+          {/* <Image
+            x="25%"
+            y="10%"
+            width="50%"
+            height="50%"
+            opacity="0.5"
+            href={require('./silver-medal.png')}
+            clipPath="url(#clip)"
+          /> */}
         </Svg>
       </View >
     )
