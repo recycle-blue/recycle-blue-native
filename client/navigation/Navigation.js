@@ -24,7 +24,7 @@ import {
   Marketplace,
 } from '../components'
 import DrawerContent from './drawer'
-import { ColorPalette, colors } from '../components/color-palette'
+import { colors } from '../components/color-palette'
 
 const Drawer = createDrawerNavigator(
   {
