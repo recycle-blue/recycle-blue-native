@@ -97,7 +97,7 @@ async function seed() {
   )
 
   function getRandomUsers(user) {
-    return users.filter(checkUser => checkUser.id !== user.id && (checkUser.id % 2))
+    return users.filter(checkUser => checkUser.id !== user.id)
   }
 
   await Promise.all(

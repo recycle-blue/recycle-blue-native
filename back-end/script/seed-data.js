@@ -79,6 +79,62 @@ const usersData = [
     password: '1234',
     totalPoints: 2412,
     imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Mary_Warrick_zpspbhkcymd.jpeg'
+  },
+  {
+    firstName: 'Cody',
+    lastName: 'Heslep',
+    email: 'cody@email.com',
+    password: '1234',
+    totalPoints: 577,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Cody_Heslep_zpsgsgmale0.jpeg'
+  },
+  {
+    firstName: 'Raysa',
+    lastName: 'Aurrecochea',
+    email: 'raysa@email.com',
+    password: '1234',
+    totalPoints: 2821,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Raysa_Aurrecochea_zpsqzm0sj6l.jpeg'
+  },
+  {
+    firstName: 'Shaheed',
+    lastName: 'Shamsi',
+    email: 'shaheed@email.com',
+    password: '1234',
+    totalPoints: 1587,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Shaheed_Shamsi_zpsuwadgo97.jpeg'
+  },
+  {
+    firstName: 'Justin',
+    lastName: 'Hustrulid',
+    email: 'justin@email.com',
+    password: '1234',
+    totalPoints: 421,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Justin_Hustrulid_zpshnx6a3ml.jpeg'
+  },
+  {
+    firstName: 'Collin',
+    lastName: 'Miller',
+    email: 'collin@email.com',
+    password: '1234',
+    totalPoints: 3721,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Collin_Miller_zpsxidrem5q.jpeg'
+  },
+  {
+    firstName: 'Kevin',
+    lastName: 'Kelly',
+    email: 'kevin@email.com',
+    password: '1234',
+    totalPoints: 101,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Kevin_Kelly_zpshhgpegzg.jpeg'
+  },
+  {
+    firstName: 'Priti',
+    lastName: 'Patel',
+    email: 'priti@email.com',
+    password: '1234',
+    totalPoints: 2632,
+    imageUrl: 'http://i36.photobucket.com/albums/e19/samirthakral/Priti%20Patel_zpslvuswsac.jpeg'
   }
 ]
 

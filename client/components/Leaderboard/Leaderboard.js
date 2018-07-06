@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   idx: {
-    width: 15
+    width: 20
   },
   name: {
     flex: 3,
