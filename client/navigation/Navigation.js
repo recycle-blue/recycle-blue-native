@@ -29,18 +29,18 @@ import { ColorPalette, colors } from '../components/color-palette'
 const Drawer = createDrawerNavigator(
   {
     Dashboard: { screen: UserDashboard },
-    AddActivity: { screen: AddActivity },
-    AddAd: { screen: AddAd },
-    Map: { screen: Map },
-    Activity: { screen: Activity },
-    LoadingScreen: { screen: LoadingScreen },
-    'Post Activity': { screen: Camera },
-    Marketplace: { screen: Marketplace },
+    'New Post': { screen: Camera },
     Leaderboard: { screen: Leaderboard },
     Feed: { screen: Feed },
     Friends: { screen: Friends },
     'Search Users': { screen: SearchUsers },
+    Marketplace: { screen: Marketplace },
+    Map: { screen: Map },
     Logout: { screen: Logout },
+    AddActivity: { screen: AddActivity },
+    AddAd: { screen: AddAd },
+    Activity: { screen: Activity },
+    LoadingScreen: { screen: LoadingScreen },
   },
   {
     drawerOpenRoute: 'DrawerOpen',
@@ -61,7 +61,7 @@ const Drawer = createDrawerNavigator(
 const PrimaryNav = createStackNavigator(
   {
     drawerStack: { screen: Drawer },
-    'Post Activity': { screen: Camera },
+    'New Post': { screen: Camera },
   },
   {
     title: 'main',
@@ -97,7 +97,7 @@ const PrimaryNav = createStackNavigator(
         <Button
           transparent
           onPress={() => {
-            navigation.navigate('Post Activity')
+            navigation.navigate('New Post')
           }}
         >
           <Text>
