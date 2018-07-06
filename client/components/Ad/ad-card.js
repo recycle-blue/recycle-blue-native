@@ -36,7 +36,7 @@ class AdCard extends React.Component {
           </View>
           <TouchableOpacity style={styles.right} onPress={() => { }}>
             <Text>ToMap</Text>
-            <Thumbnail small source={{ uri: ad.activity.imageUrl }} />
+            <Thumbnail small source={{ uri: 'https://classroomclipart.com/images/gallery/Clipart/Geography/earth-globe-south-america-north-america-clipart.jpg' }} />
             <Text style={{ fontWeight: 'bold', paddingTop: 5 }}>
               {Math.round(ad.distance * 100) / 100}
             </Text>
