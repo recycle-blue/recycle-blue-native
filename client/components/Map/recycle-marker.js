@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { CardItem, Body, Text, Button, Right, Icon, Left } from 'native-base'
-import { ScrollView, View } from 'react-native'
+import { TouchableHighlight, View, StyleSheet } from 'react-native'
 import { Popup } from 'react-native-map-link'
 import { showDetailAction } from '../../store/location'
-import { ColorPalette } from '../color-palette'
+import { colors } from '../color-palette'
 
 class RecycleMarker extends React.Component {
   constructor() {
@@ -46,9 +46,15 @@ class RecycleMarker extends React.Component {
           </Text>
         </CardItem>
         <CardItem style={{ justifyContent: 'center' }}>
-          <Button success onPress={this.handlePress}>
-            <Text> Navigate to Location </Text>
-          </Button>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmit}
+            underlayColor={colors.light}
+          >
+            <Text style={styles.buttonFont}>
+              Navigate to Location
+              </Text>
+          </TouchableHighlight>
         </CardItem>
         <Popup
           isVisible={this.state.isVisible}
@@ -82,6 +88,25 @@ const mapDispatch = dispatch => {
     showDetail: status => dispatch(showDetailAction(status)),
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 5,
+    paddingVertical: 7,
+    paddingHorizontal: 25,
+    backgroundColor: colors.midLight,
+    borderRadius: 100,
+    borderColor: colors.midLight,
+    borderWidth: 1,
+    alignSelf: 'center',
+  },
+  buttonFont: {
+    color: colors.white,
+    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+})
 
 export default connect(
   mapState,

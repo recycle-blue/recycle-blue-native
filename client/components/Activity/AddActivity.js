@@ -51,11 +51,11 @@ class AddActivity extends React.Component {
           {this.state.imageUrl === 'default' ? (
             <Button
               title="Take Picture"
-              onPress={() => this.props.navigation.navigate('Post Activity')}
+              onPress={() => this.props.navigation.navigate('New Post')}
             />
           ) : (
-            <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
-          )}
+              <Image style={styles.image} source={{ uri: this.state.imageUrl }} />
+            )}
         </View>
         <Form style={styles.form}>
           <Item rounded style={styles.items}>

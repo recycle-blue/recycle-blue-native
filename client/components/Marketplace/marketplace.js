@@ -38,7 +38,7 @@ class Marketplace extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getCategories();
+    await this.props.getCategories()
     geoLocation.getCurrentPosition(location => {
       const { latitude, longitude } = location.coords
       const userLocation = { latitude: latitude, longitude: longitude }
@@ -51,18 +51,18 @@ class Marketplace extends React.Component {
     })
   }
 
-  componentWillUpdate(nextProps,nextState) {
-    if(nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
-      const category = this.props.categories.find( elem => elem.name === nextState.category)
-      geoLocation.getCurrentPosition( async (location) => {
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.category !== this.state.category || nextState.searchText !== this.state.searchText) {
+      const category = this.props.categories.find(elem => elem.name === nextState.category)
+      geoLocation.getCurrentPosition(async (location) => {
         const { latitude, longitude } = location.coords
         const userLocation = { latitude: latitude, longitude: longitude }
         const locationStr = Object.keys(userLocation)
           .map(key => userLocation[key])
           .join(',')
-        await this.props.fetchAdLocations(locationStr, category, nextState.searchText);
+        await this.props.fetchAdLocations(locationStr, category, nextState.searchText)
         if (this.state.isLoading) this.setState({ isLoading: false })
-     })
+      })
     }
   }
 
@@ -104,9 +104,7 @@ class Marketplace extends React.Component {
               textStyle={{ color: colors.light }}
               activeTextStyle={{ color: colors.light }}
             >
-              <ScrollView>
-                <MapComp view='ads' />
-              </ScrollView>
+              <MapComp view='ads' />
             </Tab>
           </Tabs>
           <View style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}>
@@ -119,7 +117,7 @@ class Marketplace extends React.Component {
                   mode="dropdown"
                   prompt='Category'
                   selectedValue={this.state.category}
-                  onValueChange={(category) => this.setState({ category})}
+                  onValueChange={(category) => this.setState({ category })}
                 >
                   <Picker.Item label="Category" value="" />
                   <Picker.Item label="Plastic" value="Plastic" />
@@ -135,7 +133,7 @@ class Marketplace extends React.Component {
               <Input
                 style={{ flex: 2 }}
                 placeholder="Search For Products"
-                onChangeText={(searchText) => this.setState({searchText})}
+                onChangeText={(searchText) => this.setState({ searchText })}
               />
               <View style={styles.searchIcon} >
                 <Icon active name="search" style={{ color: colors.white }} />
@@ -209,7 +207,7 @@ const mapDispatchToProps = dispatch => {
     getMarketplaceAds: location => dispatch(getMarketplaceAdsThunk(location)),
     fetchRecycleLocations: locationStr =>
       dispatch(getRecycleLocationsThunk(locationStr)),
-    fetchAdLocations: (locationStr,category,text) => dispatch(getAdLocationsThunk(locationStr,category,text)),
+    fetchAdLocations: (locationStr, category, text) => dispatch(getAdLocationsThunk(locationStr, category, text)),
     setUserLocation: location => dispatch(getUserLocationAction(location)),
     selectMarker: marker => dispatch(selectMarkerAction(marker)),
     setFetch: status => dispatch(setFetch(status)),

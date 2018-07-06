@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { colors } from '../components/color-palette'
 
 const CustomDrawer = (props) => (
-  <ScrollView>
+  <ScrollView style={styles.drawer} >
     <TouchableOpacity
       onPress={() => {
         props.navigation.navigate('Dashboard')
@@ -14,14 +14,17 @@ const CustomDrawer = (props) => (
       style={styles.header}
     >
       <Thumbnail source={{ uri: props.user.imageUrl }} small style={{ flex: 1, }} />
-      <Text style={{ textAlign: 'center', fontWeight: 'bold', flex: 3 }}>{props.user.firstName} {props.user.lastName}</Text>
-      <Text note style={{ textAlign: 'center' }}>Pts: {props.user.totalPoints}</Text>
+      <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold', flex: 3 }]}>{props.user.firstName} {props.user.lastName}</Text>
+      <Text note style={styles.text}>Pts: {props.user.totalPoints}</Text>
     </TouchableOpacity>
     <DrawerItems {...props} />
   </ScrollView>
 )
 
 const styles = StyleSheet.create({
+  drawer: {
+    backgroundColor: colors.light
+  },
   container: {
     flex: 1,
   },
@@ -31,9 +34,13 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.dark,
     paddingHorizontal: 15,
     paddingVertical: 5,
-    backgroundColor: colors.light,
+    backgroundColor: colors.midDark,
     alignItems: 'center',
     height: 60,
+  },
+  text: {
+    textAlign: 'center',
+    color: colors.white,
   }
 })
 
