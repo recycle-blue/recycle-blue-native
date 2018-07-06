@@ -52,8 +52,6 @@ const Drawer = createDrawerNavigator(
       activeLabelStyle: { color: colors.white },
       inactiveLabelStyle: { color: colors.dark },
       activeBackgroundColor: colors.midLight,
-      // inactiveBackgroundColor: colors.white,
-      // itemsContainerStyle: colors.light,
     }
   }
 )
