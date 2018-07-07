@@ -494,7 +494,7 @@ const images = {
   bottle:
     'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/glass_bottle.jpg',
   jug:
-    'https://images.freeimages.com/images/large-previews/241/jug-1622711.jpg',
+    'https://images.freeimages.com/images/small-previews/241/jug-1622711.jpg',
   can:
     'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/tin_can.jpg',
   box:
@@ -514,13 +514,13 @@ const images = {
   food:
     'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/apple.jpg',
   cloth:
-    'https://images.freeimages.com/images/large-previews/503/towels-1-1417062.jpg',
+    'https://images.freeimages.com/images/small-previews/503/towels-1-1417062.jpg',
   mug:
     'https://res.cloudinary.com/dvdrpqyp1/image/upload/w_500,h_500,c_fit/porcellain_mug.jpg',
   package:
-    'https://images.freeimages.com/images/large-previews/84b/package-1426094.jpg',
+    'https://images.freeimages.com/images/small-previews/84b/package-1426094.jpg',
   paper:
-    'https://images.freeimages.com/images/large-previews/d26/newspaper-1529884.jpg'
+    'https://images.freeimages.com/images/small-previews/d26/newspaper-1529884.jpg'
 }
 
 const properSeedData = {
