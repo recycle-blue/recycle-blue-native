@@ -100,7 +100,7 @@ async function seed() {
             }
           })
           const categoryId = category.id
-          const type = (i + j) % 2 || i + j > 13 ? 'activity' : 'ad'
+          const type = (i + j) % 3 ? 'activity' : 'ad'
           return Activity.create({
             productId: product.id,
             categoryId,
