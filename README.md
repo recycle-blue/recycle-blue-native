@@ -62,12 +62,12 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Fullstack Academy** - *Boilerplate* - [Fullstack Academy](https://github.com/FullstackAcademy)
 * **Lamine Sadoun** - *Developer* - [Lamine Sadoun](https://github.com/Tiny-Sheep)
-* **Andrew Trahan** - *Developer* - [PurpleBooth](https://github.com/globalART19)
-* **Dustin McDowell** - *Developer* - [PurpleBooth](https://github.com/dusmcd)
-* **Samir Thakral** - *Developer* - [PurpleBooth](https://github.com/samirthakral)
-* **Cody Fayolle** - *Advisor* - [PurpleBooth](https://github.com/samirthakral)
+* **Andrew Trahan** - *Developer* - [Andrew Trahan](https://github.com/globalART19)
+* **Dustin McDowell** - *Developer* - [Dustin McDowell](https://github.com/dusmcd)
+* **Samir Thakral** - *Developer* - [Samir Thakral](https://github.com/samirthakral)
+* **Cody Fayolle** - *Advisor* - [Cody Fayolle](https://github.com/samirthakral)
+* **Fullstack Academy** - *Boilerplate* - [Fullstack Academy](https://github.com/FullstackAcademy)
 
 
 
