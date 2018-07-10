@@ -44,10 +44,6 @@ npm run start
 On your client terminal you will see a a prompt for expo to either send  a URI for the server to your phone which you can use to run the expo application. Andriod devices have the option of scanning a QR code to achieve the same result.
 
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * [EXPO](https://expo.io/) - The toolchain used during development
