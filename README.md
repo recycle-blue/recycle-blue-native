@@ -1,37 +1,84 @@
-# recycle-blue-native
-# Welcome to Recycle Blue ! 
+# Recycle Blue
+
 ![RECYCLE BLUE](https://i.imgur.com/OvnLvTn.png)
 
 Recycle Blue is a social network and marketplace application that is designed to incentivize users to recycle more.
 This is achieved by gamifying the activity of recycling by using a points and milestones system.
 
-### Using RecycleBlue 
-
 Users can document their recycling activities by pressing the + button located on the top right of the screen.
 This will activate the phone's camera and the user can take a picture of their recycling activity.
 Recycle Blue uses AI tagging services to classify user Images and then assigns points to the user based on how recyclable their item is.  User's can view their Recycling activity on their user dashboard as well as view their weekly recycling activity and their progress towards their next milestone. User's can share their activities to other social media platforms as well as view a feed of all their friends' recent activities.
 
-![PLUS ICON](https://i.imgur.com/7u4Tve5.jpg)![Data Viz](https://i.imgur.com/kIf2uni.jpg)
+
+### Prerequisites
+
+You will need Node and node package mangager as well as git to run our application. 
+
+To run Recycle Blue on your device you must have Expo installed on your mobile device. Expo can be found in your phone's app store. 
+
+[ Expo on iPhone ](https://itunes.apple.com/us/app/expo-client/id982107779?mt=8)
+
+[ Expo on Android ](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US)
 
 
-### The Market Place
-Users can peruse a market place to see what reusable items are being offered up by other users. They can view what items are being offered near them by viewing the map or they can see a list of all the items on offer by going to the ads page. If a user is interested in a particular item they can email the owner of the ad to claim the item. Users can then use their favorite navigation app to find a route to the item they would like to claim .The aim of the market place is to encourage the reuse of otherwise non-recyclable items as well as to help businesses that recycle heavy duty items like refrigerators find those particular items.
+## Getting Started
 
-![Marketplace Map-View](https://i.imgur.com/IcPtISK.jpg)![mapWithNav](https://i.imgur.com/lPTS4xc.jpg)
+To get started using our application first fork and clone this repo.
+Next, in your terminal go to ./recycle-blue-native/back-end and run the following commands:
+
+```
+npm install
+npm run seed
+npm run start-dev
+
+```
+
+Next, open another terminal (while keeping the back-end terminal open) and go to ./recycle-blue-native/client and run the following commands:
+
+```
+npm install
+npm run start
+
+```
+
+On your client terminal you will see a a prompt for expo to either send  a URI for the server to your phone which you can use to run the expo application. Andriod devices have the option of scanning a QR code to achieve the same result.
 
 
-### Cross Compatibility
-Our mission is to get as many people to document and share their recycling activities. We built RecycleBlue for Andriod and IOS so that no one would be left out.
+## Deployment
 
-![cross compatible](https://i.imgur.com/LRcxpIp.jpg)
+Add additional notes about how to deploy this on a live system
 
-### The Technologies
-We utilized a bevy of technologies to make RecycleBlue a reality. The primary technologies we used were React-Native for the front end with a postgreSQL back end. 
+## Built With
 
-![The Tech](https://i.imgur.com/m8QgIY0.jpg)
+* [EXPO](https://expo.io/) - The toolchain used during development
+* [NPM](https://www.npmjs.com/) - Dependency Management
+* [React Native](https://facebook.github.io/react-native/) - Used for front end cross platform development
+* [Redux](https://redux.js.org/) - Used for front end state management
+* [postgreSQL](https://redux.js.org/) - Database
+* [Sequelize](https://redux.js.org/) - ORM 
+* [Express](https://redux.js.org/) - Used to make RESTful api
+* [Victory Native](https://redux.js.org/) - Used to display data visualizations
+
+
+## Authors
+
+* **Fullstack Academy** - *Boilerplate* - [Fullstack Academy](https://github.com/FullstackAcademy)
+* **Lamine Sadoun** - *Developer* - [Lamine Sadoun](https://github.com/Tiny-Sheep)
+* **Andrew Trahan** - *Developer* - [PurpleBooth](https://github.com/globalART19)
+* **Dustin McDowell** - *Developer* - [PurpleBooth](https://github.com/dusmcd)
+* **Samir Thakral** - *Developer* - [PurpleBooth](https://github.com/samirthakral)
+* **Cody Fayolle** - *Advisor* - [PurpleBooth](https://github.com/samirthakral)
 
 
 
-### Link To Expo
 
-_http//placeholder.for.expo.link_
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to Collin T Miller for advising on the project and helping our team get through technical hurdles.
+
+## Link to live Expo Application
