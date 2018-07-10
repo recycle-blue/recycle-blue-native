@@ -49,25 +49,23 @@ export const showDetailAction = status => {
 
 export const getRecycleLocationsThunk = locationStr => {
   return async dispatch => {
-    const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${locationStr}&keyword=recycle&radius=3000&key=${googleAPIKey}`
-    )
-    dispatch(getLocationsAction(data.results))
+    const res = await axios.get(`${ENV_PATH}/api/map/recyclelocations?location=${locationStr}`)
+    dispatch(getLocationsAction(res.data))
   }
 }
 
-export const getAdLocationsThunk = (locationStr,category,text) => {
+export const getAdLocationsThunk = (locationStr, category, text) => {
   return async dispatch => {
     let res
-    if(text === undefined || text === '' && !category) {
+    if (text === undefined || text === '' && !category) {
       res = await axios.get(
         `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}`
       )
-    } else if(category && text === undefined || text === '') {
+    } else if (category && text === undefined || text === '') {
       res = await axios.get(
         `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}&categoryId=${category.id}`
       )
-    } else if(!category && text) {
+    } else if (!category && text) {
       res = await axios.get(
         `${ENV_PATH}/api/activity/marketplace?userLocation=${locationStr}&search&name=${text}`
       )
@@ -80,11 +78,9 @@ export const getAdLocationsThunk = (locationStr,category,text) => {
 }
 export const getDistanceThunk = (markerId, origin, destination) => {
   return async dispatch => {
-    const { data } = await axios.get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&units=imperial&key=${googleAPIKey}`
-    )
+    const res = await axios.get(`${ENV_PATH}/api/map/distance?origin=${origin}&destination=${destination}`)
     dispatch(
-      getDistanceAction(data.rows[0].elements[0].distance.text, markerId)
+      getDistanceAction(res.data.rows[0].elements[0].distance.text, markerId)
     )
   }
 }
@@ -102,7 +98,7 @@ const initialState = {
   showDetail: true,
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_LOCATIONS:
       return { ...state, locations: action.locations }
