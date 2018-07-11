@@ -10,7 +10,6 @@ router.get('/recyclelocations', async (req, res, next) => {
     const { data } = await axios.get(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.query.location}&keyword=recycle&radius=3000&key=${googleAPIKey}`
     )
-    console.log('data', data)
     res.json(data.results)
   } catch (err) {
     next(err)

@@ -78,3 +78,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to Collin T Miller for advising on the project and helping our team get through technical hurdles.
 
 ## Link to live Expo Application
+
+https://exp.host/@globalart19/recyclingapp - Enter this link into your Expo app to try out RecycleBlue!

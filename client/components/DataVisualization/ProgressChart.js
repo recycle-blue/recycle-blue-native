@@ -17,11 +17,8 @@ export default class ProgressChart extends React.Component {
   render() {
     const totalPoints = this.props.selectedUser.totalPoints - this.state[this.props.selectedUser.milestoneId - 1]
     const nextMilestonePoints = this.state[this.props.selectedUser.milestoneId] - this.state[this.props.selectedUser.milestoneId - 1]
-    console.log("total points", totalPoints)
-    console.log('next mileStone', nextMilestonePoints)
     const percentComplete = Math.ceil((totalPoints / nextMilestonePoints) * 100) <= 100 ? Math.ceil((totalPoints / nextMilestonePoints) * 100) : 100
-    console.log(percentComplete)
-    const { height, width } = Dimensions.get('screen');
+    const { height, width } = Dimensions.get('screen')
     const halfheight = height / 2
     return (
       <View style={styles.container}>

@@ -56,24 +56,13 @@ class TestCamera extends React.Component {
       ),
     }
   }
-  // fakePicture = () => {
-  //   this.setState({ ...this.state, loadingToggle: true })
-  // }
-  // componentDidUpdate() {
-  //   console.log('cdm', this.state.loadingToggle)
-  //   if (this.state.loadingToggle) {
-  //     this.takePicture()
-  //   }
-  // }
   takePicture = async () => {
     if (this.camera) {
       const options = {
         quality: 0.5,
         base64: true,
       }
-      console.log('is expo broken?')
       const data = await this.camera.takePictureAsync(options)
-      console.log('nope! still working for now!')
       await this.props.clearActivity()
       this.savePicture(data)
       this.setState({ loadingToggle: true })
