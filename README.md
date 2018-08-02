@@ -80,3 +80,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Link to live Expo Application
 
 https://exp.host/@globalart19/recyclingapp - Enter this link into your Expo app to try out RecycleBlue!
+
+
+## Link to a short video 
+
+https://www.youtube.com/watch?v=y82NKctfn_A&feature=youtu.be - Get acquainted with our application!
+
+
